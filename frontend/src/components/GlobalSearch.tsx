@@ -1,7 +1,9 @@
 import { useState, type FormEvent, type KeyboardEvent } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
 export function GlobalSearch() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const search = useSearch({ strict: false }) as { q?: string };
   const [value, setValue] = useState(search.q ?? "");
@@ -47,16 +49,16 @@ export function GlobalSearch() {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="Barcha kitoblar bo'yicha qidirish..."
+          placeholder={t("search.placeholder")}
           className="w-full rounded-md border border-zinc-300 bg-white py-2 pl-8 pr-3 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-100"
-          aria-label="Qidiruv"
+          aria-label={t("search.aria")}
         />
       </div>
       <button
         type="submit"
         className="rounded-md bg-zinc-900 px-3 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
       >
-        Qidir
+        {t("search.button")}
       </button>
     </form>
   );

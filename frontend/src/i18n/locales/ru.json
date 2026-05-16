@@ -1,0 +1,86 @@
+{
+  "app": {
+    "name": "Essential Words"
+  },
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "back_to_books": "← Все книги",
+    "open": "Открыть →",
+    "previous": "Назад",
+    "next": "Вперёд",
+    "page": "Страница",
+    "of": "/",
+    "per_page": "/ страница",
+    "total": "Всего",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "deleting": "Удаление..."
+  },
+  "home": {
+    "title": "Книги",
+    "subtitle": "7 книг — по 30 юнитов в каждой, 20 слов в юните. Выберите книгу, чтобы начать.",
+    "empty": "Книги не найдены. Запустите сначала pnpm db:seed."
+  },
+  "book": {
+    "unit_count": "{{count}} юнитов",
+    "word_count": "{{count}} слов",
+    "not_found": "Книга не найдена.",
+    "no_units": "В этой книге пока нет юнитов.",
+    "select_unit_aria": "Выбрать юнит",
+    "unit_tab_title": "{{title}} — {{count}} слов"
+  },
+  "word_form": {
+    "english_label": "Английский",
+    "english_placeholder": "apple",
+    "translation_label": "Перевод",
+    "translation_placeholder": "яблоко",
+    "submit": "Добавить",
+    "submitting": "Добавление...",
+    "both_required": "Оба поля обязательны"
+  },
+  "words_table": {
+    "header_num": "#",
+    "header_english": "Английский",
+    "header_translation": "Перевод",
+    "header_actions": "Действие",
+    "total_in_unit": "Всего в юните:",
+    "word_unit": "слов",
+    "empty": "В этом юните пока нет слов. Добавьте через форму выше.",
+    "delete_title": "Удалить слово",
+    "delete_confirm_prefix": "Вы уверены, что хотите удалить",
+    "delete_confirm_suffix": "? Это действие нельзя отменить.",
+    "delete_button": "Да, удалить"
+  },
+  "search": {
+    "placeholder": "Поиск по всем книгам...",
+    "button": "Найти",
+    "aria": "Поиск",
+    "page_title": "Результаты поиска",
+    "page_subtitle": "Поиск слов по всем книгам и юнитам.",
+    "empty_query": "Поисковый запрос не введён.",
+    "searching": "Поиск...",
+    "results_found": "Найдено результатов: {{count}} —",
+    "no_results_prefix": "Ничего не найдено по запросу",
+    "no_results_suffix": ".",
+    "col_location": "Расположение",
+    "col_english": "Английский",
+    "col_translation": "Перевод",
+    "col_actions": "Действие",
+    "location_badge": "Книга {{book}} · Юнит {{unit}}"
+  },
+  "theme": {
+    "to_light_aria": "Переключить на светлую тему",
+    "to_dark_aria": "Переключить на тёмную тему",
+    "light_title": "Светлая тема",
+    "dark_title": "Тёмная тема"
+  },
+  "lang": {
+    "label": "Язык",
+    "uz": "O'zbekcha",
+    "en": "English",
+    "ru": "Русский"
+  }
+}

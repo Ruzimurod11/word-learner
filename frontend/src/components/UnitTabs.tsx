@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { UnitSummary } from "@/types/book";
 
 interface UnitTabsProps {
@@ -7,10 +8,11 @@ interface UnitTabsProps {
 }
 
 export function UnitTabs({ units, activeUnitId, onSelect }: UnitTabsProps) {
+  const { t } = useTranslation();
   return (
     <div
       role="tablist"
-      aria-label="Unit tanlash"
+      aria-label={t("book.select_unit_aria")}
       className="flex flex-wrap gap-1.5 rounded-lg border border-zinc-200 bg-white p-2 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
     >
       {units.map((unit) => {
@@ -28,7 +30,10 @@ export function UnitTabs({ units, activeUnitId, onSelect }: UnitTabsProps) {
                 ? "bg-zinc-900 text-white shadow-sm dark:bg-zinc-100 dark:text-zinc-900"
                 : "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800")
             }
-            title={`${unit.title} — ${unit.wordCount} so'z`}
+            title={t("book.unit_tab_title", {
+              title: unit.title,
+              count: unit.wordCount,
+            })}
           >
             {unit.order}
           </button>

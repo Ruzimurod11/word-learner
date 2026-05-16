@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { createUnitWord } from "@/api/word-api";
 
 interface WordFormProps {
@@ -7,6 +8,7 @@ interface WordFormProps {
 }
 
 export function WordForm({ unitId }: WordFormProps) {
+  const { t } = useTranslation();
   const [english, setEnglish] = useState("");
   const [translation, setTranslation] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -32,7 +34,7 @@ export function WordForm({ unitId }: WordFormProps) {
   const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (!english.trim() || !translation.trim()) {
-      setError("Ikkala maydon ham to'ldirilishi kerak");
+      setError(t("word_form.both_required"));
       return;
     }
     mutation.mutate();
@@ -45,26 +47,26 @@ export function WordForm({ unitId }: WordFormProps) {
     >
       <div className="flex-1">
         <label className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300">
-          English
+          {t("word_form.english_label")}
         </label>
         <input
           type="text"
           value={english}
           onChange={(e) => setEnglish(e.target.value)}
-          placeholder="apple"
+          placeholder={t("word_form.english_placeholder")}
           className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-100"
           disabled={mutation.isPending}
         />
       </div>
       <div className="flex-1">
         <label className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300">
-          Tarjima
+          {t("word_form.translation_label")}
         </label>
         <input
           type="text"
           value={translation}
           onChange={(e) => setTranslation(e.target.value)}
-          placeholder="olma"
+          placeholder={t("word_form.translation_placeholder")}
           className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-100"
           disabled={mutation.isPending}
         />
@@ -74,7 +76,7 @@ export function WordForm({ unitId }: WordFormProps) {
         disabled={mutation.isPending}
         className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 sm:w-auto"
       >
-        {mutation.isPending ? "Qo'shilmoqda..." : "Qo'shish"}
+        {mutation.isPending ? t("word_form.submitting") : t("word_form.submit")}
       </button>
       {error && (
         <p className="text-sm text-red-600 dark:text-red-400 sm:absolute sm:mt-16">

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type Theme = "light" | "dark";
 
@@ -10,6 +11,7 @@ function readTheme(): Theme {
 }
 
 export function ThemeToggle() {
+  const { t } = useTranslation();
   const [theme, setTheme] = useState<Theme>(readTheme);
 
   useEffect(() => {
@@ -22,15 +24,15 @@ export function ThemeToggle() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const toggle = () => setTheme((tt) => (tt === "dark" ? "light" : "dark"));
   const isDark = theme === "dark";
 
   return (
     <button
       type="button"
       onClick={toggle}
-      aria-label={isDark ? "Yorug' rejimga o'tish" : "Qorong'i rejimga o'tish"}
-      title={isDark ? "Yorug' rejim" : "Qorong'i rejim"}
+      aria-label={isDark ? t("theme.to_light_aria") : t("theme.to_dark_aria")}
+      title={isDark ? t("theme.light_title") : t("theme.dark_title")}
       className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-zinc-300 bg-white text-zinc-700 shadow-sm hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
     >
       {isDark ? (

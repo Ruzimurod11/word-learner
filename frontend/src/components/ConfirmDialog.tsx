@@ -4,9 +4,10 @@ interface ConfirmDialogProps {
   open: boolean;
   title: string;
   message: React.ReactNode;
-  confirmLabel?: string;
-  cancelLabel?: string;
+  confirmLabel: string;
+  cancelLabel: string;
   confirmLoading?: boolean;
+  loadingLabel?: string;
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -15,9 +16,10 @@ export function ConfirmDialog({
   open,
   title,
   message,
-  confirmLabel = "Ha, o'chirish",
-  cancelLabel = "Bekor",
+  confirmLabel,
+  cancelLabel,
   confirmLoading = false,
+  loadingLabel,
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {
@@ -94,7 +96,7 @@ export function ConfirmDialog({
             disabled={confirmLoading}
             className="rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50 dark:bg-red-500 dark:hover:bg-red-600"
           >
-            {confirmLoading ? "O'chirilmoqda..." : confirmLabel}
+            {confirmLoading && loadingLabel ? loadingLabel : confirmLabel}
           </button>
         </div>
       </div>

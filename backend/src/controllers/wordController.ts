@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { z } from "zod";
 import * as wordService from "../services/wordService.ts";
+import { getLang, t } from "../i18n/index.ts";
 import {
   createWordSchema,
   searchQuerySchema,
@@ -14,10 +15,17 @@ const idSchema = z.coerce.number().int().positive();
 const formatZodError = (err: z.ZodError): string =>
   err.issues.map((i) => `${i.path.join(".") || "value"}: ${i.message}`).join("; ");
 
+const isUniqueViolation = (err: unknown): boolean => {
+  if (!(err instanceof Error)) return false;
+  if (/unique/i.test(err.message)) return true;
+  const cause = (err as Error & { cause?: { code?: string } }).cause;
+  return cause?.code === "23505";
+};
+
 export const listUnitWords = async (req: Request, res: Response): Promise<void> => {
   const unitIdResult = idSchema.safeParse(req.params.unitId);
   if (!unitIdResult.success) {
-    sendError(res, "Noto'g'ri unit ID", 400);
+    sendError(res, t(getLang(req), "errors.invalid_unit_id"), 400);
     return;
   }
   const queryResult = unitWordsQuerySchema.safeParse(req.query);
@@ -30,14 +38,14 @@ export const listUnitWords = async (req: Request, res: Response): Promise<void> 
     sendSuccess(res, result);
   } catch (err) {
     console.error(err);
-    sendError(res, "So'zlarni olishda xatolik");
+    sendError(res, t(getLang(req), "errors.list_words_failed"));
   }
 };
 
 export const createUnitWord = async (req: Request, res: Response): Promise<void> => {
   const unitIdResult = idSchema.safeParse(req.params.unitId);
   if (!unitIdResult.success) {
-    sendError(res, "Noto'g'ri unit ID", 400);
+    sendError(res, t(getLang(req), "errors.invalid_unit_id"), 400);
     return;
   }
   const bodyResult = createWordSchema.safeParse(req.body);
@@ -48,25 +56,25 @@ export const createUnitWord = async (req: Request, res: Response): Promise<void>
   try {
     const exists = await wordService.unitExists(unitIdResult.data);
     if (!exists) {
-      sendError(res, "Unit topilmadi", 404);
+      sendError(res, t(getLang(req), "errors.unit_not_found"), 404);
       return;
     }
     const word = await wordService.createWord(unitIdResult.data, bodyResult.data);
     sendSuccess(res, word, 201);
   } catch (err: unknown) {
-    if (err instanceof Error && /unique/i.test(err.message)) {
-      sendError(res, "Bu so'z bu unitda allaqachon mavjud", 409);
+    if (isUniqueViolation(err)) {
+      sendError(res, t(getLang(req), "errors.duplicate_word"), 409);
       return;
     }
     console.error(err);
-    sendError(res, "So'z qo'shishda xatolik");
+    sendError(res, t(getLang(req), "errors.create_word_failed"));
   }
 };
 
 export const updateWord = async (req: Request, res: Response): Promise<void> => {
   const idResult = idSchema.safeParse(req.params.id);
   if (!idResult.success) {
-    sendError(res, "Noto'g'ri ID", 400);
+    sendError(res, t(getLang(req), "errors.invalid_id"), 400);
     return;
   }
   const bodyResult = updateWordSchema.safeParse(req.body);
@@ -77,36 +85,36 @@ export const updateWord = async (req: Request, res: Response): Promise<void> => 
   try {
     const word = await wordService.updateWord(idResult.data, bodyResult.data);
     if (!word) {
-      sendError(res, "So'z topilmadi", 404);
+      sendError(res, t(getLang(req), "errors.word_not_found"), 404);
       return;
     }
     sendSuccess(res, word);
   } catch (err: unknown) {
-    if (err instanceof Error && /unique/i.test(err.message)) {
-      sendError(res, "Bu so'z bu unitda allaqachon mavjud", 409);
+    if (isUniqueViolation(err)) {
+      sendError(res, t(getLang(req), "errors.duplicate_word"), 409);
       return;
     }
     console.error(err);
-    sendError(res, "So'zni yangilashda xatolik");
+    sendError(res, t(getLang(req), "errors.update_word_failed"));
   }
 };
 
 export const deleteWord = async (req: Request, res: Response): Promise<void> => {
   const idResult = idSchema.safeParse(req.params.id);
   if (!idResult.success) {
-    sendError(res, "Noto'g'ri ID", 400);
+    sendError(res, t(getLang(req), "errors.invalid_id"), 400);
     return;
   }
   try {
     const ok = await wordService.deleteWord(idResult.data);
     if (!ok) {
-      sendError(res, "So'z topilmadi", 404);
+      sendError(res, t(getLang(req), "errors.word_not_found"), 404);
       return;
     }
     sendSuccess(res, { id: idResult.data });
   } catch (err) {
     console.error(err);
-    sendError(res, "O'chirishda xatolik");
+    sendError(res, t(getLang(req), "errors.delete_word_failed"));
   }
 };
 
@@ -121,6 +129,6 @@ export const searchWords = async (req: Request, res: Response): Promise<void> =>
     sendSuccess(res, result);
   } catch (err) {
     console.error(err);
-    sendError(res, "Qidiruvda xatolik");
+    sendError(res, t(getLang(req), "errors.search_failed"));
   }
 };

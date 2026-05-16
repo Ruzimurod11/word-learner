@@ -6,6 +6,7 @@ import {
   type ColumnDef,
 } from "@tanstack/react-table";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { deleteWord, getUnitWords, updateWord } from "@/api/word-api";
 import type { Word } from "@/types/word";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
@@ -20,6 +21,12 @@ interface TableCtx {
   setTranslationValue: (v: string) => void;
   isSaving: boolean;
   isDeleting: boolean;
+  labels: {
+    save: string;
+    cancel: string;
+    edit: string;
+    delete: string;
+  };
 }
 
 function EditableInput({
@@ -50,6 +57,7 @@ interface WordsTableProps {
 }
 
 export function WordsTable({ unitId }: WordsTableProps) {
+  const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -118,7 +126,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
     () => [
       {
         id: "rowNumber",
-        header: "#",
+        header: t("words_table.header_num"),
         cell: ({ row }) => (
           <span className="text-zinc-500 dark:text-zinc-400">
             {row.original.order}
@@ -128,7 +136,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
       },
       {
         accessorKey: "english",
-        header: "English",
+        header: t("words_table.header_english"),
         cell: ({ row, table }) => {
           const ctx = table.options.meta as TableCtx;
           if (ctx.editingId === row.original.id) {
@@ -145,7 +153,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
       },
       {
         accessorKey: "translation",
-        header: "Tarjima",
+        header: t("words_table.header_translation"),
         cell: ({ row, table }) => {
           const ctx = table.options.meta as TableCtx;
           if (ctx.editingId === row.original.id) {
@@ -161,7 +169,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
       },
       {
         id: "actions",
-        header: () => <div className="text-right">Amal</div>,
+        header: () => <div className="text-right">{t("words_table.header_actions")}</div>,
         cell: ({ row, table }) => {
           const ctx = table.options.meta as TableCtx;
           const w = row.original;
@@ -174,14 +182,14 @@ export function WordsTable({ unitId }: WordsTableProps) {
                   disabled={ctx.isSaving}
                   className="rounded bg-green-600 px-2 py-1 text-xs text-white hover:bg-green-700 disabled:opacity-50 dark:bg-green-500 dark:hover:bg-green-600"
                 >
-                  Saqlash
+                  {ctx.labels.save}
                 </button>
                 <button
                   type="button"
                   onClick={ctx.cancelEdit}
                   className="rounded bg-zinc-200 px-2 py-1 text-xs text-zinc-900 hover:bg-zinc-300 dark:bg-zinc-700 dark:text-zinc-100 dark:hover:bg-zinc-600"
                 >
-                  Bekor
+                  {ctx.labels.cancel}
                 </button>
               </div>
             );
@@ -191,8 +199,8 @@ export function WordsTable({ unitId }: WordsTableProps) {
               <button
                 type="button"
                 onClick={() => ctx.startEdit(w)}
-                aria-label="Tahrirlash"
-                title="Tahrirlash"
+                aria-label={ctx.labels.edit}
+                title={ctx.labels.edit}
                 className="rounded bg-zinc-900 p-1.5 text-white hover:bg-zinc-800 dark:bg-zinc-200 dark:text-zinc-900 dark:hover:bg-zinc-300"
               >
                 <svg
@@ -214,8 +222,8 @@ export function WordsTable({ unitId }: WordsTableProps) {
                 type="button"
                 onClick={() => ctx.deleteRow(w)}
                 disabled={ctx.isDeleting}
-                aria-label="O'chirish"
-                title="O'chirish"
+                aria-label={ctx.labels.delete}
+                title={ctx.labels.delete}
                 className="rounded bg-red-600 p-1.5 text-white hover:bg-red-700 disabled:opacity-50 dark:bg-red-500 dark:hover:bg-red-600"
               >
                 <svg
@@ -241,7 +249,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
         },
       },
     ],
-    [],
+    [t],
   );
 
   const data = wordsQuery.data?.items ?? [];
@@ -262,6 +270,12 @@ export function WordsTable({ unitId }: WordsTableProps) {
     },
     isSaving: updateMutation.isPending,
     isDeleting: deleteMutation.isPending,
+    labels: {
+      save: t("common.save"),
+      cancel: t("common.cancel"),
+      edit: t("common.edit"),
+      delete: t("common.delete"),
+    },
   };
 
   const table = useReactTable({
@@ -277,7 +291,9 @@ export function WordsTable({ unitId }: WordsTableProps) {
     <div className="flex flex-col gap-3">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <span className="text-sm text-zinc-600 dark:text-zinc-400">
-          Bu unitda jami: <span className="font-semibold text-zinc-900 dark:text-zinc-100">{total}</span> so'z
+          {t("words_table.total_in_unit")}{" "}
+          <span className="font-semibold text-zinc-900 dark:text-zinc-100">{total}</span>{" "}
+          {t("words_table.word_unit")}
         </span>
         <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
           <select
@@ -290,7 +306,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
           >
             {[10, 20, 50, 100].map((s) => (
               <option key={s} value={s}>
-                {s} / sahifa
+                {s} {t("common.per_page")}
               </option>
             ))}
           </select>
@@ -322,7 +338,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
                   colSpan={columns.length}
                   className="px-4 py-6 text-center text-zinc-500 dark:text-zinc-400"
                 >
-                  Yuklanmoqda...
+                  {t("common.loading")}
                 </td>
               </tr>
             ) : wordsQuery.isError ? (
@@ -340,7 +356,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
                   colSpan={columns.length}
                   className="px-4 py-6 text-center text-zinc-500 dark:text-zinc-400"
                 >
-                  Bu unitda hozircha so'z yo'q. Yuqoridagi forma orqali qo'shing.
+                  {t("words_table.empty")}
                 </td>
               </tr>
             ) : (
@@ -360,7 +376,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
 
       <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">
         <span className="text-sm text-zinc-600 dark:text-zinc-400">
-          Sahifa {page} / {totalPages}
+          {t("common.page")} {page} {t("common.of")} {totalPages}
         </span>
         <div className="flex gap-2">
           <button
@@ -369,7 +385,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
             disabled={page <= 1 || wordsQuery.isFetching}
             className="rounded-md border border-zinc-300 bg-white px-3 py-1 text-sm text-zinc-900 hover:bg-zinc-100 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
           >
-            Oldingi
+            {t("common.previous")}
           </button>
           <button
             type="button"
@@ -377,22 +393,25 @@ export function WordsTable({ unitId }: WordsTableProps) {
             disabled={page >= totalPages || wordsQuery.isFetching}
             className="rounded-md border border-zinc-300 bg-white px-3 py-1 text-sm text-zinc-900 hover:bg-zinc-100 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
           >
-            Keyingi
+            {t("common.next")}
           </button>
         </div>
       </div>
 
       <ConfirmDialog
         open={confirmTarget !== null}
-        title="So'zni o'chirish"
+        title={t("words_table.delete_title")}
         message={
           <>
+            {t("words_table.delete_confirm_prefix")}{" "}
             <span className="font-medium text-zinc-900 dark:text-zinc-100">
               "{confirmTarget?.english}"
             </span>{" "}
-            so'zini o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi.
+            {t("words_table.delete_confirm_suffix")}
           </>
         }
+        confirmLabel={t("words_table.delete_button")}
+        cancelLabel={t("common.cancel")}
         confirmLoading={deleteMutation.isPending}
         onConfirm={() => {
           if (confirmTarget) deleteMutation.mutate(confirmTarget.id);

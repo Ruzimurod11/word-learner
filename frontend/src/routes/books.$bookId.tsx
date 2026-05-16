@@ -5,6 +5,7 @@ import {
   useNavigate,
 } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { z } from "zod";
 import { getBook } from "@/api/book-api";
 import { UnitTabs } from "@/components/UnitTabs";
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/books/$bookId")({
 });
 
 function BookPage() {
+  const { t } = useTranslation();
   const { bookId } = Route.useParams();
   const search = Route.useSearch();
   const navigate = useNavigate();
@@ -59,7 +61,7 @@ function BookPage() {
   if (bookQuery.isLoading) {
     return (
       <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-        Yuklanmoqda...
+        {t("common.loading")}
       </div>
     );
   }
@@ -67,7 +69,7 @@ function BookPage() {
   if (bookQuery.isError) {
     return (
       <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300">
-        Xatolik: {(bookQuery.error as Error).message}
+        {t("common.error")}: {(bookQuery.error as Error).message}
       </div>
     );
   }
@@ -76,7 +78,7 @@ function BookPage() {
   if (!book) {
     return (
       <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-        Kitob topilmadi.
+        {t("book.not_found")}
       </div>
     );
   }
@@ -88,7 +90,7 @@ function BookPage() {
           to="/"
           className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
         >
-          ← Barcha kitoblar
+          {t("common.back_to_books")}
         </Link>
         <div className="flex items-end justify-between gap-3">
           <div>
@@ -100,8 +102,8 @@ function BookPage() {
             )}
           </div>
           <div className="hidden text-right text-sm text-zinc-500 dark:text-zinc-400 sm:block">
-            <div>{book.unitCount} unit</div>
-            <div>{book.wordCount} so'z</div>
+            <div>{t("book.unit_count", { count: book.unitCount })}</div>
+            <div>{t("book.word_count", { count: book.wordCount })}</div>
           </div>
         </div>
       </div>
@@ -117,7 +119,7 @@ function BookPage() {
           <div className="flex items-baseline justify-between gap-2">
             <h2 className="text-lg font-semibold">{activeUnit.title}</h2>
             <span className="text-sm text-zinc-500 dark:text-zinc-400">
-              {activeUnit.wordCount} so'z
+              {t("book.word_count", { count: activeUnit.wordCount })}
             </span>
           </div>
           <WordForm unitId={activeUnitId} />
@@ -125,7 +127,7 @@ function BookPage() {
         </div>
       ) : (
         <div className="rounded-lg border border-zinc-200 bg-white p-6 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-          Bu kitobda hali unit yo'q.
+          {t("book.no_units")}
         </div>
       )}
     </div>

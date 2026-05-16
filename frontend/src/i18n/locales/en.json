@@ -1,0 +1,86 @@
+{
+  "app": {
+    "name": "Essential Words"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "back_to_books": "← All books",
+    "open": "Open →",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "/",
+    "per_page": "/ page",
+    "total": "Total",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleting": "Deleting..."
+  },
+  "home": {
+    "title": "Books",
+    "subtitle": "7 books — 30 units each, 20 words per unit. Pick a book to start.",
+    "empty": "No books found. Run pnpm db:seed first."
+  },
+  "book": {
+    "unit_count": "{{count}} units",
+    "word_count": "{{count}} words",
+    "not_found": "Book not found.",
+    "no_units": "This book has no units yet.",
+    "select_unit_aria": "Select unit",
+    "unit_tab_title": "{{title}} — {{count}} words"
+  },
+  "word_form": {
+    "english_label": "English",
+    "english_placeholder": "apple",
+    "translation_label": "Translation",
+    "translation_placeholder": "apple",
+    "submit": "Add",
+    "submitting": "Adding...",
+    "both_required": "Both fields are required"
+  },
+  "words_table": {
+    "header_num": "#",
+    "header_english": "English",
+    "header_translation": "Translation",
+    "header_actions": "Actions",
+    "total_in_unit": "Total in this unit:",
+    "word_unit": "words",
+    "empty": "No words in this unit yet. Add some using the form above.",
+    "delete_title": "Delete word",
+    "delete_confirm_prefix": "Are you sure you want to delete",
+    "delete_confirm_suffix": "? This action cannot be undone.",
+    "delete_button": "Yes, delete"
+  },
+  "search": {
+    "placeholder": "Search across all books...",
+    "button": "Search",
+    "aria": "Search",
+    "page_title": "Search results",
+    "page_subtitle": "Search words across all books and units.",
+    "empty_query": "No search query entered.",
+    "searching": "Searching...",
+    "results_found": "{{count}} results found —",
+    "no_results_prefix": "No results found for",
+    "no_results_suffix": ".",
+    "col_location": "Location",
+    "col_english": "English",
+    "col_translation": "Translation",
+    "col_actions": "Actions",
+    "location_badge": "Book {{book}} · Unit {{unit}}"
+  },
+  "theme": {
+    "to_light_aria": "Switch to light mode",
+    "to_dark_aria": "Switch to dark mode",
+    "light_title": "Light mode",
+    "dark_title": "Dark mode"
+  },
+  "lang": {
+    "label": "Language",
+    "uz": "O'zbekcha",
+    "en": "English",
+    "ru": "Русский"
+  }
+}

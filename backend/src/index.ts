@@ -4,6 +4,7 @@ import cors, { type CorsOptions } from "cors";
 import wordRoutes from "./routes/wordRoutes.ts";
 import bookRoutes from "./routes/bookRoutes.ts";
 import unitRoutes from "./routes/unitRoutes.ts";
+import { languageMiddleware } from "./i18n/index.ts";
 
 const app = express();
 
@@ -32,6 +33,8 @@ app.use((_req, res, next) => {
   res.set("Cache-Control", "no-store");
   next();
 });
+
+app.use(languageMiddleware);
 
 app.get("/health", (_req, res) => {
   res.json({ ok: true });

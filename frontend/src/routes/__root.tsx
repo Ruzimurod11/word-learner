@@ -1,5 +1,7 @@
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { GlobalSearch } from "@/components/GlobalSearch";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Route = createRootRoute({
@@ -7,6 +9,7 @@ export const Route = createRootRoute({
 });
 
 function RootLayout() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
       <header className="sticky top-0 z-30 border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/80">
@@ -18,10 +21,11 @@ function RootLayout() {
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-zinc-900 text-sm text-white dark:bg-zinc-100 dark:text-zinc-900">
               EW
             </span>
-            <span>Essential Words</span>
+            <span>{t("app.name")}</span>
           </Link>
           <div className="flex items-center gap-2 sm:gap-3">
             <GlobalSearch />
+            <LanguageSwitcher />
             <ThemeToggle />
           </div>
         </div>

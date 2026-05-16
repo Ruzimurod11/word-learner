@@ -1,0 +1,86 @@
+{
+  "app": {
+    "name": "Essential Words"
+  },
+  "common": {
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik",
+    "back_to_books": "← Barcha kitoblar",
+    "open": "Ochish →",
+    "previous": "Oldingi",
+    "next": "Keyingi",
+    "page": "Sahifa",
+    "of": "/",
+    "per_page": "/ sahifa",
+    "total": "Jami",
+    "save": "Saqlash",
+    "cancel": "Bekor",
+    "edit": "Tahrirlash",
+    "delete": "O'chirish",
+    "deleting": "O'chirilmoqda..."
+  },
+  "home": {
+    "title": "Kitoblar",
+    "subtitle": "7 ta kitob — har birida 30 ta unit, har bir unitda 20 ta so'z. Boshlash uchun kitobni tanlang.",
+    "empty": "Kitoblar topilmadi. Avval pnpm db:seed ni ishga tushiring."
+  },
+  "book": {
+    "unit_count": "{{count}} unit",
+    "word_count": "{{count}} so'z",
+    "not_found": "Kitob topilmadi.",
+    "no_units": "Bu kitobda hali unit yo'q.",
+    "select_unit_aria": "Unit tanlash",
+    "unit_tab_title": "{{title}} — {{count}} so'z"
+  },
+  "word_form": {
+    "english_label": "English",
+    "english_placeholder": "apple",
+    "translation_label": "Tarjima",
+    "translation_placeholder": "olma",
+    "submit": "Qo'shish",
+    "submitting": "Qo'shilmoqda...",
+    "both_required": "Ikkala maydon ham to'ldirilishi kerak"
+  },
+  "words_table": {
+    "header_num": "#",
+    "header_english": "English",
+    "header_translation": "Tarjima",
+    "header_actions": "Amal",
+    "total_in_unit": "Bu unitda jami:",
+    "word_unit": "so'z",
+    "empty": "Bu unitda hozircha so'z yo'q. Yuqoridagi forma orqali qo'shing.",
+    "delete_title": "So'zni o'chirish",
+    "delete_confirm_prefix": "",
+    "delete_confirm_suffix": "so'zini o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi.",
+    "delete_button": "Ha, o'chirish"
+  },
+  "search": {
+    "placeholder": "Barcha kitoblar bo'yicha qidirish...",
+    "button": "Qidir",
+    "aria": "Qidiruv",
+    "page_title": "Qidiruv natijalari",
+    "page_subtitle": "Barcha kitoblar va unitlar ichidagi so'zlar bo'yicha qidirish.",
+    "empty_query": "Qidiruv so'rovi kiritilmagan.",
+    "searching": "Qidirilmoqda...",
+    "results_found": "{{count}} ta natija topildi —",
+    "no_results_prefix": "",
+    "no_results_suffix": "bo'yicha hech narsa topilmadi.",
+    "col_location": "Joylashuv",
+    "col_english": "English",
+    "col_translation": "Tarjima",
+    "col_actions": "Amal",
+    "location_badge": "Book {{book}} · Unit {{unit}}"
+  },
+  "theme": {
+    "to_light_aria": "Yorug' rejimga o'tish",
+    "to_dark_aria": "Qorong'i rejimga o'tish",
+    "light_title": "Yorug' rejim",
+    "dark_title": "Qorong'i rejim"
+  },
+  "lang": {
+    "label": "Til",
+    "uz": "O'zbekcha",
+    "en": "English",
+    "ru": "Русский"
+  }
+}

@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { getBooks } from "@/api/book-api";
 
 export function BooksGrid() {
+  const { t } = useTranslation();
   const query = useQuery({
     queryKey: ["books"],
     queryFn: getBooks,
@@ -11,7 +13,7 @@ export function BooksGrid() {
   if (query.isLoading) {
     return (
       <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-        Yuklanmoqda...
+        {t("common.loading")}
       </div>
     );
   }
@@ -19,7 +21,7 @@ export function BooksGrid() {
   if (query.isError) {
     return (
       <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300">
-        Xatolik: {(query.error as Error).message}
+        {t("common.error")}: {(query.error as Error).message}
       </div>
     );
   }
@@ -28,7 +30,7 @@ export function BooksGrid() {
   if (books.length === 0) {
     return (
       <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-        Kitoblar topilmadi. Avval <code className="font-mono text-xs">pnpm db:seed</code> ni ishga tushiring.
+        {t("home.empty")}
       </div>
     );
   }
@@ -47,7 +49,7 @@ export function BooksGrid() {
               {book.order}
             </span>
             <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
-              {book.unitCount} unit
+              {t("book.unit_count", { count: book.unitCount })}
             </span>
           </div>
           <div>
@@ -61,9 +63,9 @@ export function BooksGrid() {
             )}
           </div>
           <div className="mt-auto flex items-center justify-between border-t border-zinc-100 pt-3 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-500">
-            <span>{book.wordCount} so'z</span>
+            <span>{t("book.word_count", { count: book.wordCount })}</span>
             <span className="font-medium text-zinc-900 dark:text-zinc-100">
-              Ochish →
+              {t("common.open")}
             </span>
           </div>
         </Link>
