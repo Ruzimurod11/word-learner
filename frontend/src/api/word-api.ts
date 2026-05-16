@@ -8,7 +8,8 @@ import type {
   Word,
 } from "@/types/word";
 
-const API = "http://localhost:3000/words";
+const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+const API = `${API_BASE.replace(/\/$/, "")}/words`;
 
 const unwrap = <T,>(payload: ApiResponse<T>): T => {
   if (!payload.success) {

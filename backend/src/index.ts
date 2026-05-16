@@ -1,11 +1,29 @@
 import "dotenv/config";
 import express, { type NextFunction, type Request, type Response } from "express";
-import cors from "cors";
+import cors, { type CorsOptions } from "cors";
 import wordRoutes from "./routes/wordRoutes.ts";
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = (process.env.FRONTEND_URL ?? "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+const corsOptions: CorsOptions = {
+  origin:
+    allowedOrigins.length === 0
+      ? true
+      : (origin, callback) => {
+          if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+          } else {
+            callback(new Error(`Origin ${origin} not allowed by CORS`));
+          }
+        },
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use((_req, res, next) => {
