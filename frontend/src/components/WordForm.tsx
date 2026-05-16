@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { createUnitWord } from "@/api/word-api";
@@ -13,6 +13,12 @@ export function WordForm({ unitId }: WordFormProps) {
   const [translation, setTranslation] = useState("");
   const [error, setError] = useState<string | null>(null);
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    setEnglish("");
+    setTranslation("");
+    setError(null);
+  }, [unitId]);
 
   const mutation = useMutation({
     mutationFn: () =>
