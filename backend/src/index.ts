@@ -35,6 +35,10 @@ app.get("/health", (_req, res) => {
   res.json({ ok: true });
 });
 
+app.get("/cron", (_req, res) => {
+  res.send("ok");
+});
+
 app.use("/words", wordRoutes);
 
 app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
