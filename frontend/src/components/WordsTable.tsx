@@ -40,7 +40,7 @@ function EditableInput({
         setValue(e.target.value);
         onChange(e.target.value);
       }}
-      className="w-full rounded border border-zinc-300 px-2 py-1 text-sm outline-none focus:border-zinc-900"
+      className="w-full rounded border border-zinc-300 bg-white px-2 py-1 text-sm text-zinc-900 outline-none focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-zinc-100"
     />
   );
 }
@@ -114,7 +114,9 @@ export function WordsTable() {
         cell: ({ row, table }) => {
           const ctx = table.options.meta as TableCtx;
           return (
-            <span className="text-zinc-500">{ctx.rowOffset + row.index + 1}</span>
+            <span className="text-zinc-500 dark:text-zinc-400">
+              {ctx.rowOffset + row.index + 1}
+            </span>
           );
         },
         size: 60,
@@ -165,14 +167,14 @@ export function WordsTable() {
                   type="button"
                   onClick={ctx.saveEdit}
                   disabled={ctx.isSaving}
-                  className="rounded bg-green-600 px-2 py-1 text-xs text-white hover:bg-green-700 disabled:opacity-50"
+                  className="rounded bg-green-600 px-2 py-1 text-xs text-white hover:bg-green-700 disabled:opacity-50 dark:bg-green-500 dark:hover:bg-green-600"
                 >
                   Saqlash
                 </button>
                 <button
                   type="button"
                   onClick={ctx.cancelEdit}
-                  className="rounded bg-zinc-200 px-2 py-1 text-xs hover:bg-zinc-300"
+                  className="rounded bg-zinc-200 px-2 py-1 text-xs text-zinc-900 hover:bg-zinc-300 dark:bg-zinc-700 dark:text-zinc-100 dark:hover:bg-zinc-600"
                 >
                   Bekor
                 </button>
@@ -184,17 +186,50 @@ export function WordsTable() {
               <button
                 type="button"
                 onClick={() => ctx.startEdit(w)}
-                className="rounded bg-zinc-900 px-2 py-1 text-xs text-white hover:bg-zinc-800"
+                aria-label="Tahrirlash"
+                title="Tahrirlash"
+                className="rounded bg-zinc-900 p-1.5 text-white hover:bg-zinc-800 dark:bg-zinc-200 dark:text-zinc-900 dark:hover:bg-zinc-300"
               >
-                Tahrirlash
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                >
+                  <path d="M12 20h9" />
+                  <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+                </svg>
               </button>
               <button
                 type="button"
                 onClick={() => ctx.deleteRow(w)}
                 disabled={ctx.isDeleting}
-                className="rounded bg-red-600 px-2 py-1 text-xs text-white hover:bg-red-700 disabled:opacity-50"
+                aria-label="O'chirish"
+                title="O'chirish"
+                className="rounded bg-red-600 p-1.5 text-white hover:bg-red-700 disabled:opacity-50 dark:bg-red-500 dark:hover:bg-red-600"
               >
-                O'chirish
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                >
+                  <path d="M3 6h18" />
+                  <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                  <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                  <path d="M10 11v6" />
+                  <path d="M14 11v6" />
+                </svg>
               </button>
             </div>
           );
@@ -245,9 +280,9 @@ export function WordsTable() {
             setPage(1);
           }}
           placeholder="Qidiruv (english yoki tarjima)..."
-          className="w-full rounded-md border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-zinc-900 sm:max-w-xs"
+          className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-100 sm:max-w-xs"
         />
-        <div className="flex items-center gap-2 text-sm text-zinc-600">
+        <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
           <span>Jami: {total}</span>
           <select
             value={pageSize}
@@ -255,7 +290,7 @@ export function WordsTable() {
               setPageSize(Number(e.target.value));
               setPage(1);
             }}
-            className="rounded-md border border-zinc-300 px-2 py-1"
+            className="rounded-md border border-zinc-300 bg-white px-2 py-1 text-zinc-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
           >
             {[10, 20, 50, 100].map((s) => (
               <option key={s} value={s}>
@@ -266,15 +301,15 @@ export function WordsTable() {
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white shadow-sm">
-        <table className="min-w-full divide-y divide-zinc-200 text-sm">
-          <thead className="bg-zinc-50">
+      <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+        <table className="min-w-full divide-y divide-zinc-200 text-sm dark:divide-zinc-800">
+          <thead className="bg-zinc-50 dark:bg-zinc-800/50">
             {table.getHeaderGroups().map((hg) => (
               <tr key={hg.id}>
                 {hg.headers.map((h) => (
                   <th
                     key={h.id}
-                    className="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider text-zinc-600"
+                    className="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400"
                   >
                     {h.isPlaceholder
                       ? null
@@ -284,12 +319,12 @@ export function WordsTable() {
               </tr>
             ))}
           </thead>
-          <tbody className="divide-y divide-zinc-100">
+          <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
             {wordsQuery.isLoading ? (
               <tr>
                 <td
                   colSpan={columns.length}
-                  className="px-4 py-6 text-center text-zinc-500"
+                  className="px-4 py-6 text-center text-zinc-500 dark:text-zinc-400"
                 >
                   Yuklanmoqda...
                 </td>
@@ -298,7 +333,7 @@ export function WordsTable() {
               <tr>
                 <td
                   colSpan={columns.length}
-                  className="px-4 py-6 text-center text-red-600"
+                  className="px-4 py-6 text-center text-red-600 dark:text-red-400"
                 >
                   {(wordsQuery.error as Error).message}
                 </td>
@@ -307,14 +342,14 @@ export function WordsTable() {
               <tr>
                 <td
                   colSpan={columns.length}
-                  className="px-4 py-6 text-center text-zinc-500"
+                  className="px-4 py-6 text-center text-zinc-500 dark:text-zinc-400"
                 >
                   Hozircha so'z yo'q. Yuqoridan qo'shing.
                 </td>
               </tr>
             ) : (
               table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="hover:bg-zinc-50">
+                <tr key={row.id} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
                   {row.getVisibleCells().map((cell) => (
                     <td key={cell.id} className="px-4 py-2 align-middle">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -328,7 +363,7 @@ export function WordsTable() {
       </div>
 
       <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">
-        <span className="text-sm text-zinc-600">
+        <span className="text-sm text-zinc-600 dark:text-zinc-400">
           Sahifa {page} / {totalPages}
         </span>
         <div className="flex gap-2">
@@ -336,7 +371,7 @@ export function WordsTable() {
             type="button"
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page <= 1 || wordsQuery.isFetching}
-            className="rounded-md border border-zinc-300 px-3 py-1 text-sm hover:bg-zinc-100 disabled:opacity-50"
+            className="rounded-md border border-zinc-300 bg-white px-3 py-1 text-sm text-zinc-900 hover:bg-zinc-100 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
           >
             Oldingi
           </button>
@@ -344,7 +379,7 @@ export function WordsTable() {
             type="button"
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page >= totalPages || wordsQuery.isFetching}
-            className="rounded-md border border-zinc-300 px-3 py-1 text-sm hover:bg-zinc-100 disabled:opacity-50"
+            className="rounded-md border border-zinc-300 bg-white px-3 py-1 text-sm text-zinc-900 hover:bg-zinc-100 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
           >
             Keyingi
           </button>
