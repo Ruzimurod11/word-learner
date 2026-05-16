@@ -1,9 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { WordForm } from "@/components/WordForm";
+import { WordsTable } from "@/components/WordsTable";
 
 export const Route = createFileRoute("/")({
-  component: Home,
+  component: VocabularyPage,
 });
 
-function Home() {
-  return <h1>Hello World 👋</h1>;
+function VocabularyPage() {
+  return (
+    <div className="mx-auto flex max-w-5xl flex-col gap-6 p-4 sm:p-8">
+      <header className="flex flex-col gap-1">
+        <h1 className="text-2xl font-bold sm:text-3xl">Vocabulary</h1>
+        <p className="text-sm text-zinc-600">
+          Inglizcha so'zlar va tarjimasi. Qo'shing, tahrirlang, o'chiring.
+        </p>
+      </header>
+
+      <WordForm />
+      <WordsTable />
+    </div>
+  );
 }

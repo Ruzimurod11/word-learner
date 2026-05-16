@@ -1,28 +1,31 @@
-import express, { NextFunction, Request, Response } from "express";
-import postRoutes from "./routes/postRoutes.ts";
+import "dotenv/config";
+import express, { type NextFunction, type Request, type Response } from "express";
 import cors from "cors";
+import wordRoutes from "./routes/wordRoutes.ts";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use((req, res, next) => {
+app.use((_req, res, next) => {
   res.set("Cache-Control", "no-store");
   next();
 });
 
-// Routes
-app.use("/posts", postRoutes);
+app.get("/health", (_req, res) => {
+  res.json({ ok: true });
+});
 
-// global error handler
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+app.use("/words", wordRoutes);
+
+app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
   console.error(err);
   res.status(500).json({
     success: false,
-    message: "Internal Server Error",
+    error: "Internal Server Error",
   });
 });
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT ?? 3000);
 app.listen(PORT, () => console.log(`Server: http://localhost:${PORT}`));
