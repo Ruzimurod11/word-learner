@@ -154,13 +154,13 @@ export function WordsTable() {
       },
       {
         id: "actions",
-        header: "Amal",
+        header: () => <div className="text-right">Amal</div>,
         cell: ({ row, table }) => {
           const ctx = table.options.meta as TableCtx;
           const w = row.original;
           if (ctx.editingId === w.id) {
             return (
-              <div className="flex gap-2">
+              <div className="flex justify-end gap-2">
                 <button
                   type="button"
                   onClick={ctx.saveEdit}
@@ -180,7 +180,7 @@ export function WordsTable() {
             );
           }
           return (
-            <div className="flex gap-2">
+            <div className="flex justify-end gap-2">
               <button
                 type="button"
                 onClick={() => ctx.startEdit(w)}
