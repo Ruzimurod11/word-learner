@@ -1,8 +1,12 @@
 import { useState, type FormEvent } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createWord } from "@/api/word-api";
+import { createUnitWord } from "@/api/word-api";
 
-export function WordForm() {
+interface WordFormProps {
+  unitId: number;
+}
+
+export function WordForm({ unitId }: WordFormProps) {
   const [english, setEnglish] = useState("");
   const [translation, setTranslation] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -10,12 +14,17 @@ export function WordForm() {
 
   const mutation = useMutation({
     mutationFn: () =>
-      createWord({ english: english.trim(), translation: translation.trim() }),
+      createUnitWord(unitId, {
+        english: english.trim(),
+        translation: translation.trim(),
+      }),
     onSuccess: () => {
       setEnglish("");
       setTranslation("");
       setError(null);
-      void queryClient.invalidateQueries({ queryKey: ["words"] });
+      void queryClient.invalidateQueries({ queryKey: ["unit-words", unitId] });
+      void queryClient.invalidateQueries({ queryKey: ["book"] });
+      void queryClient.invalidateQueries({ queryKey: ["books"] });
     },
     onError: (err: Error) => setError(err.message),
   });

@@ -2,6 +2,8 @@ import "dotenv/config";
 import express, { type NextFunction, type Request, type Response } from "express";
 import cors, { type CorsOptions } from "cors";
 import wordRoutes from "./routes/wordRoutes.ts";
+import bookRoutes from "./routes/bookRoutes.ts";
+import unitRoutes from "./routes/unitRoutes.ts";
 
 const app = express();
 
@@ -39,6 +41,8 @@ app.get("/cron", (_req, res) => {
   res.send("ok");
 });
 
+app.use("/books", bookRoutes);
+app.use("/units", unitRoutes);
 app.use("/words", wordRoutes);
 
 app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {

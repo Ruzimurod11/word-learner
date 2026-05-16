@@ -3,8 +3,7 @@ import * as wordController from "../controllers/wordController.ts";
 
 const router = Router();
 
-router.get("/search", wordController.searchWords);
-router.put("/:id", wordController.updateWord);
-router.delete("/:id", wordController.deleteWord);
+router.get("/:unitId/words", wordController.listUnitWords);
+router.post("/:unitId/words", wordController.createUnitWord);
 
 export default router;

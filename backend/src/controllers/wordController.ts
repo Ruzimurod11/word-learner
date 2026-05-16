@@ -3,7 +3,8 @@ import { z } from "zod";
 import * as wordService from "../services/wordService.ts";
 import {
   createWordSchema,
-  listQuerySchema,
+  searchQuerySchema,
+  unitWordsQuerySchema,
   updateWordSchema,
 } from "../types/word.ts";
 import { sendError, sendSuccess } from "../utils/responseHandler.ts";
@@ -13,14 +14,19 @@ const idSchema = z.coerce.number().int().positive();
 const formatZodError = (err: z.ZodError): string =>
   err.issues.map((i) => `${i.path.join(".") || "value"}: ${i.message}`).join("; ");
 
-export const listWords = async (req: Request, res: Response): Promise<void> => {
-  const parsed = listQuerySchema.safeParse(req.query);
-  if (!parsed.success) {
-    sendError(res, formatZodError(parsed.error), 400);
+export const listUnitWords = async (req: Request, res: Response): Promise<void> => {
+  const unitIdResult = idSchema.safeParse(req.params.unitId);
+  if (!unitIdResult.success) {
+    sendError(res, "Noto'g'ri unit ID", 400);
+    return;
+  }
+  const queryResult = unitWordsQuerySchema.safeParse(req.query);
+  if (!queryResult.success) {
+    sendError(res, formatZodError(queryResult.error), 400);
     return;
   }
   try {
-    const result = await wordService.listWords(parsed.data);
+    const result = await wordService.listWordsByUnit(unitIdResult.data, queryResult.data);
     sendSuccess(res, result);
   } catch (err) {
     console.error(err);
@@ -28,18 +34,28 @@ export const listWords = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export const createWord = async (req: Request, res: Response): Promise<void> => {
-  const parsed = createWordSchema.safeParse(req.body);
-  if (!parsed.success) {
-    sendError(res, formatZodError(parsed.error), 400);
+export const createUnitWord = async (req: Request, res: Response): Promise<void> => {
+  const unitIdResult = idSchema.safeParse(req.params.unitId);
+  if (!unitIdResult.success) {
+    sendError(res, "Noto'g'ri unit ID", 400);
+    return;
+  }
+  const bodyResult = createWordSchema.safeParse(req.body);
+  if (!bodyResult.success) {
+    sendError(res, formatZodError(bodyResult.error), 400);
     return;
   }
   try {
-    const word = await wordService.createWord(parsed.data);
+    const exists = await wordService.unitExists(unitIdResult.data);
+    if (!exists) {
+      sendError(res, "Unit topilmadi", 404);
+      return;
+    }
+    const word = await wordService.createWord(unitIdResult.data, bodyResult.data);
     sendSuccess(res, word, 201);
   } catch (err: unknown) {
     if (err instanceof Error && /unique/i.test(err.message)) {
-      sendError(res, "Bu so'z allaqachon mavjud", 409);
+      sendError(res, "Bu so'z bu unitda allaqachon mavjud", 409);
       return;
     }
     console.error(err);
@@ -67,7 +83,7 @@ export const updateWord = async (req: Request, res: Response): Promise<void> => 
     sendSuccess(res, word);
   } catch (err: unknown) {
     if (err instanceof Error && /unique/i.test(err.message)) {
-      sendError(res, "Bu so'z allaqachon mavjud", 409);
+      sendError(res, "Bu so'z bu unitda allaqachon mavjud", 409);
       return;
     }
     console.error(err);
@@ -91,5 +107,20 @@ export const deleteWord = async (req: Request, res: Response): Promise<void> => 
   } catch (err) {
     console.error(err);
     sendError(res, "O'chirishda xatolik");
+  }
+};
+
+export const searchWords = async (req: Request, res: Response): Promise<void> => {
+  const parsed = searchQuerySchema.safeParse(req.query);
+  if (!parsed.success) {
+    sendError(res, formatZodError(parsed.error), 400);
+    return;
+  }
+  try {
+    const result = await wordService.searchWords(parsed.data);
+    sendSuccess(res, result);
+  } catch (err) {
+    console.error(err);
+    sendError(res, "Qidiruvda xatolik");
   }
 };

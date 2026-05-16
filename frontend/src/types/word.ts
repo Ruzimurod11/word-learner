@@ -1,5 +1,7 @@
 export interface Word {
   id: number;
+  unitId: number;
+  order: number;
   english: string;
   translation: string;
   createdAt: string;
@@ -24,10 +26,31 @@ export interface UpdateWordDto {
   translation?: string;
 }
 
-export interface ListQuery {
+export interface UnitWordsQuery {
   page?: number;
   pageSize?: number;
-  search?: string;
+}
+
+export interface SearchQuery {
+  q: string;
+  page?: number;
+  pageSize?: number;
+}
+
+export interface SearchWord extends Word {
+  bookId: number;
+  bookOrder: number;
+  bookTitle: string;
+  unitOrder: number;
+  unitTitle: string;
+}
+
+export interface PaginatedSearchWords {
+  items: SearchWord[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
 }
 
 export interface ApiSuccess<T> {

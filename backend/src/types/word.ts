@@ -10,24 +10,50 @@ export const updateWordSchema = createWordSchema.partial().refine(
   { message: "Kamida bitta maydon yuborilishi kerak" },
 );
 
-export const listQuerySchema = z.object({
+export const unitWordsQuerySchema = z.object({
   page: z.coerce.number().int().min(1).default(1),
   pageSize: z.coerce.number().int().min(1).max(100).default(20),
-  search: z.string().trim().optional(),
+});
+
+export const searchQuerySchema = z.object({
+  q: z.string().trim().min(1, "Qidiruv so'rovi bo'sh bo'lmasligi kerak"),
+  page: z.coerce.number().int().min(1).default(1),
+  pageSize: z.coerce.number().int().min(1).max(100).default(20),
 });
 
 export type CreateWordDto = z.infer<typeof createWordSchema>;
 export type UpdateWordDto = z.infer<typeof updateWordSchema>;
-export type ListQuery = z.infer<typeof listQuerySchema>;
+export type UnitWordsQuery = z.infer<typeof unitWordsQuerySchema>;
+export type SearchQuery = z.infer<typeof searchQuerySchema>;
+
+export interface WordDto {
+  id: number;
+  unitId: number;
+  order: number;
+  english: string;
+  translation: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export interface PaginatedWords {
-  items: Array<{
-    id: number;
-    english: string;
-    translation: string;
-    createdAt: string;
-    updatedAt: string;
-  }>;
+  items: WordDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}
+
+export interface SearchWordDto extends WordDto {
+  bookId: number;
+  bookOrder: number;
+  bookTitle: string;
+  unitOrder: number;
+  unitTitle: string;
+}
+
+export interface PaginatedSearchWords {
+  items: SearchWordDto[];
   total: number;
   page: number;
   pageSize: number;

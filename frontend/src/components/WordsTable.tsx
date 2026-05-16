@@ -6,7 +6,7 @@ import {
   type ColumnDef,
 } from "@tanstack/react-table";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteWord, getWords, updateWord } from "@/api/word-api";
+import { deleteWord, getUnitWords, updateWord } from "@/api/word-api";
 import type { Word } from "@/types/word";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 
@@ -20,7 +20,6 @@ interface TableCtx {
   setTranslationValue: (v: string) => void;
   isSaving: boolean;
   isDeleting: boolean;
-  rowOffset: number;
 }
 
 function EditableInput({
@@ -46,10 +45,13 @@ function EditableInput({
   );
 }
 
-export function WordsTable() {
+interface WordsTableProps {
+  unitId: number;
+}
+
+export function WordsTable({ unitId }: WordsTableProps) {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
-  const [search, setSearch] = useState("");
   const [editingId, setEditingId] = useState<number | null>(null);
   const [confirmTarget, setConfirmTarget] = useState<Word | null>(null);
   const englishRef = useRef("");
@@ -57,16 +59,22 @@ export function WordsTable() {
   const queryClient = useQueryClient();
 
   const wordsQuery = useQuery({
-    queryKey: ["words", { page, pageSize, search }],
-    queryFn: () => getWords({ page, pageSize, search: search || undefined }),
+    queryKey: ["unit-words", unitId, { page, pageSize }],
+    queryFn: () => getUnitWords(unitId, { page, pageSize }),
     placeholderData: (prev) => prev,
   });
+
+  const invalidate = () => {
+    void queryClient.invalidateQueries({ queryKey: ["unit-words", unitId] });
+    void queryClient.invalidateQueries({ queryKey: ["book"] });
+    void queryClient.invalidateQueries({ queryKey: ["books"] });
+  };
 
   const deleteMutation = useMutation({
     mutationFn: (id: number) => deleteWord(id),
     onSuccess: () => {
       setConfirmTarget(null);
-      void queryClient.invalidateQueries({ queryKey: ["words"] });
+      invalidate();
     },
   });
 
@@ -78,7 +86,7 @@ export function WordsTable() {
       }),
     onSuccess: () => {
       setEditingId(null);
-      void queryClient.invalidateQueries({ queryKey: ["words"] });
+      invalidate();
     },
   });
 
@@ -111,14 +119,11 @@ export function WordsTable() {
       {
         id: "rowNumber",
         header: "#",
-        cell: ({ row, table }) => {
-          const ctx = table.options.meta as TableCtx;
-          return (
-            <span className="text-zinc-500 dark:text-zinc-400">
-              {ctx.rowOffset + row.index + 1}
-            </span>
-          );
-        },
+        cell: ({ row }) => (
+          <span className="text-zinc-500 dark:text-zinc-400">
+            {row.original.order}
+          </span>
+        ),
         size: 60,
       },
       {
@@ -257,7 +262,6 @@ export function WordsTable() {
     },
     isSaving: updateMutation.isPending,
     isDeleting: deleteMutation.isPending,
-    rowOffset: (page - 1) * pageSize,
   };
 
   const table = useReactTable({
@@ -272,18 +276,10 @@ export function WordsTable() {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <input
-          type="search"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setPage(1);
-          }}
-          placeholder="Qidiruv (english yoki tarjima)..."
-          className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-100 sm:max-w-xs"
-        />
+        <span className="text-sm text-zinc-600 dark:text-zinc-400">
+          Bu unitda jami: <span className="font-semibold text-zinc-900 dark:text-zinc-100">{total}</span> so'z
+        </span>
         <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-          <span>Jami: {total}</span>
           <select
             value={pageSize}
             onChange={(e) => {
@@ -344,7 +340,7 @@ export function WordsTable() {
                   colSpan={columns.length}
                   className="px-4 py-6 text-center text-zinc-500 dark:text-zinc-400"
                 >
-                  Hozircha so'z yo'q. Yuqoridan qo'shing.
+                  Bu unitda hozircha so'z yo'q. Yuqoridagi forma orqali qo'shing.
                 </td>
               </tr>
             ) : (
