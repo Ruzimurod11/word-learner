@@ -16,7 +16,8 @@ const LABELS: Record<Lang, string> = {
 
 export function LanguageSwitcher() {
   const { i18n, t } = useTranslation();
-  const current = (i18n.language as Lang) in FLAGS ? (i18n.language as Lang) : "uz";
+  const current =
+    (i18n.language as Lang) in FLAGS ? (i18n.language as Lang) : "uz";
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -74,7 +75,7 @@ export function LanguageSwitcher() {
       {open && (
         <ul
           role="listbox"
-          className="absolute right-0 z-40 mt-1 min-w-[10rem] overflow-hidden rounded-md border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900"
+          className="absolute right-0 z-40 mt-1 min-w-40 overflow-hidden rounded-md border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900"
         >
           {SUPPORTED_LANGS.map((lang) => {
             const isActive = lang === current;
@@ -93,7 +94,9 @@ export function LanguageSwitcher() {
                   <span className="text-base leading-none">{FLAGS[lang]}</span>
                   <span>{LABELS[lang]}</span>
                   {isActive && (
-                    <span className="ml-auto text-zinc-500 dark:text-zinc-400">✓</span>
+                    <span className="ml-auto text-zinc-500 dark:text-zinc-400">
+                      ✓
+                    </span>
                   )}
                 </button>
               </li>
