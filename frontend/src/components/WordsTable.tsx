@@ -8,6 +8,7 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteWord, getWords, updateWord } from "@/api/word-api";
 import type { Word } from "@/types/word";
+import { ConfirmDialog } from "@/components/ConfirmDialog";
 
 interface TableCtx {
   editingId: number | null;
@@ -50,6 +51,7 @@ export function WordsTable() {
   const [pageSize, setPageSize] = useState(20);
   const [search, setSearch] = useState("");
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [confirmTarget, setConfirmTarget] = useState<Word | null>(null);
   const englishRef = useRef("");
   const translationRef = useRef("");
   const queryClient = useQueryClient();
@@ -62,7 +64,10 @@ export function WordsTable() {
 
   const deleteMutation = useMutation({
     mutationFn: (id: number) => deleteWord(id),
-    onSuccess: () => void queryClient.invalidateQueries({ queryKey: ["words"] }),
+    onSuccess: () => {
+      setConfirmTarget(null);
+      void queryClient.invalidateQueries({ queryKey: ["words"] });
+    },
   });
 
   const updateMutation = useMutation({
@@ -97,14 +102,9 @@ export function WordsTable() {
     });
   }, [updateMutation]);
 
-  const deleteRow = useCallback(
-    (w: Word) => {
-      if (confirm(`"${w.english}" so'zini o'chirishni xohlaysizmi?`)) {
-        deleteMutation.mutate(w.id);
-      }
-    },
-    [deleteMutation],
-  );
+  const deleteRow = useCallback((w: Word) => {
+    setConfirmTarget(w);
+  }, []);
 
   const columns = useMemo<ColumnDef<Word>[]>(
     () => [
@@ -385,6 +385,24 @@ export function WordsTable() {
           </button>
         </div>
       </div>
+
+      <ConfirmDialog
+        open={confirmTarget !== null}
+        title="So'zni o'chirish"
+        message={
+          <>
+            <span className="font-medium text-zinc-900 dark:text-zinc-100">
+              "{confirmTarget?.english}"
+            </span>{" "}
+            so'zini o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi.
+          </>
+        }
+        confirmLoading={deleteMutation.isPending}
+        onConfirm={() => {
+          if (confirmTarget) deleteMutation.mutate(confirmTarget.id);
+        }}
+        onCancel={() => setConfirmTarget(null)}
+      />
     </div>
   );
 }
