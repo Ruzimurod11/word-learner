@@ -122,7 +122,7 @@ function BookPage() {
               {t("book.word_count", { count: activeUnit.wordCount })}
             </span>
           </div>
-          <WordForm unitId={activeUnitId} />
+          <WordForm key={activeUnitId} unitId={activeUnitId} />
           <WordsTable key={activeUnitId} unitId={activeUnitId} />
         </div>
       ) : (

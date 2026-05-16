@@ -53,7 +53,10 @@ export function WordForm({ unitId }: WordFormProps) {
           <input
             type="text"
             value={english}
-            onChange={(e) => setEnglish(e.target.value)}
+            onChange={(e) => {
+              setEnglish(e.target.value);
+              if (error) setError(null);
+            }}
             placeholder={t("word_form.english_placeholder")}
             className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-100"
             disabled={mutation.isPending}
@@ -66,7 +69,10 @@ export function WordForm({ unitId }: WordFormProps) {
           <input
             type="text"
             value={translation}
-            onChange={(e) => setTranslation(e.target.value)}
+            onChange={(e) => {
+              setTranslation(e.target.value);
+              if (error) setError(null);
+            }}
             placeholder={t("word_form.translation_placeholder")}
             className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-100"
             disabled={mutation.isPending}
