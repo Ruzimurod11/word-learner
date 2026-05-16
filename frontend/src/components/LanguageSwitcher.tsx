@@ -44,7 +44,7 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="relative shrink-0">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -52,7 +52,7 @@ export function LanguageSwitcher() {
         aria-expanded={open}
         aria-label={t("lang.label")}
         title={LABELS[current]}
-        className="inline-flex h-9 items-center justify-center gap-1.5 rounded-md border border-zinc-300 bg-white px-2 text-zinc-700 shadow-sm hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-md border border-zinc-300 bg-white px-2 text-zinc-700 shadow-sm hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
       >
         <span className="text-base leading-none">{FLAGS[current]}</span>
         <span className="text-xs font-medium uppercase">{current}</span>
