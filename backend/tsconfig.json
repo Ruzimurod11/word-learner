@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler", // Yoki "NodeNext"
+    "allowImportingTsExtensions": true,
+    "noEmit": true, // Bu muhim: kengaytma bilan import qilganda tsc fayl yaratmasligi kerak
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}

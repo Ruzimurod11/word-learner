@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "I can do it",
+      "content": "It's very easy"
+    },
+    {
+      "id": 2,
+      "title": "My name is Ruzimurod Doniev I am a Fullstack developer",
+      "content": "It's very easy"
+    },
+    {
+      "id": 3,
+      "title": "It's my really step to world developming industry",
+      "content": "I promise I win every single game from today"
+    },
+    {
+      "id": 4,
+      "title": "Bingo",
+      "content": "Hi kiska"
+    },
+    {
+      "id": 5,
+      "title": "Jack and pear tree on the wayHa",
+      "content": "Ha ha i want to invite big fullstack developer"
+    }
+  ]
+}
