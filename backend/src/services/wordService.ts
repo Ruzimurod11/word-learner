@@ -1,6 +1,22 @@
 import { asc, eq, ilike, or, sql } from "drizzle-orm";
 import { db } from "../db/index.ts";
 import { books, units, words, type Word } from "../db/schema.ts";
+
+export interface WordLocation {
+  bookOrder: number;
+  unitOrder: number;
+}
+
+export async function findWordLocation(english: string): Promise<WordLocation | null> {
+  const [row] = await db
+    .select({ bookOrder: books.order, unitOrder: units.order })
+    .from(words)
+    .innerJoin(units, eq(units.id, words.unitId))
+    .innerJoin(books, eq(books.id, units.bookId))
+    .where(sql`lower(${words.english}) = lower(${english})`)
+    .limit(1);
+  return row ?? null;
+}
 import type {
   CreateWordDto,
   PaginatedSearchWords,

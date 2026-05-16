@@ -6,7 +6,7 @@ import {
   timestamp,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 
 export const books = pgTable(
   "books",
@@ -64,7 +64,7 @@ export const words = pgTable(
       .defaultNow(),
   },
   (table) => [
-    uniqueIndex("words_unit_english_unique_idx").on(table.unitId, table.english),
+    uniqueIndex("words_english_lower_unique_idx").on(sql`lower(${table.english})`),
   ],
 );
 

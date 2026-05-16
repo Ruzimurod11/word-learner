@@ -25,7 +25,7 @@ export function UnitTabs({ units, activeUnitId, onSelect }: UnitTabsProps) {
             aria-selected={isActive}
             onClick={() => onSelect(unit.id)}
             className={
-              "inline-flex min-w-[2.75rem] items-center justify-center rounded-md px-2.5 py-1.5 text-sm font-medium transition " +
+              "inline-flex min-w-11 items-center justify-center rounded-md px-2.5 py-1.5 text-sm font-medium transition " +
               (isActive
                 ? "bg-zinc-900 text-white shadow-sm dark:bg-zinc-100 dark:text-zinc-900"
                 : "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800")

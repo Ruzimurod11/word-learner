@@ -15,7 +15,9 @@ const messages: Record<Lang, Messages> = {
     "errors.book_not_found": "Kitob topilmadi",
     "errors.unit_not_found": "Unit topilmadi",
     "errors.word_not_found": "So'z topilmadi",
-    "errors.duplicate_word": "Bu so'z bu unitda allaqachon mavjud",
+    "errors.duplicate_word": "Bu so'z lug'atda allaqachon mavjud",
+    "errors.duplicate_word_at":
+      "Bu so'z lug'atda allaqachon mavjud (Book {{book}} / Unit {{unit}})",
     "errors.list_books_failed": "Kitoblarni olishda xatolik",
     "errors.get_book_failed": "Kitobni olishda xatolik",
     "errors.list_words_failed": "So'zlarni olishda xatolik",
@@ -32,7 +34,9 @@ const messages: Record<Lang, Messages> = {
     "errors.book_not_found": "Book not found",
     "errors.unit_not_found": "Unit not found",
     "errors.word_not_found": "Word not found",
-    "errors.duplicate_word": "This word already exists in this unit",
+    "errors.duplicate_word": "This word already exists in the dictionary",
+    "errors.duplicate_word_at":
+      "This word already exists in the dictionary (Book {{book}} / Unit {{unit}})",
     "errors.list_books_failed": "Failed to load books",
     "errors.get_book_failed": "Failed to load book",
     "errors.list_words_failed": "Failed to load words",
@@ -49,7 +53,9 @@ const messages: Record<Lang, Messages> = {
     "errors.book_not_found": "Книга не найдена",
     "errors.unit_not_found": "Юнит не найден",
     "errors.word_not_found": "Слово не найдено",
-    "errors.duplicate_word": "Это слово уже существует в этом юните",
+    "errors.duplicate_word": "Это слово уже есть в словаре",
+    "errors.duplicate_word_at":
+      "Это слово уже есть в словаре (Книга {{book}} / Юнит {{unit}})",
     "errors.list_books_failed": "Не удалось загрузить книги",
     "errors.get_book_failed": "Не удалось загрузить книгу",
     "errors.list_words_failed": "Не удалось загрузить слова",
@@ -61,8 +67,18 @@ const messages: Record<Lang, Messages> = {
   },
 };
 
-export function t(lang: Lang, key: string): string {
-  return messages[lang]?.[key] ?? messages[DEFAULT_LANG][key] ?? key;
+export function t(
+  lang: Lang,
+  key: string,
+  params?: Record<string, string | number>,
+): string {
+  let msg = messages[lang]?.[key] ?? messages[DEFAULT_LANG][key] ?? key;
+  if (params) {
+    for (const [k, v] of Object.entries(params)) {
+      msg = msg.replace(`{{${k}}}`, String(v));
+    }
+  }
+  return msg;
 }
 
 export function parseAcceptLanguage(header: string | undefined): Lang {

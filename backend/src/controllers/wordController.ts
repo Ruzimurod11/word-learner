@@ -63,7 +63,14 @@ export const createUnitWord = async (req: Request, res: Response): Promise<void>
     sendSuccess(res, word, 201);
   } catch (err: unknown) {
     if (isUniqueViolation(err)) {
-      sendError(res, t(getLang(req), "errors.duplicate_word"), 409);
+      const loc = await wordService.findWordLocation(bodyResult.data.english);
+      const msg = loc
+        ? t(getLang(req), "errors.duplicate_word_at", {
+            book: loc.bookOrder,
+            unit: loc.unitOrder,
+          })
+        : t(getLang(req), "errors.duplicate_word");
+      sendError(res, msg, 409);
       return;
     }
     console.error(err);
@@ -91,7 +98,17 @@ export const updateWord = async (req: Request, res: Response): Promise<void> => 
     sendSuccess(res, word);
   } catch (err: unknown) {
     if (isUniqueViolation(err)) {
-      sendError(res, t(getLang(req), "errors.duplicate_word"), 409);
+      const newEnglish = bodyResult.data.english;
+      const loc = newEnglish
+        ? await wordService.findWordLocation(newEnglish)
+        : null;
+      const msg = loc
+        ? t(getLang(req), "errors.duplicate_word_at", {
+            book: loc.bookOrder,
+            unit: loc.unitOrder,
+          })
+        : t(getLang(req), "errors.duplicate_word");
+      sendError(res, msg, 409);
       return;
     }
     console.error(err);

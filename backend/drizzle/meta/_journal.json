@@ -15,6 +15,13 @@
       "when": 1778935197979,
       "tag": "0001_plain_vulture",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1778943381802,
+      "tag": "0002_adorable_swarm",
+      "breakpoints": true
     }
   ]
 }
