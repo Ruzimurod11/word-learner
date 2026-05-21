@@ -1,5 +1,6 @@
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import { AdminLogin } from "@/components/AdminLogin";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -27,6 +28,7 @@ function RootLayout() {
             <GlobalSearch />
             <LanguageSwitcher />
             <ThemeToggle />
+            <AdminLogin />
           </div>
         </div>
       </header>

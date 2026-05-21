@@ -77,6 +77,14 @@
     "light_title": "Светлая тема",
     "dark_title": "Тёмная тема"
   },
+  "admin": {
+    "title": "Вход администратора",
+    "login": "Вход администратора",
+    "logout": "Выйти",
+    "password_placeholder": "Пароль",
+    "submit": "Войти",
+    "submitting": "Вход..."
+  },
   "lang": {
     "label": "Язык",
     "uz": "O'zbekcha",

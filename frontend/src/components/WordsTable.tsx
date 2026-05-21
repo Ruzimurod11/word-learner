@@ -8,6 +8,7 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { deleteWord, getUnitWords, updateWord } from "@/api/word-api";
+import { useIsAdmin } from "@/lib/auth";
 import type { Word } from "@/types/word";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 
@@ -58,6 +59,7 @@ interface WordsTableProps {
 
 export function WordsTable({ unitId }: WordsTableProps) {
   const { t } = useTranslation();
+  const isAdmin = useIsAdmin();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -167,7 +169,8 @@ export function WordsTable({ unitId }: WordsTableProps) {
           return row.original.translation;
         },
       },
-      {
+      ...(isAdmin
+        ? [{
         id: "actions",
         header: () => <div className="text-right">{t("words_table.header_actions")}</div>,
         cell: ({ row, table }) => {
@@ -247,9 +250,10 @@ export function WordsTable({ unitId }: WordsTableProps) {
             </div>
           );
         },
-      },
+      } as ColumnDef<Word>]
+        : []),
     ],
-    [t],
+    [t, isAdmin],
   );
 
   const data = wordsQuery.data?.items ?? [];

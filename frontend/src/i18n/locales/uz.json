@@ -77,6 +77,14 @@
     "light_title": "Yorug' rejim",
     "dark_title": "Qorong'i rejim"
   },
+  "admin": {
+    "title": "Admin kirish",
+    "login": "Admin kirish",
+    "logout": "Chiqish",
+    "password_placeholder": "Parol",
+    "submit": "Kirish",
+    "submitting": "Kirilmoqda..."
+  },
   "lang": {
     "label": "Til",
     "uz": "O'zbekcha",

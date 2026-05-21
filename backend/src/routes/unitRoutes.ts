@@ -1,9 +1,10 @@
 import { Router } from "express";
 import * as wordController from "../controllers/wordController.ts";
+import { requireAdmin } from "../middleware/auth.ts";
 
 const router = Router();
 
 router.get("/:unitId/words", wordController.listUnitWords);
-router.post("/:unitId/words", wordController.createUnitWord);
+router.post("/:unitId/words", requireAdmin, wordController.createUnitWord);
 
 export default router;

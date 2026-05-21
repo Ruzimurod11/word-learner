@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
 import { getBook } from "@/api/book-api";
+import { useIsAdmin } from "@/lib/auth";
 import { UnitTabs } from "@/components/UnitTabs";
 import { WordForm } from "@/components/WordForm";
 import { WordsTable } from "@/components/WordsTable";
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/books/$bookId")({
 
 function BookPage() {
   const { t } = useTranslation();
+  const isAdmin = useIsAdmin();
   const { bookId } = Route.useParams();
   const search = Route.useSearch();
   const navigate = useNavigate();
@@ -122,7 +124,7 @@ function BookPage() {
               {t("book.word_count", { count: activeUnit.wordCount })}
             </span>
           </div>
-          <WordForm unitId={activeUnitId} />
+          {isAdmin && <WordForm unitId={activeUnitId} />}
           <WordsTable key={activeUnitId} unitId={activeUnitId} />
         </div>
       ) : (

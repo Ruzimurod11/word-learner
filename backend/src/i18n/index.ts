@@ -26,6 +26,9 @@ const messages: Record<Lang, Messages> = {
     "errors.delete_word_failed": "O'chirishda xatolik",
     "errors.search_failed": "Qidiruvda xatolik",
     "errors.internal": "Server xatosi",
+    "errors.unauthorized": "Avtorizatsiya talab qilinadi",
+    "errors.invalid_password": "Parol noto'g'ri",
+    "errors.auth_not_configured": "Admin paroli sozlanmagan",
   },
   en: {
     "errors.invalid_book_id": "Invalid book ID",
@@ -45,6 +48,9 @@ const messages: Record<Lang, Messages> = {
     "errors.delete_word_failed": "Failed to delete word",
     "errors.search_failed": "Search failed",
     "errors.internal": "Internal server error",
+    "errors.unauthorized": "Authorization required",
+    "errors.invalid_password": "Incorrect password",
+    "errors.auth_not_configured": "Admin password is not configured",
   },
   ru: {
     "errors.invalid_book_id": "Неверный ID книги",
@@ -64,6 +70,9 @@ const messages: Record<Lang, Messages> = {
     "errors.delete_word_failed": "Не удалось удалить слово",
     "errors.search_failed": "Ошибка поиска",
     "errors.internal": "Внутренняя ошибка сервера",
+    "errors.unauthorized": "Требуется авторизация",
+    "errors.invalid_password": "Неверный пароль",
+    "errors.auth_not_configured": "Пароль администратора не настроен",
   },
 };
 

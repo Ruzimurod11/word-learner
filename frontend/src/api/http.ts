@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import type { ApiResponse } from "@/types/word";
 import i18n from "@/i18n";
+import { clearToken, getToken } from "@/lib/auth";
 
 const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
 
@@ -10,8 +11,20 @@ export const http = axios.create({ baseURL: API_ROOT });
 
 http.interceptors.request.use((config) => {
   config.headers["Accept-Language"] = i18n.language;
+  const token = getToken();
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
+
+http.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    if (err instanceof AxiosError && err.response?.status === 401) {
+      clearToken();
+    }
+    return Promise.reject(err);
+  },
+);
 
 export const unwrap = <T,>(payload: ApiResponse<T>): T => {
   if (!payload.success) {

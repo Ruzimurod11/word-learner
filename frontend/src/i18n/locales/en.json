@@ -77,6 +77,14 @@
     "light_title": "Light mode",
     "dark_title": "Dark mode"
   },
+  "admin": {
+    "title": "Admin login",
+    "login": "Admin login",
+    "logout": "Log out",
+    "password_placeholder": "Password",
+    "submit": "Log in",
+    "submitting": "Logging in..."
+  },
   "lang": {
     "label": "Language",
     "uz": "O'zbekcha",

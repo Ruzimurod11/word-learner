@@ -4,6 +4,7 @@ import cors, { type CorsOptions } from "cors";
 import wordRoutes from "./routes/wordRoutes.ts";
 import bookRoutes from "./routes/bookRoutes.ts";
 import unitRoutes from "./routes/unitRoutes.ts";
+import authRoutes from "./routes/authRoutes.ts";
 import { languageMiddleware } from "./i18n/index.ts";
 
 const app = express();
@@ -44,6 +45,7 @@ app.get("/cron", (_req, res) => {
   res.send("ok");
 });
 
+app.use("/auth", authRoutes);
 app.use("/books", bookRoutes);
 app.use("/units", unitRoutes);
 app.use("/words", wordRoutes);
