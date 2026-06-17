@@ -5,3 +5,7 @@ build/
 .DS_Store
 *.log
 backup/
+*.claude
+*docs/
+*CLAUDE.md
+*CLAUDE.local.md

@@ -13,7 +13,7 @@ export function UnitTabs({ units, activeUnitId, onSelect }: UnitTabsProps) {
     <div
       role="tablist"
       aria-label={t("book.select_unit_aria")}
-      className="flex flex-wrap gap-1.5 rounded-lg border border-zinc-200 bg-white p-2 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
+      className="grid grid-cols-[repeat(auto-fill,minmax(2.75rem,1fr))] gap-1.5 rounded-lg border border-zinc-200 bg-white p-2 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
     >
       {units.map((unit) => {
         const isActive = unit.id === activeUnitId;

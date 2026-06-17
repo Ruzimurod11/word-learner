@@ -308,7 +308,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
             }}
             className="rounded-md border border-zinc-300 bg-white px-2 py-1 text-zinc-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
           >
-            {[10, 20, 50, 100].map((s) => (
+            {[5, 10, 20].map((s) => (
               <option key={s} value={s}>
                 {s} {t("common.per_page")}
               </option>
