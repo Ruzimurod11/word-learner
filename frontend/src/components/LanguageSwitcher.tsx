@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Check, ChevronDown } from "lucide-react";
 import { SUPPORTED_LANGS, setLang, type Lang } from "@/i18n";
 
 const FLAGS: Record<Lang, string> = {
@@ -53,29 +54,22 @@ export function LanguageSwitcher() {
         aria-expanded={open}
         aria-label={t("lang.label")}
         title={LABELS[current]}
-        className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-md border border-zinc-300 bg-white px-2 text-zinc-700 shadow-sm hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-xl border border-border bg-card px-2.5 text-muted-foreground shadow-sm transition hover:border-primary/40 hover:text-primary"
       >
         <span className="text-base leading-none">{FLAGS[current]}</span>
         <span className="text-xs font-medium uppercase">{current}</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="h-3.5 w-3.5"
+        <ChevronDown
+          className={
+            "h-3.5 w-3.5 transition-transform" + (open ? " rotate-180" : "")
+          }
           aria-hidden="true"
-        >
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
+        />
       </button>
 
       {open && (
         <ul
           role="listbox"
-          className="absolute right-0 z-40 mt-1 min-w-40 overflow-hidden rounded-md border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900"
+          className="absolute right-0 z-40 mt-2 min-w-40 origin-top-right animate-scale-in overflow-hidden rounded-xl border border-border bg-popover text-popover-foreground shadow-xl"
         >
           {SUPPORTED_LANGS.map((lang) => {
             const isActive = lang === current;
@@ -87,16 +81,17 @@ export function LanguageSwitcher() {
                   className={
                     "flex w-full items-center gap-2 px-3 py-2 text-left text-sm " +
                     (isActive
-                      ? "bg-zinc-100 font-medium text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100"
-                      : "text-zinc-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-800/60")
+                      ? "bg-primary/10 font-medium text-primary"
+                      : "text-foreground hover:bg-muted")
                   }
                 >
                   <span className="text-base leading-none">{FLAGS[lang]}</span>
                   <span>{LABELS[lang]}</span>
                   {isActive && (
-                    <span className="ml-auto text-zinc-500 dark:text-zinc-400">
-                      ✓
-                    </span>
+                    <Check
+                      className="ml-auto h-4 w-4 text-primary"
+                      aria-hidden="true"
+                    />
                   )}
                 </button>
               </li>

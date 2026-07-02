@@ -7,11 +7,13 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
+import { ArrowLeft } from "lucide-react";
 import { getBook } from "@/api/book-api";
 import { useIsAdmin } from "@/lib/auth";
 import { UnitTabs } from "@/components/UnitTabs";
 import { WordForm } from "@/components/WordForm";
 import { WordsTable } from "@/components/WordsTable";
+import { StateCard } from "@/components/ui";
 
 const bookSearchSchema = z.object({
   unit: z.coerce.number().int().positive().optional(),
@@ -61,28 +63,20 @@ function BookPage() {
   };
 
   if (bookQuery.isLoading) {
-    return (
-      <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-        {t("common.loading")}
-      </div>
-    );
+    return <StateCard>{t("common.loading")}</StateCard>;
   }
 
   if (bookQuery.isError) {
     return (
-      <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300">
+      <StateCard variant="error">
         {t("common.error")}: {(bookQuery.error as Error).message}
-      </div>
+      </StateCard>
     );
   }
 
   const book = bookQuery.data;
   if (!book) {
-    return (
-      <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-        {t("book.not_found")}
-      </div>
-    );
+    return <StateCard>{t("book.not_found")}</StateCard>;
   }
 
   return (
@@ -90,22 +84,27 @@ function BookPage() {
       <div className="flex flex-col gap-2">
         <Link
           to="/"
-          className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+          className="inline-flex items-center gap-1 self-start text-sm text-muted-foreground transition hover:text-primary"
         >
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           {t("common.back_to_books")}
         </Link>
         <div className="flex items-end justify-between gap-3">
           <div>
             <h1 className="text-2xl font-bold sm:text-3xl">{book.title}</h1>
             {book.description && (
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              <p className="mt-1 text-sm text-muted-foreground">
                 {book.description}
               </p>
             )}
           </div>
-          <div className="hidden text-right text-sm text-zinc-500 dark:text-zinc-400 sm:block">
-            <div>{t("book.unit_count", { count: book.unitCount })}</div>
-            <div>{t("book.word_count", { count: book.wordCount })}</div>
+          <div className="hidden flex-col items-end gap-1.5 sm:flex">
+            <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+              {t("book.unit_count", { count: book.unitCount })}
+            </span>
+            <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+              {t("book.word_count", { count: book.wordCount })}
+            </span>
           </div>
         </div>
       </div>
@@ -120,7 +119,7 @@ function BookPage() {
         <div className="flex flex-col gap-4">
           <div className="flex items-baseline justify-between gap-2">
             <h2 className="text-lg font-semibold">{activeUnit.title}</h2>
-            <span className="text-sm text-zinc-500 dark:text-zinc-400">
+            <span className="text-sm text-muted-foreground">
               {t("book.word_count", { count: activeUnit.wordCount })}
             </span>
           </div>
@@ -128,9 +127,7 @@ function BookPage() {
           <WordsTable key={activeUnitId} unitId={activeUnitId} />
         </div>
       ) : (
-        <div className="rounded-lg border border-zinc-200 bg-white p-6 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-          {t("book.no_units")}
-        </div>
+        <StateCard>{t("book.no_units")}</StateCard>
       )}
     </div>
   );

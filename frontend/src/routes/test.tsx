@@ -2,9 +2,19 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
+import {
+  ArrowLeft,
+  BookOpen,
+  Layers,
+  Settings2,
+  SlidersHorizontal,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 import { getBook, getBooks } from "@/api/book-api";
 import { QuizGame } from "@/components/QuizGame";
 import { UnitTabs } from "@/components/UnitTabs";
+import { StateCard, bookGradient, card } from "@/components/ui";
 
 const testSearchSchema = z.object({
   mode: z.enum(["topic", "general"]).optional(),
@@ -27,22 +37,25 @@ export const Route = createFileRoute("/test")({
 function ChoiceCard({
   title,
   description,
+  icon: Icon,
   onClick,
 }: {
   title: string;
   description: string;
+  icon: LucideIcon;
   onClick: () => void;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex flex-col gap-2 rounded-xl border border-zinc-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-zinc-400 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600"
+      className={`group flex flex-col gap-3 ${card} p-6 text-left transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-indigo-500/10`}
     >
-      <span className="text-lg font-semibold">{title}</span>
-      <span className="text-sm text-zinc-600 dark:text-zinc-400">
-        {description}
+      <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-md shadow-indigo-500/30">
+        <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
+      <span className="text-lg font-semibold">{title}</span>
+      <span className="text-sm text-muted-foreground">{description}</span>
     </button>
   );
 }
@@ -103,11 +116,13 @@ function TestPage() {
         <ChoiceCard
           title={t("test.topic")}
           description={t("test.topic_desc")}
+          icon={BookOpen}
           onClick={() => goTo({ mode: "topic" })}
         />
         <ChoiceCard
           title={t("test.general")}
           description={t("test.general_desc")}
+          icon={Layers}
           onClick={() => goTo({ mode: "general" })}
         />
       </div>
@@ -289,16 +304,19 @@ function GeneralFlow({
         <ChoiceCard
           title={t("test.all_words")}
           description={t("test.all_words_desc")}
+          icon={Sparkles}
           onClick={() => goTo({ mode: "general", scope: "all" })}
         />
         <ChoiceCard
           title={t("test.half_manual")}
           description={t("test.half_manual_desc")}
+          icon={SlidersHorizontal}
           onClick={() => goTo({ mode: "general", scope: "half" })}
         />
         <ChoiceCard
           title={t("test.full_manual")}
           description={t("test.full_manual_desc")}
+          icon={Settings2}
           onClick={() => goTo({ mode: "general", scope: "full" })}
         />
       </div>
@@ -312,9 +330,10 @@ function BackButton({ onClick }: { onClick: () => void }) {
     <button
       type="button"
       onClick={onClick}
-      className="self-start text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+      className="inline-flex items-center gap-1 self-start text-sm text-muted-foreground transition hover:text-primary"
     >
-      ← {t("test.back")}
+      <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+      {t("test.back")}
     </button>
   );
 }
@@ -335,15 +354,11 @@ function BookPicker({
     <div className="flex flex-col gap-5">
       <BackButton onClick={onBack} />
       <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
-      {query.isLoading && (
-        <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-          {t("common.loading")}
-        </div>
-      )}
+      {query.isLoading && <StateCard>{t("common.loading")}</StateCard>}
       {query.isError && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300">
+        <StateCard variant="error">
           {t("common.error")}: {(query.error as Error).message}
-        </div>
+        </StateCard>
       )}
       {query.data && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -352,13 +367,15 @@ function BookPicker({
               key={book.id}
               type="button"
               onClick={() => onSelect(book.id)}
-              className="flex flex-col gap-2 rounded-xl border border-zinc-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-zinc-400 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600"
+              className={`flex flex-col gap-2 ${card} p-5 text-left transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-indigo-500/10`}
             >
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-900 text-base font-bold text-white dark:bg-zinc-100 dark:text-zinc-900">
+              <span
+                className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${bookGradient(book.order)} font-display text-base font-bold text-white shadow-md`}
+              >
                 {book.order}
               </span>
               <span className="text-base font-semibold">{book.title}</span>
-              <span className="text-xs text-zinc-500 dark:text-zinc-400">
+              <span className="text-xs text-muted-foreground">
                 {t("book.word_count", { count: book.wordCount })}
               </span>
             </button>
@@ -390,15 +407,11 @@ function UnitPicker({
     <div className="flex flex-col gap-5">
       <BackButton onClick={onBack} />
       <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
-      {query.isLoading && (
-        <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-          {t("common.loading")}
-        </div>
-      )}
+      {query.isLoading && <StateCard>{t("common.loading")}</StateCard>}
       {query.isError && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300">
+        <StateCard variant="error">
           {t("common.error")}: {(query.error as Error).message}
-        </div>
+        </StateCard>
       )}
       {query.data && (
         <UnitTabs

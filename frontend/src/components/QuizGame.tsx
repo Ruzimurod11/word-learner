@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { ArrowLeftRight, PartyPopper, RotateCcw, Trophy } from "lucide-react";
 import { getBooks } from "@/api/book-api";
 import { getQuiz } from "@/api/word-api";
 import type { QuizDirection, QuizQuestion } from "@/types/word";
+import { StateCard, btn, card, input } from "@/components/ui";
 
 interface QuizGameProps {
   unitId?: number;
@@ -89,11 +91,8 @@ export function QuizGame({
       parsedCount <= maxCount;
     return (
       <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
-        <div className="flex flex-col gap-4 rounded-lg border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-          <label
-            htmlFor="quiz-count"
-            className="text-sm font-semibold text-zinc-900 dark:text-zinc-100"
-          >
+        <div className={`flex flex-col gap-4 ${card} animate-fade-in p-6`}>
+          <label htmlFor="quiz-count" className="text-sm font-semibold">
             {t("test.question_count")}
           </label>
           <input
@@ -103,9 +102,9 @@ export function QuizGame({
             max={maxCount}
             value={countInput}
             onChange={(e) => setCountInput(e.target.value)}
-            className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100"
+            className={input}
           />
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+          <p className="text-xs text-muted-foreground">
             {maxCount !== undefined &&
               t("test.question_count_hint", { min: MIN_COUNT, max: maxCount })}
           </p>
@@ -115,15 +114,11 @@ export function QuizGame({
             type="button"
             disabled={!countValid}
             onClick={() => setCount(parsedCount)}
-            className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+            className={btn.primary}
           >
             {t("test.start")}
           </button>
-          <button
-            type="button"
-            onClick={onExit}
-            className="rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm font-medium text-zinc-900 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
-          >
+          <button type="button" onClick={onExit} className={btn.ghost}>
             {t("test.back")}
           </button>
         </div>
@@ -132,24 +127,18 @@ export function QuizGame({
   }
 
   if (quizQuery.isLoading) {
-    return (
-      <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-        {t("common.loading")}
-      </div>
-    );
+    return <StateCard>{t("common.loading")}</StateCard>;
   }
 
   if (quizQuery.isError || !quizQuery.data) {
     return (
       <div className="flex flex-col items-start gap-4">
-        <div className="w-full rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300">
-          {t("common.error")}: {quizQuery.error?.message}
+        <div className="w-full">
+          <StateCard variant="error">
+            {t("common.error")}: {quizQuery.error?.message}
+          </StateCard>
         </div>
-        <button
-          type="button"
-          onClick={onExit}
-          className="rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm font-medium text-zinc-900 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
-        >
+        <button type="button" onClick={onExit} className={btn.ghost}>
           {t("test.back")}
         </button>
       </div>
@@ -168,30 +157,44 @@ export function QuizGame({
   if (index >= questions.length) {
     const wrong = answers.filter((a) => a.selected !== a.question.correct);
     const correctCount = answers.length - wrong.length;
+    const percent =
+      answers.length > 0
+        ? Math.round((correctCount / answers.length) * 100)
+        : 0;
     return (
-      <div className="flex flex-col gap-5">
-        <h2 className="text-xl font-bold">{t("test.results")}</h2>
+      <div className="flex animate-pop flex-col gap-5">
+        <div className="flex items-center gap-3">
+          {wrong.length === 0 ? (
+            <PartyPopper className="h-8 w-8 text-warning" aria-hidden="true" />
+          ) : (
+            <Trophy className="h-8 w-8 text-warning" aria-hidden="true" />
+          )}
+          <h2 className="text-xl font-bold">{t("test.results")}</h2>
+          <span className="ml-auto bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text font-display text-4xl font-bold text-transparent">
+            {percent}%
+          </span>
+        </div>
         <div className="flex gap-3">
-          <span className="rounded-md bg-green-100 px-3 py-2 text-sm font-medium text-green-800 dark:bg-green-950 dark:text-green-300">
+          <span className="rounded-xl bg-green-500/10 px-4 py-2.5 text-sm font-semibold text-green-600 dark:text-green-400">
             {t("test.correct_count", { count: correctCount })}
           </span>
-          <span className="rounded-md bg-red-100 px-3 py-2 text-sm font-medium text-red-800 dark:bg-red-950 dark:text-red-300">
+          <span className="rounded-xl bg-red-500/10 px-4 py-2.5 text-sm font-semibold text-red-600 dark:text-red-400">
             {t("test.wrong_count", { count: wrong.length })}
           </span>
         </div>
         {wrong.length > 0 ? (
-          <div className="rounded-lg border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-            <h3 className="border-b border-zinc-200 px-4 py-3 text-sm font-semibold dark:border-zinc-800">
+          <div className={card}>
+            <h3 className="border-b border-border px-4 py-3 text-sm font-semibold">
               {t("test.wrong_list_title")}
             </h3>
-            <ul className="divide-y divide-zinc-100 dark:divide-zinc-800">
+            <ul className="divide-y divide-border/60">
               {wrong.map((a) => (
                 <li key={a.question.id} className="flex flex-col gap-1 px-4 py-3">
-                  <span className="font-semibold">{a.question.question}</span>
-                  <span className="text-sm text-red-600 dark:text-red-400">
+                  <span className="text-xl font-semibold">{a.question.question}</span>
+                  <span className="text-lg text-red-600 dark:text-red-400">
                     {t("test.your_answer")}: {a.selected}
                   </span>
-                  <span className="text-sm text-green-600 dark:text-green-400">
+                  <span className="text-lg text-green-600 dark:text-green-400">
                     {t("test.correct_answer")}: {a.question.correct}
                   </span>
                 </li>
@@ -199,23 +202,16 @@ export function QuizGame({
             </ul>
           </div>
         ) : (
-          <div className="rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-700 dark:border-green-900 dark:bg-green-950 dark:text-green-300">
+          <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-4 text-sm text-green-600 dark:text-green-400">
             {t("test.no_wrong")}
           </div>
         )}
         <div className="flex gap-3">
-          <button
-            type="button"
-            onClick={restart}
-            className="rounded-md bg-zinc-900 px-3 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
-          >
+          <button type="button" onClick={restart} className={btn.primary}>
+            <RotateCcw className="h-4 w-4" aria-hidden="true" />
             {t("test.restart")}
           </button>
-          <button
-            type="button"
-            onClick={onExit}
-            className="rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm font-medium text-zinc-900 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
-          >
+          <button type="button" onClick={onExit} className={btn.ghost}>
             {t("test.back")}
           </button>
         </div>
@@ -239,44 +235,54 @@ export function QuizGame({
 
   const optionClass = (option: string): string => {
     const base =
-      "w-full rounded-md border px-4 py-3 text-left text-sm font-medium transition ";
+      "w-full rounded-xl border-2 px-4 py-3.5 text-left text-lg font-semibold transition-all ";
     if (!answered) {
       return (
         base +
-        "border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
+        "border-border bg-card hover:-translate-y-0.5 hover:border-primary/60 hover:bg-primary/5 active:scale-[0.99]"
       );
     }
     if (option === question.correct) {
-      return base + "border-green-600 bg-green-600 text-white dark:bg-green-500 dark:border-green-500";
+      return (
+        base + "animate-pop border-green-500 bg-green-500 text-white shadow-md shadow-green-500/30"
+      );
     }
     if (option === selected) {
-      return base + "border-red-600 bg-red-600 text-white dark:bg-red-500 dark:border-red-500";
+      return (
+        base + "border-red-500 bg-red-500 text-white shadow-md shadow-red-500/30"
+      );
     }
-    return (
-      base +
-      "border-zinc-200 bg-white text-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-600"
-    );
+    return base + "border-border bg-card text-muted-foreground opacity-60";
   };
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
-      <div className="flex items-center justify-between">
-        <div className="text-sm text-zinc-500 dark:text-zinc-400">
+      <div className="flex items-center gap-3">
+        <div className="shrink-0 text-sm text-muted-foreground">
           {t("test.question_progress", {
             current: index + 1,
             total: questions.length,
           })}
         </div>
+        <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-muted">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-300"
+            style={{ width: `${(index / questions.length) * 100}%` }}
+          />
+        </div>
         <button
           type="button"
           onClick={toggleDirection}
-          className="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-sm font-medium uppercase text-zinc-900 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
+          className={`${btn.ghost} uppercase`}
         >
+          <ArrowLeftRight className="h-4 w-4" aria-hidden="true" />
           {direction === "uz-en" ? "UZ - EN" : "EN - UZ"}
         </button>
       </div>
-      <div className="rounded-lg border border-zinc-200 bg-white p-6 text-center shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-        <span className="text-3xl font-bold">{question.question}</span>
+      <div key={question.id} className={`${card} animate-fade-in p-8 text-center`}>
+        <span className="font-display text-[34px] font-bold">
+          {question.question}
+        </span>
       </div>
       <div className="flex flex-col gap-2">
         {question.options.map((option) => (
@@ -295,7 +301,7 @@ export function QuizGame({
         <button
           type="button"
           onClick={onNext}
-          className="self-end rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+          className={`${btn.primary} self-end`}
         >
           {index + 1 >= questions.length ? t("test.finish") : t("test.next")}
         </button>

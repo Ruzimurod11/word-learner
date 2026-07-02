@@ -5,8 +5,8 @@
   "common": {
     "loading": "Loading...",
     "error": "Error",
-    "back_to_books": "← All books",
-    "open": "Open →",
+    "back_to_books": "All books",
+    "open": "Open",
     "previous": "Previous",
     "next": "Next",
     "page": "Page",
@@ -22,6 +22,8 @@
   "home": {
     "title": "Books",
     "subtitle": "30 units per book, 20 words per unit. Pick a book to start.",
+    "hero_title": "Master the essential English words",
+    "hero_cta": "Start a quiz",
     "empty": "No books found. Run pnpm db:seed first."
   },
   "book": {

@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { searchWords } from "@/api/word-api";
+import { StateCard, btn } from "@/components/ui";
 
 interface SearchResultsTableProps {
   query: string;
@@ -21,26 +23,18 @@ export function SearchResultsTable({ query }: SearchResultsTableProps) {
   });
 
   if (!query) {
-    return (
-      <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-        {t("search.empty_query")}
-      </div>
-    );
+    return <StateCard>{t("search.empty_query")}</StateCard>;
   }
 
   if (results.isLoading) {
-    return (
-      <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-        {t("search.searching")}
-      </div>
-    );
+    return <StateCard>{t("search.searching")}</StateCard>;
   }
 
   if (results.isError) {
     return (
-      <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300">
+      <StateCard variant="error">
         {t("common.error")}: {(results.error as Error).message}
-      </div>
+      </StateCard>
     );
   }
 
@@ -50,67 +44,60 @@ export function SearchResultsTable({ query }: SearchResultsTableProps) {
 
   if (items.length === 0) {
     return (
-      <div className="rounded-lg border border-zinc-200 bg-white p-8 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
+      <StateCard>
         {t("search.no_results_prefix")}{" "}
-        <span className="font-medium text-zinc-900 dark:text-zinc-100">
-          "{query}"
-        </span>
+        <span className="font-medium text-foreground">"{query}"</span>
         {t("search.no_results_suffix")}
-      </div>
+      </StateCard>
     );
   }
 
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-sm text-zinc-600 dark:text-zinc-400">
+      <p className="text-sm text-muted-foreground">
         {t("search.results_found", { count: total })}{" "}
-        <span className="font-medium text-zinc-900 dark:text-zinc-100">
-          "{query}"
-        </span>
+        <span className="font-medium text-foreground">"{query}"</span>
       </p>
 
-      <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-        <table className="min-w-full divide-y divide-zinc-200 text-sm dark:divide-zinc-800">
-          <thead className="bg-zinc-50 dark:bg-zinc-800/50">
+      <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-sm">
+        <table className="min-w-full divide-y divide-border text-sm">
+          <thead className="bg-muted/60">
             <tr>
-              <th className="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 {t("search.col_location")}
               </th>
-              <th className="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 {t("search.col_english")}
               </th>
-              <th className="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 {t("search.col_translation")}
               </th>
-              <th className="px-4 py-2 text-right text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+              <th className="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 {t("search.col_actions")}
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+          <tbody className="divide-y divide-border/60">
             {items.map((item) => (
-              <tr
-                key={item.id}
-                className="hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
-              >
+              <tr key={item.id} className="transition-colors hover:bg-primary/5">
                 <td className="px-4 py-2 align-middle">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
                     {t("search.location_badge", {
                       book: item.bookOrder,
                       unit: item.unitOrder,
                     })}
                   </span>
                 </td>
-                <td className="px-4 py-2 align-middle font-medium">
+                <td className="px-4 py-2 align-middle text-lg font-medium">
                   {item.english}
                 </td>
-                <td className="px-4 py-2 align-middle">{item.translation}</td>
+                <td className="px-4 py-2 align-middle text-lg">{item.translation}</td>
                 <td className="px-4 py-2 text-right align-middle">
                   <Link
                     to="/books/$bookId"
                     params={{ bookId: String(item.bookId) }}
                     search={{ unit: item.unitId }}
-                    className="text-xs font-medium text-zinc-900 hover:underline dark:text-zinc-100"
+                    className="text-xs font-semibold text-primary hover:underline"
                   >
                     {t("common.open")}
                   </Link>
@@ -122,7 +109,7 @@ export function SearchResultsTable({ query }: SearchResultsTableProps) {
       </div>
 
       <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">
-        <span className="text-sm text-zinc-600 dark:text-zinc-400">
+        <span className="text-sm text-muted-foreground">
           {t("common.page")} {page} {t("common.of")} {totalPages}
         </span>
         <div className="flex gap-2">
@@ -130,17 +117,19 @@ export function SearchResultsTable({ query }: SearchResultsTableProps) {
             type="button"
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page <= 1 || results.isFetching}
-            className="rounded-md border border-zinc-300 bg-white px-3 py-1 text-sm text-zinc-900 hover:bg-zinc-100 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
+            className={btn.ghost}
           >
+            <ChevronLeft className="h-4 w-4" aria-hidden="true" />
             {t("common.previous")}
           </button>
           <button
             type="button"
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page >= totalPages || results.isFetching}
-            className="rounded-md border border-zinc-300 bg-white px-3 py-1 text-sm text-zinc-900 hover:bg-zinc-100 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
+            className={btn.ghost}
           >
             {t("common.next")}
+            <ChevronRight className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
       </div>

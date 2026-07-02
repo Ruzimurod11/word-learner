@@ -13,7 +13,7 @@ export function UnitTabs({ units, activeUnitId, onSelect }: UnitTabsProps) {
     <div
       role="tablist"
       aria-label={t("book.select_unit_aria")}
-      className="grid grid-cols-[repeat(auto-fill,minmax(2.75rem,1fr))] gap-1.5 rounded-lg border border-zinc-200 bg-white p-2 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
+      className="grid grid-cols-[repeat(auto-fill,minmax(2.75rem,1fr))] gap-1.5 rounded-2xl border border-border bg-card p-2 shadow-sm"
     >
       {units.map((unit) => {
         const isActive = unit.id === activeUnitId;
@@ -25,10 +25,10 @@ export function UnitTabs({ units, activeUnitId, onSelect }: UnitTabsProps) {
             aria-selected={isActive}
             onClick={() => onSelect(unit.id)}
             className={
-              "inline-flex min-w-11 items-center justify-center rounded-md px-2.5 py-1.5 text-sm font-medium transition " +
+              "inline-flex min-w-11 items-center justify-center rounded-lg px-2.5 py-1.5 text-sm font-semibold transition " +
               (isActive
-                ? "bg-zinc-900 text-white shadow-sm dark:bg-zinc-100 dark:text-zinc-900"
-                : "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800")
+                ? "scale-105 bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-md shadow-indigo-500/30"
+                : "text-muted-foreground hover:bg-primary/10 hover:text-primary")
             }
             title={t("book.unit_tab_title", {
               title: unit.title,

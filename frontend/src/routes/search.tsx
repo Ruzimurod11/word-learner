@@ -20,7 +20,7 @@ function SearchPage() {
     <div className="flex flex-col gap-5">
       <div>
         <h1 className="text-2xl font-bold sm:text-3xl">{t("search.page_title")}</h1>
-        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-1 text-sm text-muted-foreground">
           {t("search.page_subtitle")}
         </p>
       </div>

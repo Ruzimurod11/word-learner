@@ -1,10 +1,10 @@
 import { useEffect, useState, type FormEvent } from "react";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
+import { Lock, LockOpen } from "lucide-react";
 import { login as loginRequest } from "@/api/auth-api";
 import { clearToken, setToken, useIsAdmin } from "@/lib/auth";
-
-const buttonClass =
-  "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-zinc-300 bg-white text-zinc-700 shadow-sm hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800";
+import { btn, errorAlert, input, modalOverlay, modalPanel } from "@/components/ui";
 
 export function AdminLogin() {
   const { t } = useTranslation();
@@ -35,22 +35,9 @@ export function AdminLogin() {
         onClick={() => clearToken()}
         aria-label={t("admin.logout")}
         title={t("admin.logout")}
-        className={buttonClass}
+        className={btn.icon}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="h-5 w-5"
-          aria-hidden="true"
-        >
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0 1 9.9-1" />
-        </svg>
+        <LockOpen className="h-5 w-5" aria-hidden="true" />
       </button>
     );
   }
@@ -85,40 +72,24 @@ export function AdminLogin() {
         onClick={() => setOpen(true)}
         aria-label={t("admin.login")}
         title={t("admin.login")}
-        className={buttonClass}
+        className={btn.icon}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="h-5 w-5"
-          aria-hidden="true"
-        >
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-        </svg>
+        <Lock className="h-5 w-5" aria-hidden="true" />
       </button>
 
-      {open && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="admin-login-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-        >
+      {open &&
+        createPortal(
           <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={close}
-            aria-hidden="true"
-          />
-          <div className="relative w-full max-w-sm rounded-lg border border-zinc-200 bg-white p-5 shadow-xl dark:border-zinc-800 dark:bg-zinc-900">
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="admin-login-title"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          >
+          <div className={modalOverlay} onClick={close} aria-hidden="true" />
+          <div className={modalPanel}>
             <h2
               id="admin-login-title"
-              className="text-base font-semibold text-zinc-900 dark:text-zinc-100"
+              className="text-base font-semibold"
             >
               {t("admin.title")}
             </h2>
@@ -132,37 +103,31 @@ export function AdminLogin() {
                   if (error) setError(null);
                 }}
                 placeholder={t("admin.password_placeholder")}
-                className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-100"
+                className={input}
                 disabled={loading}
               />
               {error && (
-                <p
-                  role="alert"
-                  className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/50 dark:text-red-300"
-                >
+                <p role="alert" className={errorAlert}>
                   {error}
                 </p>
               )}
               <div className="flex justify-end gap-2">
-                <button
-                  type="button"
-                  onClick={close}
-                  className="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-sm text-zinc-900 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
-                >
+                <button type="button" onClick={close} className={btn.ghost}>
                   {t("common.cancel")}
                 </button>
                 <button
                   type="submit"
                   disabled={loading || !password.trim()}
-                  className="rounded-md bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+                  className={btn.primary}
                 >
                   {loading ? t("admin.submitting") : t("admin.submit")}
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-      )}
+            </div>
+          </div>,
+          document.body,
+        )}
     </>
   );
 }

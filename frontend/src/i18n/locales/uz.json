@@ -5,8 +5,8 @@
   "common": {
     "loading": "Yuklanmoqda...",
     "error": "Xatolik",
-    "back_to_books": "← Barcha kitoblar",
-    "open": "Ochish →",
+    "back_to_books": "Barcha kitoblar",
+    "open": "Ochish",
     "previous": "Oldingi",
     "next": "Keyingi",
     "page": "Sahifa",
@@ -22,6 +22,8 @@
   "home": {
     "title": "Kitoblar",
     "subtitle": "Har bir kitobda 30 ta unit, har bir unitda 20 ta so'z. Boshlash uchun kitobni tanlang.",
+    "hero_title": "Eng kerakli inglizcha so'zlarni o'rganing",
+    "hero_cta": "Testni boshlash",
     "empty": "Kitoblar topilmadi. Avval pnpm db:seed ni ishga tushiring."
   },
   "book": {
