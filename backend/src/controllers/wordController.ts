@@ -4,6 +4,7 @@ import * as wordService from "../services/wordService.ts";
 import { getLang, t } from "../i18n/index.ts";
 import {
   createWordSchema,
+  quizQuerySchema,
   searchQuerySchema,
   unitWordsQuerySchema,
   updateWordSchema,
@@ -132,6 +133,58 @@ export const deleteWord = async (req: Request, res: Response): Promise<void> => 
   } catch (err) {
     console.error(err);
     sendError(res, t(getLang(req), "errors.delete_word_failed"));
+  }
+};
+
+export const getQuiz = async (req: Request, res: Response): Promise<void> => {
+  const parsed = quizQuerySchema.safeParse(req.query);
+  if (!parsed.success) {
+    sendError(res, formatZodError(parsed.error), 400);
+    return;
+  }
+  try {
+    const { unitId, fromUnitId, toUnitId } = parsed.data;
+    if (unitId !== undefined) {
+      const exists = await wordService.unitExists(unitId);
+      if (!exists) {
+        sendError(res, t(getLang(req), "errors.unit_not_found"), 404);
+        return;
+      }
+    }
+    let from: wordService.UnitPosition | undefined;
+    let to: wordService.UnitPosition | undefined;
+    if (fromUnitId !== undefined) {
+      from = (await wordService.getUnitPosition(fromUnitId)) ?? undefined;
+      if (!from) {
+        sendError(res, t(getLang(req), "errors.unit_not_found"), 404);
+        return;
+      }
+    }
+    if (toUnitId !== undefined) {
+      to = (await wordService.getUnitPosition(toUnitId)) ?? undefined;
+      if (!to) {
+        sendError(res, t(getLang(req), "errors.unit_not_found"), 404);
+        return;
+      }
+    }
+    if (
+      from &&
+      to &&
+      (from.bookOrder > to.bookOrder ||
+        (from.bookOrder === to.bookOrder && from.unitOrder > to.unitOrder))
+    ) {
+      sendError(res, t(getLang(req), "errors.invalid_range"), 400);
+      return;
+    }
+    const quiz = await wordService.getQuiz(parsed.data, { from, to });
+    if (!quiz) {
+      sendError(res, t(getLang(req), "errors.quiz_not_enough_words"), 400);
+      return;
+    }
+    sendSuccess(res, quiz);
+  } catch (err) {
+    console.error(err);
+    sendError(res, t(getLang(req), "errors.quiz_failed"));
   }
 };
 

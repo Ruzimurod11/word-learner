@@ -53,6 +53,19 @@ export interface PaginatedSearchWords {
   totalPages: number;
 }
 
+export type QuizDirection = "uz-en" | "en-uz";
+
+export interface QuizQuestion {
+  id: number;
+  question: string;
+  options: string[];
+  correct: string;
+}
+
+export interface QuizResponse {
+  questions: QuizQuestion[];
+}
+
 export interface ApiSuccess<T> {
   success: true;
   data: T;

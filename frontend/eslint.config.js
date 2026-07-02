@@ -39,6 +39,9 @@ export default defineConfig([
       "@tanstack/router": pluginRouter,
       "@tanstack/query": pluginQuery,
     },
+    settings: {
+      react: { version: "detect" },
+    },
     rules: {
       ...reactHooks.configs.recommended.rules,
       ...react.configs.recommended.rules,

@@ -24,7 +24,13 @@ function RootLayout() {
             </span>
             <span>{t("app.name")}</span>
           </Link>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap sm:gap-3">
+            <Link
+              to="/test"
+              className="inline-flex h-9 shrink-0 items-center justify-center rounded-md border border-zinc-300 bg-white px-3 text-sm font-medium text-zinc-700 shadow-sm hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+            >
+              {t("test.button")}
+            </Link>
             <GlobalSearch />
             <LanguageSwitcher />
             <ThemeToggle />

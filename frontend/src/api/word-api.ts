@@ -4,6 +4,8 @@ import type {
   CreateWordDto,
   PaginatedSearchWords,
   PaginatedWords,
+  QuizDirection,
+  QuizResponse,
   SearchQuery,
   UnitWordsQuery,
   UpdateWordDto,
@@ -58,6 +60,25 @@ export const deleteWord = async (id: number): Promise<void> => {
     unwrap(res.data);
   } catch (err) {
     handleError(err);
+  }
+};
+
+export const getQuiz = async (
+  params: {
+    unitId?: number;
+    fromUnitId?: number;
+    toUnitId?: number;
+    count?: number;
+    direction?: QuizDirection;
+  } = {},
+): Promise<QuizResponse> => {
+  try {
+    const res = await http.get<ApiResponse<QuizResponse>>("/words/quiz", {
+      params,
+    });
+    return unwrap(res.data);
+  } catch (err) {
+    return handleError(err);
   }
 };
 

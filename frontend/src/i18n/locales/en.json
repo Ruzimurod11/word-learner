@@ -21,7 +21,7 @@
   },
   "home": {
     "title": "Books",
-    "subtitle": "7 books — 30 units each, 20 words per unit. Pick a book to start.",
+    "subtitle": "30 units per book, 20 words per unit. Pick a book to start.",
     "empty": "No books found. Run pnpm db:seed first."
   },
   "book": {
@@ -90,5 +90,40 @@
     "uz": "O'zbekcha",
     "en": "English",
     "ru": "Русский"
+  },
+  "test": {
+    "button": "Test",
+    "title": "Quiz",
+    "topic": "Test by topic",
+    "general": "General test",
+    "topic_desc": "Pick a book and unit, then take a quiz on its words",
+    "general_desc": "A random quiz from words across all books",
+    "all_words": "Test on all words",
+    "all_words_desc": "Random questions from every word on the site",
+    "half_manual": "Semi-manual setup",
+    "half_manual_desc": "Quiz on words from the beginning up to the book and unit you choose",
+    "full_manual": "Fully manual setup",
+    "full_manual_desc": "You choose both the start and the end book/unit",
+    "choose_book": "Choose a book",
+    "choose_unit": "Choose a unit",
+    "choose_start_book": "From where? Choose a book",
+    "choose_start_unit": "From where? Choose a unit",
+    "choose_end_book": "Up to where? Choose a book",
+    "choose_end_unit": "Up to where? Choose a unit",
+    "question_count": "Number of questions",
+    "question_count_hint": "From {{min}} to {{max}} questions",
+    "start": "Start",
+    "question_progress": "{{current}} / {{total}}",
+    "next": "Next",
+    "finish": "Finish",
+    "results": "Results",
+    "correct_count": "Correct: {{count}}",
+    "wrong_count": "Wrong: {{count}}",
+    "wrong_list_title": "Wrong answers",
+    "your_answer": "Your answer",
+    "correct_answer": "Correct answer",
+    "no_wrong": "All answers correct!",
+    "back": "Back",
+    "restart": "Restart"
   }
 }

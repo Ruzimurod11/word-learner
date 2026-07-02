@@ -1,4 +1,4 @@
-import { asc, eq, ilike, or, sql } from "drizzle-orm";
+import { and, asc, eq, ilike, or, sql, type SQL } from "drizzle-orm";
 import { db } from "../db/index.ts";
 import { books, units, words, type Word } from "../db/schema.ts";
 
@@ -21,6 +21,9 @@ import type {
   CreateWordDto,
   PaginatedSearchWords,
   PaginatedWords,
+  QuizDto,
+  QuizQuery,
+  QuizQuestionDto,
   SearchQuery,
   SearchWordDto,
   UnitWordsQuery,
@@ -134,6 +137,99 @@ export async function searchWords(
     pageSize,
     totalPages: Math.max(1, Math.ceil(total / pageSize)),
   };
+}
+
+function shuffle<T>(arr: T[]): T[] {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+export interface UnitPosition {
+  bookOrder: number;
+  unitOrder: number;
+}
+
+export async function getUnitPosition(unitId: number): Promise<UnitPosition | null> {
+  const [row] = await db
+    .select({ bookOrder: books.order, unitOrder: units.order })
+    .from(units)
+    .innerJoin(books, eq(books.id, units.bookId))
+    .where(eq(units.id, unitId));
+  return row ?? null;
+}
+
+export async function getQuiz(
+  query: QuizQuery,
+  range: { from?: UnitPosition; to?: UnitPosition } = {},
+): Promise<QuizDto | null> {
+  const { unitId, count, direction } = query;
+  // uz-en: savol tarjimada, javob variantlari inglizchada; en-uz: aksincha
+  const uzToEn = direction === "uz-en";
+
+  const conditions: SQL[] = [];
+  if (unitId !== undefined) conditions.push(eq(words.unitId, unitId));
+  if (range.from) {
+    conditions.push(
+      sql`(${books.order}, ${units.order}) >= (${range.from.bookOrder}, ${range.from.unitOrder})`,
+    );
+  }
+  if (range.to) {
+    conditions.push(
+      sql`(${books.order}, ${units.order}) <= (${range.to.bookOrder}, ${range.to.unitOrder})`,
+    );
+  }
+
+  const questionRows = await db
+    .select({ id: words.id, english: words.english, translation: words.translation })
+    .from(words)
+    .innerJoin(units, eq(units.id, words.unitId))
+    .innerJoin(books, eq(books.id, units.bookId))
+    .where(conditions.length > 0 ? and(...conditions) : undefined)
+    .orderBy(sql`random()`)
+    .limit(count);
+  if (questionRows.length === 0) return null;
+
+  const distinctAnswers = db
+    .selectDistinct({ answer: uzToEn ? words.english : words.translation })
+    .from(words)
+    .as("dt");
+  const poolRows = await db
+    .select({ answer: distinctAnswers.answer })
+    .from(distinctAnswers)
+    .orderBy(sql`random()`)
+    .limit(60);
+
+  // translation ustuni unique emas — variantlar takrorlanmasligi uchun dedupe
+  const seen = new Set<string>();
+  const pool = poolRows
+    .map((r) => r.answer)
+    .filter((a) => {
+      const key = a.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  if (pool.length < 4) return null;
+
+  const questions: QuizQuestionDto[] = [];
+  for (const row of questionRows) {
+    const answer = uzToEn ? row.english : row.translation;
+    const distractors = shuffle(
+      pool.filter((a) => a.toLowerCase() !== answer.toLowerCase()),
+    ).slice(0, 3);
+    if (distractors.length < 3) return null;
+    questions.push({
+      id: row.id,
+      question: uzToEn ? row.translation : row.english,
+      options: shuffle([answer, ...distractors]),
+      correct: answer,
+    });
+  }
+  return { questions };
 }
 
 export async function unitExists(unitId: number): Promise<boolean> {

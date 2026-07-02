@@ -26,8 +26,11 @@ export function GlobalSearch() {
   };
 
   return (
-    <form onSubmit={onSubmit} className="flex w-full max-w-md items-center gap-2">
-      <div className="relative flex-1">
+    <form
+      onSubmit={onSubmit}
+      className="order-last flex w-full basis-full flex-col gap-2 sm:order-none sm:w-auto sm:max-w-md sm:flex-1 sm:basis-auto sm:flex-row sm:items-center"
+    >
+      <div className="relative w-full sm:flex-1">
         <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-zinc-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +59,7 @@ export function GlobalSearch() {
       </div>
       <button
         type="submit"
-        className="rounded-md bg-zinc-900 px-3 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+        className="w-full rounded-md bg-zinc-900 px-3 py-2 text-sm font-medium text-white hover:bg-zinc-800 sm:w-auto dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
       >
         {t("search.button")}
       </button>

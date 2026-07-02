@@ -21,7 +21,7 @@
   },
   "home": {
     "title": "Kitoblar",
-    "subtitle": "7 ta kitob — har birida 30 ta unit, har bir unitda 20 ta so'z. Boshlash uchun kitobni tanlang.",
+    "subtitle": "Har bir kitobda 30 ta unit, har bir unitda 20 ta so'z. Boshlash uchun kitobni tanlang.",
     "empty": "Kitoblar topilmadi. Avval pnpm db:seed ni ishga tushiring."
   },
   "book": {
@@ -90,5 +90,40 @@
     "uz": "O'zbekcha",
     "en": "English",
     "ru": "Русский"
+  },
+  "test": {
+    "button": "Test",
+    "title": "Test",
+    "topic": "Mavzu bo'yicha test",
+    "general": "Umumiy test",
+    "topic_desc": "Kitob va unitni tanlab, shu unit so'zlaridan test yeching",
+    "general_desc": "Barcha kitoblardagi so'zlardan tasodifiy test",
+    "all_words": "Barcha so'zlar bo'yicha test",
+    "all_words_desc": "Saytdagi barcha so'zlardan tasodifiy savollar",
+    "half_manual": "Yarim qo'lda sozlash",
+    "half_manual_desc": "Boshidan siz tanlagan kitob va unitgacha bo'lgan so'zlardan test",
+    "full_manual": "To'liq qo'lda sozlash",
+    "full_manual_desc": "Boshlanish va tugash kitob/unitni o'zingiz tanlaysiz",
+    "choose_book": "Kitobni tanlang",
+    "choose_unit": "Unitni tanlang",
+    "choose_start_book": "Qayerdan? Kitobni tanlang",
+    "choose_start_unit": "Qayerdan? Unitni tanlang",
+    "choose_end_book": "Qayergacha? Kitobni tanlang",
+    "choose_end_unit": "Qayergacha? Unitni tanlang",
+    "question_count": "Savollar soni",
+    "question_count_hint": "Kamida {{min}}, ko'pi bilan {{max}} ta savol",
+    "start": "Boshlash",
+    "question_progress": "{{current}} / {{total}}",
+    "next": "Keyingi",
+    "finish": "Yakunlash",
+    "results": "Natijalar",
+    "correct_count": "To'g'ri: {{count}}",
+    "wrong_count": "Noto'g'ri: {{count}}",
+    "wrong_list_title": "Xato javoblar",
+    "your_answer": "Sizning javobingiz",
+    "correct_answer": "To'g'ri javob",
+    "no_wrong": "Barcha javoblar to'g'ri!",
+    "back": "Ortga",
+    "restart": "Qayta boshlash"
   }
 }
