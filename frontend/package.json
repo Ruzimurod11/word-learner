@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "tsc": "tsc --project tsconfig.app.json --noEmit"
+    "tsc": "tsc --project tsconfig.app.json --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.100.10",
@@ -43,10 +44,12 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "eslint-plugin-react-x": "^5.10.0",
     "globals": "^17.4.0",
+    "happy-dom": "^20.10.6",
     "prettier": "^3.9.4",
     "tailwindcss": "^4.2.2",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.0",
-    "vite": "^8.0.4"
+    "vite": "^8.0.4",
+    "vitest": "^4.1.9"
   }
 }

@@ -10,18 +10,9 @@ import {
   updateWordSchema,
 } from "../types/word.ts";
 import { sendError, sendSuccess } from "../utils/responseHandler.ts";
+import { formatZodError, isUniqueViolation } from "../utils/validation.ts";
 
 const idSchema = z.coerce.number().int().positive();
-
-const formatZodError = (err: z.ZodError): string =>
-  err.issues.map((i) => `${i.path.join(".") || "value"}: ${i.message}`).join("; ");
-
-const isUniqueViolation = (err: unknown): boolean => {
-  if (!(err instanceof Error)) return false;
-  if (/unique/i.test(err.message)) return true;
-  const cause = (err as Error & { cause?: { code?: string } }).cause;
-  return cause?.code === "23505";
-};
 
 export const listUnitWords = async (req: Request, res: Response): Promise<void> => {
   const unitIdResult = idSchema.safeParse(req.params.unitId);

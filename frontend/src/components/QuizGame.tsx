@@ -5,6 +5,7 @@ import { ArrowLeftRight, PartyPopper, RotateCcw, Trophy } from "lucide-react";
 import { getBooks } from "@/api/book-api";
 import { getQuiz } from "@/api/word-api";
 import type { QuizDirection, QuizQuestion } from "@/types/word";
+import { MIN_COUNT, isValidQuizCount, scoreQuiz } from "@/lib/quiz";
 import { StateCard, btn, card, input } from "@/components/ui";
 
 interface QuizGameProps {
@@ -14,8 +15,6 @@ interface QuizGameProps {
   selectableCount?: boolean;
   onExit: () => void;
 }
-
-const MIN_COUNT = 20;
 
 interface Answer {
   question: QuizQuestion;
@@ -84,11 +83,7 @@ export function QuizGame({
 
   if (count === null) {
     const parsedCount = Number(countInput);
-    const countValid =
-      maxCount !== undefined &&
-      Number.isInteger(parsedCount) &&
-      parsedCount >= MIN_COUNT &&
-      parsedCount <= maxCount;
+    const countValid = isValidQuizCount(countInput, maxCount);
     return (
       <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
         <div className={`flex flex-col gap-4 ${card} animate-fade-in p-6`}>
@@ -155,12 +150,7 @@ export function QuizGame({
   };
 
   if (index >= questions.length) {
-    const wrong = answers.filter((a) => a.selected !== a.question.correct);
-    const correctCount = answers.length - wrong.length;
-    const percent =
-      answers.length > 0
-        ? Math.round((correctCount / answers.length) * 100)
-        : 0;
+    const { wrong, correctCount, percent } = scoreQuiz(answers);
     return (
       <div className="flex animate-pop flex-col gap-5">
         <div className="flex items-center gap-3">
