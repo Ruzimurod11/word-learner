@@ -12,6 +12,7 @@ import { deleteWord, getUnitWords, updateWord } from "@/api/word-api";
 import { useIsAdmin } from "@/lib/auth";
 import type { Word } from "@/types/word";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
+import { Select } from "@/components/Select";
 import { btn, input } from "@/components/ui";
 
 interface TableCtx {
@@ -271,20 +272,18 @@ export function WordsTable({ unitId }: WordsTableProps) {
           {t("words_table.word_unit")}
         </span>
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <select
+          <Select
             value={pageSize}
-            onChange={(e) => {
-              setPageSize(Number(e.target.value));
+            options={[5, 10, 20].map((s) => ({
+              value: s,
+              label: `${s} ${t("common.per_page")}`,
+            }))}
+            onChange={(s) => {
+              setPageSize(s);
               setPage(1);
             }}
-            className="rounded-xl border border-input bg-card px-2 py-1 text-foreground outline-none transition focus:border-primary"
-          >
-            {[5, 10, 20].map((s) => (
-              <option key={s} value={s}>
-                {s} {t("common.per_page")}
-              </option>
-            ))}
-          </select>
+            ariaLabel={t("common.per_page")}
+          />
         </div>
       </div>
 

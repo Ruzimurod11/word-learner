@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { Lock, LockOpen } from "lucide-react";
+import { Eye, EyeOff, Lock, LockOpen } from "lucide-react";
 import { login as loginRequest } from "@/api/auth-api";
 import { clearToken, setToken, useIsAdmin } from "@/lib/auth";
 import { btn, errorAlert, input, modalOverlay, modalPanel } from "@/components/ui";
@@ -13,6 +13,7 @@ export function AdminLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -63,6 +64,7 @@ export function AdminLogin() {
     setOpen(false);
     setPassword("");
     setError(null);
+    setShowPassword(false);
   };
 
   return (
@@ -94,18 +96,37 @@ export function AdminLogin() {
               {t("admin.title")}
             </h2>
             <form onSubmit={onSubmit} className="mt-4 flex flex-col gap-3">
-              <input
-                type="password"
-                autoFocus
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  if (error) setError(null);
-                }}
-                placeholder={t("admin.password_placeholder")}
-                className={input}
-                disabled={loading}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  autoFocus
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (error) setError(null);
+                  }}
+                  placeholder={t("admin.password_placeholder")}
+                  className={`${input} pr-10`}
+                  disabled={loading}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  aria-label={t(
+                    showPassword ? "admin.hide_password" : "admin.show_password",
+                  )}
+                  title={t(
+                    showPassword ? "admin.hide_password" : "admin.show_password",
+                  )}
+                  className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground transition hover:text-foreground"
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" aria-hidden="true" />
+                  ) : (
+                    <Eye className="h-4 w-4" aria-hidden="true" />
+                  )}
+                </button>
+              </div>
               {error && (
                 <p role="alert" className={errorAlert}>
                   {error}

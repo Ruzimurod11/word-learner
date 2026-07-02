@@ -35,6 +35,8 @@
     "unit_tab_title": "{{title}} — {{count}} so'z"
   },
   "word_form": {
+    "title": "Yangi so'z qo'shish",
+    "success": "So'z qo'shildi",
     "english_label": "English",
     "english_placeholder": "apple",
     "translation_label": "Tarjima",
@@ -84,6 +86,8 @@
     "login": "Admin kirish",
     "logout": "Chiqish",
     "password_placeholder": "Parol",
+    "show_password": "Parolni ko'rsatish",
+    "hide_password": "Parolni yashirish",
     "submit": "Kirish",
     "submitting": "Kirilmoqda..."
   },

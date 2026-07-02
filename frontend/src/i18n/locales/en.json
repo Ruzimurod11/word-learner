@@ -35,6 +35,8 @@
     "unit_tab_title": "{{title}} — {{count}} words"
   },
   "word_form": {
+    "title": "Add a new word",
+    "success": "Word added",
     "english_label": "English",
     "english_placeholder": "apple",
     "translation_label": "Translation",
@@ -84,6 +86,8 @@
     "login": "Admin login",
     "logout": "Log out",
     "password_placeholder": "Password",
+    "show_password": "Show password",
+    "hide_password": "Hide password",
     "submit": "Log in",
     "submitting": "Logging in..."
   },

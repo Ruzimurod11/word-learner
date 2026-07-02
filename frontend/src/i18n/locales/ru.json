@@ -35,6 +35,8 @@
     "unit_tab_title": "{{title}} — {{count}} слов"
   },
   "word_form": {
+    "title": "Добавить новое слово",
+    "success": "Слово добавлено",
     "english_label": "Английский",
     "english_placeholder": "apple",
     "translation_label": "Перевод",
@@ -84,6 +86,8 @@
     "login": "Вход администратора",
     "logout": "Выйти",
     "password_placeholder": "Пароль",
+    "show_password": "Показать пароль",
+    "hide_password": "Скрыть пароль",
     "submit": "Войти",
     "submitting": "Вход..."
   },
