@@ -333,7 +333,7 @@ export function QuizGame({
 
   const optionClass = (option: string): string => {
     const base =
-      "w-full rounded-xl border-2 px-4 py-3.5 text-left text-lg font-semibold transition-all ";
+      "w-full rounded-xl border-2 px-1 py-1 text-left text-lg font-semibold transition-all sm:px-4 sm:py-3.5 ";
     if (!answered) {
       return (
         base +
@@ -355,7 +355,7 @@ export function QuizGame({
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
-      {cheer && <CheerPopup key={index} cheer={cheer} seed={cheerSeed} />}
+      {cheer && <CheerPopup key={`cheer-${index}`} cheer={cheer} seed={cheerSeed} />}
       <div className="flex items-center gap-3">
         <div className="shrink-0 text-sm text-muted-foreground">
           {t("test.question_progress", {
@@ -378,7 +378,7 @@ export function QuizGame({
           {direction === "uz-en" ? "UZ - EN" : "EN - UZ"}
         </button>
       </div>
-      <div key={question.id} className={`${card} animate-fade-in p-8 text-center`}>
+      <div key={question.id} className={`${card} animate-fade-in p-2 text-center sm:p-8`}>
         <span className="font-display text-[34px] font-bold">
           {question.question}
         </span>

@@ -4,6 +4,7 @@ export interface Word {
   order: number;
   english: string;
   translation: string;
+  transcription: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -19,11 +20,13 @@ export interface PaginatedWords {
 export interface CreateWordDto {
   english: string;
   translation: string;
+  transcription?: string | null;
 }
 
 export interface UpdateWordDto {
   english?: string;
   translation?: string;
+  transcription?: string | null;
 }
 
 export interface UnitWordsQuery {

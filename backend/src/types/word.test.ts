@@ -18,6 +18,15 @@ describe("createWordSchema", () => {
     expect(createWordSchema.safeParse({ english: "x", translation: "   " }).success).toBe(false);
   });
 
+  it("accepts an optional trimmed transcription", () => {
+    const result = createWordSchema.parse({
+      english: "cat",
+      translation: "mushuk",
+      transcription: " [kæt] ",
+    });
+    expect(result).toEqual({ english: "cat", translation: "mushuk", transcription: "[kæt]" });
+  });
+
   it("rejects english longer than 100 chars", () => {
     const result = createWordSchema.safeParse({
       english: "a".repeat(101),
@@ -35,6 +44,7 @@ describe("updateWordSchema", () => {
   it("accepts a single field", () => {
     expect(updateWordSchema.safeParse({ english: "cat" }).success).toBe(true);
     expect(updateWordSchema.safeParse({ translation: "mushuk" }).success).toBe(true);
+    expect(updateWordSchema.safeParse({ transcription: "[kæt]" }).success).toBe(true);
   });
 });
 

@@ -71,6 +71,9 @@ export function SearchResultsTable({ query }: SearchResultsTableProps) {
                 {t("search.col_english")}
               </th>
               <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {t("search.col_transcription")}
+              </th>
+              <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 {t("search.col_translation")}
               </th>
               <th className="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -91,6 +94,9 @@ export function SearchResultsTable({ query }: SearchResultsTableProps) {
                 </td>
                 <td className="px-4 py-2 align-middle text-lg font-medium">
                   {item.english}
+                </td>
+                <td className="px-4 py-2 align-middle text-lg text-muted-foreground">
+                  {item.transcription ? `[${item.transcription}]` : null}
                 </td>
                 <td className="px-4 py-2 align-middle text-lg">{item.translation}</td>
                 <td className="px-4 py-2 text-right align-middle">

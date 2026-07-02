@@ -24,6 +24,7 @@ interface TableCtx {
   deleteRow: (w: Word) => void;
   setEnglishValue: (v: string) => void;
   setTranslationValue: (v: string) => void;
+  setTranscriptionValue: (v: string) => void;
   isSaving: boolean;
   isDeleting: boolean;
   labels: {
@@ -70,6 +71,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
   const [confirmTarget, setConfirmTarget] = useState<Word | null>(null);
   const englishRef = useRef("");
   const translationRef = useRef("");
+  const transcriptionRef = useRef("");
   const queryClient = useQueryClient();
 
   const wordsQuery = useQuery({
@@ -93,10 +95,16 @@ export function WordsTable({ unitId }: WordsTableProps) {
   });
 
   const updateMutation = useMutation({
-    mutationFn: (vars: { id: number; english: string; translation: string }) =>
+    mutationFn: (vars: {
+      id: number;
+      english: string;
+      translation: string;
+      transcription: string;
+    }) =>
       updateWord(vars.id, {
         english: vars.english.trim(),
         translation: vars.translation.trim(),
+        transcription: vars.transcription.trim() || null,
       }),
     onSuccess: () => {
       setEditingId(null);
@@ -107,6 +115,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
   const startEdit = useCallback((w: Word) => {
     englishRef.current = w.english;
     translationRef.current = w.translation;
+    transcriptionRef.current = w.transcription ?? "";
     setEditingId(w.id);
   }, []);
 
@@ -119,6 +128,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
         id,
         english: englishRef.current,
         translation: translationRef.current,
+        transcription: transcriptionRef.current,
       });
       return id;
     });
@@ -153,6 +163,26 @@ export function WordsTable({ unitId }: WordsTableProps) {
             );
           }
           return <span className="text-lg font-medium">{row.original.english}</span>;
+        },
+      },
+      {
+        accessorKey: "transcription",
+        header: t("words_table.header_transcription"),
+        cell: ({ row, table }) => {
+          const ctx = table.options.meta as TableCtx;
+          if (ctx.editingId === row.original.id) {
+            return (
+              <EditableInput
+                initialValue={row.original.transcription ?? ""}
+                onChange={ctx.setTranscriptionValue}
+              />
+            );
+          }
+          return row.original.transcription ? (
+            <span className="text-lg text-muted-foreground">
+              [{row.original.transcription}]
+            </span>
+          ) : null;
         },
       },
       {
@@ -244,6 +274,9 @@ export function WordsTable({ unitId }: WordsTableProps) {
     },
     setTranslationValue: (v) => {
       translationRef.current = v;
+    },
+    setTranscriptionValue: (v) => {
+      transcriptionRef.current = v;
     },
     isSaving: updateMutation.isPending,
     isDeleting: deleteMutation.isPending,

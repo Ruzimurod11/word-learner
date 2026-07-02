@@ -3,10 +3,14 @@ import { z } from "zod";
 export const createWordSchema = z.object({
   english: z.string().trim().min(1, "English so'z bo'sh bo'lmasligi kerak").max(100),
   translation: z.string().trim().min(1, "Tarjima bo'sh bo'lmasligi kerak").max(200),
+  transcription: z.string().trim().max(200).nullable().optional(),
 });
 
 export const updateWordSchema = createWordSchema.partial().refine(
-  (data) => data.english !== undefined || data.translation !== undefined,
+  (data) =>
+    data.english !== undefined ||
+    data.translation !== undefined ||
+    data.transcription !== undefined,
   { message: "Kamida bitta maydon yuborilishi kerak" },
 );
 
@@ -42,6 +46,7 @@ export interface WordDto {
   order: number;
   english: string;
   translation: string;
+  transcription: string | null;
   createdAt: string;
   updatedAt: string;
 }

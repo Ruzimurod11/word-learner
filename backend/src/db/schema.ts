@@ -56,6 +56,7 @@ export const words = pgTable(
     order: integer("order").notNull(),
     english: text("english").notNull(),
     translation: text("translation").notNull(),
+    transcription: text("transcription"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),

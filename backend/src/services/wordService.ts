@@ -37,6 +37,7 @@ const toDto = (w: Word): WordDto => ({
   order: w.order,
   english: w.english,
   translation: w.translation,
+  transcription: w.transcription,
   createdAt: w.createdAt.toISOString(),
   updatedAt: w.updatedAt.toISOString(),
 });
@@ -92,6 +93,7 @@ export async function searchWords(
         order: words.order,
         english: words.english,
         translation: words.translation,
+        transcription: words.transcription,
         createdAt: words.createdAt,
         updatedAt: words.updatedAt,
         bookId: books.id,
@@ -121,6 +123,7 @@ export async function searchWords(
     order: r.order,
     english: r.english,
     translation: r.translation,
+    transcription: r.transcription,
     createdAt: r.createdAt.toISOString(),
     updatedAt: r.updatedAt.toISOString(),
     bookId: r.bookId,

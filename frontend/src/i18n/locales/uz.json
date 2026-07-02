@@ -48,6 +48,7 @@
   "words_table": {
     "header_num": "#",
     "header_english": "English",
+    "header_transcription": "Transkripsiya",
     "header_translation": "Tarjima",
     "header_actions": "Amal",
     "total_in_unit": "Bu unitda jami:",
@@ -71,6 +72,7 @@
     "no_results_suffix": "bo'yicha hech narsa topilmadi.",
     "col_location": "Joylashuv",
     "col_english": "English",
+    "col_transcription": "Transkripsiya",
     "col_translation": "Tarjima",
     "col_actions": "Amal",
     "location_badge": "Book {{book}} · Unit {{unit}}"

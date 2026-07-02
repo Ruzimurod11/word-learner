@@ -48,6 +48,7 @@
   "words_table": {
     "header_num": "#",
     "header_english": "English",
+    "header_transcription": "Transcription",
     "header_translation": "Translation",
     "header_actions": "Actions",
     "total_in_unit": "Total in this unit:",
@@ -71,6 +72,7 @@
     "no_results_suffix": ".",
     "col_location": "Location",
     "col_english": "English",
+    "col_transcription": "Transcription",
     "col_translation": "Translation",
     "col_actions": "Actions",
     "location_badge": "Book {{book}} · Unit {{unit}}"

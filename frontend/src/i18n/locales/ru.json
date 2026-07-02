@@ -48,6 +48,7 @@
   "words_table": {
     "header_num": "#",
     "header_english": "Английский",
+    "header_transcription": "Транскрипция",
     "header_translation": "Перевод",
     "header_actions": "Действие",
     "total_in_unit": "Всего в юните:",
@@ -71,6 +72,7 @@
     "no_results_suffix": ".",
     "col_location": "Расположение",
     "col_english": "Английский",
+    "col_transcription": "Транскрипция",
     "col_translation": "Перевод",
     "col_actions": "Действие",
     "location_badge": "Книга {{book}} · Юнит {{unit}}"
