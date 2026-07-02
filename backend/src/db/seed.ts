@@ -1,9 +1,9 @@
 import "dotenv/config";
-import { eq } from "drizzle-orm";
+import { eq, gt } from "drizzle-orm";
 import { db, pool } from "./index.ts";
 import { books, units } from "./schema.ts";
 
-const BOOK_COUNT = 7;
+const BOOK_COUNT = 2;
 const UNIT_PER_BOOK = 30;
 
 async function main(): Promise<void> {
@@ -42,6 +42,15 @@ async function main(): Promise<void> {
       await db.insert(units).values(toInsert);
       console.log(`    + added ${toInsert.length} units to Book ${bookOrder}`);
     }
+  }
+
+  // Ortiqcha kitoblarni o'chirish (cascade: unit va so'zlari ham o'chadi)
+  const removed = await db
+    .delete(books)
+    .where(gt(books.order, BOOK_COUNT))
+    .returning({ order: books.order });
+  if (removed.length > 0) {
+    console.log(`  - removed ${removed.length} extra book(s): ${removed.map((b) => b.order).join(", ")}`);
   }
 
   console.log("Seed done.");
