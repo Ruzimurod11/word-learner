@@ -12,6 +12,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { getBook, getBooks } from "@/api/book-api";
+import { Loader } from "@/components/Loader";
 import { QuizGame } from "@/components/QuizGame";
 import { UnitTabs } from "@/components/UnitTabs";
 import { StateCard, bookGradient, card } from "@/components/ui";
@@ -354,7 +355,7 @@ function BookPicker({
     <div className="flex flex-col gap-5">
       <BackButton onClick={onBack} />
       <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
-      {query.isLoading && <StateCard>{t("common.loading")}</StateCard>}
+      {query.isLoading && <Loader />}
       {query.isError && (
         <StateCard variant="error">
           {t("common.error")}: {(query.error as Error).message}
@@ -407,7 +408,7 @@ function UnitPicker({
     <div className="flex flex-col gap-5">
       <BackButton onClick={onBack} />
       <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
-      {query.isLoading && <StateCard>{t("common.loading")}</StateCard>}
+      {query.isLoading && <Loader />}
       {query.isError && (
         <StateCard variant="error">
           {t("common.error")}: {(query.error as Error).message}

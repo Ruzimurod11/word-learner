@@ -167,7 +167,14 @@ export function WordsTable({ unitId }: WordsTableProps) {
       },
       {
         accessorKey: "transcription",
-        header: t("words_table.header_transcription"),
+        header: () => (
+          <>
+            <span className="sm:hidden">t</span>
+            <span className="hidden sm:inline">
+              {t("words_table.header_transcription")}
+            </span>
+          </>
+        ),
         cell: ({ row, table }) => {
           const ctx = table.options.meta as TableCtx;
           if (ctx.editingId === row.original.id) {
@@ -329,7 +336,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
                 {hg.headers.map((h) => (
                   <th
                     key={h.id}
-                    className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                    className="px-0.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                   >
                     {h.isPlaceholder
                       ? null
@@ -368,7 +375,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
               table.getRowModel().rows.map((row) => (
                 <tr key={row.id} className="transition-colors hover:bg-primary/5">
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-4 py-2 align-middle">
+                    <td key={cell.id} className="px-0.5 py-2 align-middle">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
                   ))}
