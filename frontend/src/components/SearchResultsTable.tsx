@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { searchWords } from "@/api/word-api";
 import { StateCard, btn } from "@/components/ui";
+import { Loader } from "@/components/Loader";
 
 interface SearchResultsTableProps {
   query: string;
@@ -27,7 +28,7 @@ export function SearchResultsTable({ query }: SearchResultsTableProps) {
   }
 
   if (results.isLoading) {
-    return <StateCard>{t("search.searching")}</StateCard>;
+    return <Loader label={t("search.searching")} />;
   }
 
   if (results.isError) {

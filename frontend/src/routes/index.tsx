@@ -10,8 +10,8 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col gap-8">
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 px-6 py-10 text-white shadow-xl shadow-indigo-500/20 sm:px-10">
+    <div className="flex flex-col gap-5 sm:gap-8">
+      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 px-5 py-4 text-white shadow-xl shadow-indigo-500/20 sm:rounded-3xl sm:px-10 sm:py-10">
         <div
           className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-2xl"
           aria-hidden="true"
@@ -22,13 +22,15 @@ function HomePage() {
         />
         <div className="relative flex items-center justify-between gap-6">
           <div className="max-w-xl">
-            <h1 className="font-display text-3xl font-bold sm:text-4xl">
+            <h1 className="font-display text-xl font-bold sm:text-4xl">
               {t("home.hero_title")}
             </h1>
-            <p className="mt-2 text-white/85">{t("home.subtitle")}</p>
+            <p className="mt-1 text-sm text-white/85 sm:mt-2 sm:text-base">
+              {t("home.subtitle")}
+            </p>
             <Link
               to="/test"
-              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-indigo-600 shadow-lg transition hover:scale-[1.03]"
+              className="mt-3 inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-indigo-600 shadow-lg transition hover:scale-[1.03] sm:mt-6 sm:px-5 sm:py-2.5"
             >
               <Sparkles className="h-4 w-4" aria-hidden="true" />
               {t("home.hero_cta")}

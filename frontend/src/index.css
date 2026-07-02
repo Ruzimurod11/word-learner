@@ -114,6 +114,42 @@
       transform: scale(1);
     }
   }
+  --animate-cheer: cheer 1s cubic-bezier(0.22, 1.4, 0.36, 1) both;
+  --animate-cheer-emoji: cheer-emoji 0.9s ease-in-out both;
+
+  @keyframes cheer {
+    0% {
+      opacity: 0;
+      transform: translateY(-24px) scale(0.5) rotate(-4deg);
+    }
+    35% {
+      opacity: 1;
+      transform: translateY(0) scale(1.08) rotate(2deg);
+    }
+    50% {
+      transform: scale(1) rotate(0deg);
+    }
+    80% {
+      opacity: 1;
+      transform: none;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.9);
+    }
+  }
+  @keyframes cheer-emoji {
+    0%,
+    100% {
+      transform: none;
+    }
+    30% {
+      transform: scale(1.4) rotate(-12deg);
+    }
+    60% {
+      transform: scale(1.15) rotate(10deg);
+    }
+  }
 }
 
 @layer base {

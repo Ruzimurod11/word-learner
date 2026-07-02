@@ -2,7 +2,7 @@ import { useState, type FormEvent, type KeyboardEvent } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { Search } from "lucide-react";
-import { btn, input } from "@/components/ui";
+import { input } from "@/components/ui";
 
 export function GlobalSearch() {
   const { t } = useTranslation();
@@ -30,9 +30,9 @@ export function GlobalSearch() {
   return (
     <form
       onSubmit={onSubmit}
-      className="order-last flex w-full basis-full flex-col gap-2 sm:order-none sm:w-auto sm:max-w-md sm:flex-1 sm:basis-auto sm:flex-row sm:items-center"
+      className="order-last flex w-full basis-full items-center gap-2 sm:order-none sm:w-auto sm:max-w-md sm:flex-1 sm:basis-auto"
     >
-      <div className="relative w-full sm:flex-1">
+      <div className="relative flex-1">
         <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
           <Search className="h-4 w-4" aria-hidden="true" />
         </span>
@@ -48,9 +48,10 @@ export function GlobalSearch() {
       </div>
       <button
         type="submit"
-        className={`${btn.primary} w-full sm:w-auto`}
+        aria-label={t("search.button")}
+        className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md shadow-primary/25 transition hover:brightness-110 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98]"
       >
-        {t("search.button")}
+        <Search className="h-4 w-4" aria-hidden="true" />
       </button>
     </form>
   );

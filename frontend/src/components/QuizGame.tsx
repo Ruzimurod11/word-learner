@@ -5,8 +5,94 @@ import { ArrowLeftRight, PartyPopper, RotateCcw, Trophy } from "lucide-react";
 import { getBooks } from "@/api/book-api";
 import { getQuiz } from "@/api/word-api";
 import type { QuizDirection, QuizQuestion } from "@/types/word";
-import { MIN_COUNT, isValidQuizCount, scoreQuiz } from "@/lib/quiz";
+import {
+  CHEER_TIER_VARIANTS,
+  MIN_COUNT,
+  STREAK_CHEER_VARIANTS,
+  getQuizCheer,
+  getQuizFeedbackTier,
+  isValidQuizCount,
+  scoreQuiz,
+} from "@/lib/quiz";
+import type { QuizCheer, QuizCheerTier, QuizFeedbackTier } from "@/lib/quiz";
 import { StateCard, btn, card, input } from "@/components/ui";
+import { Loader } from "@/components/Loader";
+
+const FEEDBACK_STYLES: Record<
+  QuizFeedbackTier,
+  { emoji: string; gradient: string }
+> = {
+  perfect: { emoji: "👑", gradient: "from-amber-500 to-yellow-500" },
+  excellent: { emoji: "🚀", gradient: "from-emerald-500 to-teal-500" },
+  great: { emoji: "🔥", gradient: "from-indigo-500 to-violet-500" },
+  good: { emoji: "💪", gradient: "from-sky-500 to-blue-500" },
+  average: { emoji: "🌱", gradient: "from-orange-500 to-amber-500" },
+  low: { emoji: "⚡", gradient: "from-rose-500 to-pink-500" },
+};
+
+const CHEER_STYLES: Record<
+  "streak" | QuizCheerTier,
+  { emojis: string[]; gradient: string }
+> = {
+  streak: {
+    emojis: ["🔥", "⚡", "🌟", "🚀", "💎", "👑"],
+    gradient: "from-amber-500 to-orange-600",
+  },
+  hot: {
+    emojis: ["🎉", "⭐", "🤩", "👏"],
+    gradient: "from-emerald-500 to-teal-500",
+  },
+  good: {
+    emojis: ["💪", "😎", "✨", "🙌"],
+    gradient: "from-sky-500 to-blue-500",
+  },
+  mid: {
+    emojis: ["🎯", "🌱", "🧭"],
+    gradient: "from-orange-500 to-amber-500",
+  },
+  low: {
+    emojis: ["🧗", "🌤️", "🚴"],
+    gradient: "from-rose-500 to-pink-500",
+  },
+};
+
+// faqat event handler'da chaqiriladi; komponentdan tashqarida turibdi, chunki
+// react-compiler lint'i render ichidagi to'g'ridan-to'g'ri Math.random'ni taqiqlaydi
+function randomSeed(): number {
+  return Math.random();
+}
+
+function CheerPopup({ cheer, seed }: { cheer: QuizCheer; seed: number }) {
+  const { t } = useTranslation();
+  // seed — javob tanlanganda olingan tasodifiy son; shu turkumdagi
+  // iboralardan bittasini tanlaydi
+  const size =
+    cheer.kind === "streak"
+      ? STREAK_CHEER_VARIANTS
+      : CHEER_TIER_VARIANTS[cheer.tier];
+  const variant = Math.min(Math.floor(seed * size), size - 1);
+  const style = CHEER_STYLES[cheer.kind === "streak" ? "streak" : cheer.tier];
+  const message =
+    cheer.kind === "streak"
+      ? t(`test.cheer.streak_${variant}`, { count: cheer.streak })
+      : t(`test.cheer.${cheer.tier}_${variant}`);
+  const emoji = style.emojis[variant % style.emojis.length];
+  return (
+    <div
+      className="pointer-events-none fixed inset-x-0 top-20 z-50 flex justify-center"
+      aria-live="polite"
+    >
+      <div
+        className={`animate-cheer flex items-center gap-2.5 rounded-2xl bg-gradient-to-r ${style.gradient} px-6 py-3 text-white shadow-2xl`}
+      >
+        <span className="animate-cheer-emoji text-2xl" aria-hidden="true">
+          {emoji}
+        </span>
+        <span className="font-display text-lg font-bold">{message}</span>
+      </div>
+    </div>
+  );
+}
 
 interface QuizGameProps {
   unitId?: number;
@@ -33,6 +119,7 @@ export function QuizGame({
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Answer[]>([]);
+  const [cheerSeed, setCheerSeed] = useState(0);
   const [direction, setDirection] = useState<QuizDirection>("uz-en");
   const [countInput, setCountInput] = useState(String(MIN_COUNT));
   const [count, setCount] = useState<number | null>(
@@ -122,7 +209,7 @@ export function QuizGame({
   }
 
   if (quizQuery.isLoading) {
-    return <StateCard>{t("common.loading")}</StateCard>;
+    return <Loader />;
   }
 
   if (quizQuery.isError || !quizQuery.data) {
@@ -151,6 +238,8 @@ export function QuizGame({
 
   if (index >= questions.length) {
     const { wrong, correctCount, percent } = scoreQuiz(answers);
+    const tier = getQuizFeedbackTier(percent);
+    const feedback = FEEDBACK_STYLES[tier];
     return (
       <div className="flex animate-pop flex-col gap-5">
         <div className="flex items-center gap-3">
@@ -163,6 +252,23 @@ export function QuizGame({
           <span className="ml-auto bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text font-display text-4xl font-bold text-transparent">
             {percent}%
           </span>
+        </div>
+        <div
+          className={`animate-pop rounded-2xl bg-gradient-to-r ${feedback.gradient} p-5 text-white shadow-lg`}
+        >
+          <div className="flex items-start gap-3">
+            <span className="text-3xl" aria-hidden="true">
+              {feedback.emoji}
+            </span>
+            <div>
+              <p className="font-display text-lg font-bold">
+                {t(`test.feedback.${tier}.title`)}
+              </p>
+              <p className="mt-1 text-sm text-white/90">
+                {t(`test.feedback.${tier}.message`)}
+              </p>
+            </div>
+          </div>
         </div>
         <div className="flex gap-3">
           <span className="rounded-xl bg-green-500/10 px-4 py-2.5 text-sm font-semibold text-green-600 dark:text-green-400">
@@ -211,10 +317,12 @@ export function QuizGame({
 
   const question = questions[index];
   const answered = selected !== null;
+  const cheer = answered ? getQuizCheer(answers) : null;
 
   const onSelect = (option: string) => {
     if (answered) return;
     setSelected(option);
+    setCheerSeed(randomSeed());
     setAnswers((prev) => [...prev, { question, selected: option }]);
   };
 
@@ -247,6 +355,7 @@ export function QuizGame({
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
+      {cheer && <CheerPopup key={index} cheer={cheer} seed={cheerSeed} />}
       <div className="flex items-center gap-3">
         <div className="shrink-0 text-sm text-muted-foreground">
           {t("test.question_progress", {

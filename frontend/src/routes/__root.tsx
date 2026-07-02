@@ -29,9 +29,9 @@ function RootLayout() {
           <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap sm:gap-3">
             <Link
               to="/test"
-              className={`${btn.ghost} h-9 shrink-0`}
+              className={`${btn.ghost} mr-auto h-9 shrink-0 sm:mr-0`}
               activeProps={{
-                className: `${btn.ghost} h-9 shrink-0 border-primary/50 bg-primary/10 text-primary`,
+                className: `${btn.ghost} mr-auto h-9 shrink-0 border-primary/50 bg-primary/10 text-primary sm:mr-0`,
               }}
             >
               {t("test.button")}

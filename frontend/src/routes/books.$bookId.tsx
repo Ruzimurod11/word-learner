@@ -14,6 +14,7 @@ import { UnitTabs } from "@/components/UnitTabs";
 import { WordForm } from "@/components/WordForm";
 import { WordsTable } from "@/components/WordsTable";
 import { StateCard } from "@/components/ui";
+import { Loader } from "@/components/Loader";
 
 const bookSearchSchema = z.object({
   unit: z.coerce.number().int().positive().optional(),
@@ -63,7 +64,7 @@ function BookPage() {
   };
 
   if (bookQuery.isLoading) {
-    return <StateCard>{t("common.loading")}</StateCard>;
+    return <Loader />;
   }
 
   if (bookQuery.isError) {

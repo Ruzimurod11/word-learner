@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { MIN_COUNT, isValidQuizCount, scoreQuiz } from "@/lib/quiz";
+import {
+  MIN_COUNT,
+  STREAK_CHEER_MIN,
+  getQuizCheer,
+  getQuizCheerTier,
+  getQuizFeedbackTier,
+  getTrailingStreak,
+  isValidQuizCount,
+  scoreQuiz,
+} from "@/lib/quiz";
 
 const answer = (correct: string, selected: string) => ({
   question: { correct },
@@ -43,5 +52,91 @@ describe("isValidQuizCount", () => {
 
   it("rejects everything while max is unknown", () => {
     expect(isValidQuizCount("20", undefined)).toBe(false);
+  });
+});
+
+describe("getTrailingStreak", () => {
+  it("counts consecutive correct answers from the end", () => {
+    expect(getTrailingStreak([])).toBe(0);
+    expect(getTrailingStreak([answer("cat", "cat")])).toBe(1);
+    expect(
+      getTrailingStreak([
+        answer("dog", "sun"),
+        answer("cat", "cat"),
+        answer("sun", "sun"),
+      ]),
+    ).toBe(2);
+  });
+
+  it("resets to 0 when the last answer is wrong", () => {
+    expect(
+      getTrailingStreak([answer("cat", "cat"), answer("dog", "sun")]),
+    ).toBe(0);
+  });
+});
+
+describe("getQuizCheerTier", () => {
+  it("maps running percentages to tiers at the boundaries", () => {
+    expect(getQuizCheerTier(100)).toBe("hot");
+    expect(getQuizCheerTier(90)).toBe("hot");
+    expect(getQuizCheerTier(89)).toBe("good");
+    expect(getQuizCheerTier(70)).toBe("good");
+    expect(getQuizCheerTier(69)).toBe("mid");
+    expect(getQuizCheerTier(50)).toBe("mid");
+    expect(getQuizCheerTier(49)).toBe("low");
+    expect(getQuizCheerTier(0)).toBe("low");
+  });
+});
+
+describe("getQuizCheer", () => {
+  const correct = () => answer("cat", "cat");
+  const wrong = () => answer("dog", "sun");
+
+  it("returns null before any answer", () => {
+    expect(getQuizCheer([])).toBeNull();
+  });
+
+  it("returns a tier cheer based on the running percent", () => {
+    expect(getQuizCheer([correct()])).toEqual({
+      kind: "tier",
+      tier: "hot",
+      percent: 100,
+    });
+    expect(getQuizCheer([correct(), wrong()])).toEqual({
+      kind: "tier",
+      tier: "mid",
+      percent: 50,
+    });
+    expect(getQuizCheer([wrong(), wrong(), correct()])).toEqual({
+      kind: "tier",
+      tier: "low",
+      percent: 33,
+    });
+  });
+
+  it("returns a streak cheer with the current count once the threshold is reached", () => {
+    expect(
+      getQuizCheer(Array.from({ length: STREAK_CHEER_MIN - 1 }, correct)),
+    ).toMatchObject({ kind: "tier" });
+    for (const streak of [STREAK_CHEER_MIN, 10, 25]) {
+      const answers = Array.from({ length: streak }, correct);
+      expect(getQuizCheer(answers)).toEqual({ kind: "streak", streak });
+    }
+  });
+});
+
+describe("getQuizFeedbackTier", () => {
+  it("maps percentages to tiers at the boundaries", () => {
+    expect(getQuizFeedbackTier(100)).toBe("perfect");
+    expect(getQuizFeedbackTier(99)).toBe("excellent");
+    expect(getQuizFeedbackTier(95)).toBe("excellent");
+    expect(getQuizFeedbackTier(94)).toBe("great");
+    expect(getQuizFeedbackTier(85)).toBe("great");
+    expect(getQuizFeedbackTier(84)).toBe("good");
+    expect(getQuizFeedbackTier(70)).toBe("good");
+    expect(getQuizFeedbackTier(69)).toBe("average");
+    expect(getQuizFeedbackTier(50)).toBe("average");
+    expect(getQuizFeedbackTier(49)).toBe("low");
+    expect(getQuizFeedbackTier(0)).toBe("low");
   });
 });

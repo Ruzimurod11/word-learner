@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ArrowRight } from "lucide-react";
 import { getBooks } from "@/api/book-api";
 import { StateCard, bookGradient, card } from "@/components/ui";
+import { Loader } from "@/components/Loader";
 
 export function BooksGrid() {
   const { t } = useTranslation();
@@ -13,7 +14,7 @@ export function BooksGrid() {
   });
 
   if (query.isLoading) {
-    return <StateCard>{t("common.loading")}</StateCard>;
+    return <Loader />;
   }
 
   if (query.isError) {

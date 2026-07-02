@@ -14,6 +14,7 @@ import type { Word } from "@/types/word";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { Select } from "@/components/Select";
 import { btn, input } from "@/components/ui";
+import { Loader } from "@/components/Loader";
 
 interface TableCtx {
   editingId: number | null;
@@ -308,11 +309,8 @@ export function WordsTable({ unitId }: WordsTableProps) {
           <tbody className="divide-y divide-border/60">
             {wordsQuery.isLoading ? (
               <tr>
-                <td
-                  colSpan={columns.length}
-                  className="px-4 py-6 text-center text-muted-foreground"
-                >
-                  {t("common.loading")}
+                <td colSpan={columns.length} className="px-4 py-8">
+                  <Loader bare />
                 </td>
               </tr>
             ) : wordsQuery.isError ? (
