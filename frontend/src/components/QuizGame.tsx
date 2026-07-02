@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { getBooks } from "@/api/book-api";
 import { getQuiz } from "@/api/word-api";
 import type { QuizDirection, QuizQuestion } from "@/types/word";
 
@@ -13,7 +14,6 @@ interface QuizGameProps {
 }
 
 const MIN_COUNT = 20;
-const MAX_COUNT = 100;
 
 interface Answer {
   question: QuizQuestion;
@@ -37,6 +37,14 @@ export function QuizGame({
   const [count, setCount] = useState<number | null>(
     selectableCount ? null : MIN_COUNT,
   );
+
+  // max = saytdagi jami so'zlar soni; picker'lar keshidagi books query'dan olinadi
+  const booksQuery = useQuery({
+    queryKey: ["books"],
+    queryFn: getBooks,
+    enabled: !!selectableCount && count === null,
+  });
+  const maxCount = booksQuery.data?.reduce((acc, b) => acc + b.wordCount, 0);
 
   const quizQuery = useQuery({
     queryKey: [
@@ -75,9 +83,10 @@ export function QuizGame({
   if (count === null) {
     const parsedCount = Number(countInput);
     const countValid =
+      maxCount !== undefined &&
       Number.isInteger(parsedCount) &&
       parsedCount >= MIN_COUNT &&
-      parsedCount <= MAX_COUNT;
+      parsedCount <= maxCount;
     return (
       <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
         <div className="flex flex-col gap-4 rounded-lg border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
@@ -91,13 +100,14 @@ export function QuizGame({
             id="quiz-count"
             type="number"
             min={MIN_COUNT}
-            max={MAX_COUNT}
+            max={maxCount}
             value={countInput}
             onChange={(e) => setCountInput(e.target.value)}
             className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100"
           />
           <p className="text-xs text-zinc-500 dark:text-zinc-400">
-            {t("test.question_count_hint", { min: MIN_COUNT, max: MAX_COUNT })}
+            {maxCount !== undefined &&
+              t("test.question_count_hint", { min: MIN_COUNT, max: maxCount })}
           </p>
         </div>
         <div className="flex gap-3">

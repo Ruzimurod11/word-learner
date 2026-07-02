@@ -25,7 +25,8 @@ export const quizQuerySchema = z.object({
   unitId: z.coerce.number().int().positive().optional(),
   fromUnitId: z.coerce.number().int().positive().optional(),
   toUnitId: z.coerce.number().int().positive().optional(),
-  count: z.coerce.number().int().min(1).max(100).default(20),
+  // yuqori chegara yo'q: LIMIT bazadagi mavjud so'zlar sonidan oshirmaydi
+  count: z.coerce.number().int().min(1).default(20),
   direction: z.enum(["uz-en", "en-uz"]).default("uz-en"),
 });
 
