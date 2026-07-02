@@ -8,6 +8,7 @@ import authRoutes from "./routes/authRoutes.ts";
 import { languageMiddleware } from "./i18n/index.ts";
 
 const app = express();
+app.set("etag", false);
 
 const allowedOrigins = (process.env.FRONTEND_URL ?? "")
   .split(",")
