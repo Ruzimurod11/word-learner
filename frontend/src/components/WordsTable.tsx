@@ -336,7 +336,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
                 {hg.headers.map((h) => (
                   <th
                     key={h.id}
-                    className="px-0.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                    className="px-0.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:px-4"
                   >
                     {h.isPlaceholder
                       ? null
@@ -375,7 +375,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
               table.getRowModel().rows.map((row) => (
                 <tr key={row.id} className="transition-colors hover:bg-primary/5">
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-0.5 py-2 align-middle">
+                    <td key={cell.id} className="px-0.5 py-2 align-middle sm:px-4">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
                   ))}
