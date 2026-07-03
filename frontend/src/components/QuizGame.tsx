@@ -333,7 +333,7 @@ export function QuizGame({
 
   const optionClass = (option: string): string => {
     const base =
-      "w-full rounded-xl border-2 px-1 py-1 text-left text-lg font-semibold transition-all sm:px-4 sm:py-3.5 ";
+      "w-full rounded-xl border-2 px-3 py-2 text-left text-lg font-semibold transition-all sm:px-4 sm:py-3.5 ";
     if (!answered) {
       return (
         base +
