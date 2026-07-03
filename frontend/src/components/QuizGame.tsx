@@ -83,7 +83,7 @@ function CheerPopup({ cheer, seed }: { cheer: QuizCheer; seed: number }) {
       aria-live="polite"
     >
       <div
-        className={`animate-cheer flex items-center gap-2.5 rounded-2xl bg-gradient-to-r ${style.gradient} px-6 py-3 text-white shadow-2xl`}
+        className={`animate-cheer flex items-center gap-2.5 rounded-2xl bg-linear-to-r ${style.gradient} px-6 py-3 text-white shadow-2xl`}
       >
         <span className="animate-cheer-emoji text-2xl" aria-hidden="true">
           {emoji}
@@ -145,7 +145,13 @@ export function QuizGame({
       round,
     ],
     queryFn: () =>
-      getQuiz({ unitId, fromUnitId, toUnitId, count: count ?? MIN_COUNT, direction }),
+      getQuiz({
+        unitId,
+        fromUnitId,
+        toUnitId,
+        count: count ?? MIN_COUNT,
+        direction,
+      }),
     enabled: count !== null,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
@@ -249,12 +255,12 @@ export function QuizGame({
             <Trophy className="h-8 w-8 text-warning" aria-hidden="true" />
           )}
           <h2 className="text-xl font-bold">{t("test.results")}</h2>
-          <span className="ml-auto bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text font-display text-4xl font-bold text-transparent">
+          <span className="ml-auto bg-linear-to-r from-indigo-500 to-violet-500 bg-clip-text font-display text-4xl font-bold text-transparent">
             {percent}%
           </span>
         </div>
         <div
-          className={`animate-pop rounded-2xl bg-gradient-to-r ${feedback.gradient} p-5 text-white shadow-lg`}
+          className={`animate-pop rounded-2xl bg-linear-to-r ${feedback.gradient} p-5 text-white shadow-lg`}
         >
           <div className="flex items-start gap-3">
             <span className="text-3xl" aria-hidden="true">
@@ -285,8 +291,13 @@ export function QuizGame({
             </h3>
             <ul className="divide-y divide-border/60">
               {wrong.map((a) => (
-                <li key={a.question.id} className="flex flex-col gap-1 px-4 py-3">
-                  <span className="text-xl font-semibold">{a.question.question}</span>
+                <li
+                  key={a.question.id}
+                  className="flex flex-col gap-1 px-4 py-3"
+                >
+                  <span className="text-xl font-semibold">
+                    {a.question.question}
+                  </span>
                   <span className="text-lg text-red-600 dark:text-red-400">
                     {t("test.your_answer")}: {a.selected}
                   </span>
@@ -342,12 +353,14 @@ export function QuizGame({
     }
     if (option === question.correct) {
       return (
-        base + "animate-pop border-green-500 bg-green-500 text-white shadow-md shadow-green-500/30"
+        base +
+        "animate-pop border-green-500 bg-green-500 text-white shadow-md shadow-green-500/30"
       );
     }
     if (option === selected) {
       return (
-        base + "border-red-500 bg-red-500 text-white shadow-md shadow-red-500/30"
+        base +
+        "border-red-500 bg-red-500 text-white shadow-md shadow-red-500/30"
       );
     }
     return base + "border-border bg-card text-muted-foreground opacity-60";
@@ -355,7 +368,9 @@ export function QuizGame({
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
-      {cheer && <CheerPopup key={`cheer-${index}`} cheer={cheer} seed={cheerSeed} />}
+      {cheer && (
+        <CheerPopup key={`cheer-${index}`} cheer={cheer} seed={cheerSeed} />
+      )}
       <div className="flex items-center gap-3">
         <div className="shrink-0 text-sm text-muted-foreground">
           {t("test.question_progress", {
@@ -365,7 +380,7 @@ export function QuizGame({
         </div>
         <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-muted">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-300"
+            className="h-full rounded-full bg-linear-to-r from-indigo-500 to-violet-500 transition-all duration-300"
             style={{ width: `${(index / questions.length) * 100}%` }}
           />
         </div>
@@ -378,7 +393,10 @@ export function QuizGame({
           {direction === "uz-en" ? "UZ - EN" : "EN - UZ"}
         </button>
       </div>
-      <div key={question.id} className={`${card} animate-fade-in p-2 text-center sm:p-8`}>
+      <div
+        key={question.id}
+        className={`${card} animate-fade-in p-2 text-center sm:p-8`}
+      >
         <span className="font-display text-[34px] font-bold">
           {question.question}
         </span>
