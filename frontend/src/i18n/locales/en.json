@@ -94,6 +94,11 @@
     "submit": "Log in",
     "submitting": "Logging in..."
   },
+  "transcription": {
+    "button": "Add transcriptions",
+    "pending": "Generating...",
+    "success": "Added transcriptions to {{updated}} words ({{remaining}} remaining)"
+  },
   "lang": {
     "label": "Language",
     "uz": "O'zbekcha",

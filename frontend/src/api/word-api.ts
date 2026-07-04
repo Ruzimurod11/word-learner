@@ -97,6 +97,23 @@ export const getQuiz = async (
   }
 };
 
+export interface BackfillTranscriptionsResult {
+  updated: number;
+  remaining: number;
+}
+
+export const backfillTranscriptions =
+  async (): Promise<BackfillTranscriptionsResult> => {
+    try {
+      const res = await http.post<ApiResponse<BackfillTranscriptionsResult>>(
+        "/words/backfill-transcriptions",
+      );
+      return unwrap(res.data);
+    } catch (err) {
+      return handleError(err);
+    }
+  };
+
 export const searchWords = async (
   query: SearchQuery,
 ): Promise<PaginatedSearchWords> => {

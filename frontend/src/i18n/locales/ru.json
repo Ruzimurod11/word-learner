@@ -94,6 +94,11 @@
     "submit": "Войти",
     "submitting": "Вход..."
   },
+  "transcription": {
+    "button": "Добавить транскрипции",
+    "pending": "Генерация...",
+    "success": "Транскрипции добавлены к {{updated}} словам (осталось {{remaining}})"
+  },
   "lang": {
     "label": "Язык",
     "uz": "O'zbekcha",

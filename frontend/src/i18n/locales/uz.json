@@ -94,6 +94,11 @@
     "submit": "Kirish",
     "submitting": "Kirilmoqda..."
   },
+  "transcription": {
+    "button": "Transkripsiya qo'shish",
+    "pending": "Yaratilmoqda...",
+    "success": "{{updated}} ta so'zga transkripsiya qo'shildi ({{remaining}} ta qoldi)"
+  },
   "lang": {
     "label": "Til",
     "uz": "O'zbekcha",

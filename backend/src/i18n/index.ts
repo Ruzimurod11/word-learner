@@ -34,6 +34,7 @@ const messages: Record<Lang, Messages> = {
     "errors.unauthorized": "Avtorizatsiya talab qilinadi",
     "errors.invalid_password": "Parol noto'g'ri",
     "errors.auth_not_configured": "Admin paroli sozlanmagan",
+    "errors.transcription_failed": "Transkripsiya yaratishda xatolik",
   },
   en: {
     "errors.invalid_book_id": "Invalid book ID",
@@ -61,6 +62,7 @@ const messages: Record<Lang, Messages> = {
     "errors.unauthorized": "Authorization required",
     "errors.invalid_password": "Incorrect password",
     "errors.auth_not_configured": "Admin password is not configured",
+    "errors.transcription_failed": "Failed to generate transcriptions",
   },
   ru: {
     "errors.invalid_book_id": "Неверный ID книги",
@@ -88,6 +90,7 @@ const messages: Record<Lang, Messages> = {
     "errors.unauthorized": "Требуется авторизация",
     "errors.invalid_password": "Неверный пароль",
     "errors.auth_not_configured": "Пароль администратора не настроен",
+    "errors.transcription_failed": "Не удалось создать транскрипции",
   },
 };
 
