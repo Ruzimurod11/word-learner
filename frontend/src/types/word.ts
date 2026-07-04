@@ -67,6 +67,8 @@ export interface QuizQuestion {
 
 export interface QuizResponse {
   questions: QuizQuestion[];
+  // kichik harfli inglizcha so'z -> IPA transkripsiya
+  transcriptions: Record<string, string>;
 }
 
 export interface ApiSuccess<T> {

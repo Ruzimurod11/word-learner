@@ -84,4 +84,7 @@ export interface QuizQuestionDto {
 
 export interface QuizDto {
   questions: QuizQuestionDto[];
+  // kichik harfli inglizcha so'z -> IPA transkripsiya; faqat inglizcha matn
+  // (uz-en'da variantlar, en-uz'da savol) uchun to'ldiriladi
+  transcriptions: Record<string, string>;
 }

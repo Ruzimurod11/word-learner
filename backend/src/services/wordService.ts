@@ -187,7 +187,12 @@ export async function getQuiz(
   }
 
   const questionRows = await db
-    .select({ id: words.id, english: words.english, translation: words.translation })
+    .select({
+      id: words.id,
+      english: words.english,
+      translation: words.translation,
+      transcription: words.transcription,
+    })
     .from(words)
     .innerJoin(units, eq(units.id, words.unitId))
     .innerJoin(books, eq(books.id, units.bookId))
@@ -197,11 +202,17 @@ export async function getQuiz(
   if (questionRows.length === 0) return null;
 
   const distinctAnswers = db
-    .selectDistinct({ answer: uzToEn ? words.english : words.translation })
+    .selectDistinct({
+      answer: uzToEn ? words.english : words.translation,
+      transcription: words.transcription,
+    })
     .from(words)
     .as("dt");
   const poolRows = await db
-    .select({ answer: distinctAnswers.answer })
+    .select({
+      answer: distinctAnswers.answer,
+      transcription: distinctAnswers.transcription,
+    })
     .from(distinctAnswers)
     .orderBy(sql`random()`)
     .limit(60);
@@ -218,6 +229,23 @@ export async function getQuiz(
     });
   if (pool.length < 4) return null;
 
+  // inglizcha so'z -> IPA; savoldagi (en-uz) va variantlardagi (uz-en) inglizcha
+  // matnlar uchun. Uzbek matn map'ga tushmaydi, shuning uchun frontend
+  // yo'nalishdan qat'i nazar mos kalitni topib ko'rsatadi.
+  const transcriptions: Record<string, string> = {};
+  for (const row of questionRows) {
+    if (row.transcription) {
+      transcriptions[row.english.toLowerCase()] = row.transcription;
+    }
+  }
+  if (uzToEn) {
+    for (const r of poolRows) {
+      if (r.transcription) {
+        transcriptions[r.answer.toLowerCase()] = r.transcription;
+      }
+    }
+  }
+
   const questions: QuizQuestionDto[] = [];
   for (const row of questionRows) {
     const answer = uzToEn ? row.english : row.translation;
@@ -232,7 +260,7 @@ export async function getQuiz(
       correct: answer,
     });
   }
-  return { questions };
+  return { questions, transcriptions };
 }
 
 export async function unitExists(unitId: number): Promise<boolean> {

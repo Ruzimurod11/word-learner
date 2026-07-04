@@ -234,6 +234,10 @@ export function QuizGame({
   }
 
   const questions = quizQuery.data.questions;
+  const transcriptions = quizQuery.data.transcriptions ?? {};
+  // inglizcha matn (savol yoki variant) bo'lsa yonida ko'rsatiladigan IPA
+  const transcriptionFor = (text: string): string | undefined =>
+    transcriptions[text.trim().toLowerCase()];
 
   const restart = () => {
     setIndex(0);
@@ -400,6 +404,11 @@ export function QuizGame({
         <span className="font-display text-[34px] font-bold">
           {question.question}
         </span>
+        {transcriptionFor(question.question) && (
+          <span className="ml-2 align-middle text-[12px] font-normal text-muted-foreground">
+            {transcriptionFor(question.question)}
+          </span>
+        )}
       </div>
       <div className="flex flex-col gap-2">
         {question.options.map((option) => (
@@ -411,6 +420,11 @@ export function QuizGame({
             className={optionClass(option)}
           >
             {option}
+            {transcriptionFor(option) && (
+              <span className="ml-2 text-[12px] font-normal opacity-80">
+                {transcriptionFor(option)}
+              </span>
+            )}
           </button>
         ))}
       </div>
