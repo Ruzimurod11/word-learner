@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { eq, gt } from "drizzle-orm";
+import { and, eq, gt } from "drizzle-orm";
 import { db, pool } from "./index.ts";
 import { books, units } from "./schema.ts";
 
@@ -44,10 +44,11 @@ async function main(): Promise<void> {
     }
   }
 
-  // Ortiqcha kitoblarni o'chirish (cascade: unit va so'zlari ham o'chadi)
+  // Ortiqcha Essential kitoblarni o'chirish (cascade: unit va so'zlari ham o'chadi).
+  // Vocabulary kitobiga (kind='vocabulary') tegilmaydi.
   const removed = await db
     .delete(books)
-    .where(gt(books.order, BOOK_COUNT))
+    .where(and(gt(books.order, BOOK_COUNT), eq(books.kind, "essential")))
     .returning({ order: books.order });
   if (removed.length > 0) {
     console.log(`  - removed ${removed.length} extra book(s): ${removed.map((b) => b.order).join(", ")}`);

@@ -4,6 +4,7 @@ import cors, { type CorsOptions } from "cors";
 import wordRoutes from "./routes/wordRoutes.ts";
 import bookRoutes from "./routes/bookRoutes.ts";
 import unitRoutes from "./routes/unitRoutes.ts";
+import vocabularyRoutes from "./routes/vocabularyRoutes.ts";
 import authRoutes from "./routes/authRoutes.ts";
 import { languageMiddleware } from "./i18n/index.ts";
 
@@ -49,6 +50,7 @@ app.get("/cron", (_req, res) => {
 app.use("/auth", authRoutes);
 app.use("/books", bookRoutes);
 app.use("/units", unitRoutes);
+app.use("/vocabulary", vocabularyRoutes);
 app.use("/words", wordRoutes);
 
 app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {

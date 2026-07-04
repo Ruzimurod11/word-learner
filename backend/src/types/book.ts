@@ -2,11 +2,14 @@ import { z } from "zod";
 
 export const bookIdSchema = z.coerce.number().int().positive();
 
+export type BookKind = "essential" | "vocabulary";
+
 export interface BookDto {
   id: number;
   order: number;
   title: string;
   description: string | null;
+  kind: BookKind;
   unitCount: number;
   wordCount: number;
 }

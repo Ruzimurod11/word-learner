@@ -1,8 +1,11 @@
+export type BookKind = "essential" | "vocabulary";
+
 export interface Book {
   id: number;
   order: number;
   title: string;
   description: string | null;
+  kind: BookKind;
   unitCount: number;
   wordCount: number;
 }

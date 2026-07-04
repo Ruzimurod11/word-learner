@@ -3,13 +3,23 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { Check, Loader2, Plus } from "lucide-react";
 import { createUnitWord } from "@/api/word-api";
+import type { CreateWordDto } from "@/types/word";
 import { btn, card, errorAlert, input } from "@/components/ui";
 
-interface WordFormProps {
-  unitId: number;
+interface WordFormProps<R = unknown> {
+  // Standart (unit) rejim: unitId beriladi, so'z shu unit'ga qo'shiladi.
+  unitId?: number;
+  // Muqobil submit (mas. Vocabularies avto-tag): berilsa createUnitWord o'rniga ishlatiladi.
+  submitWord?: (data: CreateWordDto) => Promise<R>;
+  // Muvaffaqiyatdan keyin qo'shimcha ish (mas. invalidatsiya + navigatsiya).
+  onAdded?: (result: R) => void;
 }
 
-export function WordForm({ unitId }: WordFormProps) {
+export function WordForm<R = unknown>({
+  unitId,
+  submitWord,
+  onAdded,
+}: WordFormProps<R>) {
   const { t } = useTranslation();
   const [english, setEnglish] = useState("");
   const [translation, setTranslation] = useState("");
@@ -25,20 +35,26 @@ export function WordForm({ unitId }: WordFormProps) {
   }, [success]);
 
   const mutation = useMutation({
-    mutationFn: () =>
-      createUnitWord(unitId, {
+    mutationFn: (): Promise<R> => {
+      const payload: CreateWordDto = {
         english: english.trim(),
         translation: translation.trim(),
-      }),
-    onSuccess: () => {
+      };
+      if (submitWord) return submitWord(payload);
+      return createUnitWord(unitId!, payload) as Promise<R>;
+    },
+    onSuccess: (result) => {
       setEnglish("");
       setTranslation("");
       setError(null);
       setSuccess(true);
       englishRef.current?.focus();
-      void queryClient.invalidateQueries({ queryKey: ["unit-words", unitId] });
+      if (unitId !== undefined) {
+        void queryClient.invalidateQueries({ queryKey: ["unit-words", unitId] });
+      }
       void queryClient.invalidateQueries({ queryKey: ["book"] });
       void queryClient.invalidateQueries({ queryKey: ["books"] });
+      onAdded?.(result);
     },
     onError: (err: Error) => setError(err.message),
   });

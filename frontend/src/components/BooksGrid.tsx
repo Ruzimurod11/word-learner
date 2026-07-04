@@ -25,7 +25,7 @@ export function BooksGrid() {
     );
   }
 
-  const books = query.data ?? [];
+  const books = (query.data ?? []).filter((b) => b.kind === "essential");
   if (books.length === 0) {
     return <StateCard>{t("home.empty")}</StateCard>;
   }

@@ -15,6 +15,8 @@ export const books = pgTable(
     order: integer("order").notNull(),
     title: text("title").notNull(),
     description: text("description"),
+    // "essential" — Essential Words kitoblari; "vocabulary" — Vocabularies to'plami
+    kind: text("kind").notNull().default("essential"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),

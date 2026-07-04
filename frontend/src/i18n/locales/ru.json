@@ -34,6 +34,13 @@
     "select_unit_aria": "Выбрать юнит",
     "unit_tab_title": "{{title}} — {{count}} слов"
   },
+  "vocab": {
+    "title": "Vocabularies",
+    "subtitle": "Дополнительные слова помимо Essential Words. По 100 слов в каждой части.",
+    "part": "Часть {{n}}",
+    "part_count": "{{count}} частей",
+    "empty": "Пока нет слов."
+  },
   "word_form": {
     "title": "Добавить новое слово",
     "success": "Слово добавлено",

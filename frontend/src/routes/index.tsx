@@ -1,7 +1,16 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { BookOpen, GraduationCap, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  GraduationCap,
+  Library,
+  Sparkles,
+} from "lucide-react";
+import { getBooks } from "@/api/book-api";
 import { BooksGrid } from "@/components/BooksGrid";
+import { card } from "@/components/ui";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -53,6 +62,41 @@ function HomePage() {
         <h2 className="text-xl font-bold sm:text-2xl">{t("home.title")}</h2>
         <BooksGrid />
       </div>
+      <VocabulariesSection />
+    </div>
+  );
+}
+
+function VocabulariesSection() {
+  const { t } = useTranslation();
+  const query = useQuery({ queryKey: ["books"], queryFn: getBooks });
+  const vocab = (query.data ?? []).find((b) => b.kind === "vocabulary");
+  const wordCount = vocab?.wordCount ?? 0;
+
+  return (
+    <div className="flex flex-col gap-4 border-t border-border pt-6 sm:pt-8">
+      <h2 className="text-xl font-bold sm:text-2xl">{t("vocab.title")}</h2>
+      <Link
+        to="/vocabulary"
+        className={`group flex items-center gap-4 ${card} p-5 transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-indigo-500/10`}
+      >
+        <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-md">
+          <Library className="h-6 w-6" aria-hidden="true" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h3 className="text-base font-semibold">{t("vocab.title")}</h3>
+          <p className="mt-0.5 line-clamp-2 text-sm text-muted-foreground">
+            {t("vocab.subtitle")}
+          </p>
+        </div>
+        <div className="hidden shrink-0 flex-col items-end gap-1 text-xs text-muted-foreground sm:flex">
+          <span>{t("book.word_count", { count: wordCount })}</span>
+          <span className="inline-flex items-center gap-1 font-semibold text-primary transition group-hover:translate-x-0.5">
+            {t("common.open")}
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </span>
+        </div>
+      </Link>
     </div>
   );
 }

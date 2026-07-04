@@ -34,6 +34,13 @@
     "select_unit_aria": "Unit tanlash",
     "unit_tab_title": "{{title}} — {{count}} so'z"
   },
+  "vocab": {
+    "title": "Vocabularies",
+    "subtitle": "Essential Words'dan tashqari qo'shimcha so'zlar. Har bo'limda 100 tadan so'z.",
+    "part": "Bo'lim {{n}}",
+    "part_count": "{{count}} bo'lim",
+    "empty": "Hozircha so'z yo'q."
+  },
   "word_form": {
     "title": "Yangi so'z qo'shish",
     "success": "So'z qo'shildi",

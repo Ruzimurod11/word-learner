@@ -3,6 +3,7 @@ import { db } from "../db/index.ts";
 import { books, units, words } from "../db/schema.ts";
 import type {
   BookDto,
+  BookKind,
   BookWithUnitsDto,
   UnitSummaryDto,
 } from "../types/book.ts";
@@ -14,6 +15,7 @@ export async function listBooks(): Promise<BookDto[]> {
       order: books.order,
       title: books.title,
       description: books.description,
+      kind: books.kind,
       unitCount: sql<number>`cast(count(distinct ${units.id}) as int)`,
       wordCount: sql<number>`cast(count(${words.id}) as int)`,
     })
@@ -28,6 +30,7 @@ export async function listBooks(): Promise<BookDto[]> {
     order: r.order,
     title: r.title,
     description: r.description,
+    kind: r.kind as BookKind,
     unitCount: r.unitCount ?? 0,
     wordCount: r.wordCount ?? 0,
   }));
@@ -66,6 +69,7 @@ export async function getBookWithUnits(
     order: book.order,
     title: book.title,
     description: book.description,
+    kind: book.kind as BookKind,
     unitCount: unitDtos.length,
     wordCount: totalWords,
     units: unitDtos,

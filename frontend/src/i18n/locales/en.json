@@ -34,6 +34,13 @@
     "select_unit_aria": "Select unit",
     "unit_tab_title": "{{title}} — {{count}} words"
   },
+  "vocab": {
+    "title": "Vocabularies",
+    "subtitle": "Extra words beyond Essential Words. 100 words in each part.",
+    "part": "Part {{n}}",
+    "part_count": "{{count}} parts",
+    "empty": "No words yet."
+  },
   "word_form": {
     "title": "Add a new word",
     "success": "Word added",
