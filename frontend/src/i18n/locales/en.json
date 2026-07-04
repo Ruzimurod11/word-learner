@@ -51,6 +51,7 @@
     "header_transcription": "Transcription",
     "header_translation": "Translation",
     "header_actions": "Actions",
+    "reorder": "Drag to reorder",
     "total_in_unit": "Total in this unit:",
     "word_unit": "words",
     "empty": "No words in this unit yet. Add some using the form above.",

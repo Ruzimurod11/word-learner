@@ -1,16 +1,34 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState, type CSSProperties } from "react";
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
   type ColumnDef,
+  type Row,
 } from "@tanstack/react-table";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  arrayMove,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { useTranslation } from "react-i18next";
-import { ChevronLeft, ChevronRight, Pencil, Trash2 } from "lucide-react";
-import { deleteWord, getUnitWords, updateWord } from "@/api/word-api";
+import { ChevronLeft, ChevronRight, GripVertical, Pencil, Trash2 } from "lucide-react";
+import { deleteWord, getUnitWords, reorderUnitWords, updateWord } from "@/api/word-api";
 import { useIsAdmin } from "@/lib/auth";
-import type { Word } from "@/types/word";
+import type { PaginatedWords, Word } from "@/types/word";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { Select } from "@/components/Select";
 import { btn, input } from "@/components/ui";
@@ -55,6 +73,48 @@ function EditableInput({
       }}
       className={`${input} px-2 py-1`}
     />
+  );
+}
+
+function RowDragHandleCell({ rowId, label }: { rowId: string; label: string }) {
+  const { attributes, listeners } = useSortable({ id: rowId });
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      className="cursor-grab touch-none rounded p-1 text-muted-foreground transition hover:bg-muted active:cursor-grabbing"
+      {...attributes}
+      {...listeners}
+    >
+      <GripVertical className="h-4 w-4" aria-hidden="true" />
+    </button>
+  );
+}
+
+function SortableRow({ row }: { row: Row<Word> }) {
+  const { setNodeRef, transform, transition, isDragging } = useSortable({
+    id: String(row.original.id),
+  });
+  const style: CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : undefined,
+  };
+  return (
+    <tr
+      ref={setNodeRef}
+      style={style}
+      className={`transition-colors hover:bg-primary/5 ${
+        isDragging ? "relative z-10 bg-card shadow-lg" : ""
+      }`}
+    >
+      {row.getVisibleCells().map((cell) => (
+        <td key={cell.id} className="px-0.5 py-2 align-middle sm:px-4">
+          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+        </td>
+      ))}
+    </tr>
   );
 }
 
@@ -112,6 +172,36 @@ export function WordsTable({ unitId }: WordsTableProps) {
     },
   });
 
+  const reorderMutation = useMutation({
+    mutationFn: (orderedIds: number[]) => reorderUnitWords(unitId, orderedIds),
+    onMutate: async (orderedIds) => {
+      const key = ["unit-words", unitId, { page, pageSize }] as const;
+      await queryClient.cancelQueries({ queryKey: key });
+      const previous = queryClient.getQueryData<PaginatedWords>(key);
+      if (previous) {
+        const byId = new Map(previous.items.map((w) => [w.id, w]));
+        const slots = previous.items.map((w) => w.order).sort((a, b) => a - b);
+        const items = orderedIds
+          .map((id, i) => {
+            const w = byId.get(id);
+            return w ? { ...w, order: slots[i] } : null;
+          })
+          .filter((w): w is Word => w !== null);
+        queryClient.setQueryData<PaginatedWords>(key, { ...previous, items });
+      }
+      return { previous, key };
+    },
+    onError: (_err, _vars, ctx) => {
+      if (ctx?.previous) queryClient.setQueryData(ctx.key, ctx.previous);
+    },
+    onSettled: () => invalidate(),
+  });
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+  );
+
   const startEdit = useCallback((w: Word) => {
     englishRef.current = w.english;
     translationRef.current = w.translation;
@@ -140,6 +230,19 @@ export function WordsTable({ unitId }: WordsTableProps) {
 
   const columns = useMemo<ColumnDef<Word>[]>(
     () => [
+      ...(isAdmin
+        ? [{
+        id: "drag",
+        header: () => null,
+        cell: ({ row }) => (
+          <RowDragHandleCell
+            rowId={String(row.original.id)}
+            label={t("words_table.reorder")}
+          />
+        ),
+        size: 40,
+      } as ColumnDef<Word>]
+        : []),
       {
         id: "rowNumber",
         header: t("words_table.header_num"),
@@ -269,6 +372,21 @@ export function WordsTable({ unitId }: WordsTableProps) {
   const data = wordsQuery.data?.items ?? [];
   const total = wordsQuery.data?.total ?? 0;
   const totalPages = wordsQuery.data?.totalPages ?? 1;
+  const rowIds = useMemo(() => data.map((w) => String(w.id)), [data]);
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const oldIndex = rowIds.indexOf(String(active.id));
+    const newIndex = rowIds.indexOf(String(over.id));
+    if (oldIndex < 0 || newIndex < 0) return;
+    const orderedIds = arrayMove(
+      data.map((w) => w.id),
+      oldIndex,
+      newIndex,
+    );
+    reorderMutation.mutate(orderedIds);
+  };
 
   const tableCtx: TableCtx = {
     editingId,
@@ -299,6 +417,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getRowId: (row) => String(row.id),
     manualPagination: true,
     pageCount: totalPages,
     meta: tableCtx,
@@ -329,7 +448,12 @@ export function WordsTable({ unitId }: WordsTableProps) {
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-sm">
-        <table className="min-w-full divide-y divide-border text-sm">
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <table className="min-w-full divide-y divide-border text-sm">
           <thead className="bg-muted/60">
             {table.getHeaderGroups().map((hg) => (
               <tr key={hg.id}>
@@ -372,18 +496,18 @@ export function WordsTable({ unitId }: WordsTableProps) {
                 </td>
               </tr>
             ) : (
-              table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="transition-colors hover:bg-primary/5">
-                  {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-0.5 py-2 align-middle sm:px-4">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
-                  ))}
-                </tr>
-              ))
+              <SortableContext
+                items={rowIds}
+                strategy={verticalListSortingStrategy}
+              >
+                {table.getRowModel().rows.map((row) => (
+                  <SortableRow key={row.id} row={row} />
+                ))}
+              </SortableContext>
             )}
           </tbody>
-        </table>
+          </table>
+        </DndContext>
       </div>
 
       <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">

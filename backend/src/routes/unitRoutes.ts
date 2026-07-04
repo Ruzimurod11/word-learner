@@ -6,5 +6,6 @@ const router = Router();
 
 router.get("/:unitId/words", wordController.listUnitWords);
 router.post("/:unitId/words", requireAdmin, wordController.createUnitWord);
+router.put("/:unitId/words/order", requireAdmin, wordController.reorderUnitWords);
 
 export default router;

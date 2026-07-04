@@ -54,6 +54,21 @@ export const updateWord = async (
   }
 };
 
+export const reorderUnitWords = async (
+  unitId: number,
+  orderedIds: number[],
+): Promise<Word[]> => {
+  try {
+    const res = await http.put<ApiResponse<Word[]>>(
+      `/units/${unitId}/words/order`,
+      { orderedIds },
+    );
+    return unwrap(res.data);
+  } catch (err) {
+    return handleError(err);
+  }
+};
+
 export const deleteWord = async (id: number): Promise<void> => {
   try {
     const res = await http.delete<ApiResponse<{ id: number }>>(`/words/${id}`);

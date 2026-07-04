@@ -14,6 +14,10 @@ export const updateWordSchema = createWordSchema.partial().refine(
   { message: "Kamida bitta maydon yuborilishi kerak" },
 );
 
+export const reorderWordsSchema = z.object({
+  orderedIds: z.array(z.coerce.number().int().positive()).min(1),
+});
+
 export const unitWordsQuerySchema = z.object({
   page: z.coerce.number().int().min(1).default(1),
   pageSize: z.coerce.number().int().min(1).max(100).default(20),
@@ -36,6 +40,7 @@ export const quizQuerySchema = z.object({
 
 export type CreateWordDto = z.infer<typeof createWordSchema>;
 export type UpdateWordDto = z.infer<typeof updateWordSchema>;
+export type ReorderWordsDto = z.infer<typeof reorderWordsSchema>;
 export type UnitWordsQuery = z.infer<typeof unitWordsQuerySchema>;
 export type SearchQuery = z.infer<typeof searchQuerySchema>;
 export type QuizQuery = z.infer<typeof quizQuerySchema>;

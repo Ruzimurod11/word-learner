@@ -5,6 +5,7 @@ import { getLang, t } from "../i18n/index.ts";
 import {
   createWordSchema,
   quizQuerySchema,
+  reorderWordsSchema,
   searchQuerySchema,
   unitWordsQuerySchema,
   updateWordSchema,
@@ -105,6 +106,38 @@ export const updateWord = async (req: Request, res: Response): Promise<void> => 
     }
     console.error(err);
     sendError(res, t(getLang(req), "errors.update_word_failed"));
+  }
+};
+
+export const reorderUnitWords = async (req: Request, res: Response): Promise<void> => {
+  const unitIdResult = idSchema.safeParse(req.params.unitId);
+  if (!unitIdResult.success) {
+    sendError(res, t(getLang(req), "errors.invalid_unit_id"), 400);
+    return;
+  }
+  const bodyResult = reorderWordsSchema.safeParse(req.body);
+  if (!bodyResult.success) {
+    sendError(res, formatZodError(bodyResult.error), 400);
+    return;
+  }
+  try {
+    const exists = await wordService.unitExists(unitIdResult.data);
+    if (!exists) {
+      sendError(res, t(getLang(req), "errors.unit_not_found"), 404);
+      return;
+    }
+    const words = await wordService.reorderWords(
+      unitIdResult.data,
+      bodyResult.data.orderedIds,
+    );
+    if (!words) {
+      sendError(res, t(getLang(req), "errors.reorder_mismatch"), 400);
+      return;
+    }
+    sendSuccess(res, words);
+  } catch (err) {
+    console.error(err);
+    sendError(res, t(getLang(req), "errors.reorder_words_failed"));
   }
 };
 

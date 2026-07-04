@@ -51,6 +51,7 @@
     "header_transcription": "Транскрипция",
     "header_translation": "Перевод",
     "header_actions": "Действие",
+    "reorder": "Перетащите для изменения порядка",
     "total_in_unit": "Всего в юните:",
     "word_unit": "слов",
     "empty": "В этом юните пока нет слов. Добавьте через форму выше.",

@@ -1,4 +1,4 @@
-import { and, asc, eq, ilike, or, sql, type SQL } from "drizzle-orm";
+import { and, asc, eq, ilike, inArray, or, sql, type SQL } from "drizzle-orm";
 import { db } from "../db/index.ts";
 import { books, units, words, type Word } from "../db/schema.ts";
 
@@ -299,6 +299,43 @@ export async function updateWord(
     .where(eq(words.id, id))
     .returning();
   return row ? toDto(row) : null;
+}
+
+// Joriy sahifadagi so'zlarni yangi tartibda qayta joylashtiradi.
+// orderedIds — sahifadagi so'z id'lari yangi ko'rinish tartibida.
+// Shu so'zlarning mavjud `order` qiymatlarini "slot" sifatida qayta biriktiramiz,
+// shunda boshqa sahifalardagi so'zlar tegilmaydi. To'plam mos kelmasa null qaytadi.
+export async function reorderWords(
+  unitId: number,
+  orderedIds: number[],
+): Promise<WordDto[] | null> {
+  return db.transaction(async (tx) => {
+    const rows = await tx
+      .select()
+      .from(words)
+      .where(and(eq(words.unitId, unitId), inArray(words.id, orderedIds)));
+
+    const uniqueIds = new Set(orderedIds);
+    if (uniqueIds.size !== orderedIds.length || rows.length !== orderedIds.length) {
+      return null;
+    }
+
+    const slots = rows.map((r) => r.order).sort((a, b) => a - b);
+    const now = new Date();
+    for (let i = 0; i < orderedIds.length; i++) {
+      await tx
+        .update(words)
+        .set({ order: slots[i], updatedAt: now })
+        .where(eq(words.id, orderedIds[i]));
+    }
+
+    const updated = await tx
+      .select()
+      .from(words)
+      .where(eq(words.unitId, unitId))
+      .orderBy(asc(words.order), asc(words.id));
+    return updated.map(toDto);
+  });
 }
 
 export async function deleteWord(id: number): Promise<boolean> {
