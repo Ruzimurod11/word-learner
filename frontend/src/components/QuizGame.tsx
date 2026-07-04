@@ -405,8 +405,8 @@ export function QuizGame({
           {question.question}
         </span>
         {transcriptionFor(question.question) && (
-          <span className="ml-2 align-middle text-[12px] font-normal text-muted-foreground">
-            {transcriptionFor(question.question)}
+          <span className="ml-4 align-middle text-[14px] font-normal text-muted-foreground">
+            [{transcriptionFor(question.question)}]
           </span>
         )}
       </div>
@@ -421,8 +421,8 @@ export function QuizGame({
           >
             {option}
             {transcriptionFor(option) && (
-              <span className="ml-2 text-[12px] font-normal opacity-80">
-                {transcriptionFor(option)}
+              <span className="ml-4 text-[14px] font-normal opacity-80">
+                [{transcriptionFor(option)}]
               </span>
             )}
           </button>
