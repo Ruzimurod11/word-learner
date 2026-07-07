@@ -434,7 +434,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Select
             value={pageSize}
-            options={[5, 10, 20].map((s) => ({
+            options={[5, 10, 20, 50, 100].map((s) => ({
               value: s,
               label: `${s} ${t("common.per_page")}`,
             }))}
