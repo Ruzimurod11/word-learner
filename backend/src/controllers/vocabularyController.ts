@@ -30,7 +30,10 @@ export const addVocabularyWord = async (
     sendSuccess(res, result, 201);
   } catch (err: unknown) {
     if (isUniqueViolation(err)) {
-      const loc = await wordService.findWordLocation(bodyResult.data.english);
+      const loc = await wordService.findWordLocation(
+        bodyResult.data.english,
+        bodyResult.data.translation,
+      );
       const msg = loc
         ? t(getLang(req), "errors.duplicate_word_at", {
             book: loc.bookOrder,

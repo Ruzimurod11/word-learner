@@ -7,14 +7,25 @@ export interface WordLocation {
   unitOrder: number;
 }
 
-export async function findWordLocation(english: string): Promise<WordLocation | null> {
+// Dublikat (english, translation) juftligi qaysi kitob/unitda ekanini topadi.
+export async function findWordLocation(
+  english: string,
+  translation: string,
+): Promise<WordLocation | null> {
   const [row] = await db
     .select({ bookOrder: books.order, unitOrder: units.order })
     .from(words)
     .innerJoin(units, eq(units.id, words.unitId))
     .innerJoin(books, eq(books.id, units.bookId))
-    .where(sql`lower(${words.english}) = lower(${english})`)
+    .where(
+      sql`lower(${words.english}) = lower(${english}) and lower(${words.translation}) = lower(${translation})`,
+    )
     .limit(1);
+  return row ?? null;
+}
+
+export async function getWordById(id: number): Promise<Word | null> {
+  const [row] = await db.select().from(words).where(eq(words.id, id)).limit(1);
   return row ?? null;
 }
 import type {

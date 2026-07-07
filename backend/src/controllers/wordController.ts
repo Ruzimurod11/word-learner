@@ -56,7 +56,10 @@ export const createUnitWord = async (req: Request, res: Response): Promise<void>
     sendSuccess(res, word, 201);
   } catch (err: unknown) {
     if (isUniqueViolation(err)) {
-      const loc = await wordService.findWordLocation(bodyResult.data.english);
+      const loc = await wordService.findWordLocation(
+        bodyResult.data.english,
+        bodyResult.data.translation,
+      );
       const msg = loc
         ? t(getLang(req), "errors.duplicate_word_at", {
             book: loc.bookOrder,
@@ -91,10 +94,15 @@ export const updateWord = async (req: Request, res: Response): Promise<void> => 
     sendSuccess(res, word);
   } catch (err: unknown) {
     if (isUniqueViolation(err)) {
-      const newEnglish = bodyResult.data.english;
-      const loc = newEnglish
-        ? await wordService.findWordLocation(newEnglish)
-        : null;
+      // Update qisman bo'lishi mumkin: yuborilmagan tomonni mavjud yozuvdan olamiz,
+      // shunda dublikat juftlik (english, translation) to'g'ri aniqlanadi.
+      const existing = await wordService.getWordById(idResult.data);
+      const english = bodyResult.data.english ?? existing?.english;
+      const translation = bodyResult.data.translation ?? existing?.translation;
+      const loc =
+        english && translation
+          ? await wordService.findWordLocation(english, translation)
+          : null;
       const msg = loc
         ? t(getLang(req), "errors.duplicate_word_at", {
             book: loc.bookOrder,

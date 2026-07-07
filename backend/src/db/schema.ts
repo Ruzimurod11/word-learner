@@ -67,7 +67,13 @@ export const words = pgTable(
       .defaultNow(),
   },
   (table) => [
-    uniqueIndex("words_english_lower_unique_idx").on(sql`lower(${table.english})`),
+    // (english, translation) juftligi case-insensitive unique: bir xil juftlik
+    // ikki marta qo'shilmaydi, lekin biror tomon farq qilsa (masalan "apple/olma"
+    // va "apple/olmalar") boshqa yozuv hisoblanadi va qo'shiladi.
+    uniqueIndex("words_english_translation_lower_unique_idx").on(
+      sql`lower(${table.english})`,
+      sql`lower(${table.translation})`,
+    ),
   ],
 );
 
