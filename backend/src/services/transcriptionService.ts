@@ -1,6 +1,7 @@
 import { eq, isNull } from "drizzle-orm";
 import { db } from "../db/index.ts";
 import { words } from "../db/schema.ts";
+import { normalizeBritishIpa } from "../utils/ipa.ts";
 
 export interface BackfillResult {
   updated: number;
@@ -24,9 +25,9 @@ interface DictEntry {
 
 // IPA matnini bizning uslubga keltiradi: slash/qavslar, bo'g'in nuqtalari va
 // ixtiyoriy (ɹ) guruhlarini olib tashlaydi, bog'lovchi tie'larni yo'qotadi,
-// ɹ -> r.
+// ɹ -> r, so'ng britaniyacha urg'u konvensiyasiga keltiradi.
 function cleanIpa(raw: string): string {
-  return raw
+  const cleaned = raw
     .replace(/[/[\]]/g, "") // /.../ va [...]
     .replace(/\([^)]*\)/g, "") // ixtiyoriy (ɹ) kabi guruhlar
     .replace(/[͜͡‿]/g, "") // tie belgilari: t͡ʃ -> tʃ
@@ -35,6 +36,7 @@ function cleanIpa(raw: string): string {
     .replace(/ɛ/g, "e") // house-style DRESS unlisi: ɛ -> e
     .replace(/[.\s]/g, "") // bo'g'in nuqtalari va bo'shliqlar
     .trim();
+  return normalizeBritishIpa(cleaned);
 }
 
 function isUsable(ipa: string): boolean {
