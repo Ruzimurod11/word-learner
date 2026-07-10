@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { ArrowLeftRight, PartyPopper, RotateCcw, Trophy } from "lucide-react";
 import { getBooks } from "@/api/book-api";
 import { getQuiz } from "@/api/word-api";
-import type { QuizDirection, QuizQuestion } from "@/types/word";
+import type { QuizDirection, QuizLevel, QuizQuestion } from "@/types/word";
 import {
   CHEER_TIER_VARIANTS,
   MIN_COUNT,
   STREAK_CHEER_VARIANTS,
   getQuizCheer,
   getQuizFeedbackTier,
+  isAnswerCorrect,
   isValidQuizCount,
   scoreQuiz,
 } from "@/lib/quiz";
@@ -99,6 +100,7 @@ interface QuizGameProps {
   fromUnitId?: number;
   toUnitId?: number;
   selectableCount?: boolean;
+  level?: QuizLevel;
   onExit: () => void;
 }
 
@@ -112,14 +114,18 @@ export function QuizGame({
   fromUnitId,
   toUnitId,
   selectableCount,
+  level = "easy",
   onExit,
 }: QuizGameProps) {
   const { t } = useTranslation();
+  const hard = level === "hard";
   const [round, setRound] = useState(0);
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
+  const [typed, setTyped] = useState("");
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [cheerSeed, setCheerSeed] = useState(0);
+  // hard darajada savol doim o'zbekcha, javob inglizcha — yo'nalish almashmaydi
   const [direction, setDirection] = useState<QuizDirection>("uz-en");
   const [countInput, setCountInput] = useState(String(MIN_COUNT));
   const [count, setCount] = useState<number | null>(
@@ -141,6 +147,7 @@ export function QuizGame({
       fromUnitId ?? 0,
       toUnitId ?? 0,
       direction,
+      level,
       count,
       round,
     ],
@@ -151,6 +158,7 @@ export function QuizGame({
         toUnitId,
         count: count ?? MIN_COUNT,
         direction,
+        level,
       }),
     enabled: count !== null,
     staleTime: Infinity,
@@ -162,6 +170,7 @@ export function QuizGame({
     if (selected === null) return;
     const timer = setTimeout(() => {
       setSelected(null);
+      setTyped("");
       setIndex((i) => i + 1);
     }, 1000);
     return () => clearTimeout(timer);
@@ -242,6 +251,7 @@ export function QuizGame({
   const restart = () => {
     setIndex(0);
     setSelected(null);
+    setTyped("");
     setAnswers([]);
     setRound((r) => r + 1);
   };
@@ -332,6 +342,8 @@ export function QuizGame({
 
   const question = questions[index];
   const answered = selected !== null;
+  const answerCorrect =
+    selected !== null && isAnswerCorrect(selected, question.correct);
   const cheer = answered ? getQuizCheer(answers) : null;
 
   const onSelect = (option: string) => {
@@ -341,8 +353,15 @@ export function QuizGame({
     setAnswers((prev) => [...prev, { question, selected: option }]);
   };
 
+  const onSubmitTyped = (e: FormEvent) => {
+    e.preventDefault();
+    if (answered || typed.trim() === "") return;
+    onSelect(typed);
+  };
+
   const onNext = () => {
     setSelected(null);
+    setTyped("");
     setIndex((i) => i + 1);
   };
 
@@ -370,6 +389,14 @@ export function QuizGame({
     return base + "border-border bg-card text-muted-foreground opacity-60";
   };
 
+  // javob rangi ring orqali beriladi: `input` allaqachon border-* va text-*
+  // klasslarini o'rnatgan, ularni ustidan yozib bo'lmaydi
+  const answerFieldClass = (): string => {
+    const base = `${input} text-center text-xl font-semibold`;
+    if (!answered) return base;
+    return `${base} ${answerCorrect ? "ring-2 ring-green-500" : "ring-2 ring-red-500"}`;
+  };
+
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
       {cheer && (
@@ -388,14 +415,16 @@ export function QuizGame({
             style={{ width: `${(index / questions.length) * 100}%` }}
           />
         </div>
-        <button
-          type="button"
-          onClick={toggleDirection}
-          className={`${btn.ghost} uppercase`}
-        >
-          <ArrowLeftRight className="h-4 w-4" aria-hidden="true" />
-          {direction === "uz-en" ? "UZ - EN" : "EN - UZ"}
-        </button>
+        {!hard && (
+          <button
+            type="button"
+            onClick={toggleDirection}
+            className={`${btn.ghost} uppercase`}
+          >
+            <ArrowLeftRight className="h-4 w-4" aria-hidden="true" />
+            {direction === "uz-en" ? "UZ - EN" : "EN - UZ"}
+          </button>
+        )}
       </div>
       <div
         key={question.id}
@@ -410,24 +439,67 @@ export function QuizGame({
           </span>
         )}
       </div>
-      <div className="flex flex-col gap-2">
-        {question.options.map((option) => (
-          <button
-            key={option}
-            type="button"
+      {hard ? (
+        <form onSubmit={onSubmitTyped} className="flex flex-col gap-3">
+          <input
+            key={question.id}
+            autoFocus
+            autoComplete="off"
+            autoCapitalize="off"
+            autoCorrect="off"
+            spellCheck={false}
             disabled={answered}
-            onClick={() => onSelect(option)}
-            className={optionClass(option)}
-          >
-            {option}
-            {transcriptionFor(option) && (
-              <span className="ml-4 text-[14px] font-normal opacity-80">
-                [{transcriptionFor(option)}]
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
+            value={typed}
+            onChange={(e) => setTyped(e.target.value)}
+            placeholder={t("test.answer_placeholder")}
+            className={answerFieldClass()}
+          />
+          {answered && (
+            <div
+              className={`rounded-xl px-4 py-3 text-center text-lg font-semibold ${
+                answerCorrect
+                  ? "bg-green-500/10 text-green-600 dark:text-green-400"
+                  : "bg-red-500/10 text-red-600 dark:text-red-400"
+              }`}
+            >
+              {t("test.correct_answer")}: {question.correct}
+              {transcriptionFor(question.correct) && (
+                <span className="ml-3 text-sm font-normal opacity-80">
+                  [{transcriptionFor(question.correct)}]
+                </span>
+              )}
+            </div>
+          )}
+          {!answered && (
+            <button
+              type="submit"
+              disabled={typed.trim() === ""}
+              className={btn.primary}
+            >
+              {t("test.check")}
+            </button>
+          )}
+        </form>
+      ) : (
+        <div className="flex flex-col gap-2">
+          {question.options.map((option) => (
+            <button
+              key={option}
+              type="button"
+              disabled={answered}
+              onClick={() => onSelect(option)}
+              className={optionClass(option)}
+            >
+              {option}
+              {transcriptionFor(option) && (
+                <span className="ml-4 text-[14px] font-normal opacity-80">
+                  [{transcriptionFor(option)}]
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
       {answered && (
         <button
           type="button"

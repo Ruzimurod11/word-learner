@@ -59,4 +59,14 @@ export default defineConfig([
       "@typescript-eslint/consistent-type-definitions": "off",
     },
   },
+  {
+    // Route fayllari `Route` (non-component) eksport qiladi, komponentlar esa
+    // shu faylda turadi. Qoida buni Fast Refresh buziladi deb hisoblaydi, lekin
+    // autoCodeSplitting komponentni ?tsr-split=component moduliga ajratadi va
+    // HMR ishlayveradi (page reload emas, hmr update).
+    files: ["src/routes/**/*.tsx"],
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
+  },
 ]);

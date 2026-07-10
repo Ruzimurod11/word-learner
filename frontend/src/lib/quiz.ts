@@ -1,5 +1,14 @@
 export const MIN_COUNT = 20;
 
+// hard darajada javob qo'lda yoziladi: registr va ortiqcha bo'shliqlar hisobga
+// olinmaydi. easy darajada variantlar bazadagi matnning o'zi, shuning uchun
+// normalizatsiya natijani o'zgartirmaydi
+export function isAnswerCorrect(selected: string, correct: string): boolean {
+  const normalize = (value: string) =>
+    value.trim().toLowerCase().replace(/\s+/g, " ");
+  return normalize(selected) === normalize(correct);
+}
+
 export function isValidQuizCount(raw: string, max: number | undefined): boolean {
   const parsed = Number(raw);
   return (
@@ -56,7 +65,7 @@ export function getTrailingStreak<
 >(answers: A[]): number {
   let streak = 0;
   for (let i = answers.length - 1; i >= 0; i--) {
-    if (answers[i].selected !== answers[i].question.correct) break;
+    if (!isAnswerCorrect(answers[i].selected, answers[i].question.correct)) break;
     streak++;
   }
   return streak;
@@ -80,7 +89,9 @@ export function getQuizCheer<
 export function scoreQuiz<A extends { selected: string; question: { correct: string } }>(
   answers: A[],
 ): { wrong: A[]; correctCount: number; percent: number } {
-  const wrong = answers.filter((a) => a.selected !== a.question.correct);
+  const wrong = answers.filter(
+    (a) => !isAnswerCorrect(a.selected, a.question.correct),
+  );
   const correctCount = answers.length - wrong.length;
   const percent =
     answers.length > 0 ? Math.round((correctCount / answers.length) * 100) : 0;

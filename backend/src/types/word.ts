@@ -36,6 +36,8 @@ export const quizQuerySchema = z.object({
   // yuqori chegara yo'q: LIMIT bazadagi mavjud so'zlar sonidan oshirmaydi
   count: z.coerce.number().int().min(1).default(20),
   direction: z.enum(["uz-en", "en-uz"]).default("uz-en"),
+  // easy: 4 ta variantdan tanlanadi; hard: javob qo'lda yoziladi
+  level: z.enum(["easy", "hard"]).default("easy"),
 });
 
 export type CreateWordDto = z.infer<typeof createWordSchema>;
@@ -83,6 +85,7 @@ export interface PaginatedSearchWords {
 export interface QuizQuestionDto {
   id: number;
   question: string;
+  // hard darajada bo'sh: javob variantlardan tanlanmaydi, yoziladi
   options: string[];
   correct: string;
 }

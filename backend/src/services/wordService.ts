@@ -180,9 +180,10 @@ export async function getQuiz(
   query: QuizQuery,
   range: { from?: UnitPosition; to?: UnitPosition } = {},
 ): Promise<QuizDto | null> {
-  const { unitId, count, direction } = query;
-  // uz-en: savol tarjimada, javob variantlari inglizchada; en-uz: aksincha
-  const uzToEn = direction === "uz-en";
+  const { unitId, count, direction, level } = query;
+  // uz-en: savol tarjimada, javob variantlari inglizchada; en-uz: aksincha.
+  // hard darajada savol doim o'zbekcha, javob inglizcha yoziladi
+  const uzToEn = level === "hard" || direction === "uz-en";
 
   const conditions: SQL[] = [];
   if (unitId !== undefined) conditions.push(eq(words.unitId, unitId));
@@ -212,12 +213,39 @@ export async function getQuiz(
     .limit(count);
   if (questionRows.length === 0) return null;
 
+  // inglizcha so'z -> IPA; savoldagi (en-uz) va variantlardagi (uz-en) inglizcha
+  // matnlar uchun. Uzbek matn map'ga tushmaydi, shuning uchun frontend
+  // yo'nalishdan qat'i nazar mos kalitni topib ko'rsatadi.
+  const transcriptions: Record<string, string> = {};
+  for (const row of questionRows) {
+    if (row.transcription) {
+      transcriptions[row.english.toLowerCase()] = row.transcription;
+    }
+  }
+
+  // hard darajada variant yo'q, shuning uchun distraktorlar pooli ham kerak emas
+  if (level === "hard") {
+    return {
+      questions: questionRows.map((row) => ({
+        id: row.id,
+        question: row.translation,
+        options: [],
+        correct: row.english,
+      })),
+      transcriptions,
+    };
+  }
+
+  // distraktorlar faqat test qamrovidagi (unit yoki oraliq) so'zlardan olinadi
   const distinctAnswers = db
     .selectDistinct({
       answer: uzToEn ? words.english : words.translation,
       transcription: words.transcription,
     })
     .from(words)
+    .innerJoin(units, eq(units.id, words.unitId))
+    .innerJoin(books, eq(books.id, units.bookId))
+    .where(conditions.length > 0 ? and(...conditions) : undefined)
     .as("dt");
   const poolRows = await db
     .select({
@@ -240,15 +268,6 @@ export async function getQuiz(
     });
   if (pool.length < 4) return null;
 
-  // inglizcha so'z -> IPA; savoldagi (en-uz) va variantlardagi (uz-en) inglizcha
-  // matnlar uchun. Uzbek matn map'ga tushmaydi, shuning uchun frontend
-  // yo'nalishdan qat'i nazar mos kalitni topib ko'rsatadi.
-  const transcriptions: Record<string, string> = {};
-  for (const row of questionRows) {
-    if (row.transcription) {
-      transcriptions[row.english.toLowerCase()] = row.transcription;
-    }
-  }
   if (uzToEn) {
     for (const r of poolRows) {
       if (r.transcription) {

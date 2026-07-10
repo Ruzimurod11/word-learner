@@ -83,7 +83,11 @@ describe("searchQuerySchema", () => {
 
 describe("quizQuerySchema", () => {
   it("applies defaults", () => {
-    expect(quizQuerySchema.parse({})).toEqual({ count: 20, direction: "uz-en" });
+    expect(quizQuerySchema.parse({})).toEqual({
+      count: 20,
+      direction: "uz-en",
+      level: "easy",
+    });
   });
 
   it("coerces unit ids", () => {
@@ -94,5 +98,10 @@ describe("quizQuerySchema", () => {
   it("rejects an unknown direction and non-positive count", () => {
     expect(quizQuerySchema.safeParse({ direction: "xx" }).success).toBe(false);
     expect(quizQuerySchema.safeParse({ count: "0" }).success).toBe(false);
+  });
+
+  it("accepts a known level and rejects an unknown one", () => {
+    expect(quizQuerySchema.parse({ level: "hard" })).toMatchObject({ level: "hard" });
+    expect(quizQuerySchema.safeParse({ level: "medium" }).success).toBe(false);
   });
 });

@@ -5,7 +5,9 @@ import { z } from "zod";
 import {
   ArrowLeft,
   BookOpen,
+  Keyboard,
   Layers,
+  ListChecks,
   Settings2,
   SlidersHorizontal,
   Sparkles,
@@ -16,10 +18,12 @@ import { Loader } from "@/components/Loader";
 import { QuizGame } from "@/components/QuizGame";
 import { UnitTabs } from "@/components/UnitTabs";
 import { StateCard, bookGradient, card } from "@/components/ui";
+import type { QuizLevel } from "@/types/word";
 
 const testSearchSchema = z.object({
   mode: z.enum(["topic", "general"]).optional(),
   scope: z.enum(["all", "half", "full"]).optional(),
+  level: z.enum(["easy", "hard"]).optional(),
   book: z.coerce.number().int().positive().optional(),
   unit: z.coerce.number().int().positive().optional(),
   fromBook: z.coerce.number().int().positive().optional(),
@@ -52,12 +56,44 @@ function ChoiceCard({
       onClick={onClick}
       className={`group flex flex-col gap-3 ${card} p-6 text-left transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-indigo-500/10`}
     >
-      <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-md shadow-indigo-500/30">
+      <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-linear-to-br from-indigo-500 to-violet-600 text-white shadow-md shadow-indigo-500/30">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
       <span className="text-lg font-semibold">{title}</span>
       <span className="text-sm text-muted-foreground">{description}</span>
     </button>
+  );
+}
+
+function LevelPicker({
+  onSelect,
+  onBack,
+}: {
+  onSelect: (level: QuizLevel) => void;
+  onBack: () => void;
+}) {
+  const { t } = useTranslation();
+  return (
+    <div className="flex flex-col gap-5">
+      <BackButton onClick={onBack} />
+      <h1 className="text-2xl font-bold sm:text-3xl">
+        {t("test.choose_level")}
+      </h1>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <ChoiceCard
+          title={t("test.easy")}
+          description={t("test.easy_desc")}
+          icon={ListChecks}
+          onClick={() => onSelect("easy")}
+        />
+        <ChoiceCard
+          title={t("test.hard")}
+          description={t("test.hard_desc")}
+          icon={Keyboard}
+          onClick={() => onSelect("hard")}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -74,27 +110,41 @@ function TestPage() {
     return <GeneralFlow search={search} goTo={goTo} />;
   }
 
-  if (search.mode === "topic" && search.unit !== undefined) {
-    return (
-      <div className="flex flex-col gap-5">
-        <h1 className="text-2xl font-bold sm:text-3xl">{t("test.topic")}</h1>
-        <QuizGame
-          key={search.unit}
-          unitId={search.unit}
-          onExit={() => goTo({ mode: "topic", book: search.book })}
-        />
-      </div>
-    );
-  }
+  const level = search.level;
+  if (search.mode === "topic" && level !== undefined) {
+    if (search.unit !== undefined) {
+      return (
+        <div className="flex flex-col gap-5">
+          <h1 className="text-2xl font-bold sm:text-3xl">
+            {t(`test.${level}`)}
+          </h1>
+          <QuizGame
+            key={`${level}-${search.unit}`}
+            unitId={search.unit}
+            level={level}
+            onExit={() => goTo({ mode: "topic", level, book: search.book })}
+          />
+        </div>
+      );
+    }
 
-  if (search.mode === "topic" && search.book !== undefined) {
+    if (search.book !== undefined) {
+      return (
+        <UnitPicker
+          bookId={search.book}
+          title={t("test.choose_unit")}
+          onSelect={(unitId) =>
+            goTo({ mode: "topic", level, book: search.book, unit: unitId })
+          }
+          onBack={() => goTo({ mode: "topic", level })}
+        />
+      );
+    }
+
     return (
-      <UnitPicker
-        bookId={search.book}
-        title={t("test.choose_unit")}
-        onSelect={(unitId) =>
-          goTo({ mode: "topic", book: search.book, unit: unitId })
-        }
+      <BookPicker
+        title={t("test.choose_book")}
+        onSelect={(bookId) => goTo({ mode: "topic", level, book: bookId })}
         onBack={() => goTo({ mode: "topic" })}
       />
     );
@@ -102,9 +152,8 @@ function TestPage() {
 
   if (search.mode === "topic") {
     return (
-      <BookPicker
-        title={t("test.choose_book")}
-        onSelect={(bookId) => goTo({ mode: "topic", book: bookId })}
+      <LevelPicker
+        onSelect={(l) => goTo({ mode: "topic", level: l })}
         onBack={() => goTo({})}
       />
     );
@@ -139,15 +188,31 @@ function GeneralFlow({
   goTo: (next: TestSearch) => void;
 }) {
   const { t } = useTranslation();
+  const level = search.level;
+
+  if (level === undefined) {
+    return (
+      <LevelPicker
+        onSelect={(l) => goTo({ mode: "general", level: l })}
+        onBack={() => goTo({})}
+      />
+    );
+  }
+
+  // daraja tanlangach oqim ichidagi har bir o'tish uni saqlab qoladi
+  const go = (next: TestSearch) => goTo({ ...next, level });
 
   if (search.scope === "all") {
     return (
       <div className="flex flex-col gap-5">
-        <h1 className="text-2xl font-bold sm:text-3xl">{t("test.all_words")}</h1>
+        <h1 className="text-2xl font-bold sm:text-3xl">
+          {t("test.all_words")}
+        </h1>
         <QuizGame
-          key="all"
+          key={`all-${level}`}
           selectableCount
-          onExit={() => goTo({ mode: "general" })}
+          level={level}
+          onExit={() => go({ mode: "general" })}
         />
       </div>
     );
@@ -161,11 +226,12 @@ function GeneralFlow({
             {t("test.half_manual")}
           </h1>
           <QuizGame
-            key={`half-${search.toUnit}`}
+            key={`half-${level}-${search.toUnit}`}
             toUnitId={search.toUnit}
             selectableCount
+            level={level}
             onExit={() =>
-              goTo({ mode: "general", scope: "half", toBook: search.toBook })
+              go({ mode: "general", scope: "half", toBook: search.toBook })
             }
           />
         </div>
@@ -177,14 +243,14 @@ function GeneralFlow({
           bookId={search.toBook}
           title={t("test.choose_end_unit")}
           onSelect={(unitId) =>
-            goTo({
+            go({
               mode: "general",
               scope: "half",
               toBook: search.toBook,
               toUnit: unitId,
             })
           }
-          onBack={() => goTo({ mode: "general", scope: "half" })}
+          onBack={() => go({ mode: "general", scope: "half" })}
         />
       );
     }
@@ -192,9 +258,9 @@ function GeneralFlow({
       <BookPicker
         title={t("test.choose_end_book")}
         onSelect={(bookId) =>
-          goTo({ mode: "general", scope: "half", toBook: bookId })
+          go({ mode: "general", scope: "half", toBook: bookId })
         }
-        onBack={() => goTo({ mode: "general" })}
+        onBack={() => go({ mode: "general" })}
       />
     );
   }
@@ -207,12 +273,13 @@ function GeneralFlow({
             {t("test.full_manual")}
           </h1>
           <QuizGame
-            key={`full-${search.fromUnit}-${search.toUnit}`}
+            key={`full-${level}-${search.fromUnit}-${search.toUnit}`}
             fromUnitId={search.fromUnit}
             toUnitId={search.toUnit}
             selectableCount
+            level={level}
             onExit={() =>
-              goTo({
+              go({
                 mode: "general",
                 scope: "full",
                 fromBook: search.fromBook,
@@ -230,7 +297,7 @@ function GeneralFlow({
           bookId={search.toBook}
           title={t("test.choose_end_unit")}
           onSelect={(unitId) =>
-            goTo({
+            go({
               mode: "general",
               scope: "full",
               fromBook: search.fromBook,
@@ -240,7 +307,7 @@ function GeneralFlow({
             })
           }
           onBack={() =>
-            goTo({
+            go({
               mode: "general",
               scope: "full",
               fromBook: search.fromBook,
@@ -255,7 +322,7 @@ function GeneralFlow({
         <BookPicker
           title={t("test.choose_end_book")}
           onSelect={(bookId) =>
-            goTo({
+            go({
               mode: "general",
               scope: "full",
               fromBook: search.fromBook,
@@ -264,7 +331,7 @@ function GeneralFlow({
             })
           }
           onBack={() =>
-            goTo({ mode: "general", scope: "full", fromBook: search.fromBook })
+            go({ mode: "general", scope: "full", fromBook: search.fromBook })
           }
         />
       );
@@ -275,14 +342,14 @@ function GeneralFlow({
           bookId={search.fromBook}
           title={t("test.choose_start_unit")}
           onSelect={(unitId) =>
-            goTo({
+            go({
               mode: "general",
               scope: "full",
               fromBook: search.fromBook,
               fromUnit: unitId,
             })
           }
-          onBack={() => goTo({ mode: "general", scope: "full" })}
+          onBack={() => go({ mode: "general", scope: "full" })}
         />
       );
     }
@@ -290,35 +357,35 @@ function GeneralFlow({
       <BookPicker
         title={t("test.choose_start_book")}
         onSelect={(bookId) =>
-          goTo({ mode: "general", scope: "full", fromBook: bookId })
+          go({ mode: "general", scope: "full", fromBook: bookId })
         }
-        onBack={() => goTo({ mode: "general" })}
+        onBack={() => go({ mode: "general" })}
       />
     );
   }
 
   return (
     <div className="flex flex-col gap-5">
-      <BackButton onClick={() => goTo({})} />
+      <BackButton onClick={() => goTo({ mode: "general" })} />
       <h1 className="text-2xl font-bold sm:text-3xl">{t("test.general")}</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <ChoiceCard
           title={t("test.all_words")}
           description={t("test.all_words_desc")}
           icon={Sparkles}
-          onClick={() => goTo({ mode: "general", scope: "all" })}
+          onClick={() => go({ mode: "general", scope: "all" })}
         />
         <ChoiceCard
           title={t("test.half_manual")}
           description={t("test.half_manual_desc")}
           icon={SlidersHorizontal}
-          onClick={() => goTo({ mode: "general", scope: "half" })}
+          onClick={() => go({ mode: "general", scope: "half" })}
         />
         <ChoiceCard
           title={t("test.full_manual")}
           description={t("test.full_manual_desc")}
           icon={Settings2}
-          onClick={() => goTo({ mode: "general", scope: "full" })}
+          onClick={() => go({ mode: "general", scope: "full" })}
         />
       </div>
     </div>
@@ -366,23 +433,23 @@ function BookPicker({
           {query.data
             .filter((book) => book.kind === "essential")
             .map((book) => (
-            <button
-              key={book.id}
-              type="button"
-              onClick={() => onSelect(book.id)}
-              className={`flex flex-col gap-2 ${card} p-5 text-left transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-indigo-500/10`}
-            >
-              <span
-                className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${bookGradient(book.order)} font-display text-base font-bold text-white shadow-md`}
+              <button
+                key={book.id}
+                type="button"
+                onClick={() => onSelect(book.id)}
+                className={`flex flex-col gap-2 ${card} p-5 text-left transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-indigo-500/10`}
               >
-                {book.order}
-              </span>
-              <span className="text-base font-semibold">{book.title}</span>
-              <span className="text-xs text-muted-foreground">
-                {t("book.word_count", { count: book.wordCount })}
-              </span>
-            </button>
-          ))}
+                <span
+                  className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${bookGradient(book.order)} font-display text-base font-bold text-white shadow-md`}
+                >
+                  {book.order}
+                </span>
+                <span className="text-base font-semibold">{book.title}</span>
+                <span className="text-xs text-muted-foreground">
+                  {t("book.word_count", { count: book.wordCount })}
+                </span>
+              </button>
+            ))}
         </div>
       )}
     </div>

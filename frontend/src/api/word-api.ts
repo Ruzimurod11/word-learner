@@ -5,6 +5,7 @@ import type {
   PaginatedSearchWords,
   PaginatedWords,
   QuizDirection,
+  QuizLevel,
   QuizResponse,
   SearchQuery,
   UnitWordsQuery,
@@ -85,6 +86,7 @@ export const getQuiz = async (
     toUnitId?: number;
     count?: number;
     direction?: QuizDirection;
+    level?: QuizLevel;
   } = {},
 ): Promise<QuizResponse> => {
   try {

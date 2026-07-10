@@ -6,6 +6,7 @@ import {
   getQuizCheerTier,
   getQuizFeedbackTier,
   getTrailingStreak,
+  isAnswerCorrect,
   isValidQuizCount,
   scoreQuiz,
 } from "@/lib/quiz";
@@ -15,7 +16,28 @@ const answer = (correct: string, selected: string) => ({
   selected,
 });
 
+describe("isAnswerCorrect", () => {
+  it("ignores case and surrounding whitespace", () => {
+    expect(isAnswerCorrect("  Car ", "car")).toBe(true);
+    expect(isAnswerCorrect("CAR", "car")).toBe(true);
+  });
+
+  it("collapses repeated inner whitespace", () => {
+    expect(isAnswerCorrect("ice   cream", "ice cream")).toBe(true);
+  });
+
+  it("rejects a different word", () => {
+    expect(isAnswerCorrect("automobile", "car")).toBe(false);
+    expect(isAnswerCorrect("", "car")).toBe(false);
+  });
+});
+
 describe("scoreQuiz", () => {
+  it("accepts a typed answer that differs only by case or spacing", () => {
+    const result = scoreQuiz([answer("car", " CAR "), answer("ice cream", "ice  cream")]);
+    expect(result).toEqual({ wrong: [], correctCount: 2, percent: 100 });
+  });
+
   it("returns 100% when all answers are correct", () => {
     const result = scoreQuiz([answer("cat", "cat"), answer("dog", "dog")]);
     expect(result).toEqual({ wrong: [], correctCount: 2, percent: 100 });

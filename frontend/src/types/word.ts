@@ -58,9 +58,12 @@ export interface PaginatedSearchWords {
 
 export type QuizDirection = "uz-en" | "en-uz";
 
+export type QuizLevel = "easy" | "hard";
+
 export interface QuizQuestion {
   id: number;
   question: string;
+  // hard darajada bo'sh: javob variantlardan tanlanmaydi, yoziladi
   options: string[];
   correct: string;
 }
