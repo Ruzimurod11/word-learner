@@ -244,9 +244,13 @@ export function QuizGame({
 
   const questions = quizQuery.data.questions;
   const transcriptions = quizQuery.data.transcriptions ?? {};
+  const partsOfSpeech = quizQuery.data.partsOfSpeech ?? {};
   // inglizcha matn (savol yoki variant) bo'lsa yonida ko'rsatiladigan IPA
   const transcriptionFor = (text: string): string | undefined =>
     transcriptions[text.trim().toLowerCase()];
+  // xuddi transkripsiya kabi: faqat inglizcha matn uchun topiladi
+  const partOfSpeechFor = (text: string): string | undefined =>
+    partsOfSpeech[text.trim().toLowerCase()];
 
   const restart = () => {
     setIndex(0);
@@ -311,12 +315,27 @@ export function QuizGame({
                 >
                   <span className="text-xl font-semibold">
                     {a.question.question}
+                    {partOfSpeechFor(a.question.question) && (
+                      <span className="ml-2 text-sm font-normal italic text-muted-foreground">
+                        {partOfSpeechFor(a.question.question)}.
+                      </span>
+                    )}
                   </span>
                   <span className="text-lg text-red-600 dark:text-red-400">
                     {t("test.your_answer")}: {a.selected}
+                    {partOfSpeechFor(a.selected) && (
+                      <span className="ml-2 text-sm font-normal italic opacity-80">
+                        {partOfSpeechFor(a.selected)}.
+                      </span>
+                    )}
                   </span>
                   <span className="text-lg text-green-600 dark:text-green-400">
                     {t("test.correct_answer")}: {a.question.correct}
+                    {partOfSpeechFor(a.question.correct) && (
+                      <span className="ml-2 text-sm font-normal italic opacity-80">
+                        {partOfSpeechFor(a.question.correct)}.
+                      </span>
+                    )}
                   </span>
                 </li>
               ))}
@@ -433,8 +452,13 @@ export function QuizGame({
         <span className="font-display text-[34px] font-bold">
           {question.question}
         </span>
+        {partOfSpeechFor(question.question) && (
+          <span className="ml-3 align-middle text-[14px] font-normal italic text-muted-foreground">
+            {partOfSpeechFor(question.question)}.
+          </span>
+        )}
         {transcriptionFor(question.question) && (
-          <span className="ml-4 align-middle text-[14px] font-normal text-muted-foreground">
+          <span className="ml-3 align-middle text-[14px] font-normal text-muted-foreground">
             [{transcriptionFor(question.question)}]
           </span>
         )}
@@ -463,8 +487,13 @@ export function QuizGame({
               }`}
             >
               {t("test.correct_answer")}: {question.correct}
+              {partOfSpeechFor(question.correct) && (
+                <span className="ml-2 text-sm font-normal italic opacity-80">
+                  {partOfSpeechFor(question.correct)}.
+                </span>
+              )}
               {transcriptionFor(question.correct) && (
-                <span className="ml-3 text-sm font-normal opacity-80">
+                <span className="ml-2 text-sm font-normal opacity-80">
                   [{transcriptionFor(question.correct)}]
                 </span>
               )}
@@ -491,8 +520,13 @@ export function QuizGame({
               className={optionClass(option)}
             >
               {option}
+              {partOfSpeechFor(option) && (
+                <span className="ml-3 text-[14px] font-normal italic opacity-80">
+                  {partOfSpeechFor(option)}.
+                </span>
+              )}
               {transcriptionFor(option) && (
-                <span className="ml-4 text-[14px] font-normal opacity-80">
+                <span className="ml-3 text-[14px] font-normal opacity-80">
                   [{transcriptionFor(option)}]
                 </span>
               )}

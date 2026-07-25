@@ -93,6 +93,8 @@ export interface QuizResponse {
   questions: QuizQuestion[];
   // kichik harfli inglizcha so'z -> IPA transkripsiya
   transcriptions: Record<string, string>;
+  // kichik harfli inglizcha so'z -> so'z turkumi
+  partsOfSpeech: Record<string, PartOfSpeech>;
 }
 
 export interface ApiSuccess<T> {
