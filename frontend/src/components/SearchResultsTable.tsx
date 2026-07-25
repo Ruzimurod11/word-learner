@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { searchWords } from "@/api/word-api";
 import { StateCard, btn } from "@/components/ui";
 import { Loader } from "@/components/Loader";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 interface SearchResultsTableProps {
   query: string;
@@ -13,6 +14,7 @@ interface SearchResultsTableProps {
 
 export function SearchResultsTable({ query }: SearchResultsTableProps) {
   const { t } = useTranslation();
+  const isMobile = useIsMobile();
   const [page, setPage] = useState(1);
   const pageSize = 50;
 
@@ -61,6 +63,44 @@ export function SearchResultsTable({ query }: SearchResultsTableProps) {
       </p>
 
       <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-sm">
+        {isMobile ? (
+          <ul className="divide-y divide-border/60">
+            {items.map((item) => (
+              <li key={item.id} className="flex items-start gap-2 px-3 py-2.5">
+                <div className="min-w-0 flex-1">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
+                    {t("search.location_badge", {
+                      book: item.bookOrder,
+                      unit: item.unitOrder,
+                    })}
+                  </span>
+                  <div className="mt-1.5 flex flex-wrap items-baseline gap-x-2">
+                    <span className="text-[17px] font-medium">{item.english}</span>
+                    {item.partOfSpeech && (
+                      <span className="text-xs italic text-muted-foreground">
+                        {item.partOfSpeech}.
+                      </span>
+                    )}
+                    {item.transcription && (
+                      <span className="text-[15px] text-muted-foreground">
+                        [{item.transcription}]
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-base">{item.translation}</p>
+                </div>
+                <Link
+                  to="/books/$bookId"
+                  params={{ bookId: String(item.bookId) }}
+                  search={{ unit: item.unitId }}
+                  className="shrink-0 py-1 text-xs font-semibold text-primary hover:underline"
+                >
+                  {t("common.open")}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
         <table className="min-w-full divide-y divide-border text-sm">
           <thead className="bg-muted/60">
             <tr>
@@ -119,6 +159,7 @@ export function SearchResultsTable({ query }: SearchResultsTableProps) {
             ))}
           </tbody>
         </table>
+        )}
       </div>
 
       <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">

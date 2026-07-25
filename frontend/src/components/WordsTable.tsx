@@ -28,6 +28,7 @@ import { useTranslation } from "react-i18next";
 import { ChevronLeft, ChevronRight, GripVertical, Pencil, Trash2 } from "lucide-react";
 import { deleteWord, getUnitWords, reorderUnitWords, updateWord } from "@/api/word-api";
 import { useIsAdmin } from "@/lib/auth";
+import { useIsMobile } from "@/lib/useIsMobile";
 import { PARTS_OF_SPEECH, type PaginatedWords, type PartOfSpeech, type Word } from "@/types/word";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { Select } from "@/components/Select";
@@ -106,6 +107,54 @@ function EditablePartOfSpeech({
   );
 }
 
+function EditActions({ ctx }: { ctx: TableCtx }) {
+  return (
+    <div className="flex justify-end gap-2">
+      <button
+        type="button"
+        onClick={ctx.saveEdit}
+        disabled={ctx.isSaving}
+        className="rounded-lg bg-success px-2 py-1 text-xs font-medium text-white transition hover:brightness-110 disabled:opacity-50"
+      >
+        {ctx.labels.save}
+      </button>
+      <button
+        type="button"
+        onClick={ctx.cancelEdit}
+        className="rounded-lg border border-border bg-card px-2 py-1 text-xs font-medium transition hover:bg-muted"
+      >
+        {ctx.labels.cancel}
+      </button>
+    </div>
+  );
+}
+
+function RowActions({ ctx, word }: { ctx: TableCtx; word: Word }) {
+  return (
+    <div className="flex justify-end gap-2">
+      <button
+        type="button"
+        onClick={() => ctx.startEdit(word)}
+        aria-label={ctx.labels.edit}
+        title={ctx.labels.edit}
+        className="rounded-lg bg-primary/10 p-1.5 text-primary transition hover:bg-primary hover:text-primary-foreground"
+      >
+        <Pencil className="h-4 w-4" aria-hidden="true" />
+      </button>
+      <button
+        type="button"
+        onClick={() => ctx.deleteRow(word)}
+        disabled={ctx.isDeleting}
+        aria-label={ctx.labels.delete}
+        title={ctx.labels.delete}
+        className="rounded-lg bg-destructive/10 p-1.5 text-destructive transition hover:bg-destructive hover:text-destructive-foreground disabled:opacity-50"
+      >
+        <Trash2 className="h-4 w-4" aria-hidden="true" />
+      </button>
+    </div>
+  );
+}
+
 function RowDragHandleCell({ rowId, label }: { rowId: string; label: string }) {
   const { attributes, listeners } = useSortable({ id: rowId });
   return (
@@ -140,11 +189,100 @@ function SortableRow({ row }: { row: Row<Word> }) {
       }`}
     >
       {row.getVisibleCells().map((cell) => (
-        <td key={cell.id} className="px-0.5 py-2 align-middle sm:px-4">
+        <td key={cell.id} className="px-4 py-2 align-middle">
           {flexRender(cell.column.columnDef.cell, cell.getContext())}
         </td>
       ))}
     </tr>
+  );
+}
+
+// Mobile ko'rinish: jadval o'rniga stacked qator — english + turkum + [transkripsiya]
+// bir qatorda, tarjima ostida (Flutter mobile app bilan bir xil).
+function MobileRow({
+  word,
+  ctx,
+  isAdmin,
+  reorderLabel,
+  partOfSpeechLabel,
+}: {
+  word: Word;
+  ctx: TableCtx;
+  isAdmin: boolean;
+  reorderLabel: string;
+  partOfSpeechLabel: string;
+}) {
+  const { setNodeRef, transform, transition, isDragging } = useSortable({
+    id: String(word.id),
+  });
+  const style: CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : undefined,
+  };
+
+  if (ctx.editingId === word.id) {
+    return (
+      <li ref={setNodeRef} style={style} className="flex flex-col gap-2 px-3 py-2.5">
+        <EditableInput
+          initialValue={word.english}
+          onChange={ctx.setEnglishValue}
+          autoFocus
+        />
+        <EditablePartOfSpeech
+          initialValue={word.partOfSpeech}
+          onChange={ctx.setPartOfSpeechValue}
+          label={partOfSpeechLabel}
+        />
+        <EditableInput
+          initialValue={word.transcription ?? ""}
+          onChange={ctx.setTranscriptionValue}
+        />
+        <EditableInput
+          initialValue={word.translation}
+          onChange={ctx.setTranslationValue}
+        />
+        <EditActions ctx={ctx} />
+      </li>
+    );
+  }
+
+  return (
+    <li
+      ref={setNodeRef}
+      style={style}
+      className={`flex items-center gap-1.5 px-3 py-2 ${
+        isDragging ? "relative z-10 bg-card shadow-lg" : ""
+      }`}
+    >
+      {isAdmin && (
+        <RowDragHandleCell rowId={String(word.id)} label={reorderLabel} />
+      )}
+      <span className="w-6 shrink-0 text-xs text-muted-foreground">
+        {word.order}
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-baseline gap-x-2">
+          <span className="text-[17px] font-medium">{word.english}</span>
+          {word.partOfSpeech && (
+            <span className="text-xs italic text-muted-foreground">
+              {word.partOfSpeech}.
+            </span>
+          )}
+          {word.transcription && (
+            <span className="text-[15px] text-muted-foreground">
+              [{word.transcription}]
+            </span>
+          )}
+        </div>
+        <p className="text-base">{word.translation}</p>
+      </div>
+      {isAdmin && (
+        <div className="shrink-0">
+          <RowActions ctx={ctx} word={word} />
+        </div>
+      )}
+    </li>
   );
 }
 
@@ -155,6 +293,7 @@ interface WordsTableProps {
 export function WordsTable({ unitId }: WordsTableProps) {
   const { t } = useTranslation();
   const isAdmin = useIsAdmin();
+  const isMobile = useIsMobile();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -305,14 +444,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
       },
       {
         accessorKey: "partOfSpeech",
-        header: () => (
-          <>
-            <span className="sm:hidden">tur</span>
-            <span className="hidden sm:inline">
-              {t("words_table.header_part_of_speech")}
-            </span>
-          </>
-        ),
+        header: t("words_table.header_part_of_speech"),
         cell: ({ row, table }) => {
           const ctx = table.options.meta as TableCtx;
           if (ctx.editingId === row.original.id) {
@@ -334,14 +466,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
       },
       {
         accessorKey: "transcription",
-        header: () => (
-          <>
-            <span className="sm:hidden">t</span>
-            <span className="hidden sm:inline">
-              {t("words_table.header_transcription")}
-            </span>
-          </>
-        ),
+        header: t("words_table.header_transcription"),
         cell: ({ row, table }) => {
           const ctx = table.options.meta as TableCtx;
           if (ctx.editingId === row.original.id) {
@@ -382,49 +507,10 @@ export function WordsTable({ unitId }: WordsTableProps) {
         cell: ({ row, table }) => {
           const ctx = table.options.meta as TableCtx;
           const w = row.original;
-          if (ctx.editingId === w.id) {
-            return (
-              <div className="flex justify-end gap-2">
-                <button
-                  type="button"
-                  onClick={ctx.saveEdit}
-                  disabled={ctx.isSaving}
-                  className="rounded-lg bg-success px-2 py-1 text-xs font-medium text-white transition hover:brightness-110 disabled:opacity-50"
-                >
-                  {ctx.labels.save}
-                </button>
-                <button
-                  type="button"
-                  onClick={ctx.cancelEdit}
-                  className="rounded-lg border border-border bg-card px-2 py-1 text-xs font-medium transition hover:bg-muted"
-                >
-                  {ctx.labels.cancel}
-                </button>
-              </div>
-            );
-          }
-          return (
-            <div className="flex justify-end gap-2">
-              <button
-                type="button"
-                onClick={() => ctx.startEdit(w)}
-                aria-label={ctx.labels.edit}
-                title={ctx.labels.edit}
-                className="rounded-lg bg-primary/10 p-1.5 text-primary transition hover:bg-primary hover:text-primary-foreground"
-              >
-                <Pencil className="h-4 w-4" aria-hidden="true" />
-              </button>
-              <button
-                type="button"
-                onClick={() => ctx.deleteRow(w)}
-                disabled={ctx.isDeleting}
-                aria-label={ctx.labels.delete}
-                title={ctx.labels.delete}
-                className="rounded-lg bg-destructive/10 p-1.5 text-destructive transition hover:bg-destructive hover:text-destructive-foreground disabled:opacity-50"
-              >
-                <Trash2 className="h-4 w-4" aria-hidden="true" />
-              </button>
-            </div>
+          return ctx.editingId === w.id ? (
+            <EditActions ctx={ctx} />
+          ) : (
+            <RowActions ctx={ctx} word={w} />
           );
         },
       } as ColumnDef<Word>]
@@ -480,6 +566,21 @@ export function WordsTable({ unitId }: WordsTableProps) {
     },
   };
 
+  // Yuklanish / xato / bo'sh holat — jadval ham, mobile ro'yxat ham shu bittasini ishlatadi.
+  const status = wordsQuery.isLoading
+    ? { className: "px-4 py-8", node: <Loader bare /> }
+    : wordsQuery.isError
+      ? {
+          className: "px-4 py-6 text-center text-destructive",
+          node: (wordsQuery.error as Error).message,
+        }
+      : data.length === 0
+        ? {
+            className: "px-4 py-6 text-center text-muted-foreground",
+            node: t("words_table.empty"),
+          }
+        : null;
+
   const table = useReactTable({
     data,
     columns,
@@ -520,60 +621,66 @@ export function WordsTable({ unitId }: WordsTableProps) {
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
         >
-          <table className="min-w-full divide-y divide-border text-sm">
-          <thead className="bg-muted/60">
-            {table.getHeaderGroups().map((hg) => (
-              <tr key={hg.id}>
-                {hg.headers.map((h) => (
-                  <th
-                    key={h.id}
-                    className="px-0.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:px-4"
-                  >
-                    {h.isPlaceholder
-                      ? null
-                      : flexRender(h.column.columnDef.header, h.getContext())}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody className="divide-y divide-border/60">
-            {wordsQuery.isLoading ? (
-              <tr>
-                <td colSpan={columns.length} className="px-4 py-8">
-                  <Loader bare />
-                </td>
-              </tr>
-            ) : wordsQuery.isError ? (
-              <tr>
-                <td
-                  colSpan={columns.length}
-                  className="px-4 py-6 text-center text-destructive"
-                >
-                  {(wordsQuery.error as Error).message}
-                </td>
-              </tr>
-            ) : data.length === 0 ? (
-              <tr>
-                <td
-                  colSpan={columns.length}
-                  className="px-4 py-6 text-center text-muted-foreground"
-                >
-                  {t("words_table.empty")}
-                </td>
-              </tr>
+          {isMobile ? (
+            status ? (
+              <div className={status.className}>{status.node}</div>
             ) : (
               <SortableContext
                 items={rowIds}
                 strategy={verticalListSortingStrategy}
               >
-                {table.getRowModel().rows.map((row) => (
-                  <SortableRow key={row.id} row={row} />
-                ))}
+                <ul className="divide-y divide-border/60">
+                  {data.map((w) => (
+                    <MobileRow
+                      key={w.id}
+                      word={w}
+                      ctx={tableCtx}
+                      isAdmin={isAdmin}
+                      reorderLabel={t("words_table.reorder")}
+                      partOfSpeechLabel={t("words_table.header_part_of_speech")}
+                    />
+                  ))}
+                </ul>
               </SortableContext>
-            )}
-          </tbody>
-          </table>
+            )
+          ) : (
+            <table className="min-w-full divide-y divide-border text-sm">
+              <thead className="bg-muted/60">
+                {table.getHeaderGroups().map((hg) => (
+                  <tr key={hg.id}>
+                    {hg.headers.map((h) => (
+                      <th
+                        key={h.id}
+                        className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                      >
+                        {h.isPlaceholder
+                          ? null
+                          : flexRender(h.column.columnDef.header, h.getContext())}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody className="divide-y divide-border/60">
+                {status ? (
+                  <tr>
+                    <td colSpan={columns.length} className={status.className}>
+                      {status.node}
+                    </td>
+                  </tr>
+                ) : (
+                  <SortableContext
+                    items={rowIds}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    {table.getRowModel().rows.map((row) => (
+                      <SortableRow key={row.id} row={row} />
+                    ))}
+                  </SortableContext>
+                )}
+              </tbody>
+            </table>
+          )}
         </DndContext>
       </div>
 
