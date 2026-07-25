@@ -212,6 +212,7 @@ export async function getQuiz(
       english: words.english,
       translation: words.translation,
       transcription: words.transcription,
+      partOfSpeech: words.partOfSpeech,
     })
     .from(words)
     .innerJoin(units, eq(units.id, words.unitId))
@@ -225,9 +226,14 @@ export async function getQuiz(
   // matnlar uchun. Uzbek matn map'ga tushmaydi, shuning uchun frontend
   // yo'nalishdan qat'i nazar mos kalitni topib ko'rsatadi.
   const transcriptions: Record<string, string> = {};
+  const partsOfSpeech: Record<string, PartOfSpeech> = {};
   for (const row of questionRows) {
     if (row.transcription) {
       transcriptions[row.english.toLowerCase()] = row.transcription;
+    }
+    const pos = toPartOfSpeech(row.partOfSpeech);
+    if (pos) {
+      partsOfSpeech[row.english.toLowerCase()] = pos;
     }
   }
 
@@ -241,6 +247,7 @@ export async function getQuiz(
         correct: row.english,
       })),
       transcriptions,
+      partsOfSpeech,
     };
   }
 
@@ -249,6 +256,7 @@ export async function getQuiz(
     .selectDistinct({
       answer: uzToEn ? words.english : words.translation,
       transcription: words.transcription,
+      partOfSpeech: words.partOfSpeech,
     })
     .from(words)
     .innerJoin(units, eq(units.id, words.unitId))
@@ -259,6 +267,7 @@ export async function getQuiz(
     .select({
       answer: distinctAnswers.answer,
       transcription: distinctAnswers.transcription,
+      partOfSpeech: distinctAnswers.partOfSpeech,
     })
     .from(distinctAnswers)
     .orderBy(sql`random()`)
@@ -281,6 +290,10 @@ export async function getQuiz(
       if (r.transcription) {
         transcriptions[r.answer.toLowerCase()] = r.transcription;
       }
+      const pos = toPartOfSpeech(r.partOfSpeech);
+      if (pos) {
+        partsOfSpeech[r.answer.toLowerCase()] = pos;
+      }
     }
   }
 
@@ -298,7 +311,7 @@ export async function getQuiz(
       correct: answer,
     });
   }
-  return { questions, transcriptions };
+  return { questions, transcriptions, partsOfSpeech };
 }
 
 export async function unitExists(unitId: number): Promise<boolean> {
