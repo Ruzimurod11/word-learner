@@ -35,6 +35,7 @@ const messages: Record<Lang, Messages> = {
     "errors.invalid_password": "Parol noto'g'ri",
     "errors.auth_not_configured": "Admin paroli sozlanmagan",
     "errors.transcription_failed": "Transkripsiya yaratishda xatolik",
+    "errors.part_of_speech_failed": "So'z turkumini aniqlashda xatolik",
   },
   en: {
     "errors.invalid_book_id": "Invalid book ID",
@@ -63,6 +64,7 @@ const messages: Record<Lang, Messages> = {
     "errors.invalid_password": "Incorrect password",
     "errors.auth_not_configured": "Admin password is not configured",
     "errors.transcription_failed": "Failed to generate transcriptions",
+    "errors.part_of_speech_failed": "Failed to detect parts of speech",
   },
   ru: {
     "errors.invalid_book_id": "Неверный ID книги",
@@ -91,6 +93,7 @@ const messages: Record<Lang, Messages> = {
     "errors.invalid_password": "Неверный пароль",
     "errors.auth_not_configured": "Пароль администратора не настроен",
     "errors.transcription_failed": "Не удалось создать транскрипции",
+    "errors.part_of_speech_failed": "Не удалось определить части речи",
   },
 };
 

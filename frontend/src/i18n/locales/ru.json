@@ -55,6 +55,7 @@
   "words_table": {
     "header_num": "#",
     "header_english": "Английский",
+    "header_part_of_speech": "Часть речи",
     "header_transcription": "Транскрипция",
     "header_translation": "Перевод",
     "header_actions": "Действие",
@@ -80,6 +81,7 @@
     "no_results_suffix": ".",
     "col_location": "Расположение",
     "col_english": "Английский",
+    "col_part_of_speech": "Часть речи",
     "col_transcription": "Транскрипция",
     "col_translation": "Перевод",
     "col_actions": "Действие",
@@ -100,6 +102,11 @@
     "hide_password": "Скрыть пароль",
     "submit": "Войти",
     "submitting": "Вход..."
+  },
+  "part_of_speech": {
+    "button": "Добавить части речи",
+    "pending": "Определение...",
+    "success": "Части речи добавлены к {{updated}} словам (осталось {{remaining}})"
   },
   "transcription": {
     "button": "Добавить транскрипции",

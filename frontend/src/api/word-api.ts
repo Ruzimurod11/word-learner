@@ -99,16 +99,28 @@ export const getQuiz = async (
   }
 };
 
-export interface BackfillTranscriptionsResult {
+export interface BackfillResult {
   updated: number;
   remaining: number;
 }
 
 export const backfillTranscriptions =
-  async (): Promise<BackfillTranscriptionsResult> => {
+  async (): Promise<BackfillResult> => {
     try {
-      const res = await http.post<ApiResponse<BackfillTranscriptionsResult>>(
+      const res = await http.post<ApiResponse<BackfillResult>>(
         "/words/backfill-transcriptions",
+      );
+      return unwrap(res.data);
+    } catch (err) {
+      return handleError(err);
+    }
+  };
+
+export const backfillPartsOfSpeech =
+  async (): Promise<BackfillResult> => {
+    try {
+      const res = await http.post<ApiResponse<BackfillResult>>(
+        "/words/backfill-parts-of-speech",
       );
       return unwrap(res.data);
     } catch (err) {

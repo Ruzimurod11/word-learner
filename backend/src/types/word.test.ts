@@ -27,6 +27,22 @@ describe("createWordSchema", () => {
     expect(result).toEqual({ english: "cat", translation: "mushuk", transcription: "[kæt]" });
   });
 
+  it("accepts a known part of speech and rejects an unknown one", () => {
+    const result = createWordSchema.parse({
+      english: "cat",
+      translation: "mushuk",
+      partOfSpeech: "n",
+    });
+    expect(result).toEqual({ english: "cat", translation: "mushuk", partOfSpeech: "n" });
+    expect(
+      createWordSchema.safeParse({
+        english: "cat",
+        translation: "mushuk",
+        partOfSpeech: "noun",
+      }).success,
+    ).toBe(false);
+  });
+
   it("rejects english longer than 100 chars", () => {
     const result = createWordSchema.safeParse({
       english: "a".repeat(101),
@@ -45,6 +61,8 @@ describe("updateWordSchema", () => {
     expect(updateWordSchema.safeParse({ english: "cat" }).success).toBe(true);
     expect(updateWordSchema.safeParse({ translation: "mushuk" }).success).toBe(true);
     expect(updateWordSchema.safeParse({ transcription: "[kæt]" }).success).toBe(true);
+    expect(updateWordSchema.safeParse({ partOfSpeech: "adj" }).success).toBe(true);
+    expect(updateWordSchema.safeParse({ partOfSpeech: null }).success).toBe(true);
   });
 });
 

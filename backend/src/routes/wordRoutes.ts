@@ -1,6 +1,7 @@
 import { Router } from "express";
 import * as wordController from "../controllers/wordController.ts";
 import * as transcriptionController from "../controllers/transcriptionController.ts";
+import * as partOfSpeechController from "../controllers/partOfSpeechController.ts";
 import { requireAdmin } from "../middleware/auth.ts";
 
 const router = Router();
@@ -11,6 +12,11 @@ router.post(
   "/backfill-transcriptions",
   requireAdmin,
   transcriptionController.backfillTranscriptions,
+);
+router.post(
+  "/backfill-parts-of-speech",
+  requireAdmin,
+  partOfSpeechController.backfillPartsOfSpeech,
 );
 router.put("/:id", requireAdmin, wordController.updateWord);
 router.delete("/:id", requireAdmin, wordController.deleteWord);

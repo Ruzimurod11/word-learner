@@ -32,6 +32,7 @@ import type {
   CreateWordDto,
   PaginatedSearchWords,
   PaginatedWords,
+  PartOfSpeech,
   QuizDto,
   QuizQuery,
   QuizQuestionDto,
@@ -42,6 +43,10 @@ import type {
   WordDto,
 } from "../types/word.ts";
 
+// ustun oddiy text, qiymatlar esa yozishdan oldin Zod enum bilan tekshiriladi
+const toPartOfSpeech = (v: string | null): PartOfSpeech | null =>
+  v as PartOfSpeech | null;
+
 const toDto = (w: Word): WordDto => ({
   id: w.id,
   unitId: w.unitId,
@@ -49,6 +54,7 @@ const toDto = (w: Word): WordDto => ({
   english: w.english,
   translation: w.translation,
   transcription: w.transcription,
+  partOfSpeech: toPartOfSpeech(w.partOfSpeech),
   createdAt: w.createdAt.toISOString(),
   updatedAt: w.updatedAt.toISOString(),
 });
@@ -105,6 +111,7 @@ export async function searchWords(
         english: words.english,
         translation: words.translation,
         transcription: words.transcription,
+        partOfSpeech: words.partOfSpeech,
         createdAt: words.createdAt,
         updatedAt: words.updatedAt,
         bookId: books.id,
@@ -135,6 +142,7 @@ export async function searchWords(
     english: r.english,
     translation: r.translation,
     transcription: r.transcription,
+    partOfSpeech: toPartOfSpeech(r.partOfSpeech),
     createdAt: r.createdAt.toISOString(),
     updatedAt: r.updatedAt.toISOString(),
     bookId: r.bookId,

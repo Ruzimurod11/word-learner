@@ -59,6 +59,8 @@ export const words = pgTable(
     english: text("english").notNull(),
     translation: text("translation").notNull(),
     transcription: text("transcription"),
+    // so'z turkumi qisqartmasi: v, n, adj, adv, ...
+    partOfSpeech: text("part_of_speech"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),

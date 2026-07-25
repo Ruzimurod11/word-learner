@@ -55,6 +55,7 @@
   "words_table": {
     "header_num": "#",
     "header_english": "English",
+    "header_part_of_speech": "Turkum",
     "header_transcription": "Transkripsiya",
     "header_translation": "Tarjima",
     "header_actions": "Amal",
@@ -80,6 +81,7 @@
     "no_results_suffix": "bo'yicha hech narsa topilmadi.",
     "col_location": "Joylashuv",
     "col_english": "English",
+    "col_part_of_speech": "Turkum",
     "col_transcription": "Transkripsiya",
     "col_translation": "Tarjima",
     "col_actions": "Amal",
@@ -100,6 +102,11 @@
     "hide_password": "Parolni yashirish",
     "submit": "Kirish",
     "submitting": "Kirilmoqda..."
+  },
+  "part_of_speech": {
+    "button": "Turkum qo'shish",
+    "pending": "Aniqlanmoqda...",
+    "success": "{{updated}} ta so'zga turkum qo'shildi ({{remaining}} ta qoldi)"
   },
   "transcription": {
     "button": "Transkripsiya qo'shish",
