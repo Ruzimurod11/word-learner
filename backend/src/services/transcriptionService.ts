@@ -2,6 +2,7 @@ import { eq, isNull } from "drizzle-orm";
 import { db } from "../db/index.ts";
 import { words } from "../db/schema.ts";
 import { normalizeBritishIpa } from "../utils/ipa.ts";
+import { mapWithConcurrency } from "../utils/concurrency.ts";
 
 export interface BackfillResult {
   updated: number;
@@ -80,24 +81,6 @@ async function fetchIpa(word: string): Promise<string | null> {
   } finally {
     clearTimeout(timer);
   }
-}
-
-async function mapWithConcurrency<T, R>(
-  items: T[],
-  limit: number,
-  fn: (item: T) => Promise<R>,
-): Promise<R[]> {
-  const results = new Array<R>(items.length);
-  let next = 0;
-  async function worker(): Promise<void> {
-    while (next < items.length) {
-      const i = next++;
-      results[i] = await fn(items[i]);
-    }
-  }
-  const workers = Array.from({ length: Math.min(limit, items.length) }, worker);
-  await Promise.all(workers);
-  return results;
 }
 
 // transcription IS NULL bo'lgan barcha so'zlarga lug'at API orqali British IPA

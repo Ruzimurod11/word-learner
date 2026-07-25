@@ -1,3 +1,21 @@
+// so'z turkumi qisqartmalari (backend'dagi PARTS_OF_SPEECH bilan bir xil)
+export const PARTS_OF_SPEECH = [
+  "v",
+  "n",
+  "adj",
+  "adv",
+  "prep",
+  "conj",
+  "pron",
+  "det",
+  "article",
+  "interj",
+  "num",
+  "phr",
+] as const;
+
+export type PartOfSpeech = (typeof PARTS_OF_SPEECH)[number];
+
 export interface Word {
   id: number;
   unitId: number;
@@ -5,6 +23,7 @@ export interface Word {
   english: string;
   translation: string;
   transcription: string | null;
+  partOfSpeech: PartOfSpeech | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -21,12 +40,14 @@ export interface CreateWordDto {
   english: string;
   translation: string;
   transcription?: string | null;
+  partOfSpeech?: PartOfSpeech | null;
 }
 
 export interface UpdateWordDto {
   english?: string;
   translation?: string;
   transcription?: string | null;
+  partOfSpeech?: PartOfSpeech | null;
 }
 
 export interface UnitWordsQuery {

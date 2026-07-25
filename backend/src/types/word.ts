@@ -1,16 +1,36 @@
 import { z } from "zod";
 
+// so'z turkumi qisqartmalari (standart lug'at uslubi)
+export const PARTS_OF_SPEECH = [
+  "v",
+  "n",
+  "adj",
+  "adv",
+  "prep",
+  "conj",
+  "pron",
+  "det",
+  "article",
+  "interj",
+  "num",
+  "phr",
+] as const;
+
+export const partOfSpeechSchema = z.enum(PARTS_OF_SPEECH);
+
 export const createWordSchema = z.object({
   english: z.string().trim().min(1, "English so'z bo'sh bo'lmasligi kerak").max(100),
   translation: z.string().trim().min(1, "Tarjima bo'sh bo'lmasligi kerak").max(200),
   transcription: z.string().trim().max(200).nullable().optional(),
+  partOfSpeech: partOfSpeechSchema.nullable().optional(),
 });
 
 export const updateWordSchema = createWordSchema.partial().refine(
   (data) =>
     data.english !== undefined ||
     data.translation !== undefined ||
-    data.transcription !== undefined,
+    data.transcription !== undefined ||
+    data.partOfSpeech !== undefined,
   { message: "Kamida bitta maydon yuborilishi kerak" },
 );
 
@@ -40,6 +60,7 @@ export const quizQuerySchema = z.object({
   level: z.enum(["easy", "hard"]).default("easy"),
 });
 
+export type PartOfSpeech = z.infer<typeof partOfSpeechSchema>;
 export type CreateWordDto = z.infer<typeof createWordSchema>;
 export type UpdateWordDto = z.infer<typeof updateWordSchema>;
 export type ReorderWordsDto = z.infer<typeof reorderWordsSchema>;
@@ -54,6 +75,7 @@ export interface WordDto {
   english: string;
   translation: string;
   transcription: string | null;
+  partOfSpeech: PartOfSpeech | null;
   createdAt: string;
   updatedAt: string;
 }

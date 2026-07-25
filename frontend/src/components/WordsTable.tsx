@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 import { ChevronLeft, ChevronRight, GripVertical, Pencil, Trash2 } from "lucide-react";
 import { deleteWord, getUnitWords, reorderUnitWords, updateWord } from "@/api/word-api";
 import { useIsAdmin } from "@/lib/auth";
-import type { PaginatedWords, Word } from "@/types/word";
+import { PARTS_OF_SPEECH, type PaginatedWords, type PartOfSpeech, type Word } from "@/types/word";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { Select } from "@/components/Select";
 import { btn, input } from "@/components/ui";
@@ -43,6 +43,7 @@ interface TableCtx {
   setEnglishValue: (v: string) => void;
   setTranslationValue: (v: string) => void;
   setTranscriptionValue: (v: string) => void;
+  setPartOfSpeechValue: (v: PartOfSpeech | null) => void;
   isSaving: boolean;
   isDeleting: boolean;
   labels: {
@@ -72,6 +73,35 @@ function EditableInput({
         onChange(e.target.value);
       }}
       className={`${input} px-2 py-1`}
+    />
+  );
+}
+
+// bo'sh (turkum tanlanmagan) holat uchun Select qiymati
+const POS_NONE = "";
+
+function EditablePartOfSpeech({
+  initialValue,
+  onChange,
+  label,
+}: {
+  initialValue: PartOfSpeech | null;
+  onChange: (v: PartOfSpeech | null) => void;
+  label: string;
+}) {
+  const [value, setValue] = useState<string>(initialValue ?? POS_NONE);
+  return (
+    <Select
+      value={value}
+      options={[
+        { value: POS_NONE, label: "—" },
+        ...PARTS_OF_SPEECH.map((p) => ({ value: p as string, label: p })),
+      ]}
+      onChange={(v) => {
+        setValue(v);
+        onChange(v === POS_NONE ? null : (v as PartOfSpeech));
+      }}
+      ariaLabel={label}
     />
   );
 }
@@ -132,6 +162,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
   const englishRef = useRef("");
   const translationRef = useRef("");
   const transcriptionRef = useRef("");
+  const partOfSpeechRef = useRef<PartOfSpeech | null>(null);
   const queryClient = useQueryClient();
 
   const wordsQuery = useQuery({
@@ -160,11 +191,13 @@ export function WordsTable({ unitId }: WordsTableProps) {
       english: string;
       translation: string;
       transcription: string;
+      partOfSpeech: PartOfSpeech | null;
     }) =>
       updateWord(vars.id, {
         english: vars.english.trim(),
         translation: vars.translation.trim(),
         transcription: vars.transcription.trim() || null,
+        partOfSpeech: vars.partOfSpeech,
       }),
     onSuccess: () => {
       setEditingId(null);
@@ -206,6 +239,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
     englishRef.current = w.english;
     translationRef.current = w.translation;
     transcriptionRef.current = w.transcription ?? "";
+    partOfSpeechRef.current = w.partOfSpeech;
     setEditingId(w.id);
   }, []);
 
@@ -219,6 +253,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
         english: englishRef.current,
         translation: translationRef.current,
         transcription: transcriptionRef.current,
+        partOfSpeech: partOfSpeechRef.current,
       });
       return id;
     });
@@ -267,6 +302,35 @@ export function WordsTable({ unitId }: WordsTableProps) {
           }
           return <span className="text-lg font-medium">{row.original.english}</span>;
         },
+      },
+      {
+        accessorKey: "partOfSpeech",
+        header: () => (
+          <>
+            <span className="sm:hidden">tur</span>
+            <span className="hidden sm:inline">
+              {t("words_table.header_part_of_speech")}
+            </span>
+          </>
+        ),
+        cell: ({ row, table }) => {
+          const ctx = table.options.meta as TableCtx;
+          if (ctx.editingId === row.original.id) {
+            return (
+              <EditablePartOfSpeech
+                initialValue={row.original.partOfSpeech}
+                onChange={ctx.setPartOfSpeechValue}
+                label={t("words_table.header_part_of_speech")}
+              />
+            );
+          }
+          return row.original.partOfSpeech ? (
+            <span className="italic text-muted-foreground">
+              {row.original.partOfSpeech}.
+            </span>
+          ) : null;
+        },
+        size: 70,
       },
       {
         accessorKey: "transcription",
@@ -402,6 +466,9 @@ export function WordsTable({ unitId }: WordsTableProps) {
     },
     setTranscriptionValue: (v) => {
       transcriptionRef.current = v;
+    },
+    setPartOfSpeechValue: (v) => {
+      partOfSpeechRef.current = v;
     },
     isSaving: updateMutation.isPending,
     isDeleting: deleteMutation.isPending,
