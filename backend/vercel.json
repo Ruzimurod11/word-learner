@@ -1,3 +1,5 @@
 {
+  "buildCommand": "pnpm vercel-build",
+  "outputDirectory": "public",
   "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
 }
