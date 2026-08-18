@@ -57,7 +57,9 @@
     "header_english": "English",
     "header_part_of_speech": "Part of speech",
     "header_transcription": "Transcription",
+    "header_audio": "Audio",
     "header_translation": "Translation",
+    "audio_aria": "Listen to pronunciation",
     "header_actions": "Actions",
     "reorder": "Drag to reorder",
     "total_in_unit": "Total in this unit:",
@@ -112,6 +114,12 @@
     "button": "Add transcriptions",
     "pending": "Generating...",
     "success": "Added transcriptions to {{updated}} words ({{remaining}} remaining)"
+  },
+  "google_tts": {
+    "button": "Generate pronunciation",
+    "pending": "Generating...",
+    "progress": "{{done}}/{{total}} done",
+    "success": "Generated pronunciation for {{updated}} words ({{remaining}} remaining)"
   },
   "lang": {
     "label": "Language",

@@ -128,6 +128,20 @@ export const backfillPartsOfSpeech =
     }
   };
 
+export const backfillAudioWithGoogleTts = async (
+  limit: number,
+): Promise<BackfillResult> => {
+  try {
+    const res = await http.post<ApiResponse<BackfillResult>>(
+      "/words/backfill-audio-google-tts",
+      { limit },
+    );
+    return unwrap(res.data);
+  } catch (err) {
+    return handleError(err);
+  }
+};
+
 export const searchWords = async (
   query: SearchQuery,
 ): Promise<PaginatedSearchWords> => {

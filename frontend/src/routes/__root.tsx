@@ -7,6 +7,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { TranscriptionBackfill } from "@/components/TranscriptionBackfill";
 import { PartOfSpeechBackfill } from "@/components/PartOfSpeechBackfill";
+import { GoogleTtsBackfill } from "@/components/GoogleTtsBackfill";
 import { btn } from "@/components/ui";
 
 export const Route = createRootRoute({
@@ -41,6 +42,7 @@ function RootLayout() {
             <GlobalSearch />
             <TranscriptionBackfill />
             <PartOfSpeechBackfill />
+            <GoogleTtsBackfill />
             <LanguageSwitcher />
             <ThemeToggle />
             <AdminLogin />

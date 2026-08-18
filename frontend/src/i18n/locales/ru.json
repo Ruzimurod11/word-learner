@@ -57,7 +57,9 @@
     "header_english": "Английский",
     "header_part_of_speech": "Часть речи",
     "header_transcription": "Транскрипция",
+    "header_audio": "Аудио",
     "header_translation": "Перевод",
+    "audio_aria": "Слушать произношение",
     "header_actions": "Действие",
     "reorder": "Перетащите для изменения порядка",
     "total_in_unit": "Всего в юните:",
@@ -112,6 +114,12 @@
     "button": "Добавить транскрипции",
     "pending": "Генерация...",
     "success": "Транскрипции добавлены к {{updated}} словам (осталось {{remaining}})"
+  },
+  "google_tts": {
+    "button": "Генерировать произношение",
+    "pending": "Генерация...",
+    "progress": "{{done}}/{{total}} готово",
+    "success": "Произношение сгенерировано для {{updated}} слов (осталось {{remaining}})"
   },
   "lang": {
     "label": "Язык",

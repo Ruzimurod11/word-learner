@@ -25,8 +25,9 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useTranslation } from "react-i18next";
-import { ChevronLeft, ChevronRight, GripVertical, Pencil, Trash2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, GripVertical, Pencil, Trash2, Volume2 } from "lucide-react";
 import { deleteWord, getUnitWords, reorderUnitWords, updateWord } from "@/api/word-api";
+import { API_ROOT } from "@/api/http";
 import { useIsAdmin } from "@/lib/auth";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { PARTS_OF_SPEECH, type PaginatedWords, type PartOfSpeech, type Word } from "@/types/word";
@@ -34,6 +35,34 @@ import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { Select } from "@/components/Select";
 import { btn, input } from "@/components/ui";
 import { Loader } from "@/components/Loader";
+
+function AudioLink({ url, label }: { url: string; label: string }) {
+  const handlePlay = () => {
+    // data: URI da CORS muammosi yo'q — to'g'ridan-to'g'ri chalinadi.
+    // Tashqi URL esa backend proxy orqali ketadi (CORS masalasini hal qiladi).
+    const isDataUri = url.startsWith("data:");
+    const src = isDataUri
+      ? url
+      : `${API_ROOT}/audio/proxy?url=${encodeURIComponent(url)}`;
+    const audio = new Audio(src);
+    audio.play().catch((err) => {
+      console.error("Audio playback failed:", err);
+      // Agar proxy bilan ham bo'lmasa, yangi tab da ochish.
+      // data: URI ni brauzer bloklaydi, shuning uchun faqat tashqi URL uchun.
+      if (!isDataUri) window.open(url, '_blank');
+    });
+  };
+
+  return (
+    <button
+       onClick={handlePlay}
+       aria-label={label} title={label}
+       className="inline-flex rounded-lg bg-primary/10 p-1.5 text-primary transition hover:bg-primary hover:text-primary-foreground"
+    >
+      <Volume2 className="h-4 w-4" aria-hidden="true" />
+    </button>
+  );
+}
 
 interface TableCtx {
   editingId: number | null;
@@ -45,6 +74,7 @@ interface TableCtx {
   setTranslationValue: (v: string) => void;
   setTranscriptionValue: (v: string) => void;
   setPartOfSpeechValue: (v: PartOfSpeech | null) => void;
+  setAudioUrlValue: (v: string) => void;
   isSaving: boolean;
   isDeleting: boolean;
   labels: {
@@ -212,6 +242,7 @@ function MobileRow({
   reorderLabel: string;
   partOfSpeechLabel: string;
 }) {
+  const { t } = useTranslation();
   const { setNodeRef, transform, transition, isDragging } = useSortable({
     id: String(word.id),
   });
@@ -237,6 +268,10 @@ function MobileRow({
         <EditableInput
           initialValue={word.transcription ?? ""}
           onChange={ctx.setTranscriptionValue}
+        />
+        <EditableInput
+          initialValue={word.audioUrl ?? ""}
+          onChange={ctx.setAudioUrlValue}
         />
         <EditableInput
           initialValue={word.translation}
@@ -274,6 +309,9 @@ function MobileRow({
               [{word.transcription}]
             </span>
           )}
+          {word.audioUrl && (
+            <AudioLink url={word.audioUrl} label={t("words_table.audio_aria")} />
+          )}
         </div>
         <p className="text-base">{word.translation}</p>
       </div>
@@ -302,6 +340,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
   const translationRef = useRef("");
   const transcriptionRef = useRef("");
   const partOfSpeechRef = useRef<PartOfSpeech | null>(null);
+  const audioUrlRef = useRef("");
   const queryClient = useQueryClient();
 
   const wordsQuery = useQuery({
@@ -331,12 +370,14 @@ export function WordsTable({ unitId }: WordsTableProps) {
       translation: string;
       transcription: string;
       partOfSpeech: PartOfSpeech | null;
+      audioUrl: string;
     }) =>
       updateWord(vars.id, {
         english: vars.english.trim(),
         translation: vars.translation.trim(),
         transcription: vars.transcription.trim() || null,
         partOfSpeech: vars.partOfSpeech,
+        audioUrl: vars.audioUrl.trim() || null,
       }),
     onSuccess: () => {
       setEditingId(null);
@@ -379,6 +420,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
     translationRef.current = w.translation;
     transcriptionRef.current = w.transcription ?? "";
     partOfSpeechRef.current = w.partOfSpeech;
+    audioUrlRef.current = w.audioUrl ?? "";
     setEditingId(w.id);
   }, []);
 
@@ -393,6 +435,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
         translation: translationRef.current,
         transcription: transcriptionRef.current,
         partOfSpeech: partOfSpeechRef.current,
+        audioUrl: audioUrlRef.current,
       });
       return id;
     });
@@ -485,6 +528,24 @@ export function WordsTable({ unitId }: WordsTableProps) {
         },
       },
       {
+        accessorKey: "audioUrl",
+        header: t("words_table.header_audio"),
+        cell: ({ row, table }) => {
+          const ctx = table.options.meta as TableCtx;
+          if (ctx.editingId === row.original.id) {
+            return (
+              <EditableInput
+                initialValue={row.original.audioUrl ?? ""}
+                onChange={ctx.setAudioUrlValue}
+              />
+            );
+          }
+          return row.original.audioUrl ? (
+            <AudioLink url={row.original.audioUrl} label={t("words_table.audio_aria")} />
+          ) : null;
+        },
+      },
+      {
         accessorKey: "translation",
         header: t("words_table.header_translation"),
         cell: ({ row, table }) => {
@@ -555,6 +616,9 @@ export function WordsTable({ unitId }: WordsTableProps) {
     },
     setPartOfSpeechValue: (v) => {
       partOfSpeechRef.current = v;
+    },
+    setAudioUrlValue: (v) => {
+      audioUrlRef.current = v;
     },
     isSaving: updateMutation.isPending,
     isDeleting: deleteMutation.isPending,

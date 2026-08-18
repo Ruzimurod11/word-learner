@@ -6,6 +6,7 @@ import bookRoutes from "./routes/bookRoutes.ts";
 import unitRoutes from "./routes/unitRoutes.ts";
 import vocabularyRoutes from "./routes/vocabularyRoutes.ts";
 import authRoutes from "./routes/authRoutes.ts";
+import audioProxyRoutes from "./routes/audioProxyRoutes.ts";
 import { languageMiddleware } from "./i18n/index.ts";
 
 const app = express();
@@ -52,6 +53,7 @@ app.use("/books", bookRoutes);
 app.use("/units", unitRoutes);
 app.use("/vocabulary", vocabularyRoutes);
 app.use("/words", wordRoutes);
+app.use("/audio", audioProxyRoutes);
 
 app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
   console.error(err);

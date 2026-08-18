@@ -55,6 +55,7 @@ const toDto = (w: Word): WordDto => ({
   translation: w.translation,
   transcription: w.transcription,
   partOfSpeech: toPartOfSpeech(w.partOfSpeech),
+  audioUrl: w.audioUrl,
   createdAt: w.createdAt.toISOString(),
   updatedAt: w.updatedAt.toISOString(),
 });
@@ -112,6 +113,7 @@ export async function searchWords(
         translation: words.translation,
         transcription: words.transcription,
         partOfSpeech: words.partOfSpeech,
+        audioUrl: words.audioUrl,
         createdAt: words.createdAt,
         updatedAt: words.updatedAt,
         bookId: books.id,
@@ -143,6 +145,7 @@ export async function searchWords(
     translation: r.translation,
     transcription: r.transcription,
     partOfSpeech: toPartOfSpeech(r.partOfSpeech),
+    audioUrl: r.audioUrl,
     createdAt: r.createdAt.toISOString(),
     updatedAt: r.updatedAt.toISOString(),
     bookId: r.bookId,

@@ -23,6 +23,7 @@ export const createWordSchema = z.object({
   translation: z.string().trim().min(1, "Tarjima bo'sh bo'lmasligi kerak").max(200),
   transcription: z.string().trim().max(200).nullable().optional(),
   partOfSpeech: partOfSpeechSchema.nullable().optional(),
+  audioUrl: z.string().trim().max(500).nullable().optional(),
 });
 
 export const updateWordSchema = createWordSchema.partial().refine(
@@ -30,12 +31,19 @@ export const updateWordSchema = createWordSchema.partial().refine(
     data.english !== undefined ||
     data.translation !== undefined ||
     data.transcription !== undefined ||
-    data.partOfSpeech !== undefined,
+    data.partOfSpeech !== undefined ||
+    data.audioUrl !== undefined,
   { message: "Kamida bitta maydon yuborilishi kerak" },
 );
 
 export const reorderWordsSchema = z.object({
   orderedIds: z.array(z.coerce.number().int().positive()).min(1),
+});
+
+export const ttsBackfillSchema = z.object({
+  // Bir chaqiruvda qayta ishlanadigan so'zlar soni: so'rov timeout'ga
+  // urilmasligi uchun backfill kichik bo'laklarga bo'linadi
+  limit: z.coerce.number().int().min(1).max(200).default(50),
 });
 
 export const unitWordsQuerySchema = z.object({
@@ -76,6 +84,7 @@ export interface WordDto {
   translation: string;
   transcription: string | null;
   partOfSpeech: PartOfSpeech | null;
+  audioUrl: string | null;
   createdAt: string;
   updatedAt: string;
 }

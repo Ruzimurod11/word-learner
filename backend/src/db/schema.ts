@@ -61,6 +61,7 @@ export const words = pgTable(
     transcription: text("transcription"),
     // so'z turkumi qisqartmasi: v, n, adj, adv, ...
     partOfSpeech: text("part_of_speech"),
+    audioUrl: text("audio_url"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),

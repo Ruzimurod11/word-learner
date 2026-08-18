@@ -24,6 +24,7 @@ export interface Word {
   translation: string;
   transcription: string | null;
   partOfSpeech: PartOfSpeech | null;
+  audioUrl: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -41,6 +42,7 @@ export interface CreateWordDto {
   translation: string;
   transcription?: string | null;
   partOfSpeech?: PartOfSpeech | null;
+  audioUrl?: string | null;
 }
 
 export interface UpdateWordDto {
@@ -48,6 +50,7 @@ export interface UpdateWordDto {
   translation?: string;
   transcription?: string | null;
   partOfSpeech?: PartOfSpeech | null;
+  audioUrl?: string | null;
 }
 
 export interface UnitWordsQuery {

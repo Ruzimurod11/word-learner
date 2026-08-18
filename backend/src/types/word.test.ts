@@ -3,6 +3,7 @@ import {
   createWordSchema,
   quizQuerySchema,
   searchQuerySchema,
+  ttsBackfillSchema,
   unitWordsQuerySchema,
   updateWordSchema,
 } from "./word.ts";
@@ -25,6 +26,15 @@ describe("createWordSchema", () => {
       transcription: " [kæt] ",
     });
     expect(result).toEqual({ english: "cat", translation: "mushuk", transcription: "[kæt]" });
+  });
+
+  it("accepts an optional trimmed audioUrl", () => {
+    const result = createWordSchema.parse({
+      english: "cat",
+      translation: "mushuk",
+      audioUrl: " https://example.com/cat.mp3 ",
+    });
+    expect(result).toEqual({ english: "cat", translation: "mushuk", audioUrl: "https://example.com/cat.mp3" });
   });
 
   it("accepts a known part of speech and rejects an unknown one", () => {
@@ -63,6 +73,8 @@ describe("updateWordSchema", () => {
     expect(updateWordSchema.safeParse({ transcription: "[kæt]" }).success).toBe(true);
     expect(updateWordSchema.safeParse({ partOfSpeech: "adj" }).success).toBe(true);
     expect(updateWordSchema.safeParse({ partOfSpeech: null }).success).toBe(true);
+    expect(updateWordSchema.safeParse({ audioUrl: "https://example.com/cat.mp3" }).success).toBe(true);
+    expect(updateWordSchema.safeParse({ audioUrl: null }).success).toBe(true);
   });
 });
 
@@ -81,6 +93,21 @@ describe("unitWordsQuerySchema", () => {
   it("rejects out-of-range values", () => {
     expect(unitWordsQuerySchema.safeParse({ page: "0" }).success).toBe(false);
     expect(unitWordsQuerySchema.safeParse({ pageSize: "101" }).success).toBe(false);
+  });
+});
+
+describe("ttsBackfillSchema", () => {
+  it("applies the default batch size", () => {
+    expect(ttsBackfillSchema.parse({})).toEqual({ limit: 50 });
+  });
+
+  it("coerces string limit to a number", () => {
+    expect(ttsBackfillSchema.parse({ limit: "25" })).toEqual({ limit: 25 });
+  });
+
+  it("rejects out-of-range values", () => {
+    expect(ttsBackfillSchema.safeParse({ limit: "0" }).success).toBe(false);
+    expect(ttsBackfillSchema.safeParse({ limit: "201" }).success).toBe(false);
   });
 });
 
