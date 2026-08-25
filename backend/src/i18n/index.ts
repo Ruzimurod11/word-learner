@@ -36,6 +36,8 @@ const messages: Record<Lang, Messages> = {
     "errors.auth_not_configured": "Admin paroli sozlanmagan",
     "errors.transcription_failed": "Transkripsiya yaratishda xatolik",
     "errors.part_of_speech_failed": "So'z turkumini aniqlashda xatolik",
+    "errors.get_profile_failed": "Profilni olishda xatolik",
+    "errors.update_profile_failed": "Profilni saqlashda xatolik",
   },
   en: {
     "errors.invalid_book_id": "Invalid book ID",
@@ -65,6 +67,8 @@ const messages: Record<Lang, Messages> = {
     "errors.auth_not_configured": "Admin password is not configured",
     "errors.transcription_failed": "Failed to generate transcriptions",
     "errors.part_of_speech_failed": "Failed to detect parts of speech",
+    "errors.get_profile_failed": "Failed to load profile",
+    "errors.update_profile_failed": "Failed to save profile",
   },
   ru: {
     "errors.invalid_book_id": "Неверный ID книги",
@@ -94,6 +98,8 @@ const messages: Record<Lang, Messages> = {
     "errors.auth_not_configured": "Пароль администратора не настроен",
     "errors.transcription_failed": "Не удалось создать транскрипции",
     "errors.part_of_speech_failed": "Не удалось определить части речи",
+    "errors.get_profile_failed": "Не удалось загрузить профиль",
+    "errors.update_profile_failed": "Не удалось сохранить профиль",
   },
 };
 

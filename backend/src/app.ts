@@ -6,6 +6,7 @@ import bookRoutes from "./routes/bookRoutes.ts";
 import unitRoutes from "./routes/unitRoutes.ts";
 import vocabularyRoutes from "./routes/vocabularyRoutes.ts";
 import authRoutes from "./routes/authRoutes.ts";
+import profileRoutes from "./routes/profileRoutes.ts";
 import audioProxyRoutes from "./routes/audioProxyRoutes.ts";
 import { languageMiddleware } from "./i18n/index.ts";
 
@@ -31,7 +32,7 @@ const corsOptions: CorsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(express.json());
+app.use(express.json({ limit: "1mb" }));
 
 app.use((_req, res, next) => {
   res.set("Cache-Control", "no-store");
@@ -49,6 +50,7 @@ app.get("/cron", (_req, res) => {
 });
 
 app.use("/auth", authRoutes);
+app.use("/profile", profileRoutes);
 app.use("/books", bookRoutes);
 app.use("/units", unitRoutes);
 app.use("/vocabulary", vocabularyRoutes);

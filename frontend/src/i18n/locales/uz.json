@@ -312,5 +312,20 @@
         "message": "Taslim bo'lmang! Har bir chempion aynan shu nuqtadan boshlagan. Yana bir bor urinib ko'ring — natija sizni hayratda qoldiradi!"
       }
     }
+  },
+  "profile": {
+    "title": "Profil",
+    "subtitle": "Admin profili — rasm va ism",
+    "admin_required": "Bu sahifa uchun admin sifatida kirish kerak",
+    "upload": "Rasm yuklash",
+    "remove_photo": "Rasmni o'chirish",
+    "image_hint": "PNG yoki JPG, 5 MB gacha. Rasm 256×256 ga kichraytiriladi.",
+    "display_name": "Ism",
+    "display_name_placeholder": "Ismingiz",
+    "save": "Saqlash",
+    "saving": "Saqlanmoqda...",
+    "saved": "Saqlandi",
+    "invalid_image": "Rasmni o'qib bo'lmadi. Boshqa fayl tanlang.",
+    "image_too_large": "Rasm juda katta (5 MB gacha bo'lishi kerak)"
   }
 }

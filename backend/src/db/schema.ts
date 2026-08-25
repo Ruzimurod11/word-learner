@@ -99,3 +99,17 @@ export type Unit = typeof units.$inferSelect;
 export type NewUnit = typeof units.$inferInsert;
 export type Word = typeof words.$inferSelect;
 export type NewWord = typeof words.$inferInsert;
+
+// Admin profili — bitta yozuv (singleton, id = 1).
+export const adminProfile = pgTable("admin_profile", {
+  id: integer("id").primaryKey().default(1),
+  displayName: text("display_name"),
+  // data URL ko'rinishida saqlanadi: "data:image/webp;base64,..."
+  avatar: text("avatar"),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+});
+
+export type AdminProfile = typeof adminProfile.$inferSelect;
+export type NewAdminProfile = typeof adminProfile.$inferInsert;

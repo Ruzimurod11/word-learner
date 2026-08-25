@@ -4,6 +4,7 @@ import { GraduationCap } from "lucide-react";
 import { AdminLogin } from "@/components/AdminLogin";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ProfileButton } from "@/components/ProfileButton";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { TranscriptionBackfill } from "@/components/TranscriptionBackfill";
 import { PartOfSpeechBackfill } from "@/components/PartOfSpeechBackfill";
@@ -46,6 +47,7 @@ function RootLayout() {
             <LanguageSwitcher />
             <ThemeToggle />
             <AdminLogin />
+            <ProfileButton />
           </div>
         </div>
       </header>
