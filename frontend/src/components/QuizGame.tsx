@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { ArrowLeftRight, PartyPopper, RotateCcw, Trophy } from "lucide-react";
 import { getBooks } from "@/api/book-api";
-import { getQuiz } from "@/api/word-api";
+import { getQuiz, getUnitWords } from "@/api/word-api";
 import type { QuizDirection, QuizLevel, QuizQuestion } from "@/types/word";
 import {
   CHEER_TIER_VARIANTS,
@@ -11,11 +11,14 @@ import {
   STREAK_CHEER_VARIANTS,
   getQuizCheer,
   getQuizFeedbackTier,
+  getTrailingStreak,
   isAnswerCorrect,
   isValidQuizCount,
   scoreQuiz,
+  shouldShowFireworks,
 } from "@/lib/quiz";
 import type { QuizCheer, QuizCheerTier, QuizFeedbackTier } from "@/lib/quiz";
+import { Celebration } from "@/components/Celebration";
 import { StateCard, btn, card, input } from "@/components/ui";
 import { Loader } from "@/components/Loader";
 
@@ -56,6 +59,9 @@ const CHEER_STYLES: Record<
     gradient: "from-rose-500 to-pink-500",
   },
 };
+
+// eng uzun konfetti parchasi tugaguncha effekt ekranda qoladi
+const CELEBRATION_MS = 2500;
 
 // faqat event handler'da chaqiriladi; komponentdan tashqarida turibdi, chunki
 // react-compiler lint'i render ichidagi to'g'ridan-to'g'ri Math.random'ni taqiqlaydi
@@ -125,20 +131,42 @@ export function QuizGame({
   const [typed, setTyped] = useState("");
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [cheerSeed, setCheerSeed] = useState(0);
+  // 0 — effekt yo'q; har nishonda o'sadi va Celebration'ni qaytadan mount qiladi
+  const [celebration, setCelebration] = useState(0);
   // hard darajada savol doim o'zbekcha, javob inglizcha — yo'nalish almashmaydi
   const [direction, setDirection] = useState<QuizDirection>("uz-en");
-  const [countInput, setCountInput] = useState(String(MIN_COUNT));
+  // null — foydalanuvchi hali tegmagan, default ko'rsatiladi
+  const [countInput, setCountInput] = useState<string | null>(null);
   const [count, setCount] = useState<number | null>(
     selectableCount ? null : MIN_COUNT,
   );
 
-  // max = saytdagi jami so'zlar soni; picker'lar keshidagi books query'dan olinadi
+  // max: unit testida shu unitdagi so'zlar soni, umumiy testda saytdagi jami
+  // so'zlar; ikkalasi ham picker'lar keshidagi query'dan qaytadi
   const booksQuery = useQuery({
     queryKey: ["books"],
     queryFn: getBooks,
-    enabled: !!selectableCount && count === null,
+    enabled: !!selectableCount && unitId === undefined && count === null,
   });
-  const maxCount = booksQuery.data?.reduce((acc, b) => acc + b.wordCount, 0);
+  const unitWordsQuery = useQuery({
+    queryKey: ["unit-words", unitId, { page: 1, pageSize: 1 }],
+    queryFn: () => getUnitWords(unitId ?? 0, { page: 1, pageSize: 1 }),
+    enabled: !!selectableCount && unitId !== undefined && count === null,
+  });
+  const maxCount =
+    unitId !== undefined
+      ? unitWordsQuery.data?.total
+      : booksQuery.data?.reduce((acc, b) => acc + b.wordCount, 0);
+  // unit testi default'i — unitdagi barcha so'zlar, umumiy testda esa minimum
+  const defaultCount = unitId !== undefined ? maxCount : MIN_COUNT;
+  const countValue =
+    countInput ?? (defaultCount === undefined ? "" : String(defaultCount));
+
+  // so'zi MIN_COUNT dan oshmaydigan unitda tanlaydigan narsa yo'q — forma
+  // ko'rsatilmaydi, test hamma so'z bilan darhol boshlanadi
+  const autoCount =
+    maxCount !== undefined && maxCount <= MIN_COUNT ? maxCount : null;
+  const activeCount = count ?? autoCount;
 
   const quizQuery = useQuery({
     queryKey: [
@@ -148,7 +176,7 @@ export function QuizGame({
       toUnitId ?? 0,
       direction,
       level,
-      count,
+      activeCount,
       round,
     ],
     queryFn: () =>
@@ -156,11 +184,11 @@ export function QuizGame({
         unitId,
         fromUnitId,
         toUnitId,
-        count: count ?? MIN_COUNT,
+        count: activeCount ?? MIN_COUNT,
         direction,
         level,
       }),
-    enabled: count !== null,
+    enabled: activeCount !== null,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
     retry: false,
@@ -176,6 +204,13 @@ export function QuizGame({
     return () => clearTimeout(timer);
   }, [selected]);
 
+  // nishon effekti keyingi savolga o'tishdan uzunroq — o'z taymeri bilan yashaydi
+  useEffect(() => {
+    if (celebration === 0) return;
+    const timer = setTimeout(() => setCelebration(0), CELEBRATION_MS);
+    return () => clearTimeout(timer);
+  }, [celebration]);
+
   const toggleDirection = () => {
     setDirection((d) => (d === "uz-en" ? "en-uz" : "uz-en"));
     setIndex(0);
@@ -183,9 +218,13 @@ export function QuizGame({
     setAnswers([]);
   };
 
-  if (count === null) {
-    const parsedCount = Number(countInput);
-    const countValid = isValidQuizCount(countInput, maxCount);
+  if (activeCount === null) {
+    // max yuklanmaguncha forma ko'rsatilmaydi
+    if (maxCount === undefined) {
+      return <Loader />;
+    }
+    const parsedCount = Number(countValue);
+    const countValid = isValidQuizCount(countValue, maxCount);
     return (
       <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
         <div className={`flex flex-col gap-4 ${card} animate-fade-in p-6`}>
@@ -197,7 +236,7 @@ export function QuizGame({
             type="number"
             min={MIN_COUNT}
             max={maxCount}
-            value={countInput}
+            value={countValue}
             onChange={(e) => setCountInput(e.target.value)}
             className={input}
           />
@@ -367,9 +406,13 @@ export function QuizGame({
 
   const onSelect = (option: string) => {
     if (answered) return;
+    const next = [...answers, { question, selected: option }];
     setSelected(option);
     setCheerSeed(randomSeed());
-    setAnswers((prev) => [...prev, { question, selected: option }]);
+    setAnswers(next);
+    if (shouldShowFireworks(getTrailingStreak(next))) {
+      setCelebration((c) => c + 1);
+    }
   };
 
   const onSubmitTyped = (e: FormEvent) => {
@@ -418,6 +461,7 @@ export function QuizGame({
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
+      {celebration > 0 && <Celebration key={celebration} />}
       {cheer && (
         <CheerPopup key={`cheer-${index}`} cheer={cheer} seed={cheerSeed} />
       )}
