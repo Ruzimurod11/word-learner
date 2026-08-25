@@ -11,7 +11,7 @@ import {
   updateWordSchema,
 } from "../types/word.ts";
 import { sendError, sendSuccess } from "../utils/responseHandler.ts";
-import { formatZodError, isUniqueViolation } from "../utils/validation.ts";
+import { formatZodError } from "../utils/validation.ts";
 
 const idSchema = z.coerce.number().int().positive();
 
@@ -55,20 +55,6 @@ export const createUnitWord = async (req: Request, res: Response): Promise<void>
     const word = await wordService.createWord(unitIdResult.data, bodyResult.data);
     sendSuccess(res, word, 201);
   } catch (err: unknown) {
-    if (isUniqueViolation(err)) {
-      const loc = await wordService.findWordLocation(
-        bodyResult.data.english,
-        bodyResult.data.translation,
-      );
-      const msg = loc
-        ? t(getLang(req), "errors.duplicate_word_at", {
-            book: loc.bookOrder,
-            unit: loc.unitOrder,
-          })
-        : t(getLang(req), "errors.duplicate_word");
-      sendError(res, msg, 409);
-      return;
-    }
     console.error(err);
     sendError(res, t(getLang(req), "errors.create_word_failed"));
   }
@@ -93,25 +79,6 @@ export const updateWord = async (req: Request, res: Response): Promise<void> => 
     }
     sendSuccess(res, word);
   } catch (err: unknown) {
-    if (isUniqueViolation(err)) {
-      // Update qisman bo'lishi mumkin: yuborilmagan tomonni mavjud yozuvdan olamiz,
-      // shunda dublikat juftlik (english, translation) to'g'ri aniqlanadi.
-      const existing = await wordService.getWordById(idResult.data);
-      const english = bodyResult.data.english ?? existing?.english;
-      const translation = bodyResult.data.translation ?? existing?.translation;
-      const loc =
-        english && translation
-          ? await wordService.findWordLocation(english, translation)
-          : null;
-      const msg = loc
-        ? t(getLang(req), "errors.duplicate_word_at", {
-            book: loc.bookOrder,
-            unit: loc.unitOrder,
-          })
-        : t(getLang(req), "errors.duplicate_word");
-      sendError(res, msg, 409);
-      return;
-    }
     console.error(err);
     sendError(res, t(getLang(req), "errors.update_word_failed"));
   }

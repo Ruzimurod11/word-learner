@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import {
   ArrowRight,
   BookOpen,
+  FileText,
   GraduationCap,
   Library,
   Sparkles,
@@ -63,6 +64,7 @@ function HomePage() {
         <BooksGrid />
       </div>
       <VocabulariesSection />
+      <PassagesSection />
     </div>
   );
 }
@@ -91,6 +93,42 @@ function VocabulariesSection() {
         </div>
         <div className="hidden shrink-0 flex-col items-end gap-1 text-xs text-muted-foreground sm:flex">
           <span>{t("book.word_count", { count: wordCount })}</span>
+          <span className="inline-flex items-center gap-1 font-semibold text-primary transition group-hover:translate-x-0.5">
+            {t("common.open")}
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </span>
+        </div>
+      </Link>
+    </div>
+  );
+}
+
+function PassagesSection() {
+  const { t } = useTranslation();
+  const query = useQuery({ queryKey: ["books"], queryFn: getBooks });
+  const passages = (query.data ?? []).find((b) => b.kind === "passages");
+  if (!passages) return null;
+
+  return (
+    <div className="flex flex-col gap-4 border-t border-border pt-6 sm:pt-8">
+      <h2 className="text-xl font-bold sm:text-2xl">{t("passages.title")}</h2>
+      <Link
+        to="/books/$bookId"
+        params={{ bookId: String(passages.id) }}
+        className={`group flex items-center gap-4 ${card} p-5 transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-indigo-500/10`}
+      >
+        <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-md">
+          <FileText className="h-6 w-6" aria-hidden="true" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h3 className="text-base font-semibold">{t("passages.title")}</h3>
+          <p className="mt-0.5 line-clamp-2 text-sm text-muted-foreground">
+            {t("passages.subtitle")}
+          </p>
+        </div>
+        <div className="hidden shrink-0 flex-col items-end gap-1 text-xs text-muted-foreground sm:flex">
+          <span>{t("book.unit_count", { count: passages.unitCount })}</span>
+          <span>{t("book.word_count", { count: passages.wordCount })}</span>
           <span className="inline-flex items-center gap-1 font-semibold text-primary transition group-hover:translate-x-0.5">
             {t("common.open")}
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

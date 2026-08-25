@@ -6,7 +6,7 @@ import {
   timestamp,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 
 export const books = pgTable(
   "books",
@@ -48,37 +48,25 @@ export const units = pgTable(
   ],
 );
 
-export const words = pgTable(
-  "words",
-  {
-    id: serial("id").primaryKey(),
-    unitId: integer("unit_id")
-      .notNull()
-      .references(() => units.id, { onDelete: "cascade" }),
-    order: integer("order").notNull(),
-    english: text("english").notNull(),
-    translation: text("translation").notNull(),
-    transcription: text("transcription"),
-    // so'z turkumi qisqartmasi: v, n, adj, adv, ...
-    partOfSpeech: text("part_of_speech"),
-    audioUrl: text("audio_url"),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-  },
-  (table) => [
-    // (english, translation) juftligi case-insensitive unique: bir xil juftlik
-    // ikki marta qo'shilmaydi, lekin biror tomon farq qilsa (masalan "apple/olma"
-    // va "apple/olmalar") boshqa yozuv hisoblanadi va qo'shiladi.
-    uniqueIndex("words_english_translation_lower_unique_idx").on(
-      sql`lower(${table.english})`,
-      sql`lower(${table.translation})`,
-    ),
-  ],
-);
+export const words = pgTable("words", {
+  id: serial("id").primaryKey(),
+  unitId: integer("unit_id")
+    .notNull()
+    .references(() => units.id, { onDelete: "cascade" }),
+  order: integer("order").notNull(),
+  english: text("english").notNull(),
+  translation: text("translation").notNull(),
+  transcription: text("transcription"),
+  // so'z turkumi qisqartmasi: v, n, adj, adv, ...
+  partOfSpeech: text("part_of_speech"),
+  audioUrl: text("audio_url"),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+});
 
 export const booksRelations = relations(books, ({ many }) => ({
   units: many(units),

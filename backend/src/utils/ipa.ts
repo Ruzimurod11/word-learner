@@ -53,6 +53,16 @@ const MISPLACED_STRESS = new RegExp(
   "g",
 );
 
+// Uy uslubida ishlatiladigan belgilar. Tashqarida qolganlari — amerikacha
+// variantlar (ɚ ɝ oʊ), tor transkripsiya (ʰ ʷ ʈ ä) va buzuq belgilar (ɫ ʍ).
+const HOUSE_STYLE = new RegExp(`^[${VOWELS}${CONSONANTS}ˈˌː ]+$`);
+
+// IPA uy uslubiga (britaniyacha RP) mos yozilganmi. Lug'at API'dan kelgan
+// nomzodlarni filtrlash uchun — noto'g'ri yozuvdan ko'ra bo'sh katak yaxshi.
+export function isBritishIpa(ipa: string): boolean {
+  return HOUSE_STYLE.test(ipa);
+}
+
 const DIPHTHONGS = ["eɪ", "aɪ", "ɔɪ", "əʊ", "aʊ", "ɪə", "eə", "ʊə"];
 
 // Bo'g'in yadrolarini sanaydi. Yadro — unli (yoki diftong), yoki sillabik

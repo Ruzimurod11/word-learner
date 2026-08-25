@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { normalizeBritishIpa } from "./ipa.ts";
+import { isBritishIpa, normalizeBritishIpa } from "./ipa.ts";
 
 describe("normalizeBritishIpa", () => {
   it("moves the stress mark to the start of the syllable onset", () => {
@@ -78,5 +78,25 @@ describe("normalizeBritishIpa", () => {
       const once = normalizeBritishIpa(ipa);
       expect(normalizeBritishIpa(once)).toBe(once);
     }
+  });
+});
+
+describe("isBritishIpa", () => {
+  it("accepts house-style transcriptions", () => {
+    for (const ipa of ["ˈkɒmpjuːtə", "əkˈsept", "ˈhʌri ˈʌp", "ˌekspekˈteɪʃn", "tʃek"]) {
+      expect(isBritishIpa(ipa)).toBe(true);
+    }
+  });
+
+  it("rejects American variants", () => {
+    expect(isBritishIpa("ɪkˈspoʊʒɚ")).toBe(false); // oʊ va ɚ
+    expect(isBritishIpa("ˈsɝkəmˌstæns")).toBe(false); // ɝ
+    expect(isBritishIpa("ˈbʌɾə")).toBe(false); // flap ɾ
+  });
+
+  it("rejects narrow and broken symbols", () => {
+    expect(isBritishIpa("pʰäːs")).toBe(false);
+    expect(isBritishIpa("ʈʰɑɡ")).toBe(false);
+    expect(isBritishIpa("dɪˈplɔːrəbəɫ")).toBe(false);
   });
 });
