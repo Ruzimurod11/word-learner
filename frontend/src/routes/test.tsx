@@ -5,6 +5,7 @@ import { z } from "zod";
 import {
   ArrowLeft,
   BookOpen,
+  FileText,
   Keyboard,
   Layers,
   ListChecks,
@@ -121,6 +122,7 @@ function TestPage() {
           <QuizGame
             key={`${level}-${search.unit}`}
             unitId={search.unit}
+            selectableCount
             level={level}
             onExit={() => goTo({ mode: "topic", level, book: search.book })}
           />
@@ -431,25 +433,34 @@ function BookPicker({
       {query.data && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {query.data
-            .filter((book) => book.kind === "essential")
-            .map((book) => (
-              <button
-                key={book.id}
-                type="button"
-                onClick={() => onSelect(book.id)}
-                className={`flex flex-col gap-2 ${card} p-5 text-left transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-indigo-500/10`}
-              >
-                <span
-                  className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${bookGradient(book.order)} font-display text-base font-bold text-white shadow-md`}
+            .filter(
+              (book) => book.kind === "essential" || book.kind === "passages",
+            )
+            .map((book) => {
+              const isPassages = book.kind === "passages";
+              return (
+                <button
+                  key={book.id}
+                  type="button"
+                  onClick={() => onSelect(book.id)}
+                  className={`flex flex-col gap-2 ${card} p-5 text-left transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-indigo-500/10`}
                 >
-                  {book.order}
-                </span>
-                <span className="text-base font-semibold">{book.title}</span>
-                <span className="text-xs text-muted-foreground">
-                  {t("book.word_count", { count: book.wordCount })}
-                </span>
-              </button>
-            ))}
+                  <span
+                    className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${isPassages ? "from-amber-500 to-orange-600" : bookGradient(book.order)} font-display text-base font-bold text-white shadow-md`}
+                  >
+                    {isPassages ? (
+                      <FileText className="h-5 w-5" aria-hidden="true" />
+                    ) : (
+                      book.order
+                    )}
+                  </span>
+                  <span className="text-base font-semibold">{book.title}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {t("book.word_count", { count: book.wordCount })}
+                  </span>
+                </button>
+              );
+            })}
         </div>
       )}
     </div>

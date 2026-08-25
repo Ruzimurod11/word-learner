@@ -1,0 +1,1 @@
+DROP INDEX "words_english_translation_lower_unique_idx";

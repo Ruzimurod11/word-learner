@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const bookIdSchema = z.coerce.number().int().positive();
 
-export type BookKind = "essential" | "vocabulary";
+export type BookKind = "essential" | "vocabulary" | "passages";
 
 export interface BookDto {
   id: number;

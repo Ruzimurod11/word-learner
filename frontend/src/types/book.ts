@@ -1,4 +1,4 @@
-export type BookKind = "essential" | "vocabulary";
+export type BookKind = "essential" | "vocabulary" | "passages";
 
 export interface Book {
   id: number;

@@ -1,0 +1,5456 @@
+{
+  "a wide variety of": {
+    "ipa": "ə ˈwaɪd vəˈraɪəti əv",
+    "pos": "phr"
+  },
+  "abandon": {
+    "pos": "v"
+  },
+  "abdomen": {
+    "pos": "n"
+  },
+  "abnormal": {
+    "pos": "adj"
+  },
+  "about": {
+    "pos": "prep"
+  },
+  "absence": {
+    "pos": "n"
+  },
+  "absorbing": {
+    "pos": "adj"
+  },
+  "abstain from": {
+    "ipa": "əbˈsteɪn frɒm",
+    "pos": "phr"
+  },
+  "accelerate": {
+    "pos": "v"
+  },
+  "acceptable": {
+    "pos": "adj"
+  },
+  "acceptance": {
+    "pos": "n"
+  },
+  "accidental": {
+    "pos": "adj"
+  },
+  "according to": {
+    "ipa": "əˈkɔːdɪŋ tuː",
+    "pos": "phr"
+  },
+  "accumulate": {
+    "pos": "v"
+  },
+  "achiever": {
+    "ipa": "əˈtʃiːvə",
+    "pos": "n"
+  },
+  "activity": {
+    "pos": "n"
+  },
+  "acute": {
+    "pos": "adj"
+  },
+  "adapt": {
+    "pos": "v"
+  },
+  "adaptability": {
+    "ipa": "əˌdæptəˈbɪləti",
+    "pos": "n"
+  },
+  "adaptable": {
+    "pos": "adj"
+  },
+  "adequate": {
+    "ipa": "ˈædɪkwət",
+    "pos": "adj"
+  },
+  "adolescent": {
+    "pos": "n"
+  },
+  "advertisement": {
+    "pos": "n"
+  },
+  "advisable": {
+    "ipa": "ədˈvaɪzəbl",
+    "pos": "adj"
+  },
+  "affect": {
+    "pos": "v"
+  },
+  "after-effect": {
+    "ipa": "ˈɑːftər ɪfekt",
+    "pos": "n"
+  },
+  "afterwards": {
+    "pos": "adv"
+  },
+  "age": {
+    "pos": "n"
+  },
+  "agent": {
+    "pos": "n"
+  },
+  "aggressive": {
+    "pos": "adj"
+  },
+  "aggressiveness": {
+    "ipa": "əˈɡresɪvnəs",
+    "pos": "n"
+  },
+  "ailment": {
+    "pos": "n"
+  },
+  "all day long": {
+    "ipa": "ˈɔːl ˈdeɪ ˈlɒŋ",
+    "pos": "phr"
+  },
+  "all time": {
+    "ipa": "ˈɔːl ˈtaɪm",
+    "pos": "phr"
+  },
+  "allergy": {
+    "ipa": "ˈælədʒi",
+    "pos": "n"
+  },
+  "almost": {
+    "pos": "adv"
+  },
+  "almost twice": {
+    "ipa": "ˈɔːlməʊst ˈtwaɪs",
+    "pos": "phr"
+  },
+  "although": {
+    "pos": "conj"
+  },
+  "amazing": {
+    "pos": "adj"
+  },
+  "amongst": {
+    "ipa": "əˈmʌŋst",
+    "pos": "prep"
+  },
+  "amplifier": {
+    "ipa": "ˈæmplɪfaɪə",
+    "pos": "n"
+  },
+  "amusement": {
+    "pos": "n"
+  },
+  "amusing": {
+    "pos": "adj"
+  },
+  "analyze": {
+    "pos": "v"
+  },
+  "another": {
+    "pos": "det"
+  },
+  "answer": {
+    "pos": "n"
+  },
+  "anti-social": {
+    "ipa": "ˌænti ˈsəʊʃl",
+    "pos": "adj"
+  },
+  "anything": {
+    "pos": "pron"
+  },
+  "apart from": {
+    "ipa": "əˈpɑːt frɒm",
+    "pos": "phr"
+  },
+  "appearance": {
+    "pos": "n"
+  },
+  "applaud": {
+    "pos": "v"
+  },
+  "approximately": {
+    "pos": "adv"
+  },
+  "arduous": {
+    "ipa": "ˈɑːdjuəs",
+    "pos": "adj"
+  },
+  "arm": {
+    "pos": "n"
+  },
+  "armed": {
+    "ipa": "ɑːmd",
+    "pos": "adj"
+  },
+  "armour": {
+    "pos": "n"
+  },
+  "arouse": {
+    "pos": "v"
+  },
+  "arrival": {
+    "pos": "n"
+  },
+  "art": {
+    "pos": "n"
+  },
+  "art museum": {
+    "ipa": "ˈɑːt mjuːˈziːəm",
+    "pos": "phr"
+  },
+  "artifact": {
+    "pos": "n"
+  },
+  "artificial lighting": {
+    "ipa": "ˌɑːtɪˈfɪʃəl ˈlaɪtɪŋ",
+    "pos": "phr"
+  },
+  "artwork": {
+    "pos": "n"
+  },
+  "as": {
+    "pos": "prep"
+  },
+  "as for": {
+    "ipa": "əz ˈfɔː",
+    "pos": "phr"
+  },
+  "as if": {
+    "ipa": "əz ˈɪf",
+    "pos": "phr"
+  },
+  "as much as possible": {
+    "ipa": "əz ˈmʌtʃ əz ˈpɒsəbəl",
+    "pos": "phr"
+  },
+  "as soon as": {
+    "ipa": "əz ˈsuːn əz",
+    "pos": "phr"
+  },
+  "as soon as possible": {
+    "ipa": "əz ˈsuːn əz ˈpɒsəbəl",
+    "pos": "phr"
+  },
+  "ascend": {
+    "pos": "v"
+  },
+  "ashe": {
+    "ipa": "æʃ",
+    "pos": "n"
+  },
+  "ashen grey": {
+    "ipa": "ˈæʃən ˈɡreɪ",
+    "pos": "phr"
+  },
+  "aspect": {
+    "pos": "n"
+  },
+  "assembly line": {
+    "ipa": "əˈsembli ˈlaɪn",
+    "pos": "phr"
+  },
+  "assist": {
+    "pos": "v"
+  },
+  "assistance": {
+    "pos": "n"
+  },
+  "assistant": {
+    "pos": "n"
+  },
+  "associated with": {
+    "ipa": "əˈsəʊʃieɪtɪd wɪð",
+    "pos": "phr"
+  },
+  "astonished by": {
+    "ipa": "əˈstɒnɪʃt baɪ",
+    "pos": "phr"
+  },
+  "at a later stage": {
+    "ipa": "ət ə ˈleɪtə ˈsteɪdʒ",
+    "pos": "phr"
+  },
+  "at birth": {
+    "ipa": "ət ˈbɜːθ",
+    "pos": "phr"
+  },
+  "at least": {
+    "ipa": "ət ˈliːst",
+    "pos": "phr"
+  },
+  "at will": {
+    "ipa": "ət ˈwɪl",
+    "pos": "phr"
+  },
+  "attempts": {
+    "pos": "n"
+  },
+  "attic": {
+    "pos": "n"
+  },
+  "attractive": {
+    "pos": "adj"
+  },
+  "authenticity": {
+    "pos": "n"
+  },
+  "author": {
+    "pos": "n"
+  },
+  "avalanche": {
+    "pos": "n"
+  },
+  "await": {
+    "pos": "v"
+  },
+  "aware of": {
+    "ipa": "əˈweər əv",
+    "pos": "phr"
+  },
+  "awareness": {
+    "pos": "n"
+  },
+  "backward": {
+    "pos": "adj"
+  },
+  "baked": {
+    "pos": "adj"
+  },
+  "bandit": {
+    "ipa": "ˈbændɪt",
+    "pos": "n"
+  },
+  "bar": {
+    "pos": "n"
+  },
+  "based on": {
+    "ipa": "ˈbeɪst ɒn",
+    "pos": "phr"
+  },
+  "basic necessities": {
+    "ipa": "ˈbeɪsɪk nəˈsesətiz",
+    "pos": "phr"
+  },
+  "basically": {
+    "pos": "adv"
+  },
+  "basis for": {
+    "ipa": "ˈbeɪsɪs fɔː",
+    "pos": "phr"
+  },
+  "be taller, higher": {
+    "ipa": "biː ˈtɔːlə ˈhaɪə",
+    "pos": "phr"
+  },
+  "beauty": {
+    "pos": "n"
+  },
+  "became": {
+    "pos": "v"
+  },
+  "because": {
+    "pos": "conj"
+  },
+  "become addicted to": {
+    "ipa": "bɪˈkʌm əˈdɪktɪd tuː",
+    "pos": "phr"
+  },
+  "become aware": {
+    "ipa": "bɪˈkʌm əˈweə",
+    "pos": "phr"
+  },
+  "bed": {
+    "ipa": "bed",
+    "pos": "n"
+  },
+  "beforehand": {
+    "pos": "adv"
+  },
+  "beginning": {
+    "pos": "n"
+  },
+  "behaviour": {
+    "pos": "n"
+  },
+  "believe": {
+    "pos": "v"
+  },
+  "belong to": {
+    "ipa": "bɪˈlɒŋ tuː",
+    "pos": "phr"
+  },
+  "below": {
+    "pos": "adv"
+  },
+  "belt": {
+    "pos": "n"
+  },
+  "better": {
+    "ipa": "ˈbetə",
+    "pos": "adj"
+  },
+  "better condition": {
+    "ipa": "ˈbetə kənˈdɪʃən",
+    "pos": "phr"
+  },
+  "better type": {
+    "ipa": "ˈbetə ˈtaɪp",
+    "pos": "phr"
+  },
+  "between": {
+    "pos": "prep"
+  },
+  "bid": {
+    "pos": "n"
+  },
+  "bill": {
+    "pos": "n"
+  },
+  "birth rate": {
+    "ipa": "ˈbɜːθ ˈreɪt",
+    "pos": "phr"
+  },
+  "black community": {
+    "ipa": "ˈblæk kəˈmjuːnəti",
+    "pos": "phr"
+  },
+  "blanket": {
+    "pos": "n"
+  },
+  "blister": {
+    "ipa": "ˈblɪstə",
+    "pos": "n"
+  },
+  "blowhole": {
+    "ipa": "ˈbləʊhəʊl",
+    "pos": "n"
+  },
+  "bluff": {
+    "pos": "n"
+  },
+  "blurred": {
+    "pos": "adj"
+  },
+  "boisterous": {
+    "pos": "adj"
+  },
+  "bolster": {
+    "pos": "v"
+  },
+  "boon": {
+    "pos": "n"
+  },
+  "booth": {
+    "pos": "n"
+  },
+  "bottle-nosed": {
+    "ipa": "ˈbɒtl nəʊzd",
+    "pos": "adj"
+  },
+  "bound": {
+    "pos": "v"
+  },
+  "bowler hat": {
+    "ipa": "ˈbəʊlə ˈhæt",
+    "pos": "phr"
+  },
+  "box": {
+    "pos": "n"
+  },
+  "bracelet": {
+    "pos": "n"
+  },
+  "brainpower": {
+    "ipa": "ˈbreɪnpaʊə",
+    "pos": "n"
+  },
+  "break": {
+    "pos": "v"
+  },
+  "break out": {
+    "ipa": "ˈbreɪk ˈaʊt",
+    "pos": "phr"
+  },
+  "break through": {
+    "ipa": "ˈbreɪk ˈθruː",
+    "pos": "phr"
+  },
+  "breakthrough": {
+    "pos": "n"
+  },
+  "breathless": {
+    "pos": "adj"
+  },
+  "brighter": {
+    "pos": "adj"
+  },
+  "brightly": {
+    "pos": "adv"
+  },
+  "bring about": {
+    "ipa": "ˈbrɪŋ əˈbaʊt",
+    "pos": "phr"
+  },
+  "bring back": {
+    "ipa": "ˈbrɪŋ ˈbæk",
+    "pos": "phr"
+  },
+  "bring down": {
+    "ipa": "ˈbrɪŋ ˈdaʊn",
+    "pos": "phr"
+  },
+  "bring into action": {
+    "ipa": "ˈbrɪŋ ˈɪntuː ˈækʃən",
+    "pos": "phr"
+  },
+  "bring up": {
+    "ipa": "ˈbrɪŋ ˈʌp",
+    "pos": "phr"
+  },
+  "bristle": {
+    "pos": "n"
+  },
+  "bronze": {
+    "pos": "n"
+  },
+  "brought(bring)": {
+    "ipa": "brɔːt",
+    "pos": "v"
+  },
+  "brush": {
+    "pos": "n"
+  },
+  "brutalize": {
+    "ipa": "ˈbruːtəlaɪz",
+    "pos": "v"
+  },
+  "budget": {
+    "ipa": "ˈbʌdʒɪt",
+    "pos": "n"
+  },
+  "bulk": {
+    "pos": "n"
+  },
+  "bull": {
+    "pos": "n"
+  },
+  "burden": {
+    "pos": "n"
+  },
+  "burst on scene": {
+    "ipa": "ˈbɜːst ɒn ˈsiːn",
+    "pos": "phr"
+  },
+  "bursts": {
+    "ipa": "bɜːsts",
+    "pos": "n"
+  },
+  "bury": {
+    "pos": "v"
+  },
+  "buzz": {
+    "pos": "v"
+  },
+  "by contrast": {
+    "ipa": "baɪ ˈkɒntrɑːst",
+    "pos": "phr"
+  },
+  "by hand": {
+    "ipa": "baɪ ˈhænd",
+    "pos": "phr"
+  },
+  "by means of": {
+    "ipa": "baɪ ˈmiːnz əv",
+    "pos": "phr"
+  },
+  "by ship": {
+    "ipa": "baɪ ˈʃɪp",
+    "pos": "phr"
+  },
+  "calculation": {
+    "pos": "n"
+  },
+  "calf": {
+    "pos": "n"
+  },
+  "call": {
+    "pos": "v"
+  },
+  "calves": {
+    "pos": "n"
+  },
+  "came down": {
+    "ipa": "ˈkeɪm ˈdaʊn",
+    "pos": "phr"
+  },
+  "campaign": {
+    "pos": "n"
+  },
+  "capable of": {
+    "ipa": "ˈkeɪpəbəl əv",
+    "pos": "phr"
+  },
+  "car builder": {
+    "ipa": "ˈkɑː ˈbɪldə",
+    "pos": "phr"
+  },
+  "car crash": {
+    "ipa": "ˈkɑː ˈkræʃ",
+    "pos": "phr"
+  },
+  "car manufacturer": {
+    "ipa": "ˈkɑː ˌmænjʊˈfæktʃərə",
+    "pos": "phr"
+  },
+  "care": {
+    "pos": "v"
+  },
+  "careful": {
+    "pos": "adj"
+  },
+  "carefully observed": {
+    "ipa": "ˈkeəfəli əbˈzɜːvd",
+    "pos": "phr"
+  },
+  "carpet": {
+    "pos": "n"
+  },
+  "carry": {
+    "pos": "v"
+  },
+  "carry out": {
+    "ipa": "ˈkæri ˈaʊt",
+    "pos": "phr"
+  },
+  "case": {
+    "pos": "n"
+  },
+  "casualty": {
+    "ipa": "ˈkæʒuəlti",
+    "pos": "n"
+  },
+  "catalogued": {
+    "ipa": "ˈkætəlɒɡd",
+    "pos": "adj"
+  },
+  "catch": {
+    "pos": "v"
+  },
+  "catch disease": {
+    "ipa": "ˈkætʃ dɪˈziːz",
+    "pos": "phr"
+  },
+  "category": {
+    "pos": "n"
+  },
+  "catering": {
+    "pos": "n"
+  },
+  "celebration": {
+    "pos": "n"
+  },
+  "certain luxuries": {
+    "ipa": "ˈsɜːtən ˈlʌkʃəriz",
+    "pos": "phr"
+  },
+  "certainly": {
+    "pos": "adv"
+  },
+  "chairman": {
+    "pos": "n"
+  },
+  "challenging": {
+    "pos": "adj"
+  },
+  "change": {
+    "pos": "n"
+  },
+  "channel": {
+    "pos": "n"
+  },
+  "charged at": {
+    "ipa": "ˈtʃɑːdʒd ət",
+    "pos": "phr"
+  },
+  "charger": {
+    "pos": "n"
+  },
+  "cheerful": {
+    "pos": "adj"
+  },
+  "chest-beating": {
+    "ipa": "ˈtʃest biːtɪŋ",
+    "pos": "n"
+  },
+  "chewing gum": {
+    "ipa": "ˈtʃuːɪŋ ˈɡʌm",
+    "pos": "phr"
+  },
+  "childhood": {
+    "pos": "n"
+  },
+  "chin": {
+    "pos": "n"
+  },
+  "chosen": {
+    "pos": "adj"
+  },
+  "cinders": {
+    "ipa": "ˈsɪndəz",
+    "pos": "n"
+  },
+  "circuit": {
+    "ipa": "ˈsɜːkɪt",
+    "pos": "n"
+  },
+  "circulate": {
+    "ipa": "ˈsɜːkjəleɪt",
+    "pos": "v"
+  },
+  "circumstance": {
+    "ipa": "ˈsɜːkəmstəns",
+    "pos": "n"
+  },
+  "cite": {
+    "pos": "v"
+  },
+  "classify": {
+    "pos": "v"
+  },
+  "cleansing": {
+    "pos": "n"
+  },
+  "clear": {
+    "pos": "adj"
+  },
+  "clear-cut": {
+    "ipa": "ˌklɪə ˈkʌt",
+    "pos": "adj"
+  },
+  "clearly": {
+    "pos": "adv"
+  },
+  "clutch": {
+    "pos": "v"
+  },
+  "co-operation": {
+    "ipa": "kəʊ ˌɒpəˈreɪʃn",
+    "pos": "n"
+  },
+  "co-worker": {
+    "ipa": "ˈkəʊ wɜːkə",
+    "pos": "n"
+  },
+  "coat of feathers": {
+    "ipa": "ˈkəʊt əv ˈfeðəz",
+    "pos": "phr"
+  },
+  "coin": {
+    "pos": "n"
+  },
+  "collection": {
+    "pos": "n"
+  },
+  "colourfu": {
+    "ipa": "ˈkʌləfl",
+    "pos": "adj"
+  },
+  "column": {
+    "ipa": "ˈkɒləm",
+    "pos": "n"
+  },
+  "combat": {
+    "pos": "v"
+  },
+  "combative": {
+    "pos": "adj"
+  },
+  "combine": {
+    "ipa": "kəmˈbaɪn",
+    "pos": "v"
+  },
+  "come to realize": {
+    "ipa": "ˈkʌm tə ˈrɪəlaɪz",
+    "pos": "phr"
+  },
+  "comedian": {
+    "ipa": "kəˈmiːdiən",
+    "pos": "n"
+  },
+  "comfortable": {
+    "pos": "adj"
+  },
+  "comic strips": {
+    "ipa": "ˈkɒmɪk ˈstrɪps",
+    "pos": "phr"
+  },
+  "commercial": {
+    "pos": "adj"
+  },
+  "communication": {
+    "pos": "n"
+  },
+  "companion": {
+    "pos": "n"
+  },
+  "company": {
+    "pos": "n"
+  },
+  "competitive": {
+    "ipa": "kəmˈpetətɪv",
+    "pos": "adj"
+  },
+  "complain": {
+    "pos": "v"
+  },
+  "complete": {
+    "pos": "v"
+  },
+  "complicated concepts": {
+    "ipa": "ˈkɒmplɪkeɪtɪd ˈkɒnsepts",
+    "pos": "phr"
+  },
+  "complimentary tickets": {
+    "ipa": "ˌkɒmplɪˈmentəri ˈtɪkɪts",
+    "pos": "phr"
+  },
+  "composer": {
+    "ipa": "kəmˈpəʊzə",
+    "pos": "n"
+  },
+  "composition": {
+    "pos": "n"
+  },
+  "conceive": {
+    "pos": "v"
+  },
+  "concept": {
+    "pos": "n"
+  },
+  "concerned with": {
+    "ipa": "kənˈsɜːnd wɪð",
+    "pos": "phr"
+  },
+  "concrete": {
+    "pos": "n"
+  },
+  "confine": {
+    "pos": "v"
+  },
+  "conflict": {
+    "ipa": "ˈkɒnflɪkt",
+    "pos": "n"
+  },
+  "conform": {
+    "pos": "v"
+  },
+  "confusion": {
+    "pos": "n"
+  },
+  "connect": {
+    "pos": "v"
+  },
+  "connected with": {
+    "ipa": "kəˈnektɪd wɪð",
+    "pos": "phr"
+  },
+  "conscious": {
+    "ipa": "ˈkɒnʃəs",
+    "pos": "adj"
+  },
+  "consequently": {
+    "ipa": "ˈkɒnsɪkwəntli",
+    "pos": "adv"
+  },
+  "consideration": {
+    "pos": "n"
+  },
+  "consist of": {
+    "ipa": "kənˈsɪst əv",
+    "pos": "phr"
+  },
+  "console": {
+    "pos": "v"
+  },
+  "constant": {
+    "pos": "adj"
+  },
+  "consumer": {
+    "pos": "n"
+  },
+  "containing": {
+    "pos": "adj"
+  },
+  "contemporary": {
+    "pos": "adj"
+  },
+  "contempt": {
+    "pos": "n"
+  },
+  "contractor": {
+    "pos": "n"
+  },
+  "controller": {
+    "pos": "n"
+  },
+  "convenience": {
+    "pos": "n"
+  },
+  "cooperation": {
+    "ipa": "kəʊˌɒpəˈreɪʃn",
+    "pos": "n"
+  },
+  "cooperative": {
+    "ipa": "kəʊˈɒpərətɪv",
+    "pos": "adj"
+  },
+  "copper": {
+    "pos": "n"
+  },
+  "copy": {
+    "pos": "v"
+  },
+  "corner": {
+    "pos": "n"
+  },
+  "corpse": {
+    "pos": "n"
+  },
+  "corrective care": {
+    "ipa": "kəˈrektɪv ˈkeə",
+    "pos": "phr"
+  },
+  "cot": {
+    "ipa": "kɒt",
+    "pos": "n"
+  },
+  "counterfeiter": {
+    "ipa": "ˈkaʊntəfɪtə",
+    "pos": "n"
+  },
+  "cover": {
+    "pos": "n"
+  },
+  "cover smth up": {
+    "ipa": "ˈkʌvə ˈsʌmθɪŋ ˈʌp",
+    "pos": "phr"
+  },
+  "cow": {
+    "pos": "n"
+  },
+  "cracing": {
+    "ipa": "ˈkrækɪŋ",
+    "pos": "n"
+  },
+  "crack": {
+    "pos": "n"
+  },
+  "cramp": {
+    "pos": "n"
+  },
+  "crawl stroke": {
+    "ipa": "ˈkrɔːl ˈstrəʊk",
+    "pos": "phr"
+  },
+  "create a bridge": {
+    "ipa": "kriˈeɪt ə ˈbrɪdʒ",
+    "pos": "phr"
+  },
+  "creates problem": {
+    "ipa": "kriˈeɪts ˈprɒbləm",
+    "pos": "phr"
+  },
+  "creative": {
+    "pos": "adj"
+  },
+  "cremation": {
+    "ipa": "krəˈmeɪʃn",
+    "pos": "n"
+  },
+  "criminality": {
+    "ipa": "ˌkrɪmɪˈnæləti",
+    "pos": "n"
+  },
+  "cripple": {
+    "pos": "v"
+  },
+  "critically": {
+    "pos": "adv"
+  },
+  "cruelty": {
+    "pos": "n"
+  },
+  "cry": {
+    "ipa": "kraɪ",
+    "pos": "n"
+  },
+  "cube": {
+    "pos": "n"
+  },
+  "culinary": {
+    "ipa": "ˈkʌlɪnəri",
+    "pos": "adj"
+  },
+  "cultivate field": {
+    "ipa": "ˈkʌltɪveɪt ˈfiːld",
+    "pos": "phr"
+  },
+  "cup": {
+    "pos": "n"
+  },
+  "cupped": {
+    "pos": "adj"
+  },
+  "curator": {
+    "ipa": "kjʊˈreɪtə",
+    "pos": "n"
+  },
+  "cure": {
+    "pos": "v"
+  },
+  "curiosity": {
+    "pos": "n"
+  },
+  "cut the time": {
+    "ipa": "ˈkʌt ðə ˈtaɪm",
+    "pos": "phr"
+  },
+  "cycle": {
+    "pos": "v"
+  },
+  "daily": {
+    "pos": "adj"
+  },
+  "danger": {
+    "pos": "n"
+  },
+  "dangerous": {
+    "pos": "adj"
+  },
+  "dark": {
+    "pos": "adj"
+  },
+  "date from": {
+    "ipa": "ˈdeɪt frɒm",
+    "pos": "phr"
+  },
+  "dazzling": {
+    "pos": "adj"
+  },
+  "dead ahead": {
+    "ipa": "ˈded əˈhed",
+    "pos": "phr"
+  },
+  "deafness": {
+    "pos": "n"
+  },
+  "deal with": {
+    "ipa": "ˈdiːl wɪð",
+    "pos": "phr"
+  },
+  "dealing with": {
+    "ipa": "ˈdiːlɪŋ wɪð",
+    "pos": "phr"
+  },
+  "death": {
+    "pos": "n"
+  },
+  "death rate": {
+    "ipa": "ˈdeθ ˈreɪt",
+    "pos": "phr"
+  },
+  "decade": {
+    "pos": "n"
+  },
+  "deceptive": {
+    "pos": "adj"
+  },
+  "decibel": {
+    "ipa": "ˈdesɪbel",
+    "pos": "n"
+  },
+  "decide": {
+    "pos": "v"
+  },
+  "decline": {
+    "pos": "n"
+  },
+  "deep": {
+    "pos": "adj"
+  },
+  "deficiency": {
+    "pos": "n"
+  },
+  "define": {
+    "pos": "v"
+  },
+  "deformity": {
+    "ipa": "dɪˈfɔːməti",
+    "pos": "n"
+  },
+  "degree": {
+    "pos": "n"
+  },
+  "delicate": {
+    "pos": "adj"
+  },
+  "denim": {
+    "pos": "n"
+  },
+  "deodorant": {
+    "pos": "n"
+  },
+  "depend on": {
+    "ipa": "dɪˈpend ɒn",
+    "pos": "phr"
+  },
+  "depletion": {
+    "pos": "n"
+  },
+  "deplorable": {
+    "ipa": "dɪˈplɔːrəbl",
+    "pos": "adj"
+  },
+  "deprivation": {
+    "pos": "n"
+  },
+  "deprive": {
+    "pos": "v"
+  },
+  "depth": {
+    "pos": "n"
+  },
+  "descend": {
+    "pos": "v"
+  },
+  "descend back": {
+    "ipa": "dɪˈsend ˈbæk",
+    "pos": "phr"
+  },
+  "descendant": {
+    "pos": "n"
+  },
+  "despair": {
+    "pos": "n"
+  },
+  "desperately": {
+    "pos": "adv"
+  },
+  "destiny": {
+    "pos": "n"
+  },
+  "determination": {
+    "pos": "n"
+  },
+  "determined": {
+    "pos": "adj"
+  },
+  "develop": {
+    "ipa": "dɪˈveləp",
+    "pos": "v"
+  },
+  "developing country": {
+    "ipa": "dɪˈveləpɪŋ ˈkʌntri",
+    "pos": "phr"
+  },
+  "development": {
+    "pos": "n"
+  },
+  "device": {
+    "pos": "n"
+  },
+  "devil": {
+    "pos": "n"
+  },
+  "devise": {
+    "pos": "v"
+  },
+  "died of drink": {
+    "ipa": "ˈdaɪd əv ˈdrɪŋk",
+    "pos": "phr"
+  },
+  "difficulty": {
+    "pos": "n"
+  },
+  "digestion": {
+    "pos": "n"
+  },
+  "dining": {
+    "pos": "n"
+  },
+  "disability": {
+    "pos": "n"
+  },
+  "disagreement": {
+    "ipa": "ˌdɪsəˈɡriːmənt",
+    "pos": "n"
+  },
+  "disciple": {
+    "pos": "n"
+  },
+  "discipline": {
+    "pos": "n"
+  },
+  "discourage": {
+    "pos": "v"
+  },
+  "discouragement": {
+    "ipa": "dɪsˈkʌrɪdʒmənt",
+    "pos": "n"
+  },
+  "discovery": {
+    "pos": "n"
+  },
+  "discriminating": {
+    "pos": "adj"
+  },
+  "disease-carrying": {
+    "ipa": "dɪˈziːz kæriɪŋ",
+    "pos": "adj"
+  },
+  "dismount": {
+    "pos": "v"
+  },
+  "dispenser": {
+    "pos": "n"
+  },
+  "disregard": {
+    "pos": "v"
+  },
+  "distinction": {
+    "pos": "n"
+  },
+  "distinctly": {
+    "pos": "adv"
+  },
+  "distribution": {
+    "pos": "n"
+  },
+  "disturbance": {
+    "pos": "n"
+  },
+  "diver": {
+    "ipa": "ˈdaɪvə",
+    "pos": "n"
+  },
+  "diversion": {
+    "pos": "n"
+  },
+  "divert": {
+    "ipa": "daɪˈvɜːt",
+    "pos": "v"
+  },
+  "do calculation": {
+    "ipa": "ˈduː ˌkælkjʊˈleɪʃən",
+    "pos": "phr"
+  },
+  "do underline": {
+    "ipa": "ˈduː ˌʌndəˈlaɪn",
+    "pos": "phr"
+  },
+  "doctrine": {
+    "ipa": "ˈdɒktrɪn",
+    "pos": "n"
+  },
+  "doll": {
+    "pos": "n"
+  },
+  "domestic animal": {
+    "ipa": "dəˈmestɪk ˈænɪməl",
+    "pos": "phr"
+  },
+  "domesticate": {
+    "ipa": "dəˈmestɪkeɪt",
+    "pos": "v"
+  },
+  "douse": {
+    "pos": "v"
+  },
+  "downwards": {
+    "ipa": "ˈdaʊnwədz",
+    "pos": "adv"
+  },
+  "drain": {
+    "pos": "v"
+  },
+  "dream": {
+    "pos": "n"
+  },
+  "dreaming": {
+    "ipa": "ˈdriːmɪŋ",
+    "pos": "n"
+  },
+  "dressing": {
+    "pos": "n"
+  },
+  "drifting": {
+    "pos": "adj"
+  },
+  "drive": {
+    "pos": "n"
+  },
+  "drop out": {
+    "ipa": "ˈdrɒp ˈaʊt",
+    "pos": "phr"
+  },
+  "drown": {
+    "pos": "v"
+  },
+  "drowning": {
+    "pos": "adj"
+  },
+  "drug": {
+    "pos": "n"
+  },
+  "drum": {
+    "pos": "n"
+  },
+  "dry": {
+    "pos": "adj"
+  },
+  "dub": {
+    "ipa": "dʌb",
+    "pos": "v"
+  },
+  "due": {
+    "pos": "adj"
+  },
+  "due to": {
+    "ipa": "ˈdʒuː tuː",
+    "pos": "phr"
+  },
+  "durable": {
+    "pos": "adj"
+  },
+  "during": {
+    "pos": "prep"
+  },
+  "dwindle": {
+    "pos": "v"
+  },
+  "dynasty": {
+    "pos": "n"
+  },
+  "each other": {
+    "ipa": "ˈiːtʃ ˈʌðə",
+    "pos": "phr"
+  },
+  "each year": {
+    "ipa": "ˈiːtʃ ˈjɪə",
+    "pos": "phr"
+  },
+  "ear": {
+    "pos": "n"
+  },
+  "early": {
+    "pos": "adj"
+  },
+  "early stage": {
+    "ipa": "ˈɜːli ˈsteɪdʒ",
+    "pos": "phr"
+  },
+  "earn a living": {
+    "ipa": "ˈɜːn ə ˈlɪvɪŋ",
+    "pos": "phr"
+  },
+  "earrings": {
+    "ipa": "ˈɪərɪŋz",
+    "pos": "n"
+  },
+  "ease": {
+    "pos": "v"
+  },
+  "easily": {
+    "pos": "adv"
+  },
+  "economically deprived": {
+    "ipa": "ˌiːkəˈnɒmɪkli dɪˈpraɪvd",
+    "pos": "phr"
+  },
+  "economizer": {
+    "ipa": "ɪˈkɒnəmaɪzə",
+    "pos": "n"
+  },
+  "education": {
+    "pos": "n"
+  },
+  "effervescent": {
+    "pos": "adj"
+  },
+  "efficiency": {
+    "pos": "n"
+  },
+  "egg cocoon": {
+    "ipa": "ˈeɡ kəˈkuːn",
+    "pos": "phr"
+  },
+  "egg-laying": {
+    "ipa": "ˈeɡ leɪɪŋ",
+    "pos": "adj"
+  },
+  "elaborate": {
+    "pos": "adj"
+  },
+  "elation": {
+    "ipa": "ɪˈleɪʃn",
+    "pos": "n"
+  },
+  "elementary grades": {
+    "ipa": "ˌelɪˈmentəri ˈɡreɪdz",
+    "pos": "phr"
+  },
+  "elevated": {
+    "pos": "adj"
+  },
+  "embodiment": {
+    "ipa": "ɪmˈbɒdimənt",
+    "pos": "n"
+  },
+  "emerge": {
+    "pos": "v"
+  },
+  "emigrate": {
+    "pos": "v"
+  },
+  "emigration": {
+    "ipa": "ˌemɪˈɡreɪʃn",
+    "pos": "n"
+  },
+  "employ": {
+    "pos": "v"
+  },
+  "encounter": {
+    "pos": "v"
+  },
+  "end-product": {
+    "ipa": "ˈend prɒdʌkt",
+    "pos": "n"
+  },
+  "endless": {
+    "pos": "adj"
+  },
+  "endurance": {
+    "pos": "n"
+  },
+  "engaging": {
+    "pos": "adj"
+  },
+  "engineer": {
+    "pos": "n"
+  },
+  "enlarge": {
+    "pos": "v"
+  },
+  "enormous range": {
+    "ipa": "ɪˈnɔːməs ˈreɪndʒ",
+    "pos": "phr"
+  },
+  "enough": {
+    "pos": "adj"
+  },
+  "entire": {
+    "pos": "adj"
+  },
+  "entirely": {
+    "pos": "adv"
+  },
+  "entitled amount": {
+    "ipa": "ɪnˈtaɪtəld əˈmaʊnt",
+    "pos": "phr"
+  },
+  "entrepreneur": {
+    "pos": "n"
+  },
+  "envelope": {
+    "pos": "n"
+  },
+  "environmental": {
+    "ipa": "ɪnˌvaɪrənˈmentl",
+    "pos": "adj"
+  },
+  "equated": {
+    "ipa": "iˈkweɪtɪd",
+    "pos": "v"
+  },
+  "era": {
+    "pos": "n"
+  },
+  "eruption": {
+    "pos": "n"
+  },
+  "especially": {
+    "pos": "adv"
+  },
+  "essentia": {
+    "ipa": "ɪˈsenʃl",
+    "pos": "adj"
+  },
+  "establish": {
+    "pos": "v"
+  },
+  "ethnic tolerance": {
+    "ipa": "ˈeθnɪk ˈtɒlərəns",
+    "pos": "phr"
+  },
+  "evaluate": {
+    "ipa": "ɪˈvæljueɪt",
+    "pos": "v"
+  },
+  "even": {
+    "pos": "adv"
+  },
+  "eventually": {
+    "pos": "adv"
+  },
+  "evident": {
+    "pos": "adj"
+  },
+  "evolve": {
+    "pos": "v"
+  },
+  "exactly": {
+    "pos": "adv"
+  },
+  "excavation": {
+    "ipa": "ˌekskəˈveɪʃn",
+    "pos": "n"
+  },
+  "except": {
+    "pos": "prep"
+  },
+  "exciting": {
+    "pos": "adj"
+  },
+  "executive": {
+    "pos": "n"
+  },
+  "exetremely": {
+    "ipa": "ɪkˈstriːmli",
+    "pos": "adv"
+  },
+  "exhausted": {
+    "pos": "adj"
+  },
+  "exhilaration": {
+    "ipa": "ɪɡˌzɪləˈreɪʃn",
+    "pos": "n"
+  },
+  "existence": {
+    "pos": "n"
+  },
+  "exotic": {
+    "pos": "adj"
+  },
+  "expertise": {
+    "ipa": "ˌekspɜːˈtiːz",
+    "pos": "n"
+  },
+  "explanation": {
+    "pos": "n"
+  },
+  "explode": {
+    "pos": "v"
+  },
+  "exploit": {
+    "ipa": "ɪkˈsplɔɪt",
+    "pos": "v"
+  },
+  "explosive": {
+    "ipa": "ɪkˈspləʊsɪv",
+    "pos": "adj"
+  },
+  "exposed to": {
+    "ipa": "ɪkˈspəʊzd tuː",
+    "pos": "phr"
+  },
+  "exposition": {
+    "pos": "n"
+  },
+  "exposure": {
+    "ipa": "ɪkˈspəʊʒə",
+    "pos": "n"
+  },
+  "express": {
+    "pos": "v"
+  },
+  "expression": {
+    "pos": "n"
+  },
+  "extensive": {
+    "pos": "adj"
+  },
+  "extinguish": {
+    "pos": "v"
+  },
+  "extract": {
+    "ipa": "ɪkˈstrækt",
+    "pos": "v"
+  },
+  "eye-movements": {
+    "ipa": "ˈaɪ muːvmənts",
+    "pos": "n"
+  },
+  "face with": {
+    "ipa": "ˈfeɪs wɪð",
+    "pos": "phr"
+  },
+  "factor": {
+    "pos": "n"
+  },
+  "fake": {
+    "ipa": "feɪk",
+    "pos": "adj"
+  },
+  "fall": {
+    "pos": "v"
+  },
+  "fall heavily": {
+    "ipa": "ˈfɔːl ˈhevɪli",
+    "pos": "phr"
+  },
+  "falling in love": {
+    "ipa": "ˈfɔːlɪŋ ɪn ˈlʌv",
+    "pos": "phr"
+  },
+  "falsify": {
+    "pos": "v"
+  },
+  "famine": {
+    "ipa": "ˈfæmɪn",
+    "pos": "n"
+  },
+  "farm production": {
+    "ipa": "ˈfɑːm prəˈdʌkʃən",
+    "pos": "phr"
+  },
+  "fascinated by": {
+    "ipa": "ˈfæsɪneɪtɪd baɪ",
+    "pos": "phr"
+  },
+  "fascinating": {
+    "pos": "adj"
+  },
+  "fashion": {
+    "pos": "v"
+  },
+  "faster": {
+    "pos": "adj"
+  },
+  "fastidious": {
+    "pos": "adj"
+  },
+  "fatal power": {
+    "ipa": "ˈfeɪtəl ˈpaʊə",
+    "pos": "phr"
+  },
+  "fate": {
+    "pos": "n"
+  },
+  "feast": {
+    "ipa": "fiːst",
+    "pos": "n"
+  },
+  "feeding area": {
+    "ipa": "ˈfiːdɪŋ ˈeəriə",
+    "pos": "phr"
+  },
+  "feel": {
+    "pos": "v"
+  },
+  "feeling enjoyment": {
+    "ipa": "ˈfiːlɪŋ ɪnˈdʒɔɪmənt",
+    "pos": "phr"
+  },
+  "feet": {
+    "pos": "n"
+  },
+  "fell": {
+    "pos": "v"
+  },
+  "felled (cut down)": {
+    "ipa": "ˈfeld",
+    "pos": "v"
+  },
+  "fellow men": {
+    "ipa": "ˈfeləʊ ˈmen",
+    "pos": "phr"
+  },
+  "felt": {
+    "pos": "v"
+  },
+  "fermentation": {
+    "pos": "n"
+  },
+  "fervently": {
+    "ipa": "ˈfɜːvəntli",
+    "pos": "adv"
+  },
+  "fewer": {
+    "ipa": "ˈfjuːə",
+    "pos": "adj"
+  },
+  "fight": {
+    "pos": "n"
+  },
+  "filled with": {
+    "ipa": "ˈfɪld wɪð",
+    "pos": "phr"
+  },
+  "fillet": {
+    "pos": "n"
+  },
+  "filter paper": {
+    "ipa": "ˈfɪltə ˈpeɪpə",
+    "pos": "phr"
+  },
+  "filthy": {
+    "pos": "adj"
+  },
+  "find": {
+    "ipa": "faɪnd",
+    "pos": "v"
+  },
+  "fine art": {
+    "ipa": "ˈfaɪn ˈɑːt",
+    "pos": "phr"
+  },
+  "finger": {
+    "pos": "n"
+  },
+  "fire": {
+    "pos": "n"
+  },
+  "firecracker": {
+    "ipa": "ˈfaɪəkrækə",
+    "pos": "n"
+  },
+  "fist": {
+    "ipa": "fɪst",
+    "pos": "n"
+  },
+  "flamboyant": {
+    "pos": "adj"
+  },
+  "flame": {
+    "pos": "n"
+  },
+  "flammable": {
+    "ipa": "ˈflæməbl",
+    "pos": "adj"
+  },
+  "flash": {
+    "pos": "v"
+  },
+  "flat-footed": {
+    "ipa": "ˌflæt ˈfʊtɪd",
+    "pos": "adj"
+  },
+  "flight": {
+    "pos": "n"
+  },
+  "flimsy": {
+    "pos": "adj"
+  },
+  "flip": {
+    "pos": "v"
+  },
+  "flipper": {
+    "ipa": "ˈflɪpə",
+    "pos": "n"
+  },
+  "flower-bunch": {
+    "ipa": "ˈflaʊə bʌntʃ",
+    "pos": "n"
+  },
+  "fly": {
+    "pos": "v"
+  },
+  "food requirements": {
+    "ipa": "ˈfuːd rɪˈkwaɪəmənts",
+    "pos": "phr"
+  },
+  "for instance": {
+    "ipa": "fər ˈɪnstəns",
+    "pos": "phr"
+  },
+  "for the rest of his life": {
+    "ipa": "fə ðə ˈrest əv hɪz ˈlaɪf",
+    "pos": "phr"
+  },
+  "foremost": {
+    "pos": "adj"
+  },
+  "forest trail": {
+    "ipa": "ˈfɒrɪst ˈtreɪl",
+    "pos": "phr"
+  },
+  "forgery": {
+    "ipa": "ˈfɔːdʒəri",
+    "pos": "n"
+  },
+  "forgive": {
+    "ipa": "fəˈɡɪv",
+    "pos": "v"
+  },
+  "forgotten": {
+    "pos": "adj"
+  },
+  "form": {
+    "pos": "n"
+  },
+  "free association": {
+    "ipa": "ˈfriː əˌsəʊsiˈeɪʃən",
+    "pos": "phr"
+  },
+  "free of charge": {
+    "ipa": "ˈfriː əv ˈtʃɑːdʒ",
+    "pos": "phr"
+  },
+  "frequency": {
+    "pos": "n"
+  },
+  "frequent": {
+    "pos": "adj"
+  },
+  "friction": {
+    "pos": "n"
+  },
+  "fried": {
+    "pos": "adj"
+  },
+  "frighten": {
+    "ipa": "ˈfraɪtn",
+    "pos": "v"
+  },
+  "from a distance": {
+    "ipa": "frəm ə ˈdɪstəns",
+    "pos": "phr"
+  },
+  "from…to…": {
+    "ipa": "ˈfrɒm ˈtuː",
+    "pos": "phr"
+  },
+  "frostbite": {
+    "ipa": "ˈfrɒstbaɪt",
+    "pos": "n"
+  },
+  "frozen": {
+    "pos": "adj"
+  },
+  "furiously": {
+    "ipa": "ˈfjʊəriəsli",
+    "pos": "adv"
+  },
+  "gag": {
+    "pos": "v"
+  },
+  "garbage pail": {
+    "ipa": "ˈɡɑːbɪdʒ ˈpeɪl",
+    "pos": "phr"
+  },
+  "garment": {
+    "ipa": "ˈɡɑːmənt",
+    "pos": "n"
+  },
+  "gash": {
+    "pos": "n"
+  },
+  "gateway": {
+    "pos": "n"
+  },
+  "gather up": {
+    "ipa": "ˈɡæðər ˈʌp",
+    "pos": "phr"
+  },
+  "generally": {
+    "pos": "adv"
+  },
+  "gentler": {
+    "ipa": "ˈdʒentlə",
+    "pos": "adj"
+  },
+  "genuine": {
+    "pos": "adj"
+  },
+  "get": {
+    "pos": "v"
+  },
+  "get a bad press": {
+    "ipa": "ˈɡet ə ˈbæd ˈpres",
+    "pos": "phr"
+  },
+  "get a rise out of someone": {
+    "ipa": "ˈɡet ə ˈraɪz ˈaʊt əv ˈsʌmwʌn",
+    "pos": "phr"
+  },
+  "get converted": {
+    "ipa": "ˈɡet kənˈvɜːtɪd",
+    "pos": "phr"
+  },
+  "get fitted up": {
+    "ipa": "ˈɡet ˈfɪtɪd ˈʌp",
+    "pos": "phr"
+  },
+  "get into": {
+    "ipa": "ˈɡet ˈɪntuː",
+    "pos": "phr"
+  },
+  "get out of something": {
+    "ipa": "ˈɡet ˈaʊt əv ˈsʌmθɪŋ",
+    "pos": "phr"
+  },
+  "get pleasure": {
+    "ipa": "ˈɡet ˈpleʒə",
+    "pos": "phr"
+  },
+  "get together": {
+    "ipa": "ˈɡet təˈɡeðə",
+    "pos": "phr"
+  },
+  "give back": {
+    "ipa": "ˈɡɪv ˈbæk",
+    "pos": "phr"
+  },
+  "giving details of free": {
+    "ipa": "ˈɡɪvɪŋ ˈdiːteɪlz əv ˈfriː",
+    "pos": "phr"
+  },
+  "glance": {
+    "pos": "v"
+  },
+  "glide": {
+    "pos": "v"
+  },
+  "glimpse": {
+    "pos": "n"
+  },
+  "gloom": {
+    "pos": "n"
+  },
+  "glory": {
+    "ipa": "ˈɡlɔːri",
+    "pos": "n"
+  },
+  "go after": {
+    "ipa": "ˈɡəʊ ˈɑːftə",
+    "pos": "phr"
+  },
+  "go mad": {
+    "ipa": "ˈɡəʊ ˈmæd",
+    "pos": "phr"
+  },
+  "go to extreme": {
+    "ipa": "ˈɡəʊ tuː ɪkˈstriːm",
+    "pos": "phr"
+  },
+  "go well": {
+    "ipa": "ˈɡəʊ ˈwel",
+    "pos": "phr"
+  },
+  "golden-haired": {
+    "ipa": "ˌɡəʊldən ˈheəd",
+    "pos": "adj"
+  },
+  "goldfield": {
+    "ipa": "ˈɡəʊldfiːld",
+    "pos": "n"
+  },
+  "good luck": {
+    "ipa": "ˈɡʊd ˈlʌk",
+    "pos": "phr"
+  },
+  "good-tempered": {
+    "ipa": "ˌɡʊd ˈtempəd",
+    "pos": "adj"
+  },
+  "goose": {
+    "pos": "n"
+  },
+  "government": {
+    "pos": "n"
+  },
+  "gradually": {
+    "pos": "adv"
+  },
+  "grapes": {
+    "pos": "n"
+  },
+  "grasp": {
+    "pos": "v"
+  },
+  "grassland": {
+    "ipa": "ˈɡrɑːslænd",
+    "pos": "n"
+  },
+  "great practice": {
+    "ipa": "ˈɡreɪt ˈpræktɪs",
+    "pos": "phr"
+  },
+  "greatness": {
+    "pos": "n"
+  },
+  "grocery shelves": {
+    "ipa": "ˈɡrəʊsəri ˈʃelvz",
+    "pos": "phr"
+  },
+  "grow": {
+    "pos": "v"
+  },
+  "grow up": {
+    "ipa": "ˈɡrəʊ ˈʌp",
+    "pos": "phr"
+  },
+  "growth": {
+    "pos": "n"
+  },
+  "gunmen": {
+    "ipa": "ˈɡʌnmen",
+    "pos": "n"
+  },
+  "gust": {
+    "pos": "n"
+  },
+  "habitually": {
+    "ipa": "həˈbɪtʃuəli",
+    "pos": "adv"
+  },
+  "had better": {
+    "ipa": "həd ˈbetə",
+    "pos": "phr"
+  },
+  "half": {
+    "pos": "n"
+  },
+  "halt": {
+    "pos": "v"
+  },
+  "hammer": {
+    "pos": "v"
+  },
+  "handlebar": {
+    "ipa": "ˈhændlbɑː",
+    "pos": "n"
+  },
+  "hang in the balance": {
+    "ipa": "ˈhæŋ ɪn ðə ˈbæləns",
+    "pos": "phr"
+  },
+  "harbour": {
+    "pos": "v"
+  },
+  "hard": {
+    "pos": "adj"
+  },
+  "harden": {
+    "pos": "v"
+  },
+  "hardly any": {
+    "ipa": "ˈhɑːdli ˈeni",
+    "pos": "phr"
+  },
+  "harmonious": {
+    "pos": "adj"
+  },
+  "hasten": {
+    "ipa": "ˈheɪsn",
+    "pos": "v"
+  },
+  "hatred": {
+    "ipa": "ˈheɪtrɪd",
+    "pos": "n"
+  },
+  "head": {
+    "pos": "n"
+  },
+  "headset stereos": {
+    "ipa": "ˈhedset ˈsteriəʊz",
+    "pos": "phr"
+  },
+  "healthy": {
+    "pos": "adj"
+  },
+  "hearing loss": {
+    "ipa": "ˈhɪərɪŋ ˈlɒs",
+    "pos": "phr"
+  },
+  "heart surgeon": {
+    "ipa": "ˈhɑːt ˈsɜːdʒən",
+    "pos": "phr"
+  },
+  "hearty lunch": {
+    "ipa": "ˈhɑːti ˈlʌntʃ",
+    "pos": "phr"
+  },
+  "helicopter": {
+    "pos": "n"
+  },
+  "helm": {
+    "pos": "n"
+  },
+  "helmsman": {
+    "ipa": "ˈhelmzmən",
+    "pos": "n"
+  },
+  "help": {
+    "pos": "n"
+  },
+  "hence": {
+    "pos": "adv"
+  },
+  "high": {
+    "pos": "adj"
+  },
+  "high spirits": {
+    "ipa": "ˈhaɪ ˈspɪrɪts",
+    "pos": "phr"
+  },
+  "highly": {
+    "pos": "adv"
+  },
+  "highly appreciative of humour": {
+    "ipa": "ˈhaɪli əˈpriːʃətɪv əv ˈhjuːmə",
+    "pos": "phr"
+  },
+  "hillside": {
+    "ipa": "ˈhɪlsaɪd",
+    "pos": "n"
+  },
+  "hinder": {
+    "pos": "v"
+  },
+  "historical narrative": {
+    "ipa": "hɪˈstɒrɪkəl ˈnærətɪv",
+    "pos": "phr"
+  },
+  "hit chart": {
+    "ipa": "ˈhɪt ˈtʃɑːt",
+    "pos": "phr"
+  },
+  "hold": {
+    "pos": "v"
+  },
+  "hold onto": {
+    "ipa": "ˈhəʊld ˈɒntuː",
+    "pos": "phr"
+  },
+  "holy": {
+    "pos": "adj"
+  },
+  "homeland": {
+    "ipa": "ˈhəʊmlænd",
+    "pos": "n"
+  },
+  "honour": {
+    "pos": "n"
+  },
+  "hope": {
+    "pos": "v"
+  },
+  "hopefully": {
+    "pos": "adv"
+  },
+  "horribly": {
+    "ipa": "ˈhɒrəbli",
+    "pos": "adv"
+  },
+  "horseless coach": {
+    "ipa": "ˈhɔːsləs ˈkəʊtʃ",
+    "pos": "phr"
+  },
+  "hostile manner": {
+    "ipa": "ˈhɒstaɪl ˈmænə",
+    "pos": "phr"
+  },
+  "house": {
+    "pos": "v"
+  },
+  "hover": {
+    "pos": "v"
+  },
+  "hull": {
+    "pos": "n"
+  },
+  "human": {
+    "pos": "n"
+  },
+  "human beings": {
+    "ipa": "ˈhjuːmən ˈbiːɪŋz",
+    "pos": "phr"
+  },
+  "human race": {
+    "ipa": "ˈhjuːmən ˈreɪs",
+    "pos": "phr"
+  },
+  "humiliation": {
+    "pos": "n"
+  },
+  "humility": {
+    "pos": "n"
+  },
+  "hurtling": {
+    "ipa": "ˈhɜːtlɪŋ",
+    "pos": "adj"
+  },
+  "hut": {
+    "pos": "n"
+  },
+  "ice": {
+    "pos": "n"
+  },
+  "iceberg": {
+    "ipa": "ˈaɪsbɜːɡ",
+    "pos": "n"
+  },
+  "if": {
+    "pos": "conj"
+  },
+  "ignorance": {
+    "pos": "n"
+  },
+  "illness": {
+    "pos": "n"
+  },
+  "imitator": {
+    "ipa": "ˈɪmɪteɪtə",
+    "pos": "n"
+  },
+  "immediately": {
+    "pos": "adv"
+  },
+  "impel": {
+    "pos": "v"
+  },
+  "impenetrable": {
+    "pos": "adj"
+  },
+  "imperturbable": {
+    "ipa": "ˌɪmpəˈtɜːbəbl",
+    "pos": "adj"
+  },
+  "impervious tobullet": {
+    "ipa": "ɪmˈpɜːviəs tə ˈbʊlɪt",
+    "pos": "phr"
+  },
+  "implication": {
+    "pos": "n"
+  },
+  "important": {
+    "pos": "adj"
+  },
+  "important role": {
+    "ipa": "ɪmˈpɔːtənt ˈrəʊl",
+    "pos": "phr"
+  },
+  "improve": {
+    "pos": "v"
+  },
+  "impulse": {
+    "pos": "n"
+  },
+  "in a few minutes": {
+    "ipa": "ɪn ə ˈfjuː ˈmɪnɪts",
+    "pos": "phr"
+  },
+  "in a row": {
+    "ipa": "ɪn ə ˈrəʊ",
+    "pos": "phr"
+  },
+  "in a similar way": {
+    "ipa": "ɪn ə ˈsɪmɪlə ˈweɪ",
+    "pos": "phr"
+  },
+  "in all likelihood": {
+    "ipa": "ɪn ˈɔːl ˈlaɪklihʊd",
+    "pos": "phr"
+  },
+  "in an attempt to": {
+    "ipa": "ɪn ən əˈtempt tuː",
+    "pos": "phr"
+  },
+  "in captivity": {
+    "ipa": "ɪn kæpˈtɪvəti",
+    "pos": "phr"
+  },
+  "in common": {
+    "ipa": "ɪn ˈkɒmən",
+    "pos": "phr"
+  },
+  "in contrast to": {
+    "ipa": "ɪn ˈkɒntrɑːst tuː",
+    "pos": "phr"
+  },
+  "in desperation": {
+    "ipa": "ɪn ˌdespəˈreɪʃən",
+    "pos": "phr"
+  },
+  "in fact": {
+    "ipa": "ɪn ˈfækt",
+    "pos": "phr"
+  },
+  "in great demand for": {
+    "ipa": "ɪn ˈɡreɪt dɪˈmɑːnd fɔː",
+    "pos": "phr"
+  },
+  "in height": {
+    "ipa": "ɪn ˈhaɪt",
+    "pos": "phr"
+  },
+  "in moderation": {
+    "ipa": "ɪn ˌmɒdəˈreɪʃən",
+    "pos": "phr"
+  },
+  "in need of": {
+    "ipa": "ɪn ˈniːd əv",
+    "pos": "phr"
+  },
+  "in order to": {
+    "ipa": "ɪn ˈɔːdə tuː",
+    "pos": "phr"
+  },
+  "in particular": {
+    "ipa": "ɪn pəˈtɪkjʊlə",
+    "pos": "phr"
+  },
+  "in private": {
+    "ipa": "ɪn ˈpraɪvɪt",
+    "pos": "phr"
+  },
+  "in shape": {
+    "ipa": "ɪn ˈʃeɪp",
+    "pos": "phr"
+  },
+  "in spite of": {
+    "ipa": "ɪn ˈspaɪt əv",
+    "pos": "phr"
+  },
+  "in terms of": {
+    "ipa": "ɪn ˈtɜːmz əv",
+    "pos": "phr"
+  },
+  "in that broader sense": {
+    "ipa": "ɪn ðæt ˈbrɔːdə ˈsens",
+    "pos": "phr"
+  },
+  "in the belief": {
+    "ipa": "ɪn ðə bɪˈliːf",
+    "pos": "phr"
+  },
+  "in the course of evolution": {
+    "ipa": "ɪn ðə ˈkɔːs əv ˌiːvəˈluːʃən",
+    "pos": "phr"
+  },
+  "in the middle": {
+    "ipa": "ɪn ðə ˈmɪdəl",
+    "pos": "phr"
+  },
+  "in turn": {
+    "ipa": "ɪn ˈtɜːn",
+    "pos": "phr"
+  },
+  "inability": {
+    "pos": "n"
+  },
+  "inadequate": {
+    "pos": "adj"
+  },
+  "incentive": {
+    "pos": "n"
+  },
+  "including": {
+    "pos": "prep"
+  },
+  "increasingly": {
+    "ipa": "ɪnˈkriːsɪŋli",
+    "pos": "adv"
+  },
+  "incridible": {
+    "ipa": "ɪnˈkredəbl",
+    "pos": "adj"
+  },
+  "indoor life": {
+    "ipa": "ˈɪndɔː ˈlaɪf",
+    "pos": "phr"
+  },
+  "industrial revolution": {
+    "ipa": "ɪnˈdʌstriəl ˌrevəˈluːʃən",
+    "pos": "phr"
+  },
+  "industrialist": {
+    "ipa": "ɪnˈdʌstriəlɪst",
+    "pos": "n"
+  },
+  "industry": {
+    "pos": "n"
+  },
+  "ineffective": {
+    "ipa": "ˌɪnɪˈfektɪv",
+    "pos": "adj"
+  },
+  "inexpensive": {
+    "ipa": "ˌɪnɪkˈspensɪv",
+    "pos": "adj"
+  },
+  "infinite": {
+    "pos": "adj"
+  },
+  "inflation": {
+    "pos": "n"
+  },
+  "influence": {
+    "pos": "n"
+  },
+  "influential": {
+    "pos": "adj"
+  },
+  "ingenuity": {
+    "pos": "n"
+  },
+  "ingest": {
+    "ipa": "ɪnˈdʒest",
+    "pos": "v"
+  },
+  "inhabited": {
+    "pos": "adj"
+  },
+  "initiate": {
+    "ipa": "ɪˈnɪʃieɪt",
+    "pos": "v"
+  },
+  "injur": {
+    "ipa": "ˈɪndʒə",
+    "pos": "v"
+  },
+  "injured": {
+    "pos": "adj"
+  },
+  "injury": {
+    "pos": "n"
+  },
+  "inlaid": {
+    "ipa": "ˌɪnˈleɪd",
+    "pos": "adj"
+  },
+  "inner": {
+    "pos": "adj"
+  },
+  "inner drive": {
+    "ipa": "ˈɪnə ˈdraɪv",
+    "pos": "phr"
+  },
+  "insidious": {
+    "pos": "adj"
+  },
+  "instantly": {
+    "pos": "adv"
+  },
+  "instead of": {
+    "ipa": "ɪnˈsted əv",
+    "pos": "phr"
+  },
+  "instictively": {
+    "ipa": "ɪnˈstɪŋktɪvli",
+    "pos": "adv"
+  },
+  "instinct": {
+    "pos": "n"
+  },
+  "instinctual": {
+    "ipa": "ɪnˈstɪŋktʃuəl",
+    "pos": "adj"
+  },
+  "instrumental": {
+    "pos": "adj"
+  },
+  "insure": {
+    "pos": "v"
+  },
+  "intellect": {
+    "pos": "n"
+  },
+  "intended": {
+    "pos": "adj"
+  },
+  "intensity": {
+    "pos": "n"
+  },
+  "intensively": {
+    "ipa": "ɪnˈtensɪvli",
+    "pos": "adv"
+  },
+  "interdependent": {
+    "ipa": "ˌɪntədɪˈpendənt",
+    "pos": "adj"
+  },
+  "interest": {
+    "pos": "n"
+  },
+  "interested in": {
+    "ipa": "ˈɪntrestɪd ɪn",
+    "pos": "phr"
+  },
+  "interview": {
+    "pos": "n"
+  },
+  "intimidate": {
+    "pos": "v"
+  },
+  "intricate": {
+    "pos": "adj"
+  },
+  "intruder": {
+    "pos": "n"
+  },
+  "invention": {
+    "pos": "n"
+  },
+  "inventor": {
+    "pos": "n"
+  },
+  "investment": {
+    "pos": "n"
+  },
+  "involved in": {
+    "ipa": "ɪnˈvɒlvd ɪn",
+    "pos": "phr"
+  },
+  "involved part": {
+    "ipa": "ɪnˈvɒlvd ˈpɑːt",
+    "pos": "phr"
+  },
+  "iron wire": {
+    "ipa": "ˈaɪən ˈwaɪə",
+    "pos": "phr"
+  },
+  "irratation": {
+    "ipa": "ˌɪrɪˈteɪʃn",
+    "pos": "n"
+  },
+  "irreplaceable": {
+    "ipa": "ˌɪrɪˈpleɪsəbl",
+    "pos": "adj"
+  },
+  "is bound to": {
+    "ipa": "ɪz ˈbaʊnd tuː",
+    "pos": "phr"
+  },
+  "jerky": {
+    "ipa": "ˈdʒɜːki",
+    "pos": "adj"
+  },
+  "jet": {
+    "pos": "n"
+  },
+  "jet airplanes": {
+    "ipa": "ˈdʒet ˈeəpleɪnz",
+    "pos": "phr"
+  },
+  "join in": {
+    "ipa": "ˈdʒɔɪn ˈɪn",
+    "pos": "phr"
+  },
+  "joke": {
+    "pos": "n"
+  },
+  "jump": {
+    "pos": "v"
+  },
+  "jungle": {
+    "pos": "n"
+  },
+  "justify": {
+    "pos": "v"
+  },
+  "keep away": {
+    "ipa": "ˈkiːp əˈweɪ",
+    "pos": "phr"
+  },
+  "keep dry": {
+    "ipa": "ˈkiːp ˈdraɪ",
+    "pos": "phr"
+  },
+  "keep pace": {
+    "ipa": "ˈkiːp ˈpeɪs",
+    "pos": "phr"
+  },
+  "keeping in touch with": {
+    "ipa": "ˈkiːpɪŋ ɪn ˈtʌtʃ wɪð",
+    "pos": "phr"
+  },
+  "kick out": {
+    "ipa": "ˈkɪk ˈaʊt",
+    "pos": "phr"
+  },
+  "knight": {
+    "ipa": "naɪt",
+    "pos": "n"
+  },
+  "knot": {
+    "pos": "n"
+  },
+  "know": {
+    "pos": "v"
+  },
+  "knowingly": {
+    "ipa": "ˈnəʊɪŋli",
+    "pos": "adv"
+  },
+  "labell": {
+    "ipa": "ˈleɪbl",
+    "pos": "v"
+  },
+  "lack of": {
+    "ipa": "ˈlæk əv",
+    "pos": "phr"
+  },
+  "land jpb": {
+    "ipa": "ˈlænd ˈdʒɒb",
+    "pos": "phr"
+  },
+  "landslide": {
+    "pos": "n"
+  },
+  "lantern": {
+    "pos": "n"
+  },
+  "laughter": {
+    "pos": "n"
+  },
+  "lax": {
+    "pos": "adj"
+  },
+  "lay bare": {
+    "ipa": "ˈleɪ ˈbeə",
+    "pos": "phr"
+  },
+  "lead": {
+    "pos": "n"
+  },
+  "lead life": {
+    "ipa": "ˈliːd ˈlaɪf",
+    "pos": "phr"
+  },
+  "lead to": {
+    "ipa": "ˈliːd tuː",
+    "pos": "phr"
+  },
+  "leading": {
+    "pos": "adj"
+  },
+  "leaf": {
+    "pos": "n"
+  },
+  "leap": {
+    "pos": "v"
+  },
+  "leap into": {
+    "ipa": "ˈliːp ˈɪntuː",
+    "pos": "phr"
+  },
+  "leap up": {
+    "ipa": "ˈliːp ˈʌp",
+    "pos": "phr"
+  },
+  "leather": {
+    "pos": "n"
+  },
+  "lecture": {
+    "ipa": "ˈlektʃə",
+    "pos": "n"
+  },
+  "lessen": {
+    "pos": "v"
+  },
+  "let": {
+    "pos": "v"
+  },
+  "let someone pour forth": {
+    "ipa": "ˈlet ˈsʌmwʌn ˈpɔː ˈfɔːθ",
+    "pos": "phr"
+  },
+  "letter": {
+    "ipa": "ˈletə",
+    "pos": "n"
+  },
+  "lid": {
+    "pos": "n"
+  },
+  "lifeguards": {
+    "ipa": "ˈlaɪfɡɑːdz",
+    "pos": "n"
+  },
+  "lifespan": {
+    "ipa": "ˈlaɪfspæn",
+    "pos": "n"
+  },
+  "light": {
+    "pos": "adj"
+  },
+  "like": {
+    "pos": "prep"
+  },
+  "likewise": {
+    "pos": "adv"
+  },
+  "line": {
+    "pos": "v"
+  },
+  "liner": {
+    "pos": "n"
+  },
+  "link": {
+    "pos": "n"
+  },
+  "lipstick": {
+    "pos": "n"
+  },
+  "live": {
+    "pos": "adj"
+  },
+  "live in hope": {
+    "ipa": "ˈlɪv ɪn ˈhəʊp",
+    "pos": "phr"
+  },
+  "liver": {
+    "pos": "n"
+  },
+  "living": {
+    "pos": "adj"
+  },
+  "living standards": {
+    "ipa": "ˈlɪvɪŋ ˈstændədz",
+    "pos": "phr"
+  },
+  "local shop": {
+    "ipa": "ˈləʊkəl ˈʃɒp",
+    "pos": "phr"
+  },
+  "located": {
+    "pos": "adj"
+  },
+  "lock": {
+    "pos": "v"
+  },
+  "long before": {
+    "ipa": "ˈlɒŋ bɪˈfɔː",
+    "pos": "phr"
+  },
+  "long-distance": {
+    "ipa": "ˌlɒŋ ˈdɪstəns",
+    "pos": "adj"
+  },
+  "long-term": {
+    "ipa": "ˌlɒŋ ˈtɜːm",
+    "pos": "adj"
+  },
+  "look": {
+    "ipa": "lʊk",
+    "pos": "v"
+  },
+  "look after": {
+    "ipa": "ˈlʊk ˈɑːftə",
+    "pos": "phr"
+  },
+  "look around": {
+    "ipa": "ˈlʊk əˈraʊnd",
+    "pos": "phr"
+  },
+  "look forward to": {
+    "ipa": "ˈlʊk ˈfɔːwəd tuː",
+    "pos": "phr"
+  },
+  "lookout": {
+    "ipa": "ˈlʊkaʊt",
+    "pos": "n"
+  },
+  "lose job": {
+    "ipa": "ˈluːz ˈdʒɒb",
+    "pos": "phr"
+  },
+  "lost": {
+    "pos": "adj"
+  },
+  "low": {
+    "pos": "adj"
+  },
+  "low salary": {
+    "ipa": "ˈləʊ ˈsæləri",
+    "pos": "phr"
+  },
+  "low-cut": {
+    "ipa": "ˌləʊ ˈkʌt",
+    "pos": "adj"
+  },
+  "low-income": {
+    "ipa": "ˌləʊ ˈɪnkʌm",
+    "pos": "adj"
+  },
+  "low-paying": {
+    "ipa": "ˌləʊ ˈpeɪɪŋ",
+    "pos": "adj"
+  },
+  "loyal": {
+    "pos": "adj"
+  },
+  "luck": {
+    "pos": "n"
+  },
+  "lukewarm": {
+    "pos": "adj"
+  },
+  "lunar": {
+    "pos": "adj"
+  },
+  "luxurious": {
+    "ipa": "lʌɡˈʒʊəriəs",
+    "pos": "adj"
+  },
+  "machine": {
+    "pos": "n"
+  },
+  "main techniques": {
+    "ipa": "ˈmeɪn tekˈniːks",
+    "pos": "phr"
+  },
+  "majority": {
+    "pos": "n"
+  },
+  "make a comeback": {
+    "ipa": "ˈmeɪk ə ˈkʌmbæk",
+    "pos": "phr"
+  },
+  "make accepted": {
+    "ipa": "ˈmeɪk əkˈseptɪd",
+    "pos": "phr"
+  },
+  "make aware of": {
+    "ipa": "ˈmeɪk əˈweər əv",
+    "pos": "phr"
+  },
+  "make calculation": {
+    "ipa": "ˈmeɪk ˌkælkjʊˈleɪʃən",
+    "pos": "phr"
+  },
+  "make life better and easy": {
+    "ipa": "ˈmeɪk ˈlaɪf ˈbetər ənd ˈiːzi",
+    "pos": "phr"
+  },
+  "make money": {
+    "ipa": "ˈmeɪk ˈmʌni",
+    "pos": "phr"
+  },
+  "make name": {
+    "ipa": "ˈmeɪk ˈneɪm",
+    "pos": "phr"
+  },
+  "make stronger": {
+    "ipa": "ˈmeɪk ˈstrɒŋɡə",
+    "pos": "phr"
+  },
+  "make the difference": {
+    "ipa": "ˈmeɪk ðə ˈdɪfərəns",
+    "pos": "phr"
+  },
+  "make up": {
+    "ipa": "ˈmeɪk ˈʌp",
+    "pos": "phr"
+  },
+  "make use of": {
+    "ipa": "ˈmeɪk ˈjuːs əv",
+    "pos": "phr"
+  },
+  "make way for": {
+    "ipa": "ˈmeɪk ˈweɪ fɔː",
+    "pos": "phr"
+  },
+  "mammal": {
+    "pos": "n"
+  },
+  "man": {
+    "pos": "n"
+  },
+  "man-made": {
+    "ipa": "ˌmæn ˈmeɪd",
+    "pos": "adj"
+  },
+  "manage to": {
+    "ipa": "ˈmænɪdʒ tuː",
+    "pos": "phr"
+  },
+  "manipulate": {
+    "ipa": "məˈnɪpjuleɪt",
+    "pos": "v"
+  },
+  "mankind": {
+    "pos": "n"
+  },
+  "manufacture": {
+    "pos": "v"
+  },
+  "marine": {
+    "pos": "adj"
+  },
+  "mark a breakdown": {
+    "ipa": "ˈmɑːk ə ˈbreɪkdaʊn",
+    "pos": "phr"
+  },
+  "market": {
+    "pos": "n"
+  },
+  "market research": {
+    "ipa": "ˈmɑːkɪt rɪˈsɜːtʃ",
+    "pos": "phr"
+  },
+  "mass": {
+    "pos": "n"
+  },
+  "mass production": {
+    "ipa": "ˈmæs prəˈdʌkʃən",
+    "pos": "phr"
+  },
+  "masterpiece": {
+    "pos": "n"
+  },
+  "materialism": {
+    "pos": "n"
+  },
+  "matter": {
+    "pos": "n"
+  },
+  "mattress": {
+    "pos": "n"
+  },
+  "mayhem": {
+    "pos": "n"
+  },
+  "meadow": {
+    "pos": "n"
+  },
+  "meaning": {
+    "pos": "n"
+  },
+  "means": {
+    "pos": "n"
+  },
+  "measure": {
+    "pos": "v"
+  },
+  "meaty": {
+    "pos": "adj"
+  },
+  "medieval": {
+    "pos": "adj"
+  },
+  "mediocre": {
+    "pos": "adj"
+  },
+  "meet demand": {
+    "ipa": "ˈmiːt dɪˈmɑːnd",
+    "pos": "phr"
+  },
+  "megacity": {
+    "ipa": "ˈmeɡəsɪti",
+    "pos": "n"
+  },
+  "memorial": {
+    "ipa": "məˈmɔːriəl",
+    "pos": "n"
+  },
+  "menace": {
+    "pos": "v"
+  },
+  "mental image": {
+    "ipa": "ˈmentəl ˈɪmɪdʒ",
+    "pos": "phr"
+  },
+  "merely": {
+    "pos": "adv"
+  },
+  "metaphorically": {
+    "ipa": "ˌmetəˈfɒrɪkli",
+    "pos": "adv"
+  },
+  "middle ages": {
+    "ipa": "ˈmɪdəl ˈeɪdʒɪz",
+    "pos": "phr"
+  },
+  "migraine": {
+    "pos": "n"
+  },
+  "migrate": {
+    "pos": "v"
+  },
+  "mildly": {
+    "pos": "adv"
+  },
+  "milk": {
+    "pos": "n"
+  },
+  "million time": {
+    "ipa": "ˈmɪljən ˈtaɪm",
+    "pos": "phr"
+  },
+  "mind": {
+    "pos": "n"
+  },
+  "mine": {
+    "pos": "n"
+  },
+  "mingled": {
+    "pos": "adj"
+  },
+  "mining": {
+    "ipa": "ˈmaɪnɪŋ",
+    "pos": "n"
+  },
+  "minutely": {
+    "ipa": "maɪˈnjuːtli",
+    "pos": "adv"
+  },
+  "miser": {
+    "pos": "n"
+  },
+  "misery": {
+    "pos": "n"
+  },
+  "misfortune": {
+    "pos": "n"
+  },
+  "missile": {
+    "pos": "n"
+  },
+  "missiles": {
+    "ipa": "ˈmɪsaɪlz",
+    "pos": "n"
+  },
+  "moan": {
+    "pos": "v"
+  },
+  "modest": {
+    "pos": "adj"
+  },
+  "modify": {
+    "pos": "v"
+  },
+  "moral": {
+    "pos": "adj"
+  },
+  "more often than not": {
+    "ipa": "ˈmɔːr ˈɒfən ðən ˈnɒt",
+    "pos": "phr"
+  },
+  "mound": {
+    "pos": "n"
+  },
+  "move": {
+    "pos": "v"
+  },
+  "movement": {
+    "pos": "n"
+  },
+  "movies": {
+    "ipa": "ˈmuːviz",
+    "pos": "n"
+  },
+  "murmur": {
+    "pos": "v"
+  },
+  "muscle": {
+    "pos": "n"
+  },
+  "muscle power": {
+    "ipa": "ˈmʌsəl ˈpaʊə",
+    "pos": "phr"
+  },
+  "music-hall": {
+    "ipa": "ˈmjuːzɪk hɔːl",
+    "pos": "n"
+  },
+  "mysterious": {
+    "pos": "adj"
+  },
+  "nail polish": {
+    "ipa": "ˈneɪl ˈpɒlɪʃ",
+    "pos": "phr"
+  },
+  "namly": {
+    "ipa": "ˈneɪmli",
+    "pos": "adv"
+  },
+  "nasal": {
+    "pos": "adj"
+  },
+  "nation": {
+    "pos": "n"
+  },
+  "native": {
+    "pos": "adj"
+  },
+  "native lands": {
+    "ipa": "ˈneɪtɪv ˈlændz",
+    "pos": "phr"
+  },
+  "natural barrier": {
+    "ipa": "ˈnætʃərəl ˈbæriə",
+    "pos": "phr"
+  },
+  "natural resources": {
+    "ipa": "ˈnætʃərəl rɪˈzɔːsɪz",
+    "pos": "phr"
+  },
+  "naturally": {
+    "pos": "adv"
+  },
+  "nearby": {
+    "ipa": "ˌnɪəˈbaɪ",
+    "pos": "adv"
+  },
+  "need": {
+    "pos": "v"
+  },
+  "neighbor": {
+    "ipa": "ˈneɪbə",
+    "pos": "n"
+  },
+  "neighbourhood": {
+    "ipa": "ˈneɪbəhʊd",
+    "pos": "n"
+  },
+  "network": {
+    "pos": "n"
+  },
+  "new life": {
+    "ipa": "ˈnjuː ˈlaɪf",
+    "pos": "phr"
+  },
+  "newspapers": {
+    "pos": "n"
+  },
+  "next to": {
+    "ipa": "ˈnekst tuː",
+    "pos": "phr"
+  },
+  "no effort": {
+    "ipa": "ˈnəʊ ˈefət",
+    "pos": "phr"
+  },
+  "nobody": {
+    "pos": "pron"
+  },
+  "noise-induced": {
+    "ipa": "ˈnɔɪz ɪndjuːst",
+    "pos": "adj"
+  },
+  "nose": {
+    "pos": "n"
+  },
+  "nostril": {
+    "pos": "n"
+  },
+  "noted for": {
+    "ipa": "ˈnəʊtɪd fɔː",
+    "pos": "phr"
+  },
+  "nothing": {
+    "pos": "pron"
+  },
+  "noticeably": {
+    "ipa": "ˈnəʊtɪsəbli",
+    "pos": "adv"
+  },
+  "novelist": {
+    "pos": "n"
+  },
+  "nuclear": {
+    "pos": "adj"
+  },
+  "numb": {
+    "pos": "adj"
+  },
+  "number": {
+    "pos": "n"
+  },
+  "nutritious": {
+    "pos": "adj"
+  },
+  "obeisance": {
+    "ipa": "əʊˈbeɪsns",
+    "pos": "n"
+  },
+  "object": {
+    "pos": "n"
+  },
+  "objects": {
+    "pos": "n"
+  },
+  "obsessed with": {
+    "ipa": "əbˈsest wɪð",
+    "pos": "phr"
+  },
+  "obsolete": {
+    "pos": "adj"
+  },
+  "obstacle": {
+    "pos": "n"
+  },
+  "occasionally": {
+    "pos": "adv"
+  },
+  "occupied": {
+    "pos": "adj"
+  },
+  "officials": {
+    "pos": "n"
+  },
+  "old age pension": {
+    "ipa": "ˈəʊld ˈeɪdʒ ˈpenʃən",
+    "pos": "phr"
+  },
+  "olive": {
+    "pos": "n"
+  },
+  "ominous": {
+    "pos": "adj"
+  },
+  "on contact with": {
+    "ipa": "ɒn ˈkɒntækt wɪð",
+    "pos": "phr"
+  },
+  "on duty": {
+    "ipa": "ɒn ˈdjuːti",
+    "pos": "phr"
+  },
+  "on several occasions": {
+    "ipa": "ɒn ˈsevərəl əˈkeɪʒənz",
+    "pos": "phr"
+  },
+  "on the other hand": {
+    "ipa": "ɒn ðə ˈʌðə ˈhænd",
+    "pos": "phr"
+  },
+  "on the stage": {
+    "ipa": "ɒn ðə ˈsteɪdʒ",
+    "pos": "phr"
+  },
+  "once": {
+    "pos": "adv"
+  },
+  "only when": {
+    "ipa": "ˈəʊnli ˈwen",
+    "pos": "phr"
+  },
+  "onward": {
+    "pos": "adv"
+  },
+  "open up": {
+    "ipa": "ˈəʊpən ˈʌp",
+    "pos": "phr"
+  },
+  "opponent": {
+    "pos": "n"
+  },
+  "oppress": {
+    "pos": "v"
+  },
+  "optimism": {
+    "pos": "n"
+  },
+  "option": {
+    "pos": "n"
+  },
+  "orally": {
+    "pos": "adv"
+  },
+  "order": {
+    "pos": "n"
+  },
+  "organ": {
+    "pos": "n"
+  },
+  "orient": {
+    "pos": "n"
+  },
+  "other": {
+    "pos": "adj"
+  },
+  "othetwise": {
+    "ipa": "ˈʌðəwaɪz",
+    "pos": "adv"
+  },
+  "ought to": {
+    "ipa": "ˈɔːt tuː",
+    "pos": "phr"
+  },
+  "outdoor": {
+    "pos": "adj"
+  },
+  "outsider": {
+    "ipa": "ˌaʊtˈsaɪdə",
+    "pos": "n"
+  },
+  "outstanding": {
+    "ipa": "aʊtˈstændɪŋ",
+    "pos": "adj"
+  },
+  "over": {
+    "pos": "prep"
+  },
+  "overhead": {
+    "pos": "adv"
+  },
+  "overhear": {
+    "ipa": "ˌəʊvəˈhɪə",
+    "pos": "v"
+  },
+  "overpopulation": {
+    "ipa": "ˌəʊvəˌpɒpjuˈleɪʃn",
+    "pos": "n"
+  },
+  "overpower": {
+    "pos": "v"
+  },
+  "overreact": {
+    "pos": "v"
+  },
+  "oversized": {
+    "ipa": "ˌəʊvəˈsaɪzd",
+    "pos": "adj"
+  },
+  "owing to": {
+    "ipa": "ˈəʊɪŋ tuː",
+    "pos": "phr"
+  },
+  "owner": {
+    "pos": "n"
+  },
+  "packing": {
+    "pos": "v"
+  },
+  "pad": {
+    "pos": "n"
+  },
+  "paddle": {
+    "pos": "v"
+  },
+  "paddle-like": {
+    "ipa": "ˈpædl laɪk",
+    "pos": "adj"
+  },
+  "paid (pay)": {
+    "ipa": "ˈpeɪd",
+    "pos": "v"
+  },
+  "pail": {
+    "pos": "n"
+  },
+  "painful": {
+    "pos": "adj"
+  },
+  "painting": {
+    "pos": "n"
+  },
+  "palatial": {
+    "ipa": "pəˈleɪʃl",
+    "pos": "adj"
+  },
+  "palm": {
+    "pos": "n"
+  },
+  "palm tree": {
+    "ipa": "ˈpɑːm ˈtriː",
+    "pos": "phr"
+  },
+  "pant": {
+    "pos": "n"
+  },
+  "participant": {
+    "pos": "n"
+  },
+  "particular": {
+    "pos": "adj"
+  },
+  "particularly": {
+    "pos": "adv"
+  },
+  "partition": {
+    "pos": "n"
+  },
+  "pass": {
+    "ipa": "pɑːs",
+    "pos": "v"
+  },
+  "pass by": {
+    "ipa": "ˈpɑːs ˈbaɪ",
+    "pos": "phr"
+  },
+  "pass on": {
+    "ipa": "ˈpɑːs ˈɒn",
+    "pos": "phr"
+  },
+  "pass round": {
+    "ipa": "ˈpɑːs ˈraʊnd",
+    "pos": "phr"
+  },
+  "passion": {
+    "ipa": "ˈpæʃn",
+    "pos": "n"
+  },
+  "passionately": {
+    "pos": "adv"
+  },
+  "past": {
+    "pos": "n"
+  },
+  "past experiences": {
+    "ipa": "ˈpɑːst ɪkˈspɪəriənsɪz",
+    "pos": "phr"
+  },
+  "patience": {
+    "pos": "n"
+  },
+  "patriotic": {
+    "pos": "adj"
+  },
+  "pay off": {
+    "ipa": "ˈpeɪ ˈɒf",
+    "pos": "phr"
+  },
+  "pay respect": {
+    "ipa": "ˈpeɪ rɪˈspekt",
+    "pos": "phr"
+  },
+  "payment": {
+    "pos": "n"
+  },
+  "peacetime": {
+    "pos": "n"
+  },
+  "peasant": {
+    "pos": "n"
+  },
+  "peculiar": {
+    "ipa": "pɪˈkjuːliə",
+    "pos": "adj"
+  },
+  "pedal": {
+    "ipa": "ˈpedl",
+    "pos": "n"
+  },
+  "penniless": {
+    "pos": "adj"
+  },
+  "penny-candy": {
+    "ipa": "ˈpeni kændi",
+    "pos": "n"
+  },
+  "per annum": {
+    "ipa": "pər ˈænəm",
+    "pos": "phr"
+  },
+  "percent": {
+    "ipa": "pəˈsent",
+    "pos": "n"
+  },
+  "perfect": {
+    "pos": "adj"
+  },
+  "performance": {
+    "pos": "n"
+  },
+  "performer": {
+    "pos": "n"
+  },
+  "perfume": {
+    "pos": "n"
+  },
+  "persecution": {
+    "ipa": "ˌpɜːsɪˈkjuːʃn",
+    "pos": "n"
+  },
+  "personal affection": {
+    "ipa": "ˈpɜːsənəl əˈfekʃən",
+    "pos": "phr"
+  },
+  "personal relations": {
+    "ipa": "ˈpɜːsənəl rɪˈleɪʃənz",
+    "pos": "phr"
+  },
+  "personally": {
+    "pos": "adv"
+  },
+  "phenomenon": {
+    "pos": "n"
+  },
+  "physicist": {
+    "ipa": "ˈfɪzɪsɪst",
+    "pos": "n"
+  },
+  "pick": {
+    "pos": "v"
+  },
+  "pick up": {
+    "ipa": "ˈpɪk ˈʌp",
+    "pos": "phr"
+  },
+  "picked": {
+    "ipa": "pɪkt",
+    "pos": "adj"
+  },
+  "pickled": {
+    "ipa": "ˈpɪkld",
+    "pos": "adj"
+  },
+  "pig": {
+    "pos": "n"
+  },
+  "piglet": {
+    "pos": "n"
+  },
+  "pillar": {
+    "pos": "n"
+  },
+  "pine": {
+    "pos": "v"
+  },
+  "pine to death": {
+    "ipa": "ˈpaɪn tə ˈdeθ",
+    "pos": "phr"
+  },
+  "pineapple": {
+    "pos": "n"
+  },
+  "pioneer": {
+    "pos": "n"
+  },
+  "place": {
+    "pos": "n"
+  },
+  "plant": {
+    "pos": "v"
+  },
+  "play": {
+    "pos": "n"
+  },
+  "plea": {
+    "pos": "n"
+  },
+  "pleased with": {
+    "ipa": "ˈpliːzd wɪð",
+    "pos": "phr"
+  },
+  "pleasure": {
+    "pos": "n"
+  },
+  "plus": {
+    "pos": "prep"
+  },
+  "pocket": {
+    "pos": "n"
+  },
+  "poke holes in faulty arguments": {
+    "ipa": "ˈpəʊk ˈhəʊlz ɪn ˈfɔːlti ˈɑːɡjʊmənts",
+    "pos": "phr"
+  },
+  "polar region": {
+    "ipa": "ˈpəʊlə ˈriːdʒən",
+    "pos": "phr"
+  },
+  "political freedom": {
+    "ipa": "pəˈlɪtɪkəl ˈfriːdəm",
+    "pos": "phr"
+  },
+  "pollution": {
+    "pos": "n"
+  },
+  "pond": {
+    "pos": "n"
+  },
+  "pop into": {
+    "ipa": "ˈpɒp ˈɪntuː",
+    "pos": "phr"
+  },
+  "popularity": {
+    "pos": "n"
+  },
+  "popularize": {
+    "ipa": "ˈpɒpjələraɪz",
+    "pos": "v"
+  },
+  "population": {
+    "pos": "n"
+  },
+  "population growth": {
+    "ipa": "ˌpɒpjʊˈleɪʃən ˈɡrəʊθ",
+    "pos": "phr"
+  },
+  "porpoise": {
+    "ipa": "ˈpɔːpəs",
+    "pos": "n"
+  },
+  "portion": {
+    "pos": "n"
+  },
+  "pose": {
+    "pos": "v"
+  },
+  "positive-thinking": {
+    "ipa": "ˈpɒzətɪv θɪŋkɪŋ",
+    "pos": "adj"
+  },
+  "possible": {
+    "pos": "adj"
+  },
+  "poverty-stricken": {
+    "ipa": "ˈpɒvəti strɪkən",
+    "pos": "adj"
+  },
+  "powder": {
+    "pos": "v"
+  },
+  "power": {
+    "pos": "n"
+  },
+  "power shovels": {
+    "ipa": "ˈpaʊə ˈʃʌvəlz",
+    "pos": "phr"
+  },
+  "powerful": {
+    "pos": "adj"
+  },
+  "powers of black magic": {
+    "ipa": "ˈpaʊəz əv ˈblæk ˈmædʒɪk",
+    "pos": "phr"
+  },
+  "practise": {
+    "ipa": "ˈpræktɪs",
+    "pos": "v"
+  },
+  "pre": {
+    "ipa": "priː",
+    "pos": "adj"
+  },
+  "pre-eminent": {
+    "ipa": "priˈemɪnənt",
+    "pos": "adj"
+  },
+  "precaution": {
+    "pos": "n"
+  },
+  "precedent": {
+    "pos": "n"
+  },
+  "precious": {
+    "pos": "adj"
+  },
+  "precipitated": {
+    "ipa": "prɪˈsɪpɪteɪtɪd",
+    "pos": "v"
+  },
+  "precise": {
+    "pos": "adj"
+  },
+  "predecessor": {
+    "ipa": "ˈpriːdɪsesə",
+    "pos": "n"
+  },
+  "preparation": {
+    "ipa": "ˌprepəˈreɪʃn",
+    "pos": "n"
+  },
+  "preschool": {
+    "ipa": "ˈpriːskuːl",
+    "pos": "n"
+  },
+  "presence of mind": {
+    "ipa": "ˈprezəns əv ˈmaɪnd",
+    "pos": "phr"
+  },
+  "present": {
+    "pos": "adj"
+  },
+  "press": {
+    "pos": "v"
+  },
+  "prey": {
+    "pos": "n"
+  },
+  "prey-capturing": {
+    "ipa": "ˈpreɪ kæptʃərɪŋ",
+    "pos": "adj"
+  },
+  "primarily": {
+    "ipa": "praɪˈmerəli",
+    "pos": "adv"
+  },
+  "primary level": {
+    "ipa": "ˈpraɪməri ˈlevəl",
+    "pos": "phr"
+  },
+  "primitive": {
+    "pos": "adj"
+  },
+  "principle": {
+    "pos": "n"
+  },
+  "private": {
+    "pos": "adj"
+  },
+  "privately": {
+    "pos": "adv"
+  },
+  "probability": {
+    "pos": "n"
+  },
+  "probably": {
+    "pos": "adv"
+  },
+  "processing": {
+    "pos": "n"
+  },
+  "procession": {
+    "ipa": "prəˈseʃn",
+    "pos": "n"
+  },
+  "proclaim": {
+    "ipa": "prəˈkleɪm",
+    "pos": "v"
+  },
+  "profitable": {
+    "pos": "adj"
+  },
+  "program": {
+    "pos": "v"
+  },
+  "progressive": {
+    "pos": "adj"
+  },
+  "prolong": {
+    "pos": "v"
+  },
+  "prone to": {
+    "ipa": "ˈprəʊn tuː",
+    "pos": "phr"
+  },
+  "properly": {
+    "pos": "adv"
+  },
+  "prospect": {
+    "pos": "n"
+  },
+  "proverb": {
+    "pos": "n"
+  },
+  "provide": {
+    "pos": "v"
+  },
+  "provided with": {
+    "ipa": "prəˈvaɪdɪd wɪð",
+    "pos": "phr"
+  },
+  "psychiatrist": {
+    "pos": "n"
+  },
+  "psychological disorders": {
+    "ipa": "ˌsaɪkəˈlɒdʒɪkəl dɪsˈɔːdəz",
+    "pos": "phr"
+  },
+  "psychological studies": {
+    "ipa": "ˌsaɪkəˈlɒdʒɪkəl ˈstʌdiz",
+    "pos": "phr"
+  },
+  "psychologist": {
+    "pos": "n"
+  },
+  "psychologists": {
+    "ipa": "saɪˈkɒlədʒɪsts",
+    "pos": "n"
+  },
+  "public affair": {
+    "ipa": "ˈpʌblɪk əˈfeə",
+    "pos": "phr"
+  },
+  "public figure": {
+    "ipa": "ˈpʌblɪk ˈfɪɡə",
+    "pos": "phr"
+  },
+  "publicity": {
+    "ipa": "pʌbˈlɪsəti",
+    "pos": "n"
+  },
+  "pull": {
+    "pos": "v"
+  },
+  "punch": {
+    "pos": "n"
+  },
+  "punctuate": {
+    "pos": "v"
+  },
+  "purification": {
+    "pos": "n"
+  },
+  "pursue": {
+    "pos": "v"
+  },
+  "push": {
+    "ipa": "pʊʃ",
+    "pos": "v"
+  },
+  "push forward": {
+    "ipa": "ˈpʊʃ ˈfɔːwəd",
+    "pos": "phr"
+  },
+  "put": {
+    "pos": "v"
+  },
+  "put forward": {
+    "ipa": "ˈpʊt ˈfɔːwəd",
+    "pos": "phr"
+  },
+  "put him on his own": {
+    "ipa": "ˈpʊt hɪm ɒn hɪz ˈəʊn",
+    "pos": "phr"
+  },
+  "put his roots down": {
+    "ipa": "ˈpʊt hɪz ˈruːts ˈdaʊn",
+    "pos": "phr"
+  },
+  "put to death": {
+    "ipa": "ˈpʊt tə ˈdeθ",
+    "pos": "phr"
+  },
+  "put together": {
+    "ipa": "ˈpʊt təˈɡeðə",
+    "pos": "phr"
+  },
+  "qualification": {
+    "pos": "n"
+  },
+  "qualified": {
+    "ipa": "ˈkwɒlɪfaɪd",
+    "pos": "adj"
+  },
+  "questioning": {
+    "pos": "n"
+  },
+  "quieter": {
+    "ipa": "ˈkwaɪətə",
+    "pos": "adj"
+  },
+  "quote": {
+    "pos": "v"
+  },
+  "racial persecution": {
+    "ipa": "ˈreɪʃəl ˌpɜːsɪˈkjuːʃən",
+    "pos": "phr"
+  },
+  "range from": {
+    "ipa": "ˈreɪndʒ frɒm",
+    "pos": "phr"
+  },
+  "rapid": {
+    "ipa": "ˈræpɪd",
+    "pos": "adj"
+  },
+  "rarely": {
+    "pos": "adv"
+  },
+  "rat": {
+    "pos": "n"
+  },
+  "rather than": {
+    "ipa": "ˈrɑːðə ðən",
+    "pos": "phr"
+  },
+  "rattle": {
+    "pos": "v"
+  },
+  "reaction": {
+    "pos": "n"
+  },
+  "read": {
+    "pos": "v"
+  },
+  "ready": {
+    "ipa": "ˈredi",
+    "pos": "adj"
+  },
+  "rear": {
+    "pos": "v"
+  },
+  "reason": {
+    "ipa": "ˈriːzn",
+    "pos": "n"
+  },
+  "reasonable": {
+    "pos": "adj"
+  },
+  "reasoning": {
+    "pos": "n"
+  },
+  "reassure": {
+    "ipa": "ˌriːəˈʃʊə",
+    "pos": "v"
+  },
+  "receive gift": {
+    "ipa": "rɪˈsiːv ˈɡɪft",
+    "pos": "phr"
+  },
+  "recent": {
+    "pos": "adj"
+  },
+  "recently": {
+    "pos": "adv"
+  },
+  "reconcile": {
+    "pos": "v"
+  },
+  "record": {
+    "pos": "v"
+  },
+  "recorded": {
+    "ipa": "rɪˈkɔːdɪd",
+    "pos": "adj"
+  },
+  "recovery": {
+    "pos": "n"
+  },
+  "recruit": {
+    "pos": "v"
+  },
+  "redness": {
+    "ipa": "ˈrednəs",
+    "pos": "n"
+  },
+  "reduction": {
+    "pos": "n"
+  },
+  "refer": {
+    "pos": "v"
+  },
+  "refill": {
+    "pos": "v"
+  },
+  "refreeze": {
+    "ipa": "ˌriːˈfriːz",
+    "pos": "v"
+  },
+  "regain": {
+    "pos": "v"
+  },
+  "regarded as": {
+    "ipa": "rɪˈɡɑːdɪd əz",
+    "pos": "phr"
+  },
+  "region": {
+    "pos": "n"
+  },
+  "reign": {
+    "pos": "n"
+  },
+  "reindeer": {
+    "pos": "n"
+  },
+  "related field": {
+    "ipa": "rɪˈleɪtɪd ˈfiːld",
+    "pos": "phr"
+  },
+  "related to": {
+    "ipa": "rɪˈleɪtɪd tuː",
+    "pos": "phr"
+  },
+  "relationship": {
+    "pos": "n"
+  },
+  "relatively": {
+    "ipa": "ˈrelətɪvli",
+    "pos": "adv"
+  },
+  "relentless": {
+    "pos": "adj"
+  },
+  "relevant": {
+    "pos": "adj"
+  },
+  "relief": {
+    "pos": "n"
+  },
+  "religion": {
+    "pos": "n"
+  },
+  "rely on": {
+    "ipa": "rɪˈlaɪ ɒn",
+    "pos": "phr"
+  },
+  "remain alive": {
+    "ipa": "rɪˈmeɪn əˈlaɪv",
+    "pos": "phr"
+  },
+  "remember": {
+    "pos": "v"
+  },
+  "remonstrance": {
+    "ipa": "rɪˈmɒnstrəns",
+    "pos": "n"
+  },
+  "renowned": {
+    "pos": "adj"
+  },
+  "repeat": {
+    "ipa": "rɪˈpiːt",
+    "pos": "v"
+  },
+  "replace": {
+    "pos": "v"
+  },
+  "repress": {
+    "ipa": "rɪˈpres",
+    "pos": "v"
+  },
+  "rescue": {
+    "pos": "v"
+  },
+  "research": {
+    "pos": "n"
+  },
+  "resent": {
+    "pos": "v"
+  },
+  "resentful": {
+    "pos": "adj"
+  },
+  "resource": {
+    "pos": "n"
+  },
+  "resources": {
+    "ipa": "rɪˈzɔːsɪz",
+    "pos": "n"
+  },
+  "respectively": {
+    "pos": "adv"
+  },
+  "rest upon": {
+    "ipa": "ˈrest əˈpɒn",
+    "pos": "phr"
+  },
+  "resurrect": {
+    "pos": "v"
+  },
+  "retailer": {
+    "ipa": "ˈriːteɪlə",
+    "pos": "n"
+  },
+  "retell": {
+    "ipa": "ˌriːˈtel",
+    "pos": "v"
+  },
+  "retirement": {
+    "pos": "n"
+  },
+  "retreat": {
+    "pos": "n"
+  },
+  "revenge": {
+    "pos": "v"
+  },
+  "revenue": {
+    "pos": "n"
+  },
+  "reversal": {
+    "ipa": "rɪˈvɜːsl",
+    "pos": "n"
+  },
+  "reverse": {
+    "pos": "v"
+  },
+  "revolution": {
+    "pos": "n"
+  },
+  "revolutionary": {
+    "ipa": "ˌrevəˈluːʃənəri",
+    "pos": "adj"
+  },
+  "rewarming": {
+    "ipa": "ˌriːˈwɔːmɪŋ",
+    "pos": "n"
+  },
+  "ride in": {
+    "ipa": "ˈraɪd ˈɪn",
+    "pos": "phr"
+  },
+  "ridicule": {
+    "ipa": "ˈrɪdɪkjuːl",
+    "pos": "n"
+  },
+  "righteous": {
+    "pos": "adj"
+  },
+  "rigid": {
+    "pos": "adj"
+  },
+  "rip": {
+    "pos": "v"
+  },
+  "rise": {
+    "pos": "n"
+  },
+  "road": {
+    "pos": "n"
+  },
+  "road building": {
+    "ipa": "ˈrəʊd ˈbɪldɪŋ",
+    "pos": "phr"
+  },
+  "roam": {
+    "pos": "v"
+  },
+  "roar": {
+    "pos": "n"
+  },
+  "robbery": {
+    "pos": "n"
+  },
+  "rodent": {
+    "pos": "n"
+  },
+  "root": {
+    "ipa": "ruːt",
+    "pos": "n"
+  },
+  "rope": {
+    "pos": "n"
+  },
+  "rough games": {
+    "ipa": "ˈrʌf ˈɡeɪmz",
+    "pos": "phr"
+  },
+  "roughly": {
+    "pos": "adv"
+  },
+  "routine": {
+    "pos": "n"
+  },
+  "rub": {
+    "pos": "v"
+  },
+  "rug": {
+    "pos": "n"
+  },
+  "run a hotel": {
+    "ipa": "ˈrʌn ə həʊˈtel",
+    "pos": "phr"
+  },
+  "rural areas": {
+    "ipa": "ˈrʊərəl ˈeəriəz",
+    "pos": "phr"
+  },
+  "sacrifice": {
+    "pos": "v"
+  },
+  "sale": {
+    "pos": "n"
+  },
+  "sales": {
+    "pos": "n"
+  },
+  "salt-water": {
+    "ipa": "ˈsɔːlt wɔːtə",
+    "pos": "adj"
+  },
+  "salted": {
+    "ipa": "ˈsɔːltɪd",
+    "pos": "adj"
+  },
+  "sample": {
+    "pos": "n"
+  },
+  "sandwich": {
+    "ipa": "ˈsænwɪdʒ",
+    "pos": "v"
+  },
+  "satisfied": {
+    "pos": "adj"
+  },
+  "saturate": {
+    "ipa": "ˈsætʃəreɪt",
+    "pos": "v"
+  },
+  "sausage": {
+    "pos": "n"
+  },
+  "saving": {
+    "pos": "n"
+  },
+  "savings": {
+    "pos": "n"
+  },
+  "say": {
+    "pos": "v"
+  },
+  "saying": {
+    "pos": "n"
+  },
+  "scatter": {
+    "pos": "v"
+  },
+  "scientific": {
+    "pos": "adj"
+  },
+  "scientist": {
+    "pos": "n"
+  },
+  "score": {
+    "ipa": "skɔː",
+    "pos": "n"
+  },
+  "scornful": {
+    "pos": "adj"
+  },
+  "scrawny": {
+    "pos": "adj"
+  },
+  "seal": {
+    "pos": "v"
+  },
+  "search": {
+    "pos": "n"
+  },
+  "search for": {
+    "ipa": "ˈsɜːtʃ fɔː",
+    "pos": "phr"
+  },
+  "search for a cure": {
+    "ipa": "ˈsɜːtʃ fər ə ˈkjʊə",
+    "pos": "phr"
+  },
+  "seaside": {
+    "ipa": "ˈsiːsaɪd",
+    "pos": "n"
+  },
+  "secret society": {
+    "ipa": "ˈsiːkrɪt səˈsaɪəti",
+    "pos": "phr"
+  },
+  "secretly allied": {
+    "ipa": "ˈsiːkrɪtli ˈælaɪd",
+    "pos": "phr"
+  },
+  "security": {
+    "pos": "n"
+  },
+  "sediment": {
+    "ipa": "ˈsedɪmənt",
+    "pos": "n"
+  },
+  "seemingly": {
+    "pos": "adv"
+  },
+  "seize": {
+    "pos": "v"
+  },
+  "seized": {
+    "ipa": "siːzd",
+    "pos": "v"
+  },
+  "selection": {
+    "pos": "n"
+  },
+  "selective": {
+    "pos": "adj"
+  },
+  "self": {
+    "pos": "n"
+  },
+  "self-assertion": {
+    "ipa": "ˌself əˈsɜːʃn",
+    "pos": "n"
+  },
+  "self-confidence": {
+    "ipa": "ˌself ˈkɒnfɪdəns",
+    "pos": "n"
+  },
+  "self-love": {
+    "ipa": "ˌself ˈlʌv",
+    "pos": "n"
+  },
+  "self-selected": {
+    "ipa": "ˌself sɪˈlektɪd",
+    "pos": "adj"
+  },
+  "sell": {
+    "pos": "v"
+  },
+  "send": {
+    "pos": "v"
+  },
+  "sensation": {
+    "pos": "n"
+  },
+  "sense of humour": {
+    "ipa": "ˈsens əv ˈhjuːmə",
+    "pos": "phr"
+  },
+  "sentence": {
+    "pos": "n"
+  },
+  "sentiment": {
+    "pos": "n"
+  },
+  "series": {
+    "pos": "n"
+  },
+  "seriously": {
+    "pos": "adv"
+  },
+  "servant": {
+    "pos": "n"
+  },
+  "set the stage": {
+    "ipa": "ˈset ðə ˈsteɪdʒ",
+    "pos": "phr"
+  },
+  "seven-day-a-week": {
+    "ipa": "ˈsevn deɪ ə ˈwiːk",
+    "pos": "adj"
+  },
+  "sew": {
+    "pos": "v"
+  },
+  "shallow": {
+    "pos": "adj"
+  },
+  "sharing": {
+    "pos": "n"
+  },
+  "shark": {
+    "pos": "n"
+  },
+  "sharply": {
+    "pos": "adv"
+  },
+  "shelter": {
+    "pos": "n"
+  },
+  "shine down": {
+    "ipa": "ˈʃaɪn ˈdaʊn",
+    "pos": "phr"
+  },
+  "shoemaking": {
+    "ipa": "ˈʃuːmeɪkɪŋ",
+    "pos": "n"
+  },
+  "shortage, lack": {
+    "ipa": "ˈʃɔːtɪdʒ ˈlæk",
+    "pos": "n"
+  },
+  "shortcomings": {
+    "ipa": "ˈʃɔːtkʌmɪŋz",
+    "pos": "n"
+  },
+  "show": {
+    "pos": "v"
+  },
+  "shut down": {
+    "ipa": "ˈʃʌt ˈdaʊn",
+    "pos": "phr"
+  },
+  "significance": {
+    "pos": "n"
+  },
+  "significant segment": {
+    "ipa": "sɪɡˈnɪfɪkənt ˈseɡmənt",
+    "pos": "phr"
+  },
+  "silk-spinning": {
+    "ipa": "ˈsɪlk spɪnɪŋ",
+    "pos": "adj"
+  },
+  "silkworm": {
+    "pos": "n"
+  },
+  "silver": {
+    "pos": "n"
+  },
+  "similarity": {
+    "pos": "n"
+  },
+  "similarly": {
+    "pos": "adv"
+  },
+  "simple": {
+    "pos": "adj"
+  },
+  "simplify": {
+    "pos": "v"
+  },
+  "simultaneously": {
+    "pos": "adv"
+  },
+  "singer": {
+    "pos": "n"
+  },
+  "sissy": {
+    "pos": "n"
+  },
+  "situation": {
+    "pos": "n"
+  },
+  "size": {
+    "pos": "n"
+  },
+  "skiing": {
+    "pos": "n"
+  },
+  "skilfully": {
+    "ipa": "ˈskɪlfəli",
+    "pos": "adv"
+  },
+  "skin": {
+    "pos": "n"
+  },
+  "skull": {
+    "pos": "n"
+  },
+  "slab": {
+    "pos": "n"
+  },
+  "slack season": {
+    "ipa": "ˈslæk ˈsiːzən",
+    "pos": "phr"
+  },
+  "slapstick": {
+    "ipa": "ˈslæpstɪk",
+    "pos": "n"
+  },
+  "slavery": {
+    "pos": "n"
+  },
+  "sleep cycle": {
+    "ipa": "ˈsliːp ˈsaɪkəl",
+    "pos": "phr"
+  },
+  "sleigh": {
+    "pos": "n"
+  },
+  "slice": {
+    "ipa": "slaɪs",
+    "pos": "v"
+  },
+  "slide down": {
+    "ipa": "ˈslaɪd ˈdaʊn",
+    "pos": "phr"
+  },
+  "slope": {
+    "pos": "n"
+  },
+  "slow": {
+    "pos": "adj"
+  },
+  "slowly": {
+    "pos": "adv"
+  },
+  "slum": {
+    "pos": "n"
+  },
+  "smartly": {
+    "ipa": "ˈsmɑːtli",
+    "pos": "adv"
+  },
+  "smashing": {
+    "ipa": "ˈsmæʃɪŋ",
+    "pos": "n"
+  },
+  "smoke": {
+    "pos": "n"
+  },
+  "smoked": {
+    "pos": "adj"
+  },
+  "snowy peak": {
+    "ipa": "ˈsnəʊi ˈpiːk",
+    "pos": "phr"
+  },
+  "snub nose": {
+    "ipa": "ˈsnʌb ˈnəʊz",
+    "pos": "phr"
+  },
+  "snuff": {
+    "ipa": "snʌf",
+    "pos": "n"
+  },
+  "so far": {
+    "ipa": "ˈsəʊ ˈfɑː",
+    "pos": "phr"
+  },
+  "soap": {
+    "pos": "n"
+  },
+  "social function": {
+    "ipa": "ˈsəʊʃəl ˈfʌŋkʃən",
+    "pos": "phr"
+  },
+  "social service": {
+    "ipa": "ˈsəʊʃəl ˈsɜːvɪs",
+    "pos": "phr"
+  },
+  "soft drink": {
+    "ipa": "ˈsɒft ˈdrɪŋk",
+    "pos": "phr"
+  },
+  "solitude": {
+    "pos": "n"
+  },
+  "soon": {
+    "pos": "adv"
+  },
+  "sore": {
+    "pos": "adj"
+  },
+  "sorrow": {
+    "pos": "n"
+  },
+  "sought for": {
+    "ipa": "ˈsɔːt fɔː",
+    "pos": "phr"
+  },
+  "sound levels": {
+    "ipa": "ˈsaʊnd ˈlevəlz",
+    "pos": "phr"
+  },
+  "soup": {
+    "pos": "n"
+  },
+  "source": {
+    "pos": "n"
+  },
+  "south": {
+    "pos": "n"
+  },
+  "sow": {
+    "pos": "n"
+  },
+  "spare": {
+    "pos": "v"
+  },
+  "spawn": {
+    "pos": "v"
+  },
+  "special": {
+    "pos": "adj"
+  },
+  "special mannerisms": {
+    "ipa": "ˈspeʃəl ˈmænərɪzəmz",
+    "pos": "phr"
+  },
+  "species": {
+    "pos": "n"
+  },
+  "specifically": {
+    "pos": "adv"
+  },
+  "specilized": {
+    "ipa": "ˈspeʃəlaɪzd",
+    "pos": "adj"
+  },
+  "speed": {
+    "pos": "n"
+  },
+  "speed up": {
+    "ipa": "ˈspiːd ˈʌp",
+    "pos": "phr"
+  },
+  "spell": {
+    "pos": "v"
+  },
+  "spender": {
+    "ipa": "ˈspendə",
+    "pos": "n"
+  },
+  "spider": {
+    "ipa": "ˈspaɪdə",
+    "pos": "n"
+  },
+  "spine": {
+    "pos": "n"
+  },
+  "spirit": {
+    "pos": "n"
+  },
+  "spoil": {
+    "pos": "v"
+  },
+  "springboard": {
+    "ipa": "ˈsprɪŋbɔːd",
+    "pos": "n"
+  },
+  "squirt": {
+    "pos": "n"
+  },
+  "stacked": {
+    "ipa": "stækt",
+    "pos": "adj"
+  },
+  "stall": {
+    "pos": "n"
+  },
+  "start up": {
+    "ipa": "ˈstɑːt ˈʌp",
+    "pos": "phr"
+  },
+  "starve": {
+    "pos": "v"
+  },
+  "statistics": {
+    "pos": "n"
+  },
+  "status": {
+    "pos": "n"
+  },
+  "stay": {
+    "pos": "v"
+  },
+  "steak": {
+    "pos": "n"
+  },
+  "steel": {
+    "pos": "n"
+  },
+  "steep": {
+    "ipa": "stiːp",
+    "pos": "adj"
+  },
+  "steer": {
+    "pos": "v"
+  },
+  "sterile": {
+    "pos": "adj"
+  },
+  "stick": {
+    "pos": "n"
+  },
+  "stiff": {
+    "pos": "adj"
+  },
+  "stolen": {
+    "pos": "adj"
+  },
+  "stone": {
+    "pos": "n"
+  },
+  "storeroom": {
+    "ipa": "ˈstɔːruːm",
+    "pos": "n"
+  },
+  "story book": {
+    "ipa": "ˈstɔːri ˈbʊk",
+    "pos": "phr"
+  },
+  "strain": {
+    "ipa": "streɪn",
+    "pos": "n"
+  },
+  "streamer": {
+    "pos": "n"
+  },
+  "streamlined": {
+    "ipa": "ˈstriːmlaɪnd",
+    "pos": "adj"
+  },
+  "street": {
+    "pos": "n"
+  },
+  "street dancing": {
+    "ipa": "ˈstriːt ˈdɑːnsɪŋ",
+    "pos": "phr"
+  },
+  "stress": {
+    "pos": "n"
+  },
+  "stricken": {
+    "pos": "adj"
+  },
+  "strict safety measures": {
+    "ipa": "ˈstrɪkt ˈseɪfti ˈmeʒəz",
+    "pos": "phr"
+  },
+  "string": {
+    "pos": "n"
+  },
+  "stroke": {
+    "pos": "n"
+  },
+  "stuff": {
+    "pos": "v"
+  },
+  "stuffed": {
+    "ipa": "stʌft",
+    "pos": "adj"
+  },
+  "style": {
+    "pos": "n"
+  },
+  "subject": {
+    "pos": "n"
+  },
+  "submarine": {
+    "ipa": "ˈsʌbməriːn",
+    "pos": "n"
+  },
+  "successful": {
+    "pos": "adj"
+  },
+  "such": {
+    "pos": "det"
+  },
+  "such as": {
+    "ipa": "ˈsʌtʃ əz",
+    "pos": "phr"
+  },
+  "suffer from": {
+    "ipa": "ˈsʌfə frɒm",
+    "pos": "phr"
+  },
+  "sufferer": {
+    "ipa": "ˈsʌfərə",
+    "pos": "n"
+  },
+  "sufferings": {
+    "pos": "n"
+  },
+  "suffice": {
+    "pos": "v"
+  },
+  "summit": {
+    "pos": "n"
+  },
+  "summon up": {
+    "ipa": "ˈsʌmən ˈʌp",
+    "pos": "phr"
+  },
+  "sunrise": {
+    "pos": "n"
+  },
+  "superb": {
+    "pos": "adj"
+  },
+  "superstition": {
+    "pos": "n"
+  },
+  "supply": {
+    "pos": "n"
+  },
+  "supposedly": {
+    "ipa": "səˈpəʊzɪdli",
+    "pos": "adv"
+  },
+  "suppress": {
+    "pos": "v"
+  },
+  "surprise": {
+    "pos": "n"
+  },
+  "surrender": {
+    "pos": "v"
+  },
+  "survey": {
+    "ipa": "ˈsɜːveɪ",
+    "pos": "n"
+  },
+  "surveys": {
+    "ipa": "ˈsɜːveɪz",
+    "pos": "n"
+  },
+  "susceptible": {
+    "pos": "adj"
+  },
+  "suspected of": {
+    "ipa": "səˈspektɪd əv",
+    "pos": "phr"
+  },
+  "sweat glands": {
+    "ipa": "ˈswet ˈɡlændz",
+    "pos": "phr"
+  },
+  "sweep": {
+    "pos": "v"
+  },
+  "swiftly": {
+    "pos": "adv"
+  },
+  "swollen": {
+    "pos": "adj"
+  },
+  "symbolize": {
+    "pos": "v"
+  },
+  "sympathetic": {
+    "pos": "adj"
+  },
+  "symtopm": {
+    "ipa": "ˈsɪmptəm",
+    "pos": "n"
+  },
+  "synonymous": {
+    "pos": "adj"
+  },
+  "tailor": {
+    "pos": "n"
+  },
+  "take advantage of": {
+    "ipa": "ˈteɪk ədˈvɑːntɪdʒ əv",
+    "pos": "phr"
+  },
+  "take place": {
+    "ipa": "ˈteɪk ˈpleɪs",
+    "pos": "phr"
+  },
+  "take shelter": {
+    "ipa": "ˈteɪk ˈʃeltə",
+    "pos": "phr"
+  },
+  "take with a grain of salt": {
+    "ipa": "ˈteɪk wɪð ə ˈɡreɪn əv ˈsɔːlt",
+    "pos": "phr"
+  },
+  "take-off": {
+    "ipa": "ˈteɪk ɒf",
+    "pos": "n"
+  },
+  "talked-about": {
+    "ipa": "ˈtɔːkt əbaʊt",
+    "pos": "adj"
+  },
+  "tamed": {
+    "ipa": "teɪmd",
+    "pos": "adj"
+  },
+  "tank": {
+    "pos": "n"
+  },
+  "team": {
+    "pos": "n"
+  },
+  "tear(torn)": {
+    "ipa": "teə",
+    "pos": "v"
+  },
+  "teddy": {
+    "pos": "n"
+  },
+  "teenage": {
+    "pos": "adj"
+  },
+  "tell": {
+    "pos": "v"
+  },
+  "tell the story": {
+    "ipa": "ˈtel ðə ˈstɔːri",
+    "pos": "phr"
+  },
+  "telstar": {
+    "ipa": "ˈtelstɑː",
+    "pos": "n"
+  },
+  "temporarily": {
+    "pos": "adv"
+  },
+  "tendency": {
+    "pos": "n"
+  },
+  "tenderness": {
+    "pos": "n"
+  },
+  "tent": {
+    "pos": "n"
+  },
+  "thaw": {
+    "ipa": "θɔː",
+    "pos": "v"
+  },
+  "the best": {
+    "ipa": "ðə ˈbest",
+    "pos": "phr"
+  },
+  "the data": {
+    "ipa": "ðə ˈdeɪtə",
+    "pos": "phr"
+  },
+  "the same": {
+    "ipa": "ðə ˈseɪm",
+    "pos": "phr"
+  },
+  "the top": {
+    "ipa": "ðə ˈtɒp",
+    "pos": "phr"
+  },
+  "the worst cases": {
+    "ipa": "ðə ˈwɜːst ˈkeɪsɪz",
+    "pos": "phr"
+  },
+  "their own": {
+    "ipa": "ðeər ˈəʊn",
+    "pos": "phr"
+  },
+  "then": {
+    "pos": "adv"
+  },
+  "thick leaves": {
+    "ipa": "ˈθɪk ˈliːvz",
+    "pos": "phr"
+  },
+  "thieves": {
+    "pos": "n"
+  },
+  "thoroughly": {
+    "pos": "adv"
+  },
+  "thought": {
+    "pos": "n"
+  },
+  "thread": {
+    "ipa": "θred",
+    "pos": "n"
+  },
+  "threshold": {
+    "pos": "n"
+  },
+  "thrive": {
+    "pos": "v"
+  },
+  "through": {
+    "pos": "prep"
+  },
+  "throughout": {
+    "pos": "prep"
+  },
+  "thug": {
+    "ipa": "θʌɡ",
+    "pos": "n"
+  },
+  "thunder": {
+    "ipa": "ˈθʌndə",
+    "pos": "n"
+  },
+  "tightly": {
+    "pos": "adv"
+  },
+  "time of joy": {
+    "ipa": "ˈtaɪm əv ˈdʒɔɪ",
+    "pos": "phr"
+  },
+  "tin": {
+    "pos": "n"
+  },
+  "tingle": {
+    "ipa": "ˈtɪŋɡl",
+    "pos": "v"
+  },
+  "tiring": {
+    "ipa": "ˈtaɪərɪŋ",
+    "pos": "adj"
+  },
+  "title": {
+    "pos": "n"
+  },
+  "titled": {
+    "ipa": "ˈtaɪtld",
+    "pos": "adj"
+  },
+  "to be after": {
+    "ipa": "tə ˈbiː ˈɑːftə",
+    "pos": "phr"
+  },
+  "to be up to": {
+    "ipa": "tə ˈbiː ˈʌp tuː",
+    "pos": "phr"
+  },
+  "toil": {
+    "pos": "n"
+  },
+  "tom-boy": {
+    "ipa": "ˈtɒm bɔɪ",
+    "pos": "n"
+  },
+  "took refuge": {
+    "ipa": "ˈtʊk ˈrefjuːdʒ",
+    "pos": "phr"
+  },
+  "top": {
+    "pos": "v"
+  },
+  "torn-boy": {
+    "ipa": "ˈtɔːn bɔɪ",
+    "pos": "n"
+  },
+  "torrential": {
+    "pos": "adj"
+  },
+  "torture": {
+    "pos": "v"
+  },
+  "total": {
+    "pos": "adj"
+  },
+  "total value": {
+    "ipa": "ˈtəʊtəl ˈvæljuː",
+    "pos": "phr"
+  },
+  "touch": {
+    "ipa": "tʌtʃ",
+    "pos": "v"
+  },
+  "tourist attraction": {
+    "ipa": "ˈtʊərɪst əˈtrækʃən",
+    "pos": "phr"
+  },
+  "tournament": {
+    "pos": "n"
+  },
+  "towards": {
+    "pos": "prep"
+  },
+  "tower": {
+    "pos": "n"
+  },
+  "traditionally": {
+    "pos": "adv"
+  },
+  "train": {
+    "pos": "v"
+  },
+  "tramp": {
+    "pos": "n"
+  },
+  "transfer": {
+    "pos": "v"
+  },
+  "transition": {
+    "pos": "n"
+  },
+  "treatment": {
+    "pos": "n"
+  },
+  "treatment area": {
+    "ipa": "ˈtriːtmənt ˈeəriə",
+    "pos": "phr"
+  },
+  "tremendous": {
+    "pos": "adj"
+  },
+  "trigger": {
+    "ipa": "ˈtrɪɡə",
+    "pos": "v"
+  },
+  "troop": {
+    "pos": "n"
+  },
+  "truly humorous": {
+    "ipa": "ˈtruːli ˈhjuːmərəs",
+    "pos": "phr"
+  },
+  "try": {
+    "pos": "v"
+  },
+  "tuck up": {
+    "ipa": "ˈtʌk ˈʌp",
+    "pos": "phr"
+  },
+  "tuna": {
+    "pos": "n"
+  },
+  "turn": {
+    "pos": "v"
+  },
+  "turn into": {
+    "ipa": "ˈtɜːn ˈɪntuː",
+    "pos": "phr"
+  },
+  "turn on sb’s back": {
+    "ipa": "ˈtɜːn ɒn ˈsʌmbədiz ˈbæk",
+    "pos": "phr"
+  },
+  "turn over": {
+    "ipa": "ˈtɜːn ˈəʊvə",
+    "pos": "phr"
+  },
+  "twice": {
+    "pos": "adv"
+  },
+  "twilight": {
+    "pos": "n"
+  },
+  "twist into": {
+    "ipa": "ˈtwɪst ˈɪntuː",
+    "pos": "phr"
+  },
+  "two-thirds": {
+    "ipa": "ˌtuː ˈθɜːdz",
+    "pos": "n"
+  },
+  "tying up(tie)": {
+    "ipa": "ˈtaɪɪŋ ˈʌp",
+    "pos": "v"
+  },
+  "unable": {
+    "pos": "adj"
+  },
+  "unaffected": {
+    "ipa": "ˌʌnəˈfektɪd",
+    "pos": "adj"
+  },
+  "unarmed": {
+    "pos": "adj"
+  },
+  "unavoidable": {
+    "ipa": "ˌʌnəˈvɔɪdəbl",
+    "pos": "adj"
+  },
+  "uncertain": {
+    "pos": "adj"
+  },
+  "uncharted waters": {
+    "ipa": "ʌnˈtʃɑːtɪd ˈwɔːtəz",
+    "pos": "phr"
+  },
+  "unconscious": {
+    "pos": "adj"
+  },
+  "understanding": {
+    "pos": "n"
+  },
+  "undetected": {
+    "ipa": "ˌʌndɪˈtektɪd",
+    "pos": "adj"
+  },
+  "uneven": {
+    "pos": "adj"
+  },
+  "uninhabitable": {
+    "ipa": "ˌʌnɪnˈhæbɪtəbl",
+    "pos": "adj"
+  },
+  "uninterrupted": {
+    "ipa": "ˌʌnɪntəˈrʌptɪd",
+    "pos": "adj"
+  },
+  "union": {
+    "pos": "n"
+  },
+  "unkempt": {
+    "pos": "adj"
+  },
+  "unlock": {
+    "pos": "v"
+  },
+  "unmatched": {
+    "ipa": "ˌʌnˈmætʃt",
+    "pos": "adj"
+  },
+  "unnecessary": {
+    "pos": "adj"
+  },
+  "unparalleled": {
+    "ipa": "ʌnˈpærəleld",
+    "pos": "adj"
+  },
+  "unpleasant": {
+    "pos": "adj"
+  },
+  "unprecedented": {
+    "pos": "adj"
+  },
+  "unskilled": {
+    "ipa": "ˌʌnˈskɪld",
+    "pos": "adj"
+  },
+  "unsteadily": {
+    "ipa": "ʌnˈstedɪli",
+    "pos": "adv"
+  },
+  "untouchable": {
+    "ipa": "ʌnˈtʌtʃəbl",
+    "pos": "adj"
+  },
+  "up to the present": {
+    "ipa": "ˈʌp tə ðə ˈprezənt",
+    "pos": "phr"
+  },
+  "uprising": {
+    "ipa": "ˈʌpraɪzɪŋ",
+    "pos": "n"
+  },
+  "urban": {
+    "pos": "adj"
+  },
+  "urban areas": {
+    "ipa": "ˈɜːbən ˈeəriəz",
+    "pos": "phr"
+  },
+  "use": {
+    "ipa": "juːz",
+    "pos": "v"
+  },
+  "useful": {
+    "pos": "adj"
+  },
+  "usefully": {
+    "ipa": "ˈjuːsfəli",
+    "pos": "adv"
+  },
+  "useless": {
+    "pos": "adj"
+  },
+  "usual": {
+    "pos": "adj"
+  },
+  "usual behaviour": {
+    "ipa": "ˈjuːʒuəl bɪˈheɪvjə",
+    "pos": "phr"
+  },
+  "utilization": {
+    "ipa": "ˌjuːtəlaɪˈzeɪʃn",
+    "pos": "n"
+  },
+  "utilize": {
+    "ipa": "ˈjuːtəlaɪz",
+    "pos": "v"
+  },
+  "utopia": {
+    "pos": "n"
+  },
+  "vaguely": {
+    "pos": "adv"
+  },
+  "variety": {
+    "ipa": "vəˈraɪəti",
+    "pos": "n"
+  },
+  "vary": {
+    "pos": "v"
+  },
+  "vase": {
+    "pos": "n"
+  },
+  "vast": {
+    "pos": "adj"
+  },
+  "velocity": {
+    "pos": "n"
+  },
+  "vending machines": {
+    "ipa": "ˈvendɪŋ məˈʃiːnz",
+    "pos": "phr"
+  },
+  "vendor": {
+    "pos": "n"
+  },
+  "version": {
+    "pos": "n"
+  },
+  "vessel": {
+    "pos": "n"
+  },
+  "vicious": {
+    "pos": "adj"
+  },
+  "victory": {
+    "pos": "n"
+  },
+  "violence": {
+    "pos": "n"
+  },
+  "visual": {
+    "ipa": "ˈvɪʒuəl",
+    "pos": "adj"
+  },
+  "visualize": {
+    "ipa": "ˈvɪʒuəlaɪz",
+    "pos": "v"
+  },
+  "volume": {
+    "pos": "n"
+  },
+  "voluntary": {
+    "pos": "adj"
+  },
+  "wage": {
+    "pos": "n"
+  },
+  "wait": {
+    "pos": "v"
+  },
+  "wake up": {
+    "ipa": "ˈweɪk ˈʌp",
+    "pos": "phr"
+  },
+  "wall": {
+    "pos": "n"
+  },
+  "wallow": {
+    "pos": "v"
+  },
+  "wander": {
+    "pos": "v"
+  },
+  "warfare": {
+    "pos": "n"
+  },
+  "warm": {
+    "pos": "adj"
+  },
+  "warm-blooded": {
+    "ipa": "ˌwɔːm ˈblʌdɪd",
+    "pos": "adj"
+  },
+  "warmth": {
+    "pos": "n"
+  },
+  "warning": {
+    "pos": "n"
+  },
+  "waterhole": {
+    "ipa": "ˈwɔːtəhəʊl",
+    "pos": "n"
+  },
+  "watermelon": {
+    "pos": "n"
+  },
+  "waver": {
+    "pos": "v"
+  },
+  "way": {
+    "pos": "n"
+  },
+  "weakness": {
+    "pos": "n"
+  },
+  "weapon of war": {
+    "ipa": "ˈwepən əv ˈwɔː",
+    "pos": "phr"
+  },
+  "wear out": {
+    "ipa": "ˈweər ˈaʊt",
+    "pos": "phr"
+  },
+  "weave": {
+    "pos": "v"
+  },
+  "weep": {
+    "pos": "v"
+  },
+  "weight": {
+    "pos": "n"
+  },
+  "well-known": {
+    "pos": "adj"
+  },
+  "whale": {
+    "pos": "n"
+  },
+  "which": {
+    "pos": "pron"
+  },
+  "while": {
+    "pos": "conj"
+  },
+  "whirl": {
+    "pos": "n"
+  },
+  "whistle": {
+    "pos": "v"
+  },
+  "whizzing": {
+    "ipa": "ˈwɪzɪŋ",
+    "pos": "adj"
+  },
+  "whole range": {
+    "ipa": "ˈhəʊl ˈreɪndʒ",
+    "pos": "phr"
+  },
+  "wickedness": {
+    "pos": "n"
+  },
+  "wider": {
+    "pos": "adj"
+  },
+  "wilderness": {
+    "pos": "n"
+  },
+  "wildly": {
+    "pos": "adv"
+  },
+  "will": {
+    "pos": "n"
+  },
+  "wind": {
+    "pos": "n"
+  },
+  "wine-making": {
+    "ipa": "ˈwaɪn meɪkɪŋ",
+    "pos": "n"
+  },
+  "wisdom": {
+    "pos": "n"
+  },
+  "wisely": {
+    "pos": "adv"
+  },
+  "wish": {
+    "pos": "v"
+  },
+  "withdraw": {
+    "pos": "v"
+  },
+  "without": {
+    "pos": "prep"
+  },
+  "woken": {
+    "ipa": "ˈwəʊkən",
+    "pos": "v"
+  },
+  "wonderful": {
+    "pos": "adj"
+  },
+  "wooden": {
+    "pos": "adj"
+  },
+  "woollen": {
+    "ipa": "ˈwʊlən",
+    "pos": "adj"
+  },
+  "word": {
+    "pos": "n"
+  },
+  "worker": {
+    "pos": "n"
+  },
+  "working hours": {
+    "ipa": "ˈwɜːkɪŋ ˈaʊəz",
+    "pos": "phr"
+  },
+  "working life": {
+    "ipa": "ˈwɜːkɪŋ ˈlaɪf",
+    "pos": "phr"
+  },
+  "workshop": {
+    "pos": "n"
+  },
+  "written invitation": {
+    "ipa": "ˈrɪtən ˌɪnvɪˈteɪʃən",
+    "pos": "phr"
+  },
+  "wrote (write)": {
+    "ipa": "ˈrəʊt",
+    "pos": "v"
+  },
+  "yield": {
+    "pos": "v"
+  },
+  "young": {
+    "pos": "adj"
+  },
+  "zodiac sign": {
+    "ipa": "ˈzəʊdiæk ˈsaɪn",
+    "pos": "phr"
+  }
+}

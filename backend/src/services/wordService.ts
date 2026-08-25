@@ -1,33 +1,6 @@
 import { and, asc, eq, ilike, inArray, or, sql, type SQL } from "drizzle-orm";
 import { db } from "../db/index.ts";
 import { books, units, words, type Word } from "../db/schema.ts";
-
-export interface WordLocation {
-  bookOrder: number;
-  unitOrder: number;
-}
-
-// Dublikat (english, translation) juftligi qaysi kitob/unitda ekanini topadi.
-export async function findWordLocation(
-  english: string,
-  translation: string,
-): Promise<WordLocation | null> {
-  const [row] = await db
-    .select({ bookOrder: books.order, unitOrder: units.order })
-    .from(words)
-    .innerJoin(units, eq(units.id, words.unitId))
-    .innerJoin(books, eq(books.id, units.bookId))
-    .where(
-      sql`lower(${words.english}) = lower(${english}) and lower(${words.translation}) = lower(${translation})`,
-    )
-    .limit(1);
-  return row ?? null;
-}
-
-export async function getWordById(id: number): Promise<Word | null> {
-  const [row] = await db.select().from(words).where(eq(words.id, id)).limit(1);
-  return row ?? null;
-}
 import type {
   CreateWordDto,
   PaginatedSearchWords,
