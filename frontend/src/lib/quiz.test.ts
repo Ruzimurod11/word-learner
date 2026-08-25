@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  FIREWORKS_STREAK,
   MIN_COUNT,
   STREAK_CHEER_MIN,
   getQuizCheer,
@@ -9,6 +10,7 @@ import {
   isAnswerCorrect,
   isValidQuizCount,
   scoreQuiz,
+  shouldShowFireworks,
 } from "@/lib/quiz";
 
 const answer = (correct: string, selected: string) => ({
@@ -94,6 +96,20 @@ describe("getTrailingStreak", () => {
     expect(
       getTrailingStreak([answer("cat", "cat"), answer("dog", "sun")]),
     ).toBe(0);
+  });
+});
+
+describe("shouldShowFireworks", () => {
+  it("fires on every FIREWORKS_STREAK-th consecutive correct answer", () => {
+    expect(shouldShowFireworks(FIREWORKS_STREAK)).toBe(true);
+    expect(shouldShowFireworks(FIREWORKS_STREAK * 2)).toBe(true);
+    expect(shouldShowFireworks(FIREWORKS_STREAK * 3)).toBe(true);
+  });
+
+  it("stays quiet between the milestones and with no streak", () => {
+    expect(shouldShowFireworks(0)).toBe(false);
+    expect(shouldShowFireworks(FIREWORKS_STREAK - 1)).toBe(false);
+    expect(shouldShowFireworks(FIREWORKS_STREAK + 1)).toBe(false);
   });
 });
 

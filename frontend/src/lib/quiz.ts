@@ -39,6 +39,13 @@ export function getQuizFeedbackTier(percent: number): QuizFeedbackTier {
 export const STREAK_CHEER_VARIANTS = 16;
 export const STREAK_CHEER_MIN = 3;
 
+// har 5 ta ketma-ket to'g'ri javobda butun ekranli fireworks
+export const FIREWORKS_STREAK = 5;
+
+export function shouldShowFireworks(streak: number): boolean {
+  return streak > 0 && streak % FIREWORKS_STREAK === 0;
+}
+
 // 100 ta rag'bat iborasi joriy natija foiziga qarab 4 darajaga bo'lingan
 export const CHEER_TIER_VARIANTS = {
   hot: 25,
