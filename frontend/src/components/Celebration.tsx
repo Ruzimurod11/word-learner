@@ -29,11 +29,25 @@ const BURSTS: Burst[] = [
     distance: "150px",
   },
   {
+    left: "8%",
+    top: "16%",
+    color: "#a855f7",
+    delay: "45ms",
+    distance: "145px",
+  },
+  {
     left: "62%",
     top: "14%",
     color: "#3b82f6",
     delay: "90ms",
     distance: "155px",
+  },
+  {
+    left: "44%",
+    top: "20%",
+    color: "#22c55e",
+    delay: "135ms",
+    distance: "160px",
   },
   {
     left: "80%",
@@ -43,11 +57,25 @@ const BURSTS: Burst[] = [
     distance: "170px",
   },
   {
+    left: "70%",
+    top: "32%",
+    color: "#f59e0b",
+    delay: "220ms",
+    distance: "175px",
+  },
+  {
     left: "36%",
     top: "34%",
     color: "#ef4444",
     delay: "260ms",
     distance: "165px",
+  },
+  {
+    left: "30%",
+    top: "48%",
+    color: "#ec4899",
+    delay: "300ms",
+    distance: "180px",
   },
   {
     left: "50%",
@@ -57,11 +85,25 @@ const BURSTS: Burst[] = [
     distance: "200px",
   },
   {
+    left: "86%",
+    top: "58%",
+    color: "#a855f7",
+    delay: "385ms",
+    distance: "170px",
+  },
+  {
     left: "10%",
     top: "52%",
     color: "#22c55e",
     delay: "430ms",
     distance: "175px",
+  },
+  {
+    left: "16%",
+    top: "64%",
+    color: "#3b82f6",
+    delay: "470ms",
+    distance: "165px",
   },
   {
     left: "26%",
@@ -71,11 +113,25 @@ const BURSTS: Burst[] = [
     distance: "160px",
   },
   {
+    left: "60%",
+    top: "56%",
+    color: "#ec4899",
+    delay: "555ms",
+    distance: "190px",
+  },
+  {
     left: "90%",
     top: "44%",
     color: "#f59e0b",
     delay: "590ms",
     distance: "185px",
+  },
+  {
+    left: "40%",
+    top: "62%",
+    color: "#ef4444",
+    delay: "625ms",
+    distance: "170px",
   },
   {
     left: "76%",
@@ -85,16 +141,30 @@ const BURSTS: Burst[] = [
     distance: "180px",
   },
   {
+    left: "68%",
+    top: "84%",
+    color: "#22d3ee",
+    delay: "700ms",
+    distance: "175px",
+  },
+  {
     left: "52%",
     top: "78%",
     color: "#ec4899",
     delay: "730ms",
     distance: "190px",
   },
+  {
+    left: "24%",
+    top: "86%",
+    color: "#f59e0b",
+    delay: "780ms",
+    distance: "165px",
+  },
 ];
 
-const PARTICLES = 32;
-const CONFETTI_PER_SIDE = 36;
+const PARTICLES = 64;
+const CONFETTI_PER_SIDE = 72;
 
 interface ConfettiPiece {
   id: number;
