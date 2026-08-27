@@ -74,7 +74,6 @@ interface TableCtx {
   setTranslationValue: (v: string) => void;
   setTranscriptionValue: (v: string) => void;
   setPartOfSpeechValue: (v: PartOfSpeech | null) => void;
-  setAudioUrlValue: (v: string) => void;
   isSaving: boolean;
   isDeleting: boolean;
   labels: {
@@ -270,10 +269,6 @@ function MobileRow({
           onChange={ctx.setTranscriptionValue}
         />
         <EditableInput
-          initialValue={word.audioUrl ?? ""}
-          onChange={ctx.setAudioUrlValue}
-        />
-        <EditableInput
           initialValue={word.translation}
           onChange={ctx.setTranslationValue}
         />
@@ -340,7 +335,6 @@ export function WordsTable({ unitId }: WordsTableProps) {
   const translationRef = useRef("");
   const transcriptionRef = useRef("");
   const partOfSpeechRef = useRef<PartOfSpeech | null>(null);
-  const audioUrlRef = useRef("");
   const queryClient = useQueryClient();
 
   const wordsQuery = useQuery({
@@ -370,14 +364,12 @@ export function WordsTable({ unitId }: WordsTableProps) {
       translation: string;
       transcription: string;
       partOfSpeech: PartOfSpeech | null;
-      audioUrl: string;
     }) =>
       updateWord(vars.id, {
         english: vars.english.trim(),
         translation: vars.translation.trim(),
         transcription: vars.transcription.trim() || null,
         partOfSpeech: vars.partOfSpeech,
-        audioUrl: vars.audioUrl.trim() || null,
       }),
     onSuccess: () => {
       setEditingId(null);
@@ -420,7 +412,6 @@ export function WordsTable({ unitId }: WordsTableProps) {
     translationRef.current = w.translation;
     transcriptionRef.current = w.transcription ?? "";
     partOfSpeechRef.current = w.partOfSpeech;
-    audioUrlRef.current = w.audioUrl ?? "";
     setEditingId(w.id);
   }, []);
 
@@ -435,7 +426,6 @@ export function WordsTable({ unitId }: WordsTableProps) {
         translation: translationRef.current,
         transcription: transcriptionRef.current,
         partOfSpeech: partOfSpeechRef.current,
-        audioUrl: audioUrlRef.current,
       });
       return id;
     });
@@ -530,16 +520,8 @@ export function WordsTable({ unitId }: WordsTableProps) {
       {
         accessorKey: "audioUrl",
         header: t("words_table.header_audio"),
-        cell: ({ row, table }) => {
-          const ctx = table.options.meta as TableCtx;
-          if (ctx.editingId === row.original.id) {
-            return (
-              <EditableInput
-                initialValue={row.original.audioUrl ?? ""}
-                onChange={ctx.setAudioUrlValue}
-              />
-            );
-          }
+        cell: ({ row }) => {
+          // audio TTS orqali generatsiya qilinadi — qo'lda tahrirlanmaydi
           return row.original.audioUrl ? (
             <AudioLink url={row.original.audioUrl} label={t("words_table.audio_aria")} />
           ) : null;
@@ -580,7 +562,7 @@ export function WordsTable({ unitId }: WordsTableProps) {
     [t, isAdmin],
   );
 
-  const data = wordsQuery.data?.items ?? [];
+  const data = useMemo(() => wordsQuery.data?.items ?? [], [wordsQuery.data]);
   const total = wordsQuery.data?.total ?? 0;
   const totalPages = wordsQuery.data?.totalPages ?? 1;
   const rowIds = useMemo(() => data.map((w) => String(w.id)), [data]);
@@ -617,9 +599,6 @@ export function WordsTable({ unitId }: WordsTableProps) {
     setPartOfSpeechValue: (v) => {
       partOfSpeechRef.current = v;
     },
-    setAudioUrlValue: (v) => {
-      audioUrlRef.current = v;
-    },
     isSaving: updateMutation.isPending,
     isDeleting: deleteMutation.isPending,
     labels: {
@@ -645,6 +624,9 @@ export function WordsTable({ unitId }: WordsTableProps) {
           }
         : null;
 
+  // TanStack Table'ning useReactTable() natijasini React Compiler memoizatsiya
+  // qila olmaydi — kutubxona cheklovi, kod bilan tuzatilmaydi.
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns,

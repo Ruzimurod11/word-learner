@@ -6,9 +6,6 @@ import { GlobalSearch } from "@/components/GlobalSearch";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ProfileButton } from "@/components/ProfileButton";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { TranscriptionBackfill } from "@/components/TranscriptionBackfill";
-import { PartOfSpeechBackfill } from "@/components/PartOfSpeechBackfill";
-import { GoogleTtsBackfill } from "@/components/GoogleTtsBackfill";
 import { btn } from "@/components/ui";
 
 export const Route = createRootRoute({
@@ -41,9 +38,6 @@ function RootLayout() {
               {t("test.button")}
             </Link>
             <GlobalSearch />
-            <TranscriptionBackfill />
-            <PartOfSpeechBackfill />
-            <GoogleTtsBackfill />
             <LanguageSwitcher />
             <ThemeToggle />
             <AdminLogin />

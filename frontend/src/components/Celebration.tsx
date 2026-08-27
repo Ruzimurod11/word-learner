@@ -21,13 +21,33 @@ interface Burst {
 // portlashlar butun ekran bo'ylab tarqatilgan; joylashuv va vaqt qat'iy, chunki
 // render ichida Math.random ishlatib bo'lmaydi (react-compiler lint'i taqiqlaydi)
 const BURSTS: Burst[] = [
-  { left: "18%", top: "26%", color: "#f59e0b", delay: "0ms", distance: "150px" },
+  {
+    left: "18%",
+    top: "26%",
+    color: "#f59e0b",
+    delay: "0ms",
+    distance: "150px",
+  },
+  {
+    left: "62%",
+    top: "14%",
+    color: "#3b82f6",
+    delay: "90ms",
+    distance: "155px",
+  },
   {
     left: "80%",
     top: "20%",
     color: "#ec4899",
     delay: "180ms",
     distance: "170px",
+  },
+  {
+    left: "36%",
+    top: "34%",
+    color: "#ef4444",
+    delay: "260ms",
+    distance: "165px",
   },
   {
     left: "50%",
@@ -37,11 +57,25 @@ const BURSTS: Burst[] = [
     distance: "200px",
   },
   {
+    left: "10%",
+    top: "52%",
+    color: "#22c55e",
+    delay: "430ms",
+    distance: "175px",
+  },
+  {
     left: "26%",
     top: "70%",
     color: "#a855f7",
     delay: "520ms",
     distance: "160px",
+  },
+  {
+    left: "90%",
+    top: "44%",
+    color: "#f59e0b",
+    delay: "590ms",
+    distance: "185px",
   },
   {
     left: "76%",
@@ -50,10 +84,17 @@ const BURSTS: Burst[] = [
     delay: "660ms",
     distance: "180px",
   },
+  {
+    left: "52%",
+    top: "78%",
+    color: "#ec4899",
+    delay: "730ms",
+    distance: "190px",
+  },
 ];
 
-const PARTICLES = 16;
-const CONFETTI_PER_SIDE = 18;
+const PARTICLES = 32;
+const CONFETTI_PER_SIDE = 36;
 
 interface ConfettiPiece {
   id: number;
