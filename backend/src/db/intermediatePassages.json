@@ -473,7 +473,7 @@
    },
    {
     "english": "psychiatrist",
-    "translation": "psixiator"
+    "translation": "psixiatr"
    },
    {
     "english": "If",
@@ -521,7 +521,7 @@
    },
    {
     "english": "terror",
-    "translation": "daxshat"
+    "translation": "dahshat"
    },
    {
     "english": "network",
@@ -3045,7 +3045,7 @@
    },
    {
     "english": "terror",
-    "translation": "xavf, daxshat"
+    "translation": "xavf, dahshat"
    },
    {
     "english": "therefore",
@@ -5814,7 +5814,7 @@
    },
    {
     "english": "psychiatrist",
-    "translation": "psixiyatr"
+    "translation": "psixiatr"
    },
    {
     "english": "publish",
@@ -6712,7 +6712,7 @@
    },
    {
     "english": "Terror",
-    "translation": "qo’rquv, daxshat"
+    "translation": "qo’rquv, dahshat"
    },
    {
     "english": "cite",
@@ -7469,7 +7469,7 @@
    },
    {
     "english": "wildly",
-    "translation": "1.o’ta darajada 2.vaxshiyona"
+    "translation": "1.o’ta darajada 2.vahshiyona"
    },
    {
     "english": "astonished by",
@@ -7594,7 +7594,7 @@
    },
    {
     "english": "ominous",
-    "translation": "daxshatli, vahimali"
+    "translation": "dahshatli, vahimali"
    },
    {
     "english": "shape",
@@ -7679,7 +7679,7 @@
   "words": [
    {
     "english": "chairman",
-    "translation": "kompaniya raxbari"
+    "translation": "kompaniya rahbari"
    },
    {
     "english": "carry",
@@ -7699,7 +7699,7 @@
    },
    {
     "english": "product",
-    "translation": "maxsulot"
+    "translation": "mahsulot"
    },
    {
     "english": "development",
@@ -9532,7 +9532,7 @@
    },
    {
     "english": "product",
-    "translation": "maxsulot"
+    "translation": "mahsulot"
    },
    {
     "english": "distinction",
@@ -10083,7 +10083,7 @@
    },
    {
     "english": "up to the present",
-    "translation": "hpozirgacha"
+    "translation": "hozirgacha"
    }
   ]
  },
