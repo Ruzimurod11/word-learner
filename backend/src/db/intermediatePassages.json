@@ -328,7 +328,7 @@
    },
    {
     "english": "escape",
-    "translation": "qochmoq peshqadam"
+    "translation": "qochmoq"
    },
    {
     "english": "possible",
@@ -1119,7 +1119,7 @@
    },
    {
     "english": "prone to",
-    "translation": "motil bo’lmoq"
+    "translation": "moyil bo’lmoq"
    },
    {
     "english": "laughter",
@@ -1340,7 +1340,7 @@
    },
    {
     "english": "exploit",
-    "translation": "rivojlantirmoq"
+    "translation": "foyda olmoq, rivojlantirmoq"
    },
    {
     "english": "Consequently",
@@ -1573,7 +1573,7 @@
    },
    {
     "english": "put together",
-    "translation": "yig’moq foyda olmoq"
+    "translation": "yig’moq"
    },
    {
     "english": "Eventually",
@@ -2236,8 +2236,8 @@
     "translation": "portlash"
    },
    {
-    "english": "better",
-    "translation": "known-mashhur"
+    "english": "better-known",
+    "translation": "mashhur"
    },
    {
     "english": "neighbor",
@@ -3468,7 +3468,7 @@
    },
    {
     "english": "grow up",
-    "translation": "o’smoq"
+    "translation": "o’smoq, voyaga yetmoq"
    },
    {
     "english": "slum",
@@ -3516,7 +3516,7 @@
    },
    {
     "english": "justify",
-    "translation": "yuzaga chiqmoq, oqlamoq (o’zini) voyaga yetmoq"
+    "translation": "yuzaga chiqmoq, oqlamoq (o’zini)"
    },
    {
     "english": "talked-about",
@@ -4502,7 +4502,7 @@
    },
    {
     "english": "cry",
-    "translation": "yig’I, ko’z yosh"
+    "translation": "yig’i, ko’z yosh"
    },
    {
     "english": "enter",
@@ -6680,7 +6680,7 @@
    },
    {
     "english": "issue",
-    "translation": "muammo oqshom iltijo jasurlik qo'shimcha"
+    "translation": "muammo"
    },
    {
     "english": "spawn",
@@ -7239,8 +7239,8 @@
     "translation": "qaytmoq"
    },
    {
-    "english": "pre",
-    "translation": "industrial- sanoatlashishdan oldingi"
+    "english": "pre-industrial",
+    "translation": "sanoatlashishdan oldingi"
    },
    {
     "english": "fail",
@@ -7316,7 +7316,7 @@
    },
    {
     "english": "intellect",
-    "translation": "aql-idrok, aql- zakovat turtki"
+    "translation": "aql-idrok, aql- zakovat"
    },
    {
     "english": "reserve",
@@ -7666,7 +7666,7 @@
    },
    {
     "english": "flood",
-    "translation": "suv bilan to’lmoq ijro"
+    "translation": "suv bilan to’lmoq"
    },
    {
     "english": "cripple",
@@ -7750,8 +7750,8 @@
     "translation": "izlangan, qidirilgan"
    },
    {
-    "english": "punch",
-    "translation": "card-karta tiqiladigan"
+    "english": "punch-card",
+    "translation": "karta tiqiladigan"
    },
    {
     "english": "devise",
@@ -7871,16 +7871,16 @@
     "translation": "aniq ravishda"
    },
    {
-    "english": "light",
-    "translation": "skinned-rangi oqargan"
+    "english": "light-skinned",
+    "translation": "rangi oqargan"
    },
    {
     "english": "ashen grey",
     "translation": "kulrang"
    },
    {
-    "english": "dark",
-    "translation": "skinned-qora tanli"
+    "english": "dark-skinned",
+    "translation": "qora tanli"
    },
    {
     "english": "tip",
@@ -7992,7 +7992,7 @@
    },
    {
     "english": "dressing",
-    "translation": "bog’ich tashimoq"
+    "translation": "bog’ich"
    }
   ]
  },
@@ -8044,8 +8044,8 @@
     "translation": "go’sht"
    },
    {
-    "english": "high",
-    "translation": "quality-yuqori sifatli"
+    "english": "high-quality",
+    "translation": "yuqori sifatli"
    },
    {
     "english": "leather",
@@ -8471,8 +8471,8 @@
     "translation": "axloq"
    },
    {
-    "english": "self",
-    "translation": "control-o’z-o’zini nazorat qilmoq"
+    "english": "self-control",
+    "translation": "o’z-o’zini nazorat qilmoq"
    },
    {
     "english": "endurance",
@@ -8706,11 +8706,11 @@
   "words": [
    {
     "english": "imperturbable",
-    "translation": "OG’IR BOSIQ"
+    "translation": "og’ir bosiq"
    },
    {
     "english": "manner",
-    "translation": "USLUB"
+    "translation": "uslub"
    },
    {
     "english": "relentless",
@@ -10487,7 +10487,11 @@
    },
    {
     "english": "local",
-    "translation": "mahalliy 13Shepherd –cho’pon"
+    "translation": "mahalliy"
+   },
+   {
+    "english": "Shepherd",
+    "translation": "cho’pon"
    },
    {
     "english": "wonderful",
@@ -10894,11 +10898,11 @@
   "words": [
    {
     "english": "reign",
-    "translation": "HUKMRONLIK"
+    "translation": "hukmronlik"
    },
    {
     "english": "almost",
-    "translation": "DEYARLI"
+    "translation": "deyarli"
    },
    {
     "english": "uninterrupted",
