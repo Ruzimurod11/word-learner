@@ -1,4 +1,5 @@
 import {
+  boolean,
   integer,
   pgTable,
   serial,
@@ -15,7 +16,8 @@ export const books = pgTable(
     order: integer("order").notNull(),
     title: text("title").notNull(),
     description: text("description"),
-    // "essential" — Essential Words kitoblari; "vocabulary" — Vocabularies to'plami
+    // "essential" — Essential Words; "vocabulary" — Vocabularies;
+    // "passages" — Intermediate passages; "topic" — admin saytdan qo'shgan mavzu
     kind: text("kind").notNull().default("essential"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
@@ -36,6 +38,8 @@ export const units = pgTable(
       .references(() => books.id, { onDelete: "cascade" }),
     order: integer("order").notNull(),
     title: text("title").notNull(),
+    // true — admin unitni shu so'z sonida yopgan; yangi so'z qo'shilmaydi
+    closed: boolean("closed").notNull().default(false),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),

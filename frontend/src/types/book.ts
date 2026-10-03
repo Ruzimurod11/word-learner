@@ -1,4 +1,4 @@
-export type BookKind = "essential" | "vocabulary" | "passages";
+export type BookKind = "essential" | "vocabulary" | "passages" | "topic";
 
 export interface Book {
   id: number;
@@ -15,6 +15,7 @@ export interface UnitSummary {
   order: number;
   title: string;
   wordCount: number;
+  closed: boolean;
 }
 
 export interface BookWithUnits extends Book {

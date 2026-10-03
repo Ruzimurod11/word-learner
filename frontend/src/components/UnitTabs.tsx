@@ -28,9 +28,11 @@ export function UnitTabs({ units, activeUnitId, onSelect }: UnitTabsProps) {
               "inline-flex min-w-11 items-center justify-center rounded-lg px-2.5 py-1.5 text-sm font-semibold transition " +
               (isActive
                 ? "scale-105 bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-md shadow-indigo-500/30"
-                : "text-muted-foreground hover:bg-primary/10 hover:text-primary")
+                : unit.closed
+                  ? "bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/15 dark:text-emerald-300"
+                  : "text-muted-foreground hover:bg-primary/10 hover:text-primary")
             }
-            title={t("book.unit_tab_title", {
+            title={t(unit.closed ? "book.unit_tab_closed" : "book.unit_tab_title", {
               title: unit.title,
               count: unit.wordCount,
             })}

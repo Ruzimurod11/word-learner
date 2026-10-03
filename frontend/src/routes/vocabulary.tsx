@@ -10,6 +10,7 @@ import {
   type AddVocabularyWordResult,
 } from "@/api/vocabulary-api";
 import { useIsAdmin } from "@/lib/auth";
+import { UnitCloseButton } from "@/components/UnitCloseButton";
 import { UnitTabs } from "@/components/UnitTabs";
 import { WordForm } from "@/components/WordForm";
 import { WordsTable } from "@/components/WordsTable";
@@ -134,13 +135,26 @@ function VocabularyPage() {
 
       {activeUnit && activeUnitId != null ? (
         <div className="flex flex-col gap-4">
-          <div className="flex items-baseline justify-between gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 className="text-lg font-semibold">
               {t("vocab.part", { n: activeUnit.order })}
             </h2>
-            <span className="text-sm text-muted-foreground">
-              {t("book.word_count", { count: activeUnit.wordCount })}
-            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-sm text-muted-foreground">
+                {t("book.word_count", { count: activeUnit.wordCount })}
+              </span>
+              {activeUnit.closed && (
+                <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-300">
+                  {t("book.unit_closed")}
+                </span>
+              )}
+              {isAdmin && (
+                <UnitCloseButton
+                  unitId={activeUnitId}
+                  closed={activeUnit.closed}
+                />
+              )}
+            </div>
           </div>
           <WordsTable key={`vocab-${activeUnitId}`} unitId={activeUnitId} />
         </div>

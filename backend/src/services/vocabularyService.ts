@@ -60,7 +60,10 @@ export async function addVocabularyWord(
     .limit(1);
 
   let target: Unit | undefined = lastUnit;
-  if (target && (await countWordsInUnit(target.id)) >= VOCAB_TAG_SIZE) {
+  const lastIsFull =
+    target != null && (await countWordsInUnit(target.id)) >= VOCAB_TAG_SIZE;
+  // Yopilgan bo'limga so'z tushmaydi — keyingi bo'lim ochiladi.
+  if (target && (target.closed || lastIsFull)) {
     target = undefined;
   }
 

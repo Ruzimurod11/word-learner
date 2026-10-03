@@ -71,6 +71,13 @@
       "when": 1787661534722,
       "tag": "0009_romantic_magma",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1791019094403,
+      "tag": "0010_lucky_kulan_gath",
+      "breakpoints": true
     }
   ]
 }

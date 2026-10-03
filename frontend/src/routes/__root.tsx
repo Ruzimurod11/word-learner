@@ -9,45 +9,47 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { btn } from "@/components/ui";
 
 export const Route = createRootRoute({
-  component: RootLayout,
+    component: RootLayout,
 });
 
 function RootLayout() {
-  const { t } = useTranslation();
-  return (
-    <div className="min-h-screen">
-      <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <Link
-            to="/"
-            className="flex items-center gap-2 text-lg font-bold hover:opacity-80"
-          >
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-md shadow-indigo-500/30">
-              <GraduationCap className="h-5 w-5" />
-            </span>
-            <span className="font-display">{t("app.name")}</span>
-          </Link>
-          <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap sm:gap-3">
-            <Link
-              to="/test"
-              className={`${btn.ghost} mr-auto h-9 shrink-0 sm:mr-0`}
-              activeProps={{
-                className: `${btn.ghost} mr-auto h-9 shrink-0 border-primary/50 bg-primary/10 text-primary sm:mr-0`,
-              }}
-            >
-              {t("test.button")}
-            </Link>
-            <GlobalSearch />
-            <LanguageSwitcher />
-            <ThemeToggle />
-            <AdminLogin />
-            <ProfileButton />
-          </div>
+    const { t } = useTranslation();
+    return (
+        <div className="min-h-screen">
+            <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-md">
+                <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+                    <Link
+                        to="/"
+                        className="flex items-center gap-2 text-lg font-bold hover:opacity-80"
+                    >
+                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-indigo-500 to-violet-600 text-white shadow-md shadow-indigo-500/30">
+                            <GraduationCap className="h-5 w-5" />
+                        </span>
+                        <span className="font-display">{t("app.name")}</span>
+                    </Link>
+                    <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap sm:gap-3">
+                        <nav aria-label="Main navigation">
+                            <Link
+                                to="/test"
+                                className={`${btn.ghost} mr-auto h-9 shrink-0 sm:mr-0`}
+                                activeProps={{
+                                    className: `${btn.ghost} mr-auto h-9 shrink-0 border-primary/50 bg-primary/10 text-primary sm:mr-0`,
+                                }}
+                            >
+                                {t("test.button")}
+                            </Link>
+                        </nav>
+                        <GlobalSearch />
+                        <LanguageSwitcher />
+                        <ThemeToggle />
+                        <AdminLogin />
+                        <ProfileButton />
+                    </div>
+                </div>
+            </header>
+            <main className="mx-auto max-w-7xl p-4 sm:p-6">
+                <Outlet />
+            </main>
         </div>
-      </header>
-      <main className="mx-auto max-w-7xl p-4 sm:p-6">
-        <Outlet />
-      </main>
-    </div>
-  );
+    );
 }

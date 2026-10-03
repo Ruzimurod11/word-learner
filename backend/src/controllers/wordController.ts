@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { z } from "zod";
+import * as bookService from "../services/bookService.ts";
 import * as wordService from "../services/wordService.ts";
 import { getLang, t } from "../i18n/index.ts";
 import {
@@ -47,9 +48,13 @@ export const createUnitWord = async (req: Request, res: Response): Promise<void>
     return;
   }
   try {
-    const exists = await wordService.unitExists(unitIdResult.data);
-    if (!exists) {
+    const unit = await bookService.getUnit(unitIdResult.data);
+    if (!unit) {
       sendError(res, t(getLang(req), "errors.unit_not_found"), 404);
+      return;
+    }
+    if (unit.closed) {
+      sendError(res, t(getLang(req), "errors.unit_closed"), 409);
       return;
     }
     const word = await wordService.createWord(unitIdResult.data, bodyResult.data);
