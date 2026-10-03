@@ -98,6 +98,8 @@ export interface QuizResponse {
   transcriptions: Record<string, string>;
   // kichik harfli inglizcha so'z -> so'z turkumi
   partsOfSpeech: Record<string, PartOfSpeech>;
+  // kichik harfli inglizcha so'z -> audio
+  audioUrls: Record<string, string>;
 }
 
 export interface ApiSuccess<T> {

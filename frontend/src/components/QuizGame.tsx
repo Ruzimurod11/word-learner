@@ -1,8 +1,9 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { ArrowLeftRight, PartyPopper, RotateCcw, Trophy } from "lucide-react";
+import { ArrowLeftRight, PartyPopper, RotateCcw, Trophy, Volume2 } from "lucide-react";
 import { getBooks } from "@/api/book-api";
+import { API_ROOT } from "@/api/http";
 import { getQuiz, getUnitWords } from "@/api/word-api";
 import type { QuizDirection, QuizLevel, QuizQuestion } from "@/types/word";
 import {
@@ -67,6 +68,46 @@ const CELEBRATION_MS = 2500;
 // react-compiler lint'i render ichidagi to'g'ridan-to'g'ri Math.random'ni taqiqlaydi
 function randomSeed(): number {
   return Math.random();
+}
+
+function playAudio(url: string): void {
+  const isDataUri = url.startsWith("data:");
+  const src = isDataUri
+    ? url
+    : `${API_ROOT}/audio/proxy?url=${encodeURIComponent(url)}`;
+  const audio = new Audio(src);
+  audio.play().catch(() => {
+    if (!isDataUri) window.open(url, "_blank");
+  });
+}
+
+function AudioButton({
+  url,
+  label,
+  onLight = false,
+}: {
+  url: string;
+  label: string;
+  onLight?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      onClick={(event) => {
+        event.stopPropagation();
+        playAudio(url);
+      }}
+      className={
+        onLight
+          ? "inline-flex shrink-0 rounded-lg bg-white/20 p-1.5 text-white transition hover:bg-white/30"
+          : "inline-flex shrink-0 rounded-lg bg-primary/10 p-1.5 text-primary transition hover:bg-primary hover:text-primary-foreground"
+      }
+    >
+      <Volume2 className="h-4 w-4" aria-hidden="true" />
+    </button>
+  );
 }
 
 function CheerPopup({ cheer, seed }: { cheer: QuizCheer; seed: number }) {
@@ -284,12 +325,16 @@ export function QuizGame({
   const questions = quizQuery.data.questions;
   const transcriptions = quizQuery.data.transcriptions ?? {};
   const partsOfSpeech = quizQuery.data.partsOfSpeech ?? {};
+  const audioUrls = quizQuery.data.audioUrls ?? {};
   // inglizcha matn (savol yoki variant) bo'lsa yonida ko'rsatiladigan IPA
   const transcriptionFor = (text: string): string | undefined =>
     transcriptions[text.trim().toLowerCase()];
   // xuddi transkripsiya kabi: faqat inglizcha matn uchun topiladi
   const partOfSpeechFor = (text: string): string | undefined =>
     partsOfSpeech[text.trim().toLowerCase()];
+  const audioFor = (text: string): string | undefined =>
+    audioUrls[text.trim().toLowerCase()];
+  const audioLabel = t("words_table.audio_aria");
 
   const restart = () => {
     setIndex(0);
@@ -400,6 +445,9 @@ export function QuizGame({
 
   const question = questions[index];
   const answered = selected !== null;
+  const questionAudio =
+    !hard && direction === "en-uz" ? audioFor(question.question) : undefined;
+  const correctAudio = audioFor(question.correct);
   const answerCorrect =
     selected !== null && isAnswerCorrect(selected, question.correct);
   const cheer = answered ? getQuizCheer(answers) : null;
@@ -429,7 +477,7 @@ export function QuizGame({
 
   const optionClass = (option: string): string => {
     const base =
-      "w-full rounded-xl border-2 px-3 py-2 text-left text-lg font-semibold transition-all sm:px-4 sm:py-3.5 ";
+      "flex w-full items-center gap-2 rounded-xl border-2 px-3 py-2 text-left text-lg font-semibold transition-all sm:px-4 sm:py-3.5 ";
     if (!answered) {
       return (
         base +
@@ -491,21 +539,22 @@ export function QuizGame({
       </div>
       <div
         key={question.id}
-        className={`${card} animate-fade-in p-2 text-center sm:p-8`}
+        className={`${card} animate-fade-in flex flex-wrap items-center justify-center gap-3 p-2 text-center sm:p-8`}
       >
         <span className="font-display text-[34px] font-bold">
           {question.question}
         </span>
         {partOfSpeechFor(question.question) && (
-          <span className="ml-3 align-middle text-[14px] font-normal italic text-muted-foreground">
+          <span className="text-[14px] font-normal italic text-muted-foreground">
             {partOfSpeechFor(question.question)}.
           </span>
         )}
         {transcriptionFor(question.question) && (
-          <span className="ml-3 align-middle text-[14px] font-normal text-muted-foreground">
+          <span className="text-[14px] font-normal text-muted-foreground">
             [{transcriptionFor(question.question)}]
           </span>
         )}
+        {questionAudio && <AudioButton url={questionAudio} label={audioLabel} />}
       </div>
       {hard ? (
         <form onSubmit={onSubmitTyped} className="flex flex-col gap-3">
@@ -541,6 +590,11 @@ export function QuizGame({
                   [{transcriptionFor(question.correct)}]
                 </span>
               )}
+              {correctAudio && (
+                <span className="ml-2 inline-flex align-middle">
+                  <AudioButton url={correctAudio} label={audioLabel} />
+                </span>
+              )}
             </div>
           )}
           {!answered && (
@@ -555,27 +609,41 @@ export function QuizGame({
         </form>
       ) : (
         <div className="flex flex-col gap-2">
-          {question.options.map((option) => (
-            <button
-              key={option}
-              type="button"
-              disabled={answered}
-              onClick={() => onSelect(option)}
-              className={optionClass(option)}
-            >
-              {option}
-              {partOfSpeechFor(option) && (
-                <span className="ml-3 text-[14px] font-normal italic opacity-80">
-                  {partOfSpeechFor(option)}.
-                </span>
-              )}
-              {transcriptionFor(option) && (
-                <span className="ml-3 text-[14px] font-normal opacity-80">
-                  [{transcriptionFor(option)}]
-                </span>
-              )}
-            </button>
-          ))}
+          {question.options.map((option) => {
+            const highlighted =
+              answered && (option === question.correct || option === selected);
+            const audioUrl =
+              direction === "uz-en" ? audioFor(option) : undefined;
+            return (
+              <div key={option} className={optionClass(option)}>
+                <button
+                  type="button"
+                  disabled={answered}
+                  onClick={() => onSelect(option)}
+                  className="min-w-0 flex-1 bg-transparent text-left disabled:cursor-default disabled:opacity-100"
+                >
+                  {option}
+                  {partOfSpeechFor(option) && (
+                    <span className="ml-3 text-[14px] font-normal italic opacity-80">
+                      {partOfSpeechFor(option)}.
+                    </span>
+                  )}
+                  {transcriptionFor(option) && (
+                    <span className="ml-3 text-[14px] font-normal opacity-80">
+                      [{transcriptionFor(option)}]
+                    </span>
+                  )}
+                </button>
+                {audioUrl && (
+                  <AudioButton
+                    url={audioUrl}
+                    label={audioLabel}
+                    onLight={highlighted}
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
       {answered && (

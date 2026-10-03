@@ -189,6 +189,7 @@ export async function getQuiz(
       translation: words.translation,
       transcription: words.transcription,
       partOfSpeech: words.partOfSpeech,
+      audioUrl: words.audioUrl,
     })
     .from(words)
     .innerJoin(units, eq(units.id, words.unitId))
@@ -203,6 +204,10 @@ export async function getQuiz(
   // yo'nalishdan qat'i nazar mos kalitni topib ko'rsatadi.
   const transcriptions: Record<string, string> = {};
   const partsOfSpeech: Record<string, PartOfSpeech> = {};
+  const audioUrls: Record<string, string> = {};
+  const rememberAudio = (english: string, audioUrl: string | null) => {
+    if (audioUrl) audioUrls[english.toLowerCase()] ??= audioUrl;
+  };
   for (const row of questionRows) {
     if (row.transcription) {
       transcriptions[row.english.toLowerCase()] = row.transcription;
@@ -211,6 +216,7 @@ export async function getQuiz(
     if (pos) {
       partsOfSpeech[row.english.toLowerCase()] = pos;
     }
+    rememberAudio(row.english, row.audioUrl);
   }
 
   // hard darajada variant yo'q, shuning uchun distraktorlar pooli ham kerak emas
@@ -224,6 +230,7 @@ export async function getQuiz(
       })),
       transcriptions,
       partsOfSpeech,
+      audioUrls,
     };
   }
 
@@ -233,6 +240,7 @@ export async function getQuiz(
       answer: uzToEn ? words.english : words.translation,
       transcription: words.transcription,
       partOfSpeech: words.partOfSpeech,
+      audioUrl: words.audioUrl,
     })
     .from(words)
     .innerJoin(units, eq(units.id, words.unitId))
@@ -244,6 +252,7 @@ export async function getQuiz(
       answer: distinctAnswers.answer,
       transcription: distinctAnswers.transcription,
       partOfSpeech: distinctAnswers.partOfSpeech,
+      audioUrl: distinctAnswers.audioUrl,
     })
     .from(distinctAnswers)
     .orderBy(sql`random()`)
@@ -270,6 +279,7 @@ export async function getQuiz(
       if (pos) {
         partsOfSpeech[r.answer.toLowerCase()] = pos;
       }
+      rememberAudio(r.answer, r.audioUrl);
     }
   }
 
@@ -287,7 +297,7 @@ export async function getQuiz(
       correct: answer,
     });
   }
-  return { questions, transcriptions, partsOfSpeech };
+  return { questions, transcriptions, partsOfSpeech, audioUrls };
 }
 
 export async function unitExists(unitId: number): Promise<boolean> {

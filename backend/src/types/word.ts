@@ -129,4 +129,7 @@ export interface QuizDto {
   // kichik harfli inglizcha so'z -> so'z turkumi; transcriptions bilan bir xil
   // qamrovda to'ldiriladi
   partsOfSpeech: Record<string, PartOfSpeech>;
+  // kichik harfli inglizcha so'z -> audio; test ekranida kolonka shu xaritadan
+  // chaladi. O'zbekcha matn kalit bo'lmaydi.
+  audioUrls: Record<string, string>;
 }
