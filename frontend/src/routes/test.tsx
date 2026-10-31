@@ -20,6 +20,7 @@ import { QuizGame } from "@/components/QuizGame";
 import { UnitTabs } from "@/components/UnitTabs";
 import { StateCard, bookGradient, card } from "@/components/ui";
 import type { QuizLevel } from "@/types/word";
+import type { UnitSummary } from "@/types/book";
 
 const testSearchSchema = z.object({
     mode: z.enum(["topic", "general"]).optional(),
@@ -113,22 +114,16 @@ function TestPage() {
 
     const level = search.level;
     if (search.mode === "topic" && level !== undefined) {
-        if (search.unit !== undefined) {
+        if (search.book !== undefined && search.unit !== undefined) {
             return (
-                <div className="flex flex-col gap-5">
-                    <h1 className="text-2xl font-bold sm:text-3xl">
-                        {t(`test.${level}`)}
-                    </h1>
-                    <QuizGame
-                        key={`${level}-${search.unit}`}
-                        unitId={search.unit}
-                        selectableCount
-                        level={level}
-                        onExit={() =>
-                            goTo({ mode: "topic", level, book: search.book })
-                        }
-                    />
-                </div>
+                <TopicQuizFlow
+                    bookId={search.book}
+                    unitOrder={search.unit}
+                    level={level}
+                    onExit={() =>
+                        goTo({ mode: "topic", level, book: search.book })
+                    }
+                />
             );
         }
 
@@ -137,12 +132,12 @@ function TestPage() {
                 <UnitPicker
                     bookId={search.book}
                     title={t("test.choose_unit")}
-                    onSelect={(unitId) =>
+                    onSelect={(unit) =>
                         goTo({
                             mode: "topic",
                             level,
                             book: search.book,
-                            unit: unitId,
+                            unit: unit.order,
                         })
                     }
                     onBack={() => goTo({ mode: "topic", level })}
@@ -259,12 +254,12 @@ function GeneralFlow({
                 <UnitPicker
                     bookId={search.toBook}
                     title={t("test.choose_end_unit")}
-                    onSelect={(unitId) =>
+                    onSelect={(unit) =>
                         go({
                             mode: "general",
                             scope: "half",
                             toBook: search.toBook,
-                            toUnit: unitId,
+                            toUnit: unit.id,
                         })
                     }
                     onBack={() => go({ mode: "general", scope: "half" })}
@@ -313,14 +308,14 @@ function GeneralFlow({
                 <UnitPicker
                     bookId={search.toBook}
                     title={t("test.choose_end_unit")}
-                    onSelect={(unitId) =>
+                    onSelect={(unit) =>
                         go({
                             mode: "general",
                             scope: "full",
                             fromBook: search.fromBook,
                             fromUnit: search.fromUnit,
                             toBook: search.toBook,
-                            toUnit: unitId,
+                            toUnit: unit.id,
                         })
                     }
                     onBack={() =>
@@ -362,12 +357,12 @@ function GeneralFlow({
                 <UnitPicker
                     bookId={search.fromBook}
                     title={t("test.choose_start_unit")}
-                    onSelect={(unitId) =>
+                    onSelect={(unit) =>
                         go({
                             mode: "general",
                             scope: "full",
                             fromBook: search.fromBook,
-                            fromUnit: unitId,
+                            fromUnit: unit.id,
                         })
                     }
                     onBack={() => go({ mode: "general", scope: "full" })}
@@ -501,6 +496,71 @@ function BookPicker({
     );
 }
 
+function TopicQuizFlow({
+    bookId,
+    unitOrder,
+    level,
+    onExit,
+}: {
+    bookId: number;
+    unitOrder: number;
+    level: QuizLevel;
+    onExit: () => void;
+}) {
+    const { t } = useTranslation();
+    const query = useQuery({
+        queryKey: ["book", bookId],
+        queryFn: () => getBook(bookId),
+    });
+
+    if (query.isLoading) {
+        return <Loader />;
+    }
+
+    if (query.isError) {
+        return (
+            <StateCard variant="error">
+                {t("common.error")}: {(query.error as Error).message}
+            </StateCard>
+        );
+    }
+
+    const unit = query.data?.units.find(
+        (u) => u.order === unitOrder || u.id === unitOrder,
+    );
+
+    console.log(unit);
+
+    if (!unit) {
+        return (
+            <div className="flex flex-col gap-5">
+                <BackButton onClick={onExit} />
+                <StateCard>{t("book.not_found")}</StateCard>
+            </div>
+        );
+    }
+
+    return (
+        <div className="flex flex-col gap-5">
+            <div className="flex items-center justify-between gap-4">
+                <h1 className="text-2xl font-bold sm:text-3xl">
+                    {t(`test.${level}`)}
+                </h1>
+                <span className="rounded-xl border border-border bg-card px-3.5 py-1.5 font-display text-base font-semibold text-primary shadow-xs sm:text-lg">
+                    {unit.title}
+                </span>
+            </div>
+            <QuizGame
+                key={`${level}-${unit.id}`}
+                unitId={unit.id}
+                selectableCount
+                level={level}
+                onExit={onExit}
+            />
+        </div>
+    );
+}
+
 function UnitPicker({
     bookId,
     title,
@@ -509,7 +569,7 @@ function UnitPicker({
 }: {
     bookId: number;
     title: string;
-    onSelect: (unitId: number) => void;
+    onSelect: (unit: UnitSummary) => void;
     onBack: () => void;
 }) {
     const { t } = useTranslation();
@@ -532,7 +592,14 @@ function UnitPicker({
                 <UnitTabs
                     units={query.data.units}
                     activeUnitId={null}
-                    onSelect={onSelect}
+                    onSelect={(unitId) => {
+                        const unit = query.data.units.find(
+                            (u) => u.id === unitId,
+                        );
+                        if (unit) {
+                            onSelect(unit);
+                        }
+                    }}
                 />
             )}
         </div>
